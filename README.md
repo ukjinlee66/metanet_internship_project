@@ -56,9 +56,15 @@ GIF Images
 </p>
 
 ## 📂설치 파일 및 버전
-
+Spring Tool Suite 4.13.1 Release<br>
+JDK 11<br>
+OracleDateBase 11g xe<br>
+React 4.0.3<br>
+Python 3.9<br>
 <br>
 
 ## 🪪라이센스
+
+## Reference
 
 MIT &copy; [NoHack](mailto:lbjp114@gmail.com)
