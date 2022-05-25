@@ -61,6 +61,8 @@ JDK 11<br>
 OracleDateBase 11g xe<br>
 React 4.0.3<br>
 Python 3.9<br>
+Node 16.14.0<br>
+Npm 8.3.1<br>
 <br>
 
 ## 🪪라이센스
