@@ -1,4 +1,4 @@
-# 4조 - 요리하는주웅🧑🏻‍🍳<br>
+# 4조 - 요리하는주웅👨🏻‍🍳<br>
 ## metanet_internship_project<br>
 ### 📆프로젝트 기간
 2022-05-09 ~ 2022-06-29
@@ -9,7 +9,7 @@
 </p>
 
 ## ✨팀원 소개 및 역할
-| 🧑🏻‍🍳[김주웅](https://github.com/JuwoongKim) | 👩🏻‍🍳[구다은](https://github.com/koodaeun) |  🧑🏻‍🍳[부성제](https://github.com/BuSeongJae)   |  👨🏻‍🍳[이욱진](https://github.com/ukjinlee66)   | 👨🏻‍🍳[정효재](https://github.com/JHJaVa1) |
+| 👨🏻‍🍳[김주웅](https://github.com/JuwoongKim) | 👩🏻‍🍳[구다은](https://github.com/koodaeun) |  👨🏻‍🍳[부성제](https://github.com/BuSeongJae)   |  👨🏻‍🍳[이욱진](https://github.com/ukjinlee66)   | 👨🏻‍🍳[정효재](https://github.com/JHJaVa1) |
 | :--------: | :--------: | :------: | :-----: | :-----: |
 |   DateBase<br>Project Manager    |   Backend  | Frontend | Backend | Frontend |
 
