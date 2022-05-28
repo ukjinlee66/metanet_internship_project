@@ -12,7 +12,7 @@ import lombok.Data;
 public class Likes {
 	@Id
 	private int Likes_Number;
-	private int Users_Number;
+	private int User_Number;
 	private int Video_Number;
 	private int Likes_CrDa;
 	private int Likes_Upda;

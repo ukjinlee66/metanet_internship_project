@@ -12,7 +12,7 @@ import lombok.Data;
 public class Save {
 	@Id
 	private int Save_Number;
-	private int Users_Number;
+	private int User_Number;
 	private int Video_Number;
 	private int Save_CrDa;
 	private int Save_DeDa;

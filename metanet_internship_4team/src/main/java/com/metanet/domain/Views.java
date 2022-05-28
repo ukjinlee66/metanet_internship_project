@@ -12,7 +12,7 @@ import lombok.Data;
 public class Views {
 	@Id
 	private int View_Number;
-	private int Users_Number;
+	private int User_Number;
 	private String Is_View;
 	private int date;
 }

@@ -11,10 +11,10 @@ import lombok.Data;
 @Data
 public class Comments {
 	@Id
-	private int Comments_Number;
-	private int Users_Number;
+	private int Comment_Number;
+	private int User_Number;
 	private int Video_Number;
-	private String Comments_contexts;
+	private String Comment_contexts;
 	private int CrDa;
 	private int DeDa;
 }
