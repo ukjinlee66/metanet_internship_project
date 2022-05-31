@@ -20,15 +20,13 @@ public class MainController
         for (TestOra te : tor.findAll()) 
         {
             System.out.println(te);
-            System.out.println(te.getUser_id());
-            System.out.println(te.getUser_name());
         }
 
-//        System.out.println("\n2.findByEmail(String email)...");
-//        for (TestOra te : tor.findByuser_id(3)) 
-//        {
-//            System.out.println(te);
-//        }
+        System.out.println("\n2.findByEmail(String email)...");
+        for (TestOra te : tor.findbyuser_id(3)) 
+        {
+            System.out.println(te);
+        }
 		return "index";
 	}
 
