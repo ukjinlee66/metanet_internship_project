@@ -13,6 +13,7 @@ import SnsRanking from '../components/SnsRanking';
 import ChatButton from '../components/ChatButton';
 import Navbar from '../components/Navbar';
 
+
 function Main(props) {
     return (
         <div class="container-xxl bg-white p-0">

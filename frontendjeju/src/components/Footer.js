@@ -16,21 +16,28 @@ function Footer(props) {
                         <a class="btn btn-outline-light btn-social" href="https://github.com/ukjinlee66"><i class="fab fa-github"></i></a>
                     </div>
                     <div class="col-lg-2">
-                        <h5 class="text-white mb-4">Yongkwang Lee</h5>
+                        <h5 class="text-white mb-4">jhj</h5>
                         <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Incheon</p>
                         <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>010-8854-4614</p>
                         <p class="mb-2"><i class="fa fa-envelope me-3"></i>sksda4614@naver.com</p>
                         <a class="btn btn-outline-light btn-social" href="https://github.com/dldydrhkd"><i class="fab fa-github"></i></a>
                     </div>
                     <div class="col-lg-2">
-                        <h5 class="text-white mb-4">Taejun Park</h5>
+                        <h5 class="text-white mb-4">kde</h5>
                         <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Seoul</p>
                         <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>010-4299-9247</p>
                         <p class="mb-2"><i class="fa fa-envelope me-3"></i>hahxowns@gmail.com</p>
                         <a class="btn btn-outline-light btn-social" href="https://github.com/ih-tjpark"><i class="fab fa-github"></i></a>
                     </div>
                     <div class="col-lg-2">
-                        <h5 class="text-white mb-4">Geonwoo Gwon</h5>
+                        <h5 class="text-white mb-4">bsj</h5>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Wonju</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>010-4693-3315</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>kkw2048@daum.net</p>
+                        <a class="btn btn-outline-light btn-social" href="https://github.com/Geonw00"><i class="fab fa-github"></i></a>
+                    </div>
+                    <div class="col-lg-2">
+                        <h5 class="text-white mb-4">kjw</h5>
                         <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Wonju</p>
                         <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>010-4693-3315</p>
                         <p class="mb-2"><i class="fa fa-envelope me-3"></i>kkw2048@daum.net</p>
