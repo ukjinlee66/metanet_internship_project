@@ -1,8 +1,10 @@
 package com.metanet.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import lombok.Data;
 
 @Entity
@@ -11,9 +13,18 @@ import lombok.Data;
 public class Buy 
 {
 	@Id
-	private int Buy_Number;
-	private int User_Number;
-	private int Video_Number;
-	private String Buy_Date;
-	private int Buy_Point;
+	@Column(name = "BUY_NUMBER")
+	private int buyNumber;
+	
+	@Column(name = "BUY_USER_NUMBER")
+	private int userNumber;
+	
+	@Column(name = "BUY_VIDEO_NUMBER")
+	private int videoNumber;
+	
+	@Column(name = "BUY_DATE")
+	private java.sql.Date buyDate;
+	
+	@Column(name = "BUY_POINT")
+	private int buyPoint;
 }

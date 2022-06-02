@@ -1,5 +1,6 @@
 package com.metanet.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,10 +12,21 @@ import lombok.Data;
 @Data
 public class Likes {
 	@Id
-	private int Likes_Number;
-	private int Users_Number;
-	private int Video_Number;
-	private int Likes_CrDa;
-	private int Likes_Upda;
-	private int Likes_DeDa;	
+	@Column(name="LKIES_USER")
+	private int likesNumber;
+	
+	@Column(name="LIKES_USER_NUMBER")
+	private int userNumber;
+
+	@Column(name="LIKES_VIDEO_NUMBER")
+	private int videoNumber;
+	
+	@Column(name="LIKES_CRDA")
+	private java.sql.Date crDa;
+	
+	@Column(name="LIKES_UPDA")
+	private java.sql.Date upDa;
+	
+	@Column(name="LIKES_DEDA")
+	private java.sql.Date deDa;	
 }

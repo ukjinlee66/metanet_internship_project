@@ -1,5 +1,6 @@
 package com.metanet.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,7 +13,12 @@ import lombok.Data;
 public class Report 
 {
 	@Id
-	private int Report_Number;
-	private int User_Number;
-	private int Report_TableNumber;
+	@Column(name = "REPORT_NUMBER")
+	private int reportNumber;
+	
+	@Column(name = "REPORT_USER_NUMBER")
+	private int userNumber;
+	
+	@Column(name = "REPORT_TABLE_NUMBER")
+	private int reportTableNumber;
 }

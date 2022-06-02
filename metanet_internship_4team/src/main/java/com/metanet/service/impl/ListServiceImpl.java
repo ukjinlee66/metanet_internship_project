@@ -9,6 +9,7 @@ import com.metanet.service.ListService;
 
 public abstract class ListServiceImpl implements ListService 
 {
+	/*
 	@Autowired
 	ListService service;
 	
@@ -18,4 +19,5 @@ public abstract class ListServiceImpl implements ListService
 		List<Video> retList = new ArrayList<>(keywordList.subList(page, page+4));		
 		return retList;
 	}
+	*/
 }
