@@ -1,5 +1,11 @@
 import React from "react";
 
-export default function SaveListPage() {
-  return <h1>SaveList</h1>;
+const SaveListPage = (props) => {
+  return (
+      <>
+          <h3>SaveListPage</h3>
+      </>
+  );
 }
+
+export default SaveListPage;

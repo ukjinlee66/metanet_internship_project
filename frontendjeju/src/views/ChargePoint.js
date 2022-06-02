@@ -1,5 +1,11 @@
 import React from "react";
 
-export default function ChargePointPage() {
-  return <h1>ChargePoint</h1>
+const ChargePointPage = (props) => {
+  return (
+      <>
+          <h3>LikedViewPage</h3>
+      </>
+  );
 }
+
+export default ChargePointPage;

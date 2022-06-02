@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
 import axios from "axios";
+import RecipeRanking from '../components/RecipeRanking';
+import CategorySelect from '../components/CategorySelect';
 
 function MainSearch(props) {
     const [searchInput, setSearchInput] = useState("")
@@ -27,7 +29,7 @@ function MainSearch(props) {
                     <div class="col-md-10">
                         <div class="row g-2">
                             <div class="col-md-12">
-                                <input type="text" class="form-control border-0" placeholder="관광지명을 입력하세요." onChange={(event) => setSearchInput(event.target.value)} onKeyPress={onKeyPress} value={searchInput}/>
+                                <input type="text" class="form-control border-0" placeholder="관심있는 레시피를 검색하세요." onChange={(event) => setSearchInput(event.target.value)} onKeyPress={onKeyPress} value={searchInput}/>
                             </div>
                         </div>
                     </div>
@@ -36,6 +38,8 @@ function MainSearch(props) {
                     </div>
                 </div>
             </div>
+            <RecipeRanking/>
+            <CategorySelect/>
         </div>
     );
 }

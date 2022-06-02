@@ -25,17 +25,16 @@ const Menu = styled.div`
 
 function Sidebar() {
     const menus = [
-        { name: "시청내역", path: "/View" },
-        { name: "좋아요 누른 영상", path: "/LikedView" },
-        { name: "저장한 영상", path: "/SaveList" },
-        { name: "포인트 사용 내역", path: "/PayPoint" },
-        { name: "포인트 충전", path: "/ChargePoint" },
-        { name: "문의 내역", path: "/QnA" }
+        { name: "시청내역", path: "./View" },
+        { name: "좋아요 누른 영상", path: "./LikedView" },
+        { name: "저장한 영상", path: "./SaveList" },
+        { name: "포인트 사용 내역", path: "./PayPoint" },
+        { name: "포인트 충전", path: "./ChargePoint" },
+        { name: "문의 내역", path: "./QnA" }
     ];
     return (
         <Side>
             <Profile src={profile}></Profile>
-
             <Menu>
                 {menus.map((menu, index) => {
 

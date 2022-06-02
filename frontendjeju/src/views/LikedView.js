@@ -1,5 +1,11 @@
 import React from "react";
 
-export default function LikedViewPage() {
-  return <h1>LikedView</h1>;
+const LikedViewPage = (props) => {
+  return (
+      <>
+          <h3>LikedViewPage</h3>
+      </>
+  );
 }
+
+export default LikedViewPage;

@@ -12,6 +12,9 @@ import Footer from '../components/Footer';
 import SnsRanking from '../components/SnsRanking';
 import ChatButton from '../components/ChatButton';
 import Navbar from '../components/Navbar';
+import MainRecipeList from '../components/MainRecipeList';
+import Question from '../components/Question';
+
 
 
 function Main(props) {
@@ -20,14 +23,13 @@ function Main(props) {
             <Navbar />
             <MainImg />
             <MainSearch />
-            <KeywordList />
             <div class="container-xxl py-3 rank-con">
                 <div class="row g-4">
-                    <Ranking />
-                    <SnsRanking/>
+                    <MainRecipeList />
+                    <Question/>
                 </div>
             </div>
-            <TourImg />
+            {/* <TourImg /> */}
             <Scrolltop />
             <ChatButton/>
             <Footer />

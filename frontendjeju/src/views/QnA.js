@@ -1,5 +1,11 @@
 import React from "react";
 
-export default function QnAPage() {
-  return <h1>QnA</h1>;
+const QnAPage = (props) => {
+  return (
+      <>
+          <h3>QnA</h3>
+      </>
+  );
 }
+
+export default QnAPage;

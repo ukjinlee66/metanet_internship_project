@@ -14,7 +14,10 @@ import Navbar from '../components/Navbar';
 function TouristAttractionInfo(props) {
     return (
         <div class="container-xxl bg-white p-0">
+            
             <Navbar/>
+            
+        <h1>레시피 상세페이지</h1>
             <TourinfoTop />
             <div class="container-xxl py-5 wow fadeInUp pdCon" data-wow-delay="0.1s">
                 <hr className='info-hr'/>

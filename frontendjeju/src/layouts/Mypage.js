@@ -17,7 +17,7 @@ import ChargePoint from '../views/ChargePoint';
 import QnA from '../views/QnA';
 
 const Center = styled.div`
-  height: 92vh;
+  height: 50vh;
   display: flex;
   flex-direction: row;
   `
@@ -31,9 +31,9 @@ function Mypage(props) {
             <ListSearch />
             <Center>
             <Sidebar />
-            
             <Routes>
-                <Route exact path="/" element={<LikedView/>} />
+                <Route exact path="/" element={<View/>} />
+                <Route exact path="/View" element={<View/>} />
                 <Route path="/LikedView" element={<LikedView/>} />
                 <Route path="/SaveList" element={<SaveList/>} />
                 <Route path="/PayPoint" element={<PayPoint/>} />

@@ -1,5 +1,11 @@
 import React from "react";
 
-export default function PayPointPage() {
-  return <h1>PayPoint</h1>;
+const PayPointPage = (props) => {
+  return (
+      <>
+          <h3>PayPointPage</h3>
+      </>
+  );
 }
+
+export default PayPointPage;

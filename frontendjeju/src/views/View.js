@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Home = (props) => {
+const View = (props) => {
     return (
-        <div>
-            시청내역
-                    </div>
+        <>
+            <h3>View</h3>
+        </>
     );
-};
-
-export default Home;
+  }
+  
+  export default View;
