@@ -40,6 +40,7 @@ public class Video
 	private java.sql.Time videoLength;
 	
 	@Column(name = "VIDEO_CRDA")
+	@NonNull
 	private java.sql.Date crDa;
 	
 	@Column(name = "VIDEO_UPDA")
