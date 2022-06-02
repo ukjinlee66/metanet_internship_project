@@ -9,4 +9,6 @@ import com.metanet.domain.Video;
 public interface VideoRepository extends JpaRepository <Video, Integer>
 {
 
+	Video findByvideoNumber(int videoNumber);
+
 }
