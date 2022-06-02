@@ -1,17 +1,21 @@
 package com.metanet.domain;
 
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+
 
 @Entity
 @Table(name="VIDEO")
 @Data
+
 @RequiredArgsConstructor
 public class Video 
 {
@@ -48,5 +52,6 @@ public class Video
 	
 	@Column(name = "VIDEO_DEDA")
 	private int deDa;
+
 }
 

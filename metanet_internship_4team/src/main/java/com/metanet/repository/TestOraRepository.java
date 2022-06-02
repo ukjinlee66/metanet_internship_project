@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.metanet.domain.TestOra;
 
+
 @Repository
 public interface TestOraRepository extends JpaRepository<TestOra, Integer>
 {
