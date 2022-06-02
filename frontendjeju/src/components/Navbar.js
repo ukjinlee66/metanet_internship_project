@@ -9,7 +9,10 @@ function Navbar(props) {
 
     // useRef를 통해 css 변경
     const stickyChange = useRef(null);
-    
+    function btClick(e) {
+        sessionStorage.setItem("pageSession", 1);
+        window.location.href = "/jeju/" + e.target.value;
+    }
     // 스크롤의 Y축을 감시하여 특정 지점 이동 시 Navbar가 화면 일정 지점에 따라가도록 설정
     function handleScroll() { 
         setScrollY(window.pageYOffset);
@@ -32,6 +35,9 @@ function Navbar(props) {
                 <a href="/jeju" className="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
                     <img class="logo" src={logo}/>
                 </a>
+                <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="Signin">로그인</button>
+                <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="Signup">회원가입</button>
+                <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="MyPage">마이페이지</button>
                 <button type="button" className="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span className="navbar-toggler-icon"></span>
                 </button>

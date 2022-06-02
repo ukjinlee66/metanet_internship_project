@@ -14,6 +14,8 @@ function TouristAttractionList(props) {
     return (
         <div class="container-xxl bg-white p-0">
             <Navbar/>
+            
+        <h1>레시피 리스트 페이지</h1>
             <ListSearch />
             <div class="container-xxl py-5 wow fadeInUp pdCon" data-wow-delay="0.1s">
                 <div class="row g-5 maCon" style={{width:'100%'}}>

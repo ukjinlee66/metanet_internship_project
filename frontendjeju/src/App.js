@@ -5,6 +5,12 @@ import TouristAttractionInfo from './layouts/TouristAttractionInfo';
 import TouristAttractionList from './layouts/TouristAttractionList';
 import TouristAttractionListReco from './layouts/TouristAttractionListReco';
 import Admin from './layouts/Admin.js'
+import Signin from './layouts/Signin.js'
+import Signup from './layouts/Signup.js'
+import Mypage from './layouts/Mypage.js'
+import ServiceCenter from './layouts/ServiceCenter.js'
+import QuestionInfo from './layouts/QuestionInfo.js'
+
 
 function App() {
   useEffect(async () => {
@@ -23,6 +29,11 @@ function App() {
               <Route path='/jeju/TouristAttractionInfo' element={<TouristAttractionInfo/>}/>
               <Route path='/jeju/TouristAttractionListReco' element={<TouristAttractionListReco/>}/>
               <Route path='/jeju/Maps' element={<Admin/>}/>
+              <Route path='/jeju/Mypage/*' element={<Mypage/>}/>
+              <Route path='/jeju/ServiceCenter' element={<ServiceCenter/>}/>
+              <Route path='/jeju/QuestionInfo' element={<QuestionInfo/>}/>
+              <Route path='/jeju/Signin' element={<Signin/>}/>
+              <Route path='/jeju/Signup' element={<Signup/>}/>
           </Routes>
       </BrowserRouter>
   );
