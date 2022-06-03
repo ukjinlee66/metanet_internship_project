@@ -30,7 +30,8 @@ function Sidebar() {
         { name: "저장한 영상", path: "./SaveList" },
         { name: "포인트 사용 내역", path: "./PayPoint" },
         { name: "포인트 충전", path: "./ChargePoint" },
-        { name: "문의 내역", path: "./QnA" }
+        { name: "문의 내역", path: "./QnA" },
+        { name: "환불 페이지", path:"./refundPoint"}
     ];
     return (
         <Side>

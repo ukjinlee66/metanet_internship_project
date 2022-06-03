@@ -15,6 +15,7 @@ import SaveList from '../views/SaveList';
 import PayPoint from '../views/PayPoint';
 import ChargePoint from '../views/ChargePoint';
 import QnA from '../views/QnA';
+import RefundPointPage from '../views/RefundPoint';
 
 const Center = styled.div`
   height: 50vh;
@@ -39,6 +40,7 @@ function Mypage(props) {
                 <Route path="/PayPoint" element={<PayPoint/>} />
                 <Route path="/ChargePoint" element={<ChargePoint/>} />
                 <Route path="/QnA" element={<QnA/>} />
+                <Route path="/refundPoint" element={<RefundPointPage/>} />
             </Routes>
             </Center>
             <Scrolltop />
