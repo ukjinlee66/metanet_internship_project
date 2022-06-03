@@ -12,7 +12,7 @@ function MainSearch(props) {
     // 검색 버튼 클릭 시 이동
     function btClick(e) {
         sessionStorage.setItem("pageSession", 1);
-        window.location.href = "/jeju/TouristAttractionList?search=" + searchInput;
+        window.location.href = "/jeju/RecipeAttractionList?search=" + searchInput;
     }
 
     // 검색창에 ENTER 치는 경우에 검색 버튼 클릭으로 간주
