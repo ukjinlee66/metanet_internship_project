@@ -41,22 +41,30 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 		return(v);
 	}
 	
-//	@GetMapping("/SearchToView")
-//	@ApiOperation(value="조회순 검색", notes="조회순 기준 레시피 조회")
-//	public Optional<Video> searchToView(
-//			@ApiParam(value="검색어",required=true, example="부대찌개") @RequestParam String videoTitle
-//			)
-//	{
-//		return(service.SearchViewTitle(videoTitle));
-//	}
-//	
-//	@GetMapping("/SearchToKind")
-//	@ApiOperation(value="분야 기준 검색", notes="해당 분야 기준 레시피 조회")
-//	public List<Video> searchToView(
-//			@ApiParam(value="검색어",required=true, example="부대찌개") String search,
-//			@ApiParam(value="종류",required=true, example="한식, 중식, 양식, 일식") String recipeKind
-//			)
-//	{
-//		return(serviceImpl.findByvideoTitleContainsAndrecipeKind(search,recipeKind));
-//	}
+	@GetMapping("/SearchToView")
+	@ApiOperation(value="조회순 검색", notes="조회수 기준 레시피 조회")
+	public List<Video> searchToView(
+			@ApiParam(value="검색어",required=true, example="부대찌개") @RequestParam String videoTitle
+			)
+	{
+		return(service.SearchViewTitle(videoTitle));
+	}
+	@GetMapping("/SearchToLike")
+	@ApiOperation(value="좋아요순 검색", notes="좋아요 기준 레시피 조회")
+	public List<Video> searchToLike(
+			@ApiParam(value="검색어",required=true, example="부대찌개") @RequestParam String videoTitle
+			)
+	{
+		return(service.SearchtoLikes(videoTitle));
+	}
+	
+	@GetMapping("/SearchToKind")
+	@ApiOperation(value="분야 기준 검색", notes="해당 분야 기준 레시피 조회")
+	public List<Video> searchToView(
+			@ApiParam(value="검색어",required=true, example="부대찌개") @RequestParam String search,
+			@ApiParam(value="종류",required=true, example="한식, 중식, 양식, 일식") @RequestParam String recipeKind
+			)
+	{
+		return(service.SearchKind(search,recipeKind));
+	}
 }

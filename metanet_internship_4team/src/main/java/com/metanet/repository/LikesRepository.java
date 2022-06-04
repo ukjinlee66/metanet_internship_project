@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.metanet.domain.Likes;
 
 @Repository
-public interface LikesRepository extends JpaRepository< Likes, Integer>
+public interface LikesRepository extends JpaRepository< Likes, Long>
 {
 	long countByvideoNumber(int videoNumber);
 }
