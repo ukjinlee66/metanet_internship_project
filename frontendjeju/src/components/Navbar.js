@@ -38,18 +38,21 @@ function Navbar(props) {
                     <img class="logo" src={logo} />
                 </a>
                 <div class="justify-content-md-end">
+
                     <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="Signin">로그인</button>
                     <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="Signup">회원가입</button>
                     <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="MyPage">마이페이지</button>
+                    <a href='/jeju/MyPage' style={{ fontSize: 1 }}>buruburu(회원아이디)</a> &nbsp; &nbsp; &nbsp;
+                    <a href='/jeju/MyPage/SaveList' style={{ fontSize: 10 }}>잔여 포인트: 9850p</a>
                 </div>
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                     <div className="navbar-nav ms-auto p-4 p-lg-0">
-                {/* <a href="/jeju/Maps" className="nav-item nav-link">Map</a>
+                        {/* <a href="/jeju/Maps" className="nav-item nav-link">Map</a>
                         <a href="/jeju/TouristAttractionList?search=" className="nav-item nav-link">List</a>
                         <a href="/jeju/TouristAttractionInfo" className="nav-item nav-link">Info</a> */}
 
-                {/* <a href="/jeju" className="btn btn-primary bg-jeju-nav rounded-0 py-4 px-lg-5 d-none d-lg-block">Home<i class="fa fa-arrow-right ms-3"></i></a> */}
-                </div>
+                        {/* <a href="/jeju" className="btn btn-primary bg-jeju-nav rounded-0 py-4 px-lg-5 d-none d-lg-block">Home<i class="fa fa-arrow-right ms-3"></i></a> */}
+                    </div>
                 </div>
 
             </nav>

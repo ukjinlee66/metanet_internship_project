@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Main from './layouts/Main';
-import TouristAttractionInfo from './layouts/TouristAttractionInfo';
-import TouristAttractionList from './layouts/TouristAttractionList';
+import RecipeAttractionInfo from './layouts/RecipeAttractionInfo';
+import RecipeAttractionList from './layouts/RecipeAttractionList';
 import TouristAttractionListReco from './layouts/TouristAttractionListReco';
 import Admin from './layouts/Admin.js'
 import Signin from './layouts/Signin.js'
@@ -25,8 +25,8 @@ function App() {
       <BrowserRouter>
           <Routes>
               <Route path='/jeju' element={<Main/>}/>
-              <Route path='/jeju/TouristAttractionList' element={<TouristAttractionList/>}/>
-              <Route path='/jeju/TouristAttractionInfo' element={<TouristAttractionInfo/>}/>
+              <Route path='/jeju/RecipeAttractionList' element={<RecipeAttractionList/>}/>
+              <Route path='/jeju/RecipeAttractionInfo' element={<RecipeAttractionInfo/>}/>
               <Route path='/jeju/TouristAttractionListReco' element={<TouristAttractionListReco/>}/>
               <Route path='/jeju/Maps' element={<Admin/>}/>
               <Route path='/jeju/Mypage/*' element={<Mypage/>}/>
