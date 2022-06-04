@@ -7,7 +7,6 @@ import com.metanet.domain.Likes;
 
 @Repository
 public interface LikesRepository extends JpaRepository< Likes, Integer>
-
 {
-
+	long countByvideoNumber(int videoNumber);
 }
