@@ -7,16 +7,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 
 @Entity
 @Table(name="VIDEO")
 @Data
-
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Video 
 {
 	@Id
@@ -30,28 +28,30 @@ public class Video
 	@Column(name = "VIDEO_CONTEXTS")
 	private String videoContexts;
 	
-	@Column(name = "VIDEO_URL")
+	@Column(name = "VIDEO_NAME")
 	@NonNull
-	private String videoUrl;
+	private String videoName;
 	
-	@Column(name = "VIDEO_LEVEL")
+	@Column(name = "RECIPE_LEVEL")
 	private String recipeLevel;
 	
-	@Column(name = "VIDEO_KIND")
+	@Column(name = "RECIPE_KIND")
 	private String recipeKind;
 	
 	@Column(name = "VIDEO_LENGTH")
-	private int videoLength;
+	private java.sql.Time videoLength;
 	
 	@Column(name = "VIDEO_CRDA")
 	@NonNull
-	private int crDa;
+	private java.sql.Date crDa;
 	
 	@Column(name = "VIDEO_UPDA")
-	private int upDa;
+	private java.sql.Date upDa;
 	
 	@Column(name = "VIDEO_DEDA")
-	private int deDa;
-
+	private java.sql.Date deDa;
+	
+	@Column(name = "VIDEO_VIEW")
+	private int videoView;
 }
 
