@@ -2,6 +2,7 @@ package com.metanet.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 	private ListService service;
 	
 	@GetMapping("/Search")
+	@CrossOrigin
 	@ApiOperation(value="레시피 검색", notes="검색어를 통한 레시피조회")
 	public List<Video> search(
 			@ApiParam(value="검색어",required=true, example="계란찜") @RequestParam String videoTitle
