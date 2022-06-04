@@ -5,20 +5,31 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
 @Table(name="LIKES")
 @Data
+@SequenceGenerator( name = "LIKES_SEQ_GEN",
+					sequenceName = "LIKES_SEQ",
+					initialValue = - 1,
+					allocationSize = 1
+					)
+@NoArgsConstructor
 public class Likes {
 	@Id
 	@Column(name="LIKES_NUMBER")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LIKES_SEQ_GEN")
 	private Integer likesNumber;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

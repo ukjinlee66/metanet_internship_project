@@ -5,19 +5,30 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="COMMENTS")
 @Data
+@SequenceGenerator( name = "COMMENTS_SEQ_GEN",
+					sequenceName = "COMMENTS_SEQ",
+					initialValue = - 1,
+					allocationSize = 1
+					)
+@NoArgsConstructor
 public class Comments {
 	@Id
 	@Column(name="COMMENTS_NUMBER")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COMMENTS_SEQ_GEN")
 	private Integer commentsNumber;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

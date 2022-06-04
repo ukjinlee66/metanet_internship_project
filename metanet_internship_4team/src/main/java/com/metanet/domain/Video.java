@@ -5,11 +5,14 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -17,12 +20,18 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Table(name="VIDEO")
 @Data
-
 @RequiredArgsConstructor
+@SequenceGenerator( name = "VIDEO_SEQ_GEN",
+					sequenceName = "VIDEO_SEQ",
+					initialValue = - 1,
+					allocationSize = 1
+					)
+@NoArgsConstructor
 public class Video 
 {
 	@Id
 	@Column(name = "VIDEO_NUMBER")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VIDEO_SEQ_GEN")
 	private Integer videoNumber;
 	
 	@Column(name = "VIDEO_TITLE", columnDefinition = "char")
