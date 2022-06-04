@@ -1,8 +1,13 @@
 package com.metanet.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -12,21 +17,23 @@ import lombok.Data;
 @Data
 public class Comments {
 	@Id
-	@Column(name="COMMENTS_NUBMER")
-	private int commentsNumber;
+	@Column(name="COMMENTS_NUMBER")
+	private Integer commentsNumber;
 	
-	@Column(name="COMMENTS_USER_NUMBER")
-	private int userNumber;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="USER_NUMBER")
+	private Users users;
 	
-	@Column(name="COMMENTS_VIDEO_NUMBER")
-	private int videoNumber;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="VIDEO_NUMBER")
+	private Video video;
 	
-	@Column(name="COMMENTS_COMMENTS_CONTEXTS")
+	@Column(name="COMMENTS_CONTEXTS", columnDefinition = "char")
 	private String commentsContexts;
 	
 	@Column(name="COMMENTS_CRDA")
-	private java.sql.Date crDa;
+	private LocalDateTime crDa;
 	
 	@Column(name="COMMENTS_DEDA")
-	private java.sql.Date deDa;
+	private LocalDateTime deDa;
 }

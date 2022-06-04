@@ -2,7 +2,10 @@ package com.metanet.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -14,11 +17,13 @@ public class Report
 {
 	@Id
 	@Column(name = "REPORT_NUMBER")
-	private int reportNumber;
+	private Integer reportNumber;
 	
-	@Column(name = "REPORT_USER_NUMBER")
-	private int userNumber;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="USER_NUMBER")
+	private Users users;
 	
-	@Column(name = "REPORT_TABLE_NUMBER")
-	private int reportTableNumber;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="REPORT_TABLENUMBER")
+	private Report_Table report_Table;
 }

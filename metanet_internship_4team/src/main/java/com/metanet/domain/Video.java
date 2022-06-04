@@ -1,5 +1,7 @@
 package com.metanet.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -21,37 +23,37 @@ public class Video
 {
 	@Id
 	@Column(name = "VIDEO_NUMBER")
-	private int videoNumber;
+	private Integer videoNumber;
 	
-	@Column(name = "VIDEO_TITLE")
+	@Column(name = "VIDEO_TITLE", columnDefinition = "char")
 	@NonNull
 	private String videoTitle;
 	
-	@Column(name = "VIDEO_CONTEXTS")
+	@Column(name = "VIDEO_CONTEXTS", columnDefinition = "char")
 	private String videoContexts;
 	
-	@Column(name = "VIDEO_URL")
+	@Column(name = "VIDEO_URL", columnDefinition = "char")
 	@NonNull
 	private String videoUrl;
 	
-	@Column(name = "VIDEO_LEVEL")
+	@Column(name = "RECIPE_LEVEL", columnDefinition = "char")
 	private String recipeLevel;
 	
-	@Column(name = "VIDEO_KIND")
+	@Column(name = "RECIPE_KIND", columnDefinition = "char")
 	private String recipeKind;
 	
 	@Column(name = "VIDEO_LENGTH")
-	private int videoLength;
+	private LocalDateTime videoLength;
 	
 	@Column(name = "VIDEO_CRDA")
 	@NonNull
-	private int crDa;
+	private LocalDateTime crDa;
 	
 	@Column(name = "VIDEO_UPDA")
-	private int upDa;
+	private LocalDateTime upDa;
 	
 	@Column(name = "VIDEO_DEDA")
-	private int deDa;
+	private LocalDateTime deDa;
 
 }
 
