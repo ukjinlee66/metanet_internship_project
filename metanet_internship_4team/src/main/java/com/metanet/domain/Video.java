@@ -35,9 +35,9 @@ public class Video
 	@Column(name = "VIDEO_CONTEXTS")
 	private String videoContexts;
 	
-	@Column(name = "VIDEO_URL")
+	@Column(name = "VIDEO_NAME")
 	@NonNull
-	private String videoUrl;
+	private String videoName;
 	
 	@Column(name = "RECIPE_LEVEL")
 	private String recipeLevel;

@@ -99,13 +99,11 @@ public class ListServiceImpl implements ListService ,Comparable<Video>
 	
 	public List<Video> SearchtoLikes(String videoTitle) // 좋아요순 정렬 검색
 	{
-		
-		
 		List<Video> first = Search(videoTitle); //검색어에따른 리스트
 		List<Video> second = new ArrayList<>();
 		//likes 테이블에 존재하는 게시글 기준 정렬하기위한 새로운 리스트 생성
 		for(Video v : first)
-		{
+		{	
 			//검색결과 리스트에서 좋아요테이블의 게시글이 한개 이상 존재할 경우 -> 좋아요가 있을경우
 			if(likesRepo.countByvideoNumber(v.getVideoNumber()) > 0)
 			{
