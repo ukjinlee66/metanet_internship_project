@@ -1,36 +1,45 @@
 package com.metanet.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="VIEWS")
 @Data
-@SequenceGenerator(	name = "VIEWS_SEQ_GEN",
-sequenceName = "VIEWS_SEQ",
-initialValue = 1,
-allocationSize =1
-)
-public class Views {
-	
+@SequenceGenerator( name = "VIEWS_SEQ_GEN",
+					sequenceName = "VIEWS_SEQ",
+					initialValue = - 1,
+					allocationSize = 1
+					)
+@NoArgsConstructor
+public class Views 
+{	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="VIEWS_SEQ_GEN")
-	@Column(name = "VIEW_NUMBER")
-	private int viewNumber;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VIEWS_SEQ_GEN")
+	private Integer View_Number;
 	
-	@Column(name = "USER_NUMBER")
-	private int usersNumber;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="USER_NUMBER")
+	private Users users;
 	
-	@Column(name = "VIDEO_NUMBER")
-	private int videoNumber;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="VIDEO_NUMBER")
+	private Video video;
 	
-	@Column(name = "RECENT_TIME")
-	private java.sql.Date recentTime;
+	@Column(name="RECENT_TIME")
+	private LocalDateTime recentTime;
+
 }

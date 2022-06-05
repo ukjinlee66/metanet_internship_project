@@ -1,5 +1,7 @@
 package com.metanet.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,49 +18,48 @@ import lombok.NonNull;
 @Entity
 @Table(name="VIDEO")
 @Data
+@RequiredArgsConstructor
 @SequenceGenerator( name = "VIDEO_SEQ_GEN",
 					sequenceName = "VIDEO_SEQ",
-					initialValue = 1,
-					allocationSize = 1)
+					initialValue = - 1,
+					allocationSize = 1
+					)
 @NoArgsConstructor
 public class Video 
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="VIDEO_SEQ_GEN")
 	@Column(name = "VIDEO_NUMBER")
-	private int videoNumber;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VIDEO_SEQ_GEN")
+	private Integer videoNumber;
 	
-	@Column(name = "VIDEO_TITLE")
+	@Column(name = "VIDEO_TITLE", columnDefinition = "char")
 	@NonNull
 	private String videoTitle;
 	
-	@Column(name = "VIDEO_CONTEXTS")
+	@Column(name = "VIDEO_CONTEXTS", columnDefinition = "char")
 	private String videoContexts;
-	
-	@Column(name = "VIDEO_NAME")
+	@Column(name = "VIDEO_URL", columnDefinition = "char")
 	@NonNull
 	private String videoName;
 	
-	@Column(name = "RECIPE_LEVEL")
+	@Column(name = "RECIPE_LEVEL", columnDefinition = "char")
 	private String recipeLevel;
 	
-	@Column(name = "RECIPE_KIND")
+	@Column(name = "RECIPE_KIND", columnDefinition = "char")
 	private String recipeKind;
 	
 	@Column(name = "VIDEO_LENGTH")
-	private java.sql.Time videoLength;
+	private LocalDateTime videoLength;
 	
 	@Column(name = "VIDEO_CRDA")
 	@NonNull
-	private java.sql.Date crDa;
+	private LocalDateTime crDa;
 	
 	@Column(name = "VIDEO_UPDA")
-	private java.sql.Date upDa;
+	private LocalDateTime upDa;
 	
 	@Column(name = "VIDEO_DEDA")
-	private java.sql.Date deDa;
-	
-	@Column(name = "VIDEO_VIEW")
-	private int videoView;
+	private LocalDateTime deDa;
 }
 
