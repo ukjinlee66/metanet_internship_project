@@ -12,11 +12,9 @@ import com.metanet.repository.LikesRepository;
 import com.metanet.repository.VideoRepository;
 import com.metanet.service.ListService;
 
-
-@Service
-public class ListServiceImpl implements ListService ,Comparable<Video>
-{	
-	
+public abstract class ListServiceImpl implements ListService 
+{
+	/*
 	@Autowired
 	private VideoRepository videoRepo;
 	
@@ -137,4 +135,5 @@ public class ListServiceImpl implements ListService ,Comparable<Video>
 		else
 			return second;
 	}
+	*/
 }
