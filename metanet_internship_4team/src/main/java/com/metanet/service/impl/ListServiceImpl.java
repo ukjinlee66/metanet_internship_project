@@ -16,7 +16,10 @@ public abstract class ListServiceImpl implements ListService
 {
 	/*
 	@Autowired
-	VideoRepository videoRepo;
+	private VideoRepository videoRepo;
+	
+	@Autowired
+	private LikesRepository likesRepo;
 	
 	/*
 	 * 1. 검색어를 기준으로 jpa를 통해 검색어리스트를 추출한다.
@@ -50,7 +53,7 @@ public abstract class ListServiceImpl implements ListService
 	static class SortLike implements Comparator<Video>
 	{
 		@Autowired
-		LikesRepository likesRepo;
+		private LikesRepository likesRepo;
 		
 		@Override
 		public int compare(Video v, Video v2)
@@ -61,7 +64,6 @@ public abstract class ListServiceImpl implements ListService
 				return 0;
 			else
 				return -1;
-			
 		}
 	}
 	
@@ -96,22 +98,42 @@ public abstract class ListServiceImpl implements ListService
 	public List<Video> SearchtoLikes(String videoTitle) // 좋아요순 정렬 검색
 	{
 		List<Video> first = Search(videoTitle); //검색어에따른 리스트
-		Collections.sort(first, new SortLike()); //해당 게시글의 좋아요수를 비교해서 정렬.
-		return first;
-	}
-	
-	public List<Video> SearchKind(String videoTitle, String recipeKind) // 분야 검색
-	{
-		List<Video> first = Search(videoTitle);
 		List<Video> second = new ArrayList<>();
+		//likes 테이블에 존재하는 게시글 기준 정렬하기위한 새로운 리스트 생성
 		for(Video v : first)
-		{
-			if(v.getRecipeKind() == recipeKind)
+		{	
+			//검색결과 리스트에서 좋아요테이블의 게시글이 한개 이상 존재할 경우 -> 좋아요가 있을경우
+			if(likesRepo.countByvideoNumber(v.getVideoNumber()) > 0)
 			{
 				second.add(v);
 			}
 		}
+		Collections.sort(second, new SortLike()); //해당 게시글의 좋아요수를 비교해서 정렬.
 		return second;
+	}
+	
+	public List<Video> SearchKind(String videoTitle, String recipeKind) // 분야 검색
+	{
+		
+		System.out.println("IN kind : "+ videoTitle+" "+recipeKind);
+		List<Video> first = Search(videoTitle);
+		List<Video> second = new ArrayList<>();
+		for(Video v : first)
+		{
+			try {
+				System.out.println("v get recipe : "+v.getRecipeKind());
+				if(v.getRecipeKind().equals(recipeKind))
+					second.add(v);
+			}
+			catch(NullPointerException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		if(second.isEmpty())
+			return (new ArrayList<>());
+		else
+			return second;
 	}
 	*/
 }

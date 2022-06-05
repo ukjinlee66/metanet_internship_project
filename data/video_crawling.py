@@ -12,7 +12,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import oracle_db as oradb
+# import oracle_db as oradb
 
 def recipe_insert(data):
     conn = oradb.connect()
@@ -34,7 +34,7 @@ def recipe_insert(data):
         oradb.close(conn)
 
 def run():
-    crawling_list = ['일식']
+    crawling_list = ['한식']
     for key in crawling_list:
         driver = wd.Chrome(ChromeDriverManager().install())
         options = wd.ChromeOptions()

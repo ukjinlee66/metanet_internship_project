@@ -39,7 +39,8 @@ public class Video
 	
 	@Column(name = "VIDEO_CONTEXTS", columnDefinition = "char")
 	private String videoContexts;
-	@Column(name = "VIDEO_URL", columnDefinition = "char")
+  
+	@Column(name = "VIDEO_NAME")
 	@NonNull
 	private String videoName;
 	

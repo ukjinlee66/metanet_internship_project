@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="USERS")
-@NoArgsConstructor
 @AllArgsConstructor
 @Data
 @SequenceGenerator( name = "USERS_SEQ_GEN",
@@ -27,8 +26,9 @@ import lombok.NoArgsConstructor;
 public class Users 
 {
 	@Id
+	@Column(name ="USER_NUMBER")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_SEQ_GEN")
-	private Integer User_Number;
+	private Integer userNumber;
 	
 	@Column(name = "USER_NAME", columnDefinition = "char")
 	private String userName;
