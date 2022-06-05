@@ -25,7 +25,8 @@ import lombok.NoArgsConstructor;
 					allocationSize = 1
 					)
 @NoArgsConstructor
-public class Views {
+public class Views 
+{	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VIEWS_SEQ_GEN")
 	private Integer View_Number;
@@ -40,4 +41,5 @@ public class Views {
 	
 	@Column(name="RECENT_TIME")
 	private LocalDateTime recentTime;
+
 }

@@ -16,31 +16,39 @@ function Footer(props) {
                         <a class="btn btn-outline-light btn-social" href="https://github.com/ukjinlee66"><i class="fab fa-github"></i></a>
                     </div>
                     <div class="col-lg-2">
-                        <h5 class="text-white mb-4">Yongkwang Lee</h5>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Incheon</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>010-8854-4614</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>sksda4614@naver.com</p>
-                        <a class="btn btn-outline-light btn-social" href="https://github.com/dldydrhkd"><i class="fab fa-github"></i></a>
-                    </div>
-                    <div class="col-lg-2">
-                        <h5 class="text-white mb-4">Taejun Park</h5>
+                        <h5 class="text-white mb-4">Juwoong Kim</h5>
                         <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Seoul</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>010-4299-9247</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>hahxowns@gmail.com</p>
-                        <a class="btn btn-outline-light btn-social" href="https://github.com/ih-tjpark"><i class="fab fa-github"></i></a>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>010-4578-2534</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>wwong7247@gmail.com</p>
+                        <a class="btn btn-outline-light btn-social" href="https://github.com/JuwoongKim"><i class="fab fa-github"></i></a>
                     </div>
                     <div class="col-lg-2">
-                        <h5 class="text-white mb-4">Geonwoo Gwon</h5>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Wonju</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>010-4693-3315</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>kkw2048@daum.net</p>
-                        <a class="btn btn-outline-light btn-social" href="https://github.com/Geonw00"><i class="fab fa-github"></i></a>
+                        <h5 class="text-white mb-4">SeongJae Bu</h5>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Seoul</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>010-2510-6859</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>qntjdwp35@gmail.com</p>
+                        <a class="btn btn-outline-light btn-social" href="https://github.com/BuSeongJae"><i class="fab fa-github"></i></a>
+                    </div>
+                    <div class="col-lg-2">
+                        <h5 class="text-white mb-4">Daeun Koo</h5>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Seoul</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>010-9638-0960</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>kxxdaeun@gmail.com</p>
+                        <a class="btn btn-outline-light btn-social" href="https://github.com/koodaeun"><i class="fab fa-github"></i></a>
+                    </div>
+                    <div className="col-lg-2">
+                        <h5 className="text-white mb-4">Hyojae Jung</h5>
+                        <p className="mb-2"><i className="fa fa-map-marker-alt me-3"></i>Seoul</p>
+                        <p className="mb-2"><i className="fa fa-phone-alt me-3"></i>010-4173-1348</p>
+                        <p className="mb-2"><i className="fa fa-envelope me-3"></i>jhj774@naver.com</p>
+                        <a className="btn btn-outline-light btn-social" href="https://github.com/JHJaVa1"><i
+                            className="fab fa-github"></i></a>
                     </div>
                     <div class="col-lg-4">
                         <h5 class="text-white mb-4">Education Center</h5>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>1층, 335 효령로 서초1동 서초구 서울특별시</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>02-754-7302</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>playdata@playdata.io</p>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>9층, 70 가산디지털1로 금천구 서울특별시</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>02-6278-9352</p>
+
                     </div>
                 </div>
             </div>

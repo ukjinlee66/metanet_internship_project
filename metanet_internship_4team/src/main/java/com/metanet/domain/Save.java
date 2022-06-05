@@ -13,12 +13,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
 @Table(name="SAVE")
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @SequenceGenerator( name = "SAVE_SEQ_GEN",
 					sequenceName = "SAVE_SEQ",
@@ -26,8 +29,8 @@ import lombok.NonNull;
 					allocationSize = 1
 					)
 @NoArgsConstructor
-
-public class Save {
+public class Save 
+{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SAVE_SEQ_GEN")
 	private Integer Save_Number;

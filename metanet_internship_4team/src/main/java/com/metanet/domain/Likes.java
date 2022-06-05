@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -27,6 +28,7 @@ import lombok.NonNull;
 					)
 @NoArgsConstructor
 public class Likes {
+	
 	@Id
 	@Column(name="LIKES_NUMBER")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LIKES_SEQ_GEN")

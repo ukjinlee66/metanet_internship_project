@@ -3,7 +3,6 @@ package com.metanet.domain;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +13,6 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 
 @Entity
@@ -30,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class Video 
 {
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="VIDEO_SEQ_GEN")
 	@Column(name = "VIDEO_NUMBER")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VIDEO_SEQ_GEN")
 	private Integer videoNumber;
@@ -40,10 +39,9 @@ public class Video
 	
 	@Column(name = "VIDEO_CONTEXTS", columnDefinition = "char")
 	private String videoContexts;
-	
 	@Column(name = "VIDEO_URL", columnDefinition = "char")
 	@NonNull
-	private String videoUrl;
+	private String videoName;
 	
 	@Column(name = "RECIPE_LEVEL", columnDefinition = "char")
 	private String recipeLevel;
@@ -63,6 +61,5 @@ public class Video
 	
 	@Column(name = "VIDEO_DEDA")
 	private LocalDateTime deDa;
-
 }
 
