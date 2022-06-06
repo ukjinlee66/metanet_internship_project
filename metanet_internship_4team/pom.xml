@@ -43,6 +43,7 @@
 			<artifactId>ojdbc8</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
 		<!-- Swagger -->
 		<dependency>
 		  <groupId>io.springfox</groupId>
@@ -54,7 +55,21 @@
 		  <artifactId>springfox-swagger-ui</artifactId>
 		  <version>2.6.1</version>
 		</dependency>
+
 		<!-- Swagger End -->
+		
+		
+		<!-- mail api start -->
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		
+		<!-- mail api End -->
+		
+		
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
