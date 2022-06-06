@@ -1,6 +1,7 @@
 package com.metanet.controller;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 	}
 	
 	@GetMapping("/SearchToTime")
+	@CrossOrigin
 	@ApiOperation(value="시간순 검색", notes="최신업로드된 레시피 기준 조회")
 	public List<Video> searchToTime(
 			@ApiParam(value="검색어",required=true, example="부대찌개") @RequestParam String videoTitle
@@ -44,6 +46,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 	}
 	
 	@GetMapping("/SearchToView")
+	@CrossOrigin
 	@ApiOperation(value="조회순 검색", notes="조회수 기준 레시피 조회")
 	public List<Video> searchToView(
 			@ApiParam(value="검색어",required=true, example="부대찌개") @RequestParam String videoTitle
@@ -52,6 +55,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 		return(service.SearchViewTitle(videoTitle));
 	}
 	@GetMapping("/SearchToLike")
+	@CrossOrigin
 	@ApiOperation(value="좋아요순 검색", notes="좋아요 기준 레시피 조회")
 	public List<Video> searchToLike(
 			@ApiParam(value="검색어",required=true, example="부대찌개") @RequestParam String videoTitle
@@ -61,6 +65,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 	}
 	
 	@GetMapping("/SearchToKind")
+	@CrossOrigin
 	@ApiOperation(value="분야 기준 검색", notes="해당 분야 기준 레시피 조회")
 	public List<Video> searchToView(
 			@ApiParam(value="검색어",required=true, example="부대찌개") @RequestParam String search,
