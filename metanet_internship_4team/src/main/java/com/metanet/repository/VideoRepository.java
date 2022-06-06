@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.metanet.domain.Video;
 
 @Repository
-public interface VideoRepository extends JpaRepository <Video, Long>
+public interface VideoRepository extends JpaRepository <Video, String>
 {
 
 

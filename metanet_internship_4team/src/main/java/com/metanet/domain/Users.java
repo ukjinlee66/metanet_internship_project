@@ -1,5 +1,6 @@
 package com.metanet.domain;
 
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,49 +15,51 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="USERS")
-@NoArgsConstructor
 @AllArgsConstructor
 @Data
-@SequenceGenerator(	name = "USER_SEQ_GEN",
+@SequenceGenerator( name = "USERS_SEQ_GEN",
 					sequenceName = "USERS_SEQ",
-					initialValue = 51,
-					allocationSize =1
-				   )
-public class Users {
-	
-	
+
+					initialValue = - 1,
+					allocationSize = 1
+					)
+@NoArgsConstructor
+public class Users 
+{
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USER_SEQ_GEN")
-	@Column(name = "USER_NUMBER")
-	private int userNumber;
+	@Column(name ="USER_NUMBER")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_SEQ_GEN")
+	private Integer userNumber;
 	
-	@Column(name = "USER_NAME")
+	@Column(name = "USER_NAME", columnDefinition = "char")
 	private String userName;
-	
-	@Column(name = "USER_ID")
+
+	@Column(name = "USER_ID", columnDefinition = "char")
 	private String userId;
 	
-	@Column(name = "USER_PASSWORD")
-	private String userPassword;
-	
-	@Column(name = "USER_PHONE_NUMBER")
+	@Column(name = "USER_PASSWORD", columnDefinition = "char")
+	private String userPassWord;
+
+	@Column(name = "USER_PHONE_NUMBER", columnDefinition = "char")
 	private String userPhoneNumber;
 	
 	@Column(name = "USER_EMAIL")
 	private String userEmail;
+
 	
 	@Column(name = "USER_POINT")
 	private int userPoint;
 	
-	@Column(name = "USER_ADDR")
+	@Column(name = "USER_ADDR", columnDefinition = "char")
 	private String userAddr;
 	
-	@Column(name = "USER_RECKIND")
-	private String userReckind;
-	
-	@Column(name = "USER_KIND")
+	@Column(name = "USER_RECKIND", columnDefinition = "char")
+	private String userRecKind;
+
+	@Column(name = "USER_KIND", columnDefinition = "char")
 	private String userKind;
-	
+
 	@Column(name = "USER_DATE")
-	private java.sql.Date userDate;
+	private LocalDateTime userDate;
 }
