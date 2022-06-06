@@ -1,35 +1,86 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
+import axios from 'axios';
 export default class SignUp extends Component {
+  
   render() {
     return (
-      <form>
+      <form
+        >
         <h3>Sign Up</h3>
         <div className="mb-3">
-          <label>First name</label>
+          <label>Name</label>
           <input
             type="text"
             className="form-control"
-            placeholder="First name"
+            name='User_Name'
+            placeholder="Enter name"
+            
           />
         </div>
         <div className="mb-3">
-          <label>Last name</label>
-          <input type="text" className="form-control" placeholder="Last name" />
-        </div>
-        <div className="mb-3">
-          <label>Email address</label>
-          <input
-            type="email"
+          <label>Id</label>
+          <input type="text"
             className="form-control"
-            placeholder="Enter email"
-          />
+            name='User_Id'
+            placeholder="Enter ID"
+     />
         </div>
         <div className="mb-3">
           <label>Password</label>
           <input
             type="password"
             className="form-control"
-            placeholder="Enter password"
+            name='User_Password'
+            placeholder="Enter Password"
+   
+          />
+        </div>
+        <div className="mb-3">
+          <label>Phone</label>
+          <input
+            type="text"
+            className="form-control"
+            name='User_Phone_Number'
+            placeholder="Enter Phone"
+  
+          />
+        </div>
+        <div className="mb-3">
+          <label>Email</label>
+          <input
+            type="email"
+            className="form-control"
+            name='User_Email'
+            placeholder="Enter Email"
+
+          />
+        </div>
+        <div className="mb-3">
+          <label>Addr</label>
+          <input
+            type="text"
+            className="form-control"
+            name='User_Addr'
+            placeholder="Enter Address"
+
+          />
+        </div>
+
+        <div className="mb-3">
+          <label>RecKind</label>
+          <br />
+          <input type="radio" name="User_RecKind" value="1" />한식
+          <input type="radio" name="User_RecKind" value="2" />중식
+          <input type="radio" name="User_RecKind" value="3" />양식
+          <input type="radio" name="User_RecKind" value="4" />일식
+        </div>
+
+        <div className="mb-3">
+          <input
+            type="hidden"
+            className="form-control"
+            name='User_Point'
+            value={0}
           />
         </div>
         <div className="d-grid">
@@ -38,7 +89,7 @@ export default class SignUp extends Component {
           </button>
         </div>
         <p className="forgot-password text-right">
-          Already registered <a href="/sign-in">sign in?</a>
+          Already registered <a href="/zipcook/Login">sign in?</a>
         </p>
       </form>
     )

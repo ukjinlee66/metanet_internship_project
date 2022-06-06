@@ -12,7 +12,7 @@ function MainSearch(props) {
     // 검색 버튼 클릭 시 이동
     function btClick(e) {
         sessionStorage.setItem("pageSession", 1);
-        window.location.href = "/jeju/RecipeAttractionList?search=" + searchInput;
+        window.location.href = "/zipcook/RecipeAttractionList?search=" + searchInput;
     }
 
     // 검색창에 ENTER 치는 경우에 검색 버튼 클릭으로 간주
@@ -23,7 +23,7 @@ function MainSearch(props) {
     }
 
     return (
-        <div class="container-fluid-search bg-jeju mb-5 wow fadeIn" data-wow-delay="0.1s" >
+        <div class="container-fluid-search bg-zipcook mb-5 wow fadeIn" data-wow-delay="0.1s" >
             <div class="container">
                 <div class="row g-2">
                     <div class="col-md-10">

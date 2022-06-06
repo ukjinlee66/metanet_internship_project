@@ -62,7 +62,7 @@ function TourinfoTop(props) {
                     <p class="mb-2">
                         <i class="fa fa-location-arrow me-3">&nbsp; {tourSpot.address}</i>
                     </p>
-                    <p class="mb-2 go-map" onClick={(e) => window.location.href = "/jeju/Maps?tourSpot=" + tourSpot.source + "&longitude=" + tourSpot.location.coordinates[0] + "&latitude=" + tourSpot.location.coordinates[1]}>
+                    <p class="mb-2 go-map" onClick={(e) => window.location.href = "/zipcook/Maps?tourSpot=" + tourSpot.source + "&longitude=" + tourSpot.location.coordinates[0] + "&latitude=" + tourSpot.location.coordinates[1]}>
                         <i class="fa fa-globe me-3 go-map-btn">&nbsp; 경로 안내페이지로 이동</i>
                     </p>
                     <hr/>

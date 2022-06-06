@@ -65,7 +65,7 @@ function Sidebar(props) {
   return (
     <div className="sidebar" data-color={props.backgroundColor}>
       <div className="logo side-logo map-side">
-        <a href="/jeju" className="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+        <a href="/zipcook" className="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
           <img class="logo" src={logo}/>
         </a>
       </div>

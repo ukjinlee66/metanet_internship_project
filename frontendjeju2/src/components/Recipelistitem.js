@@ -104,11 +104,11 @@ function Recipelistitem(props) {
                 <div class="list-item p-4 mb-4">
                     <div class="row g-4 list-section">
                         <div class="col-md-4 d-flex align-items-start">
-                            <img class="img-list" src={tourList[i].img} onClick={(e) => window.location.href = "/jeju/RecipeAttractionInfo?tourSpot=" + tourList[i].id} />
+                            <img class="img-list" src={tourList[i].img} onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?tourSpot=" + tourList[i].id} />
                         </div>
                         <div class="col-md-8 list-info">
                             <div className='row'>
-                                <h4 class="col-md-10 text-left list-text" typeof='text' id='test' onClick={(e) => window.location.href = "/jeju/RecipeAttractionInfo?tourSpot=" + tourList[i].id}>{tourList[i].source}</h4>
+                                <h4 class="col-md-10 text-left list-text" typeof='text' id='test' onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?tourSpot=" + tourList[i].id}>{tourList[i].source}</h4>
                                 <p className='col-md-2' id={'btn' + (i+1)}></p>
                             </div>
                             <hr className='list-hr'/>

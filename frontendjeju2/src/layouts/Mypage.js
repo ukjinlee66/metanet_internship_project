@@ -16,11 +16,13 @@ import PayPoint from '../views/PayPoint';
 import ChargePoint from '../views/ChargePoint';
 import QnA from '../views/QnA';
 import RefundPointPage from '../views/RefundPoint';
+import MainSearch from '../components/MainSearch';
 
 const Center = styled.div`
-  height: 50vh;
+  height: 100vh;
   display: flex;
   flex-direction: row;
+  width : 100%;
   `
 
 function Mypage(props) {
@@ -29,12 +31,12 @@ function Mypage(props) {
         <div class="container-xxl bg-white p-0">
             
             <Navbar />
-            <ListSearch />
+            <MainSearch />
             <Center>
-            <Sidebar />
+                    <Sidebar />
             <Routes>
                 <Route exact path="/" element={<View/>} />
-                <Route exact path="/View" element={<View/>} />
+                <Route path="/View" element={<View/>} />
                 <Route path="/LikedView" element={<LikedView/>} />
                 <Route path="/SaveList" element={<SaveList/>} />
                 <Route path="/PayPoint" element={<PayPoint/>} />

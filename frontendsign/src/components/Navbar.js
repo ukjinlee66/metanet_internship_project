@@ -11,7 +11,7 @@ function Navbar(props) {
     const stickyChange = useRef(null);
     function btClick(e) {
         sessionStorage.setItem("pageSession", 1);
-        window.location.href = "/jeju/" + e.target.value;
+        window.location.href = "/zipcook/" + e.target.value;
     }
     // 스크롤의 Y축을 감시하여 특정 지점 이동 시 Navbar가 화면 일정 지점에 따라가도록 설정
     function handleScroll() { 
@@ -32,7 +32,7 @@ function Navbar(props) {
     return (
         <Fragment>
             <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0" ref={stickyChange}>
-                <a href="/jeju" className="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+                <a href="/zipcook" className="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
                     <img class="logo" src={logo}/>
                 </a>
                 <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="Signin">로그인</button>
@@ -43,11 +43,11 @@ function Navbar(props) {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                     <div className="navbar-nav ms-auto p-4 p-lg-0">
-                        {/* <a href="/jeju/Maps" className="nav-item nav-link">Map</a>
-                        <a href="/jeju/TouristAttractionList?search=" className="nav-item nav-link">List</a>
-                        <a href="/jeju/TouristAttractionInfo" className="nav-item nav-link">Info</a> */}
+                        {/* <a href="/zipcook/Maps" className="nav-item nav-link">Map</a>
+                        <a href="/zipcook/TouristAttractionList?search=" className="nav-item nav-link">List</a>
+                        <a href="/zipcook/TouristAttractionInfo" className="nav-item nav-link">Info</a> */}
                     </div>
-                    {/* <a href="/jeju" className="btn btn-primary bg-jeju-nav rounded-0 py-4 px-lg-5 d-none d-lg-block">Home<i class="fa fa-arrow-right ms-3"></i></a> */}
+                    {/* <a href="/zipcook" className="btn btn-primary bg-zipcook-nav rounded-0 py-4 px-lg-5 d-none d-lg-block">Home<i class="fa fa-arrow-right ms-3"></i></a> */}
                 </div>
             </nav>
         </Fragment>

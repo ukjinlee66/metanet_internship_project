@@ -30,7 +30,7 @@ function SnsRanking(props) {
                     <li className='list-element'>
                         <a className='list-area'>
                             <em className='rank'>{i + 1}</em>
-                            <span className='rank-element' onClick={(e) => window.location.href = "/jeju/TouristAttractionList?search=" + snsrankings[i].keyword}>{snsrankings[i].keyword}</span>
+                            <span className='rank-element' onClick={(e) => window.location.href = "/zipcook/TouristAttractionList?search=" + snsrankings[i].keyword}>{snsrankings[i].keyword}</span>
                         </a>
                     </li>
                 </Fragment>

@@ -13,7 +13,7 @@ function ChatButton(props) {
     return (
       <>
         <Button
-            className='btn btn-lg btn-primary bg-jeju-nav btn-lg-square chat-btn' 
+            className='btn btn-lg btn-primary bg-zipcook-nav btn-lg-square chat-btn' 
             onClick={() => setOpen(!open)}
             aria-controls="example-collapse-text"
             aria-expanded={open}

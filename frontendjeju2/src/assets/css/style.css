@@ -40,7 +40,7 @@ div .detail-img {
     object-fit: cover;
 }
 
-.bg-jeju {
+.bg-zipcook {
     background-color: var(--primary);
 }
 
@@ -67,12 +67,12 @@ div .detail-img {
     transition: .5s ;
 }
 
-.bg-jeju-nav:hover {
+.bg-zipcook-nav:hover {
     background-color: #f86300;
     border-color: #f86300;
 }
 
-.bg-jeju-nav {
+.bg-zipcook-nav {
     background-color: #ff9f40;
 }
 
@@ -583,6 +583,9 @@ div .detail-img {
 
 .tab-content-tourlist {
     height: 1300px;
+}
+.tab-content-viewlist {
+    height: 1100px;
 }
 
 ul.pagination {

@@ -18,7 +18,7 @@ function MainRecipeList(props) {
     // 레시피 클릭 시 이동
     function btClick(e) {
         sessionStorage.setItem("pageSession", 1);
-        window.location.href = "/jeju/RecipeAttractionList";
+        window.location.href = "/zipcook/RecipeAttractionList";
     }
 
 
@@ -29,22 +29,22 @@ function MainRecipeList(props) {
                         <p>
                             <button class="btn btn-dark border-0 w-20 m-3" onClick={btClick} value="low">초급</button>
                         </p>
-                        <img class="img-fluid-tour" src={foodImg1} onClick={(e) => window.location.href = "/jeju/RecipeAttractionInfo"}/> 
-                        <img class="img-fluid-tour" src={foodImg2} onClick={(e) => window.location.href = "/jeju/RecipeAttractionInfo"}/>
-                        <img class="img-fluid-tour" src={foodImg3} onClick={(e) => window.location.href = "/jeju/RecipeAttractionInfo"}/>
+                        <img class="img-fluid-tour" src={foodImg1} onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo"}/> 
+                        <img class="img-fluid-tour" src={foodImg2} onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo"}/>
+                        <img class="img-fluid-tour" src={foodImg3} onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo"}/>
                         <p>
                             <button class="btn btn-dark border-0 w-20 m-3" onClick={btClick} value="low">중급</button>
                         </p>
-                        <img class="img-fluid-tour" src={foodImg4} onClick={(e) => window.location.href = "/jeju/RecipeAttractionInfo"}/> 
-                        <img class="img-fluid-tour" src={foodImg5} onClick={(e) => window.location.href = "/jeju/RecipeAttractionInfo"}/>
-                        <img class="img-fluid-tour" src={foodImg6}onClick={(e) => window.location.href = "/jeju/RecipeAttractionInfo"}/>
+                        <img class="img-fluid-tour" src={foodImg4} onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo"}/> 
+                        <img class="img-fluid-tour" src={foodImg5} onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo"}/>
+                        <img class="img-fluid-tour" src={foodImg6}onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo"}/>
                         
                         <p>
                             <button class="btn btn-dark border-0 w-20 m-3" onClick={btClick} value="low">상급</button>
                         </p>
-                        <img class="img-fluid-tour" src={foodImg7} onClick={(e) => window.location.href = "/jeju/RecipeAttractionInfo"}/> 
-                        <img class="img-fluid-tour" src={foodImg8}onClick={(e) => window.location.href = "/jeju/RecipeAttractionInfo"}/>
-                        <img class="img-fluid-tour" src={foodImg9}onClick={(e) => window.location.href = "/jeju/RecipeAttractionInfo"}/>
+                        <img class="img-fluid-tour" src={foodImg7} onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo"}/> 
+                        <img class="img-fluid-tour" src={foodImg8}onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo"}/>
+                        <img class="img-fluid-tour" src={foodImg9}onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo"}/>
                         
                             
                     </div>

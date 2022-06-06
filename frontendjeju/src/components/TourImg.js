@@ -68,7 +68,7 @@ function TourImg(props) {
             result.push(
                 <Fragment>
                 <div class="testimonial-item bg-white rounded">
-                    <img class="img-fluid-tour" src={imgSource[i].img} onClick={(e) => window.location.href = "/jeju/TouristAttractionInfo?tourSpot=" + imgSource[i].id}/>
+                    <img class="img-fluid-tour" src={imgSource[i].img} onClick={(e) => window.location.href = "/zipcook/TouristAttractionInfo?tourSpot=" + imgSource[i].id}/>
                 </div>
                 </Fragment>
         );}    

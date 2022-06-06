@@ -24,16 +24,16 @@ function App() {
   return (
       <BrowserRouter>
           <Routes>
-              <Route path='/jeju' element={<Main/>}/>
-              <Route path='/jeju/TouristAttractionList' element={<TouristAttractionList/>}/>
-              <Route path='/jeju/TouristAttractionInfo' element={<TouristAttractionInfo/>}/>
-              <Route path='/jeju/TouristAttractionListReco' element={<TouristAttractionListReco/>}/>
-              <Route path='/jeju/Maps' element={<Admin/>}/>
-              <Route path='/jeju/Mypage/*' element={<Mypage/>}/>
-              <Route path='/jeju/ServiceCenter' element={<ServiceCenter/>}/>
-              <Route path='/jeju/QuestionInfo' element={<QuestionInfo/>}/>
-              <Route path='/jeju/Signin' element={<Signin/>}/>
-              <Route path='/jeju/Signup' element={<Signup/>}/>
+              <Route path='/zipcook' element={<Main/>}/>
+              <Route path='/zipcook/TouristAttractionList' element={<TouristAttractionList/>}/>
+              <Route path='/zipcook/TouristAttractionInfo' element={<TouristAttractionInfo/>}/>
+              <Route path='/zipcook/TouristAttractionListReco' element={<TouristAttractionListReco/>}/>
+              <Route path='/zipcook/Maps' element={<Admin/>}/>
+              <Route path='/zipcook/Mypage/*' element={<Mypage/>}/>
+              <Route path='/zipcook/ServiceCenter' element={<ServiceCenter/>}/>
+              <Route path='/zipcook/QuestionInfo' element={<QuestionInfo/>}/>
+              <Route path='/zipcook/Signin' element={<Signin/>}/>
+              <Route path='/zipcook/Signup' element={<Signup/>}/>
           </Routes>
       </BrowserRouter>
   );

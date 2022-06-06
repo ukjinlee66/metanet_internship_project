@@ -7,7 +7,7 @@ import '../assets/css/style.css';
 function Scrolltop(props) {
     return (
         <Fragment>
-             <a href="#" className="btn btn-lg btn-primary bg-jeju-nav btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+             <a href="#" className="btn btn-lg btn-primary bg-zipcook-nav btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
         </Fragment>
     );
 }

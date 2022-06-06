@@ -13,7 +13,7 @@ function Question(props) {
     // 검색 버튼 클릭 시 이동
     function btClick(e) {
         sessionStorage.setItem("pageSession", 1);
-        window.location.href = "/jeju/ServiceCenter";
+        window.location.href = "/zipcook/ServiceCenter";
     }
 
     // 검색창에 ENTER 치는 경우에 검색 버튼 클릭으로 간주
@@ -50,12 +50,12 @@ function Question(props) {
                             <th>분류</th>
                             <tr>
                                 <td>1</td>
-                                <td><a href = "/jeju/QuestionInfo">환불받고 싶어요</a></td>
+                                <td><a href = "/zipcook/QuestionInfo">환불받고 싶어요</a></td>
                                 <td>환불</td>
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td><a href = "/jeju/QuestionInfo">영상이 안나와요</a></td>
+                                <td><a href = "/zipcook/QuestionInfo">영상이 안나와요</a></td>
                                 <td>영상</td>
                             </tr>
                             </table>

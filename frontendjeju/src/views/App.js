@@ -7,9 +7,11 @@ import TouristAttractionListReco from './layouts/TouristAttractionListReco';
 import Admin from './layouts/Admin.js'
 import Signin from './layouts/Signin.js'
 import Signup from './layouts/Signup.js'
+import Login from './layouts/Login.js';
 import Mypage from './layouts/Mypage.js'
 import ServiceCenter from './layouts/ServiceCenter.js'
 import QuestionInfo from './layouts/QuestionInfo.js'
+
 
 
 function App() {
@@ -23,18 +25,20 @@ function App() {
 
   return (
       <BrowserRouter>
+      
           <Routes>
-              <Route path='/jeju' element={<Main/>}/>
-              <Route path='/jeju/RecipeAttractionList' element={<RecipeAttractionList/>}/>
-              <Route path='/jeju/RecipeAttractionInfo' element={<RecipeAttractionInfo/>}/>
-              <Route path='/jeju/TouristAttractionListReco' element={<TouristAttractionListReco/>}/>
-              <Route path='/jeju/Maps' element={<Admin/>}/>
-              <Route path='/jeju/Mypage/*' element={<Mypage/>}/>
-              <Route path='/jeju/ServiceCenter' element={<ServiceCenter/>}/>
-              <Route path='/jeju/QuestionInfo' element={<QuestionInfo/>}/>
-              <Route path='/jeju/Signin' element={<Signin/>}/>
-              <Route path='/jeju/Signup' element={<Signup/>}/>
+              <Route path='/zipcook' element={<Main/>}/>
+              <Route path='/zipcook/RecipeAttractionList' element={<RecipeAttractionList/>}/>
+              <Route path='/zipcook/RecipeAttractionInfo' element={<RecipeAttractionInfo/>}/>
+              <Route path='/zipcook/TouristAttractionListReco' element={<TouristAttractionListReco/>}/>
+              <Route path='/zipcook/Maps' element={<Admin/>}/>
+              <Route path='/zipcook/Mypage/*' element={<Mypage/>}/>
+              <Route path='/zipcook/ServiceCenter' element={<ServiceCenter/>}/>
+              <Route path='/zipcook/QuestionInfo' element={<QuestionInfo/>}/>
+              <Route path='/zipcook/Signin/*' element={<Login/>}/>
+              <Route path='/zipcook/Signup/*' element={<Signup/>}/>
           </Routes>
+          
       </BrowserRouter>
   );
 }

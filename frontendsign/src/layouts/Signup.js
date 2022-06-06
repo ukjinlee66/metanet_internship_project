@@ -7,18 +7,18 @@ export default class SignUp extends Component {
       <div className="SIGN">
         <nav className="navbar navbar-expand-lg navbar-light fixed-top">
             <div className="container">
-                <Link className="navbar-brand" to={'/jeju/Signin'}>
+                <Link className="navbar-brand" to={'/zipcook/Signin'}>
                     positronX
                 </Link>
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        <Link className="nav-link" to={'/jeju/Signin'}>
+                        <Link className="nav-link" to={'/zipcook/Signin'}>
                         Login
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to={'/jeju/Signup'}>
+                        <Link className="nav-link" to={'/zipcook/Signup'}>
                         Sign up
                         </Link>
                     </li>

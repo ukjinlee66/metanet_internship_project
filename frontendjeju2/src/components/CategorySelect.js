@@ -10,7 +10,7 @@ function RecipeRanking(props) {
     // 레시피 클릭 시 이동
     function btClick(e) {
         sessionStorage.setItem("pageSession", 1);
-        window.location.href = "/jeju/RecipeAttractionList?search=" + e.target.value;
+        window.location.href = "/zipcook/RecipeAttractionList?search=" + e.target.value;
     }
 
 

@@ -57,7 +57,7 @@ function ReturnTour(props) {
         if (tourInfo[0].id == '') {
             result = <a>loading...</a>; 
         } else {
-            result = <a className='chatbot-btn' onClick={(e) => window.location.href = "/jeju/TouristAttractionInfo?tourSpot=" + tourInfo[0].id}>{tourInfo[0].source}</a>;
+            result = <a className='chatbot-btn' onClick={(e) => window.location.href = "/zipcook/TouristAttractionInfo?tourSpot=" + tourInfo[0].id}>{tourInfo[0].source}</a>;
         } 
     return result;
     };

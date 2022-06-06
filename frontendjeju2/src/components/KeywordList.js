@@ -159,7 +159,7 @@ function KeywordList(props) {
     function btClick(e) {
         window.sessionStorage.setItem('recoKeyword', strResult);
         insertElastic(strResult);
-        window.location.href = "/jeju/TouristAttractionListReco";
+        window.location.href = "/zipcook/TouristAttractionListReco";
     }
 
     // 새로고침 버튼 클릭시 
