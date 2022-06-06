@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @SequenceGenerator(	name = "USER_SEQ_GEN",
 					sequenceName = "USERS_SEQ",
-					initialValue = 1,
+					initialValue = 51,
 					allocationSize =1
 				   )
 public class Users {
@@ -40,7 +40,10 @@ public class Users {
 	private String userPassword;
 	
 	@Column(name = "USER_PHONE_NUMBER")
-	private int userPhoneNumber;
+	private String userPhoneNumber;
+	
+	@Column(name = "USER_EMAIL")
+	private String userEmail;
 	
 	@Column(name = "USER_POINT")
 	private int userPoint;
