@@ -1,6 +1,7 @@
 package com.metanet.domain;
 
 import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,14 +20,12 @@ import lombok.NoArgsConstructor;
 @Data
 @SequenceGenerator( name = "USERS_SEQ_GEN",
 					sequenceName = "USERS_SEQ",
-
 					initialValue = - 1,
 					allocationSize = 1
 					)
 @NoArgsConstructor
 public class Users 
 {
-
 	@Id
 	@Column(name ="USER_NUMBER")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_SEQ_GEN")
@@ -40,13 +39,9 @@ public class Users
 	
 	@Column(name = "USER_PASSWORD", columnDefinition = "char")
 	private String userPassWord;
-
+	
 	@Column(name = "USER_PHONE_NUMBER", columnDefinition = "char")
 	private String userPhoneNumber;
-	
-	@Column(name = "USER_EMAIL")
-	private String userEmail;
-
 	
 	@Column(name = "USER_POINT")
 	private int userPoint;
