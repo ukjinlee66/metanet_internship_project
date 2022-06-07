@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import profile from "../assets/img/carousel-1.jpg";
 import SidebarItem from "./SidebarItem";
+
 const Side = styled.div`
   display: flex;
   border-right: 1px solid #e0e0e0;

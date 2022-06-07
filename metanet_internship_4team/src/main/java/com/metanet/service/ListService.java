@@ -6,6 +6,7 @@ import com.metanet.domain.Video;
 
 public interface ListService 
 {
+
 	List<Video> Search(String videoTitle); // 기본 검색
 	List<Video> SearchKind(String videoTitle, String recipeKind); // 분야 검색
 	List<Video> SearchCreateTitle(String videoTitle); // 시간순 정렬 검색

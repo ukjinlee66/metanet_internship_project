@@ -1,10 +1,14 @@
 import React from "react";
+import "../assets/css/style.css";
+import Table from "../components/Table";
+import styled from "styled-components";
 
-const PayPointPage = (props) => {
-  return (
-      <>
-          <h3>PayPointPage</h3>
-      </>
+
+function PayPointPage() {
+
+
+  return(
+    <Table/>
   );
 }
 

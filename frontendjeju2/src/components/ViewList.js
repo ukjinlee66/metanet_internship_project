@@ -27,9 +27,7 @@ const Nav = styled.nav`
 
 function Recipelistitem(props) {
     const [tourList, setTourList] = useState([
-        {id:'' ,img:foodImg1, source:'', sub_title:'', }, 
-        {id:'' ,img:foodImg2, source:'', sub_title:'', },
-        {id:'' ,img:foodImg3, source:'', sub_title:'', }
+        {id:'' ,img:foodImg1, source:'', sub_title:'', }
     ])
 
     const [listSize, setListSize] = useState(1);
@@ -114,8 +112,7 @@ function Recipelistitem(props) {
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         {tourlistRender()}
                     </div>
-                </div>
-                <Pagination
+                    <Pagination
                     activePage={page}
                     itemsCountPerPage={5}
                     totalItemsCount={listSize}
@@ -124,6 +121,8 @@ function Recipelistitem(props) {
                     nextPageText=">"
                     onChange={handlePageChange}
             />
+                </div>
+
             </div>
 
         

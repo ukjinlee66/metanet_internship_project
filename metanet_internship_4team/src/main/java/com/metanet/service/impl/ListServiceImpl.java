@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.metanet.domain.Video;
 import com.metanet.repository.LikesRepository;
@@ -14,7 +13,7 @@ import com.metanet.service.ListService;
 
 public abstract class ListServiceImpl implements ListService 
 {
-	/*
+
 	@Autowired
 	private VideoRepository videoRepo;
 	
@@ -67,12 +66,7 @@ public abstract class ListServiceImpl implements ListService
 		}
 	}
 	
-	@Override
-	public int compareTo(Video o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
+
 	
 	
 	// 기본 검색
@@ -135,5 +129,5 @@ public abstract class ListServiceImpl implements ListService
 		else
 			return second;
 	}
-	*/
+
 }

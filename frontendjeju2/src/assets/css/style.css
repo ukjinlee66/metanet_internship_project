@@ -507,13 +507,23 @@ div .detail-img {
     background-color: #fcfbf7;
     padding-top: 12px !important;
 }
+.pdCon2 {
+    padding-left: 0;
+    padding-right: 0;
+    background-color: #ffffff;
+    padding-top: 12px !important;
+}
 
 .maCon {
     margin-left: 0;
     margin-right: 0;
-    background-color: #fcfbf7;
+    background-color: #f8f5f5;
 }
-
+.maCon2 {
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #ffffff;
+}
 .rank-con{
     background-color: #fcfbf7;
 }

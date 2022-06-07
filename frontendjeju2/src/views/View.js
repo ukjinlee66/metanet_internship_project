@@ -6,7 +6,7 @@ import ViewList from '../components/ViewList';
 const Center = styled.h2`
 text-align: center;
 height: 100vh;
-width: 50vh;
+width: 100vh;
 `
 const View = (props) => {
     const [data, setData] = useState(null);
@@ -28,11 +28,13 @@ const View = (props) => {
             {data && <textarea rows={7} value={JSON.stringify(data, null, 2)} readOnly={true} />}
         </div> */}
        
-            <div class="container-xxl py-5 wow fadeInUp pdCon" data-wow-delay="0.1s">
-                <div class="row g-5 maCon" style={{width:'100vh',height:'100vh'}}>
+            <div class="container-xxl py-5 wow fadeInUp pdCon2" data-wow-delay="0.1s">
+                <div class="row g-5 maCon2" style={{width:'100vh',height:'100vh'}}>
                     <div class="col-lg-5" style={{width:'100%'}}>
                         <ViewList/>
+                        
                     </div>
+                    
                 </div>
             </div>
             <Scrolltop />
