@@ -6,39 +6,70 @@ const SubTitleFont = styled.div`
 text-align: center;
 width: 100vh;
 `
-
-
 const RefundPoint = (props) => {
-  const BASEURL = "http://localhost:4000/data"
-  function handleSubmit(e) {
-    e.preventDefault();
-    axios.post(BASEURL, {
-      User_Point: inputText
 
+  const [inputText, setInputText] = useState('');
+  const [refundPoint, setRefundPoint] = useState(0);
+  const [recipe, setRecipe] = useState([
+    {
+      User_Number: 0, User_Name: '', User_Id: '', User_Password: '', User_Phone_Number: '', User_Email: '', User_Point: '', User_Addr: '',
+      User_RecKind: '', User_Kind: '', User_Date: ''
+    }
+  ])
+  const BASEURL = "http://localhost:4000/users"
+  const handleSubmit = (e)=> {
+    
+    axios.put(BASEURL+"?User_id="+recipe[0].User_Id, {
+      User_Point : refundPoint
     })
       .then(function (response) {
+        alert("성공");
         console.log(response);
       })
       .catch(function (error) {
+        alert("실패");
         console.log(error);
       });
-    alert("제출");
+    
   }
-  const [inputText, setInputText] = useState('');
+  
+  const serachId = (e) => {
 
-  const handleChange = (e) => {  // <- input값으로 text 변경 함수
-    setInputText(e.target.value)
-    console.log("input", inputText)
-  };
-  const serachId = () => {
-    console.log("reset", inputText)
+    axios.get(BASEURL, {
+      params: {
+        User_Id: inputText
+      }
+    })
+      .then(function (response) {
+        if(response.data != 0) {
+          alert("존재하는 아이디")
+          setRecipe(response.data)
+          
+        }
+        else alert("없는 아이디")
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert("오류")
+      })
+      .finally(() =>{
+        console.log("지금 실행",recipe)
+        
+      })
     setInputText('');
   };
-  useEffect(() => {
-		console.log(inputText);
-	}, [inputText]);
+  
+  const handleChange = (e) => {  // <- input값으로 text 변경 함수
+    setInputText(e.target.value)
+  };
+  const handleChange2 = (e) => {  // <- input값으로 text 변경 함수
+    setRefundPoint(e.target.value)
+  };
+  
+  useEffect(() => {}, [inputText]);
+  useEffect(() => {}, [refundPoint]);
+  useEffect(() => {console.log("유즈이펙트 실행",recipe)}, [recipe]);
 
-출처: https://zereight.tistory.com/779 [김정혁 블로그:티스토리]
   return (
 
     <SubTitleFont>
@@ -50,16 +81,16 @@ const RefundPoint = (props) => {
         value={inputText}
         onChange={handleChange}
       ></input>
-      <button type="button" onClick={serachId}>계좌 조회</button><br />
+      <button type="button" onClick={serachId}>아이디 조회</button><br />
       환불 가능 포인트 :&nbsp;
       <input type='text'
-        //value={point}
+        value={recipe[0].User_Point}
         name='point'
       ></input><br />
       환불할 포인트 :&nbsp;
       <input type='text'
-        //value={refundpoint}
-        name='refundpoint'
+        value={refundPoint}
+        onChange={handleChange2}
       ></input><br />
       계좌 :&nbsp;
       <select name="bank">

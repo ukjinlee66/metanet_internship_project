@@ -47,11 +47,9 @@ function Recipelistitem(props) {
         console.log("getListItem start", decodeURI(window.location.search.split('=')[1]));
         await axios
             .get(reqUrl, {
-                params: {
-                    videoTitle: decodeURI(window.location.search.split('=')[1])
-                }
             })
-            .then((res) => setRecipe(res.data));
+            .then((res) => setRecipe(res.data),
+            console.log(recipe));
         // .then((res)=>console.log("RES : ",res.data));
     }
 
