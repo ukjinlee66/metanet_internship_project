@@ -29,7 +29,7 @@ public class Users
 	@Id
 	@Column(name ="USER_NUMBER")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_SEQ_GEN")
-	private Integer userNumber;
+	private int userNumber;
 	
 	@Column(name = "USER_NAME", columnDefinition = "char")
 	private String userName;
@@ -56,5 +56,5 @@ public class Users
 	private String userKind;
 
 	@Column(name = "USER_DATE")
-	private LocalDateTime userDate;
+	private java.sql.Date userDate;
 }

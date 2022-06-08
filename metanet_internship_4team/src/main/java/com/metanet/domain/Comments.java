@@ -30,11 +30,14 @@ public class Comments {
 	
 	@Column(name = "VIDEO_NUMBER")
 	private int videoNumber;
+	
 	@Column(name = "COMMENTS_CONTEXTS")
 	private String commentsContexts;
+	
 	@Column(name = "COMMENTS_CRDA")
 	@NonNull
 	private java.sql.Date crDa;
+	
 	@Column(name = "COMMENTS_DEDA")
 	private java.sql.Date deDa;
 }
