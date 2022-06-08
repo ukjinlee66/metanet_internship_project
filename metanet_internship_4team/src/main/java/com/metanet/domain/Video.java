@@ -1,9 +1,10 @@
 package com.metanet.domain;
 
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -15,6 +16,13 @@ import lombok.NonNull;
 @Table(name="VIDEO")
 @Data
 @NoArgsConstructor
+
+@SequenceGenerator(	name = "VIDEO_SEQ_GEN",
+sequenceName = "VIDEO_SEQ",
+initialValue = 1,
+allocationSize =50
+)
+
 public class Video 
 {
 	@Id
@@ -22,15 +30,14 @@ public class Video
 	private int videoNumber;
 	
 	@Column(name = "VIDEO_TITLE")
-	@NonNull
 	private String videoTitle;
 	
+	@Column(name = "VIDEO_NAME")
+	private String videoName;
+	
+	@Lob
 	@Column(name = "VIDEO_CONTEXTS")
 	private String videoContexts;
-	
-	@Column(name = "VIDEO_NAME")
-	@NonNull
-	private String videoName;
 	
 	@Column(name = "RECIPE_LEVEL")
 	private String recipeLevel;
@@ -38,8 +45,17 @@ public class Video
 	@Column(name = "RECIPE_KIND")
 	private String recipeKind;
 	
-	@Column(name = "VIDEO_LENGTH")
-	private java.sql.Time videoLength;
+	@Column(name = "RECIPE_TIME")
+	private int recipeTime;
+	
+	@Column(name = "RECIPE_SIZE")
+	private int recipeSize;
+	
+	@Column(name = "RECIPE_INGREDIENT")
+	private String recipeIngredient;
+	
+	@Column(name = "VIDEO_VIEW")
+	private int videoView;
 	
 	@Column(name = "VIDEO_CRDA")
 	@NonNull
@@ -51,7 +67,5 @@ public class Video
 	@Column(name = "VIDEO_DEDA")
 	private java.sql.Date deDa;
 	
-	@Column(name = "VIDEO_VIEW")
-	private int videoView;
 }
 

@@ -1,5 +1,6 @@
 package com.metanet.service.impl;
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -12,9 +13,11 @@ import com.metanet.repository.LikesRepository;
 import com.metanet.repository.VideoRepository;
 import com.metanet.service.ListService;
 
-public abstract class ListServiceImpl implements ListService 
+
+@Service
+public class ListServiceImpl implements  ListService  
 {
-	/*
+		
 	@Autowired
 	private VideoRepository videoRepo;
 	
@@ -65,12 +68,6 @@ public abstract class ListServiceImpl implements ListService
 			else
 				return -1;
 		}
-	}
-	
-	@Override
-	public int compareTo(Video o) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 	
 	
@@ -135,5 +132,7 @@ public abstract class ListServiceImpl implements ListService
 		else
 			return second;
 	}
-	*/
+	
+
+
 }

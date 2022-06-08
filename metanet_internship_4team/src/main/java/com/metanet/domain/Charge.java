@@ -23,7 +23,7 @@ import lombok.NonNull;
 @SequenceGenerator( name = "CHARGE_SEQ_GEN",
 					sequenceName = "CHARGE_SEQ",
 					initialValue = 1,
-					allocationSize = 1
+					allocationSize = 50
 					)
 @NoArgsConstructor
 public class Charge 
@@ -31,20 +31,17 @@ public class Charge
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CHARGE_SEQ_GEN")
 	@Column(name = "CHARGE_NUMBER")
-	private Integer chargeNumber;
+	private int chargeNumber;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="USER_NUMBER")
-	private Users users;
+	@Column(name = "USER_NUMBER")
+	private int usersNumber;
 	
 	@Column(name = "CHARGE_DATE")
-	@NonNull
-	private LocalDateTime chargeDate;
+	private java.sql.Date  chargeDate;
 	
 	@Column(name = "CHARGE_PRICE")
 	private int chargePrice;
 	
 	@Column(name = "CHARGE_KIND", columnDefinition = "char")
-	@NonNull
 	private String chargeKind;
 }

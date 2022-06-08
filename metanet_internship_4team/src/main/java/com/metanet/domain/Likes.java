@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @SequenceGenerator(	name = "LIKES_SEQ_GEN",
 					sequenceName = "LIKES_SEQ",
 					initialValue = 1,
-					allocationSize =1
+					allocationSize =50
 				   )
 
 public class Likes {

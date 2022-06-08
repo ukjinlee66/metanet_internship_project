@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 @Data
 @SequenceGenerator( name = "REPORT_SEQ_GEN",
 					sequenceName = "REPORT_SEQ",
-					initialValue = - 1,
-					allocationSize = 1
+					initialValue = 1,
+					allocationSize = 50
 					)
 @NoArgsConstructor
 public class Report 
@@ -28,13 +28,12 @@ public class Report
 	@Id
 	@Column(name = "REPORT_NUMBER")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REPORT_SEQ_GEN")
-	private Integer reportNumber;
+	private int reportNumber;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="USER_NUMBER")
-	private Users users;
+	@Column(name = "USER_NUMBER")
+	private int usersNumber;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="REPORT_TABLENUMBER")
-	private Report_Table report_Table;
+	@Column(name="REPORT_TABLENUMBER")
+	private int reportTableNumber;
+	
 }
