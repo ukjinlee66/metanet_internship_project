@@ -54,5 +54,47 @@
       "User_Point": 100000,
       "id": 2
     }
+  ],
+  "list": [
+    {
+      "id": 1,
+      "img": "pizza.png",
+      "videoTitle": "피자 만들기",
+      "recipeLevel": "고급",
+      "recipeKind": "양식",
+      "videoLength": "6분",
+      "crDa": "6월 7일",
+      "videoView": "1"
+    },
+    {
+      "id": 2,
+      "img": "fish.png",
+      "videoTitle": "생선조림 만들기",
+      "recipeLevel": "중급",
+      "recipeKind": "양식",
+      "videoLength": "5분",
+      "crDa": "6월 6일",
+      "videoView": "1"
+    },
+    {
+      "id": 3,
+      "img": "tendong.png",
+      "videoTitle": "텐동 만들기",
+      "recipeLevel": "초급",
+      "recipeKind": "일식",
+      "videoLength": "10분",
+      "crDa": "6월 5일",
+      "videoView": "2"
+    },
+    {
+      "id": 4,
+      "img": "nurungzi.png",
+      "videoTitle": "누룽지탕 만들기",
+      "recipeLevel": "중급",
+      "recipeKind": "한식",
+      "videoLength": "11분",
+      "crDa": "6월 4일",
+      "videoView": "1"
+    }
   ]
 }
