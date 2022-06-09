@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.metanet.domain.Comments;
 
 @Repository
-public interface CommentsRepository extends JpaRepository<Comments, Long>
+public interface CommentsRepository extends JpaRepository<Comments, Integer>
 
 {
 	List<Comments> findByvideoNumber(int videoNumber);
