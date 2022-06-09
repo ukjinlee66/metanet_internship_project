@@ -9,6 +9,6 @@ public interface Report_TableService {
 	public List<ReportBoardRequestDTO> getBoardList();
 	public ReportBoardRequestDTO getPost(int reportTableNumber);
 	public void deletePost(int reportTableNumber);
-//	public List<ReportBoardRequestDTO> searchPosts(String keyword);
+	public List<ReportBoardRequestDTO> searchPosts(String keyword);
 //	public void update(int reportTableNumber, ReportBoardRequestDTO dto);
 }

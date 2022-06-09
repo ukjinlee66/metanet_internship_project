@@ -65,26 +65,26 @@ public class Report_TableServiceImpl implements Report_TableService{
 		reportTableRepository.deleteById(reportTableNumber);
 	}
 	
-	// 키워드 검색 
-//    @Transactional
-//    @Override
-//    public List<ReportBoardRequestDTO> searchPosts(String keyword){
-//    	List<Report_Table> reportTable = reportTableRepository.findByTitleContaining(keyword); 
-//    	List<ReportBoardRequestDTO> boardList = new ArrayList<>();
-//    	
-//    	for(Report_Table reportTable : reportTables) {
-//			ReportBoardRequestDTO build = ReportBoardRequestDTO.builder()
-//					.reportName(reportTable.getReportName())
-//					.reportKind(reportTable.getReportKind())
-//					.reportDetail(reportTable.getReportDetail())
-//					.build();
-//			
-//			boardList.add(build);
-//		}
-//		return boardList;
-//    	
-//    }
-//
+//  키워드 검색 
+    @Transactional
+    @Override
+    public List<ReportBoardRequestDTO> searchPosts(String keyword){
+    	List<Report_Table> reportTables = reportTableRepository.findByreportNameContaining(keyword); 
+    	List<ReportBoardRequestDTO> boardList = new ArrayList<>();
+    	
+    	for(Report_Table reportTable : reportTables) {
+			ReportBoardRequestDTO build = ReportBoardRequestDTO.builder()
+					.reportName(reportTable.getReportName())
+					.reportKind(reportTable.getReportKind())
+					.reportDetail(reportTable.getReportDetail())
+					.build();
+			
+			boardList.add(build);
+		}
+		return boardList;
+    	
+    }
+
     // 게시글 수정 
 //    @Transactional
 //    @Override

@@ -12,8 +12,9 @@ public class ReportBoardResponseDTO {
 	private int reportTableNumber;
 	private String reportName;
 	private String reportKind;
-	private String reportDetail;
+	private String reportDetail; 
 	private LocalDateTime crDa;
+
 	
 	@Builder
 	public ReportBoardResponseDTO(String reportName, String reportKind, String reportDetail) {
