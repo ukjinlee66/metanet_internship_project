@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.metanet.domain.Report_Table;
 import com.metanet.domain.Users;
 import com.metanet.domain.dto.UsersDto;
 import com.metanet.repository.UsersRepository;
@@ -76,7 +75,7 @@ public class AccountServiceImpl implements AccountService {
 	
 	}
 	
-	
+		
 	
 	public int deleteAccount(String userId) {
 		

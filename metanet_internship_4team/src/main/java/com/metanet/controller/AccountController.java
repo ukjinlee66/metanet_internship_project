@@ -148,14 +148,12 @@ public class AccountController {
 	@CrossOrigin
 	@ApiOperation(value="로그인",notes="세션을 활용한 로그인 / 성공시 1 반환, 실패시 -1 반환 / userId, userPassword 만 넣을 것")
 	public int  login (
-			 //UsersDto.LoginRequest loginRequest ,HttpServletRequest request
-				@RequestParam String userId, @RequestParam String userPassword, HttpServletRequest request
+			 UsersDto.LoginRequest loginRequest ,HttpServletRequest request
+				
 			) 
 	{
-		System.out.println(userId);
 		
-		return 1 ;
-		/*
+		
 		HttpSession session = request.getSession(true);
 	
 		Optional<Users> findUser= accountService.validateForLogin(loginRequest);	
@@ -170,7 +168,7 @@ public class AccountController {
 			session.setAttribute("state", "NOT_LOG_IN");
 			return -1;
 		}
-		*/
+		
 	}
 	
 	
