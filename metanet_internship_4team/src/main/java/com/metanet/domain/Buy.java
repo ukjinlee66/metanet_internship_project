@@ -35,12 +35,13 @@ public class Buy
 	@Column(name = "USER_NUMBER")
 	private int usersNumber;
 	
-	@Column(name = "VIDEO_NUMBER")
-	private int videoNumber;
+	@Column(name = "BUY_KIND")
+	private String buyKind;
+
+	@Column(name = "BUY_POINT")
+	private int buyPoint;
 	
 	@Column(name = "BUY_DATE")
 	private java.sql.Date  buyDate;
 	
-	@Column(name = "BUY_POINT")
-	private int buyPoint;
 }

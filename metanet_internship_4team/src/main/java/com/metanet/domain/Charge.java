@@ -36,12 +36,15 @@ public class Charge
 	@Column(name = "USER_NUMBER")
 	private int usersNumber;
 	
+	@Column(name = "CHARGE_KIND", columnDefinition = "char")
+	private String chargeKind;
+	
+	@Column(name = "CHARGE_POINT")
+	private int chargePoint;
+	
 	@Column(name = "CHARGE_DATE")
 	private java.sql.Date  chargeDate;
 	
-	@Column(name = "CHARGE_PRICE")
-	private int chargePrice;
 	
-	@Column(name = "CHARGE_KIND", columnDefinition = "char")
-	private String chargeKind;
+
 }
