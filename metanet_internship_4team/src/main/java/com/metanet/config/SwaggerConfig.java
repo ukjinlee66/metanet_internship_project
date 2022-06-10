@@ -1,4 +1,5 @@
 package com.metanet.config;
+import springfox.documentation.builders.RequestHandlerSelectors;
 
 
 import org.springframework.context.annotation.Bean;
@@ -18,7 +19,8 @@ public class SwaggerConfig
 	@Bean
     public Docket swaggerApi(){
         return new Docket(DocumentationType.SWAGGER_2).ignoredParameterTypes(ApiIgnore.class)
-                .apiInfo(swaggerInfo()).select()
+                .apiInfo(swaggerInfo())
+                .select()
                 .apis(RequestHandlerSelectors.basePackage("com.metanet.controller"))
                 .build()
                 .useDefaultResponseMessages(false);
@@ -26,6 +28,7 @@ public class SwaggerConfig
 
     private ApiInfo swaggerInfo() {
         return new ApiInfoBuilder().title("API Documentation")
+                .title("Metanet InterShip 4Team")
                 .description("요리하는주웅 문서 ")
                 .build();
     }

@@ -12,24 +12,12 @@ import com.metanet.domain.Video;
 @Repository
 public interface VideoRepository extends JpaRepository <Video, String>
 {
-
-
 	List<Video> findByvideoTitleIsContaining(String videoTitle);
-	
+	List<Video> findByrecipeKind(String recipeKind);
+	List<Video> findByrecipeLevel(String recipeLevel);
 	Video findByvideoNumber(int videoNumber);
-	
-	//Optional<Video> findVideoByvideoTitleOrderByvideoViewDesc(String videoTitle); // 조회순 정렬 검색
-	
-	// 내가 추가한 내용 
-	
 	Optional<Video> findByVideoNumberAndRecipeKind (int videoNumber, String recipeKind);
-
 	List<Video> findByRecipeLevel(String recipeLevel);
-
 	List<Video> findByRecipeKindAndRecipeLevel(String UserReckind, String recipeLevel);
-	
 	Optional<Video> findByVideoName(String videoName);
-
-	
-
 }

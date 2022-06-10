@@ -15,9 +15,8 @@ import com.metanet.service.ListService;
 
 
 @Service
-public class ListServiceImpl implements  ListService  
-{
-		
+public class ListServiceImpl implements ListService
+{	
 	@Autowired
 	private VideoRepository videoRepo;
 	
@@ -60,17 +59,43 @@ public class ListServiceImpl implements  ListService
 		
 		@Override
 		public int compare(Video v, Video v2)
-		{
-			if (likesRepo.countByvideoNumber(v.getVideoNumber()) > likesRepo.countByvideoNumber(v2.getVideoNumber()))
-				return 1;
-			else if ((likesRepo.countByvideoNumber(v.getVideoNumber())) == likesRepo.countByvideoNumber(v2.getVideoNumber()))
+		{	
+			try 
+			{
+				if (likesRepo.existsByvideoNumber(v.getVideoNumber()) && likesRepo.existsByvideoNumber(v2.getVideoNumber()))
+				{
+					if (likesRepo.countByvideoNumber(v.getVideoNumber()) > likesRepo.countByvideoNumber(v2.getVideoNumber()))
+						return 1;
+					else if ((likesRepo.countByvideoNumber(v.getVideoNumber())) == likesRepo.countByvideoNumber(v2.getVideoNumber()))
+						return 0;
+					else
+						return -1;
+				}
+				else
+					return 0;
+			}
+			catch(NullPointerException e)
+			{
 				return 0;
-			else
-				return -1;
+			}
 		}
 	}
-	
-	
+	// 검색
+	@Override
+	public List<Video> SearchAll() 
+	{
+		return videoRepo.findAll();
+	}
+	@Override
+	public List<Video> SearchLevel(String recipeLevel) // findByLevel
+	{
+		return videoRepo.findByrecipeLevel(recipeLevel);
+	}
+	@Override
+	public List<Video> SearchKind(String recipeKind) // findByKind
+	{
+		return videoRepo.findByrecipeKind(recipeKind);
+	}
 	
 	// 기본 검색
 	public List<Video> Search(String videoTitle)
@@ -78,31 +103,38 @@ public class ListServiceImpl implements  ListService
 		return videoRepo.findByvideoTitleIsContaining(videoTitle); // 기본 검색어에 따른결과를 리스트로 반환 ex) (%검색어%)
 	}
 	
-	public List<Video> SearchCreateTitle(String videoTitle) // 시간순 정렬 검색
+	public List<Video> SearchCreateTitle(List<Video> arr) // 시간순 정렬 검색
 	{
-		List<Video> first = Search(videoTitle);//검색어에따른 리스트
+		List<Video> first = arr;//검색어에따른 리스트
 		Collections.sort(first, new SortTime());// 해당 게시글의 시간을 비교해서 정렬
 		return first; 
 	}
 
-	public List<Video> SearchViewTitle(String videoTitle) // 조회순 정렬 검색
+	public List<Video> SearchViewTitle(List<Video> arr) // 조회순 정렬 검색
 	{
-		List<Video> first = Search(videoTitle); //검색어에따른 리스트
-		Collections.sort(first, new SortView()); // 해당 게시글의 조회수를 비교해서 정렬
+		List<Video> first = arr; //검색어에따른 리스트
+		Collections.sort(first, new SortView().reversed()); // 해당 게시글의 조회수를 비교해서 정렬
 		return first;
 	}
 	
-	public List<Video> SearchtoLikes(String videoTitle) // 좋아요순 정렬 검색
+	public List<Video> SearchtoLikes(List<Video> arr) // 좋아요순 정렬 검색
 	{
-		List<Video> first = Search(videoTitle); //검색어에따른 리스트
+		List<Video> first = arr; //검색어에따른 리스트
 		List<Video> second = new ArrayList<>();
 		//likes 테이블에 존재하는 게시글 기준 정렬하기위한 새로운 리스트 생성
 		for(Video v : first)
 		{	
-			//검색결과 리스트에서 좋아요테이블의 게시글이 한개 이상 존재할 경우 -> 좋아요가 있을경우
-			if(likesRepo.countByvideoNumber(v.getVideoNumber()) > 0)
+			try 
 			{
-				second.add(v);
+				//검색결과 리스트에서 좋아요테이블의 게시글이 한개 이상 존재할 경우 -> 좋아요가 있을경우
+				if(likesRepo.countByvideoNumber(v.getVideoNumber()) > 0)
+				{
+					second.add(v);
+				}
+			}
+			catch(NullPointerException e)
+			{
+				e.printStackTrace();
 			}
 		}
 		Collections.sort(second, new SortLike()); //해당 게시글의 좋아요수를 비교해서 정렬.
@@ -111,14 +143,11 @@ public class ListServiceImpl implements  ListService
 	
 	public List<Video> SearchKind(String videoTitle, String recipeKind) // 분야 검색
 	{
-		
-		System.out.println("IN kind : "+ videoTitle+" "+recipeKind);
 		List<Video> first = Search(videoTitle);
 		List<Video> second = new ArrayList<>();
 		for(Video v : first)
 		{
 			try {
-				System.out.println("v get recipe : "+v.getRecipeKind());
 				if(v.getRecipeKind().equals(recipeKind))
 					second.add(v);
 			}
@@ -132,7 +161,4 @@ public class ListServiceImpl implements  ListService
 		else
 			return second;
 	}
-	
-
-
 }
