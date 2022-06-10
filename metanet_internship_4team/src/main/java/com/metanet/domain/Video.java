@@ -30,11 +30,13 @@ public class Video
 	@Id
 	@Column(name = "VIDEO_NUMBER")
 	private int videoNumber;
+
 	@Column(name = "VIDEO_TITLE")
+	@NonNull
 	private String videoTitle;
 	
-
 	@Column(name = "VIDEO_NAME")
+	@NonNull
 	private String videoName;
 
 	@Lob
