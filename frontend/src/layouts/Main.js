@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 import ChatButton from '../components/ChatButton';
 import Navbar from '../components/Navbar';
 import MainRecipeList from '../components/MainRecipeList';
-import Question from '../components/Question';
+import MainFaq from '../MainFaq/Question';
 
 function Main(props) {
 
@@ -21,7 +21,7 @@ function Main(props) {
             <div class="container-xxl py-3 rank-con">
                 <div class="row g-4">
                     <MainRecipeList />
-                    <Question/>
+                    <MainFaq/>
                 </div>
             </div>
             {/* <TourImg /> */}
