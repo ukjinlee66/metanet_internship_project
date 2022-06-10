@@ -1,6 +1,5 @@
 package com.metanet.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.metanet.domain.Report_Table;
+import com.metanet.domain.DTO.ReportBoardRequestDTO;
+import com.metanet.domain.DTO.ReportBoardResponseDTO;
 import com.metanet.repository.Report_TableRepository;
-import com.metanet.service.DTO.ReportBoardRequestDTO;
-import com.metanet.service.DTO.ReportBoardResponseDTO;
 import com.metanet.service.impl.Report_TableServiceImpl;
 
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +37,7 @@ public class Report_TableController {
 		reportTableService.savePost(request);
 
         return new ReportBoardResponseDTO(
-        		request.getReportTableNumber(), //수
+        		request.getReportTableNumber(),
                 request.getReportName(),
                 request.getReportKind(),
                 request.getReportDetail());
@@ -48,18 +47,7 @@ public class Report_TableController {
 	@CrossOrigin
 	@GetMapping("/List")
 	public List<Report_Table> findPosts(){
-		List<Report_Table> findAll = reportTableRepository.findAll(); //마이페이지 문의글 리스트 findbyusernumber
-//		List<ReportBoardRequestDTO> allPost = new ArrayList<>();
-//		
-//		for(Report_Table reportTable : findAll) {
-//			ReportBoardRequestDTO build = ReportBoardRequestDTO.builder()
-//					.reportName(reportTable.getReportName())
-//					.reportKind(reportTable.getReportKind())
-//					.reportDetail(reportTable.getReportDetail())
-//					.build();
-//			
-//			allPost.add(build);
-//		}
+		List<Report_Table> findAll = reportTableRepository.findAll();
 		return findAll;
 	}
 	
@@ -85,7 +73,7 @@ public class Report_TableController {
 		ReportBoardRequestDTO post = reportTableService.getPost(reportTableNumber);
 		
 		return new ReportBoardResponseDTO(
-				post.getReportTableNumber(), //수정
+				post.getReportTableNumber(),
 				post.getReportName(),
 				post.getReportKind(),
 				post.getReportDetail()

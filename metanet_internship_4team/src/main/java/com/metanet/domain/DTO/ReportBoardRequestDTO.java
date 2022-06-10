@@ -1,4 +1,4 @@
-package com.metanet.service.DTO;
+package com.metanet.domain.DTO;
 
 import com.metanet.domain.Report_Table;
 
@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class ReportBoardRequestDTO { //엔티티를 그대로 반환해주면 안되기 때문에 DTO 
+public class ReportBoardRequestDTO {
 	private int reportTableNumber;
 	private String reportName;
 	private String reportKind;
@@ -29,7 +29,7 @@ public class ReportBoardRequestDTO { //엔티티를 그대로 반환해주면 �
 	
 	public Report_Table ToEntity() {
 		return Report_Table.builder()
-				.reportTableNumber(this.reportTableNumber)//tnwjd
+				.reportTableNumber(this.reportTableNumber)
 				.reportName(this.reportName)
 				.reportKind(this.reportKind)
 				.reportDetail(this.reportDetail)

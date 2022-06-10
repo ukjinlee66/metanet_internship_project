@@ -9,9 +9,9 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.metanet.domain.Report_Table;
+import com.metanet.domain.DTO.ReportBoardRequestDTO;
 import com.metanet.repository.Report_TableRepository;
 import com.metanet.service.Report_TableService;
-import com.metanet.service.DTO.ReportBoardRequestDTO;
 
 import lombok.RequiredArgsConstructor;
 

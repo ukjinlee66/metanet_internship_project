@@ -2,7 +2,7 @@ package com.metanet.service;
 
 import java.util.List;
 
-import com.metanet.service.DTO.ReportBoardRequestDTO;
+import com.metanet.domain.DTO.ReportBoardRequestDTO;
 
 public interface Report_TableService {
 	public void savePost(ReportBoardRequestDTO boardDto);

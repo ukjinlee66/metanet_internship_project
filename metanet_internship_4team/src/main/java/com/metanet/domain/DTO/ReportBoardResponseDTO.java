@@ -1,4 +1,4 @@
-package com.metanet.service.DTO;
+package com.metanet.domain.DTO;
 
 import lombok.Builder;
 import lombok.Data;
@@ -15,8 +15,8 @@ public class ReportBoardResponseDTO {
 
 	
 	@Builder
-	public ReportBoardResponseDTO(int reportTableNumber, String reportName, String reportKind, String reportDetail) {//수정함 
-				this.reportTableNumber = reportTableNumber; //수정함 
+	public ReportBoardResponseDTO(int reportTableNumber, String reportName, String reportKind, String reportDetail) {
+				this.reportTableNumber = reportTableNumber;
 				this.reportName = reportName;
 				this.reportKind = reportKind;
 				this.reportDetail = reportDetail;
