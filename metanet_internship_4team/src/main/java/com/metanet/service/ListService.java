@@ -2,7 +2,10 @@ package com.metanet.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.metanet.domain.Video;
+
 
 public interface ListService 
 {

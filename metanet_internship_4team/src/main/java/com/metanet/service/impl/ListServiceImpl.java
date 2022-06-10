@@ -1,5 +1,6 @@
 package com.metanet.service.impl;
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -16,7 +17,6 @@ import com.metanet.service.ListService;
 @Service
 public class ListServiceImpl implements ListService
 {	
-	
 	@Autowired
 	private VideoRepository videoRepo;
 	
@@ -80,7 +80,6 @@ public class ListServiceImpl implements ListService
 			}
 		}
 	}
-	
 	// 검색
 	@Override
 	public List<Video> SearchAll() 
@@ -144,14 +143,11 @@ public class ListServiceImpl implements ListService
 	
 	public List<Video> SearchKind(String videoTitle, String recipeKind) // 분야 검색
 	{
-		
-		System.out.println("IN kind : "+ videoTitle+" "+recipeKind);
 		List<Video> first = Search(videoTitle);
 		List<Video> second = new ArrayList<>();
 		for(Video v : first)
 		{
 			try {
-				System.out.println("v get recipe : "+v.getRecipeKind());
 				if(v.getRecipeKind().equals(recipeKind))
 					second.add(v);
 			}
@@ -165,6 +161,4 @@ public class ListServiceImpl implements ListService
 		else
 			return second;
 	}
-
-	
 }
