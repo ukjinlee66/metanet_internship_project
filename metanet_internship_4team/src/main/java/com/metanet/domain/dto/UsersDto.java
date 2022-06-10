@@ -86,7 +86,6 @@ public class UsersDto {
 			
 		}
 		
-		
 
 		@NoArgsConstructor
 		@AllArgsConstructor
@@ -117,9 +116,7 @@ public class UsersDto {
 		
 		}
 	
-		
-		
-	
+			
 		@NoArgsConstructor
 		@AllArgsConstructor
 		@Data

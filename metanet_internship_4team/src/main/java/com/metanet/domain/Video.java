@@ -8,11 +8,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.ToString;
 
 
 @Entity
@@ -44,15 +42,6 @@ public class Video
 	@Column(name = "RECIPE_LEVEL")
 	@NonNull
 	private String recipeLevel;
-	
-	@Column(name = "RECIPE_TIME")
-	private String recipeTime;
-	
-	@Column(name = "RECIPE_SIZE")
-	private String recipeSize;
-	
-	@Column(name = "RECIPE_INGREDIENT")
-	private String recipeIngredient;
 	
 	@Column(name = "RECIPE_KIND")
 	@NonNull

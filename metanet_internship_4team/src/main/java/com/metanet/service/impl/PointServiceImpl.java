@@ -57,14 +57,16 @@ public class PointServiceImpl implements PointService {
 		Buy buy = new Buy();
 		
 		buy = buyRequest.transferTo(buy);
+		
+		
 		buy.setUsersNumber(userNumber);
 		
 		long millis=System.currentTimeMillis();  
 	    java.sql.Date date=new java.sql.Date(millis);  
+	    
 	    buy.setBuyDate(date);
 
 	    buyRepository.save(buy);
-		
 		
 	}; 
 	
@@ -79,6 +81,90 @@ public class PointServiceImpl implements PointService {
 	    java.sql.Date date=new java.sql.Date(millis);  
 	    refund.setRefundDate(date);
 	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	 
 
 	    refundRepository.save(refund);
 		
