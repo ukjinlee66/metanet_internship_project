@@ -21,7 +21,7 @@ function Table1() {
     const [users, setUsers] = useState([
         { id: '', name: '', email: '', phone: '' }
     ])
-    // 페이지에 따른 관광지 리스트 요청
+    
     const getListItem = async () => {
         await axios
             .get(reqUrl)

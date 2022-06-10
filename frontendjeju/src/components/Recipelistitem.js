@@ -21,7 +21,7 @@ function Recipelistitem(props) {
     // ])
     const [tourList, setTourList] = useState([
         {id:'' ,img:foodImg1, source:'', sub_title:'', }, 
-        {id:'' ,img:foodImg2, source:'', sub_title:'', },
+        {id:'' ,img:foodImg2, source:'', sub_title:'', }, 
         {id:'' ,img:foodImg3, source:'', sub_title:'', },
         {id:'' ,img:foodImg4, source:'', sub_title:'', },
         {id:'' ,img:foodImg5, source:'', sub_title:'', }

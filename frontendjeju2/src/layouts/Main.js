@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
@@ -11,12 +11,11 @@ import Navbar from '../components/Navbar';
 import MainRecipeList from '../components/MainRecipeList';
 import Question from '../components/Question';
 
-
-
 function Main(props) {
+
     return (
         <div class="container-xxl bg-white p-0">
-            <Navbar />
+            <Navbar  />
             <MainImg />
             <MainSearch />
             <div class="container-xxl py-3 rank-con">

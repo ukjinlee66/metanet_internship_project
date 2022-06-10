@@ -24,7 +24,7 @@ const Nav = styled.nav`
 
 function Recipelistitem(props) {
     const [recipe, setRecipe] = useState([
-        {id:'' ,img:'', videoTitle:'', recipeLevel: '', recipeKind: '', videoLength:'', crDa:'' ,videoView: ''}
+        {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}
     ])
 
     const [listSize, setListSize] = useState(1);
@@ -39,12 +39,11 @@ function Recipelistitem(props) {
         sessionStorage.setItem("pageSession", nowPage);
     };
 
-    const reqUrl = 'http://localhost:4000/list'
+    const reqUrl = 'http://localhost:8443/MyPage/getViews/한식'
     const tourSizeUrl = 'http://localhost:4000/list'
 
     // 페이지에 따른 관광지 리스트 요청
     const getListItem = async (page) => {
-        console.log("getListItem start", decodeURI(window.location.search.split('=')[1]));
         await axios
             .get(reqUrl, {
             })

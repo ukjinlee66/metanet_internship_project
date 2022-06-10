@@ -10,9 +10,10 @@ width: 100vh;
 `
 const View = (props) => {
     const [data, setData] = useState(null);
+    const BASEURL = "http://localhost:8443/MyPage"
     const onClick = async() => {
         try{
-            const response = await axios.get('http://localhost:4000/posts');  
+            const response = await axios.get(BASEURL + '/addViews' + "/한식");  
             setData(response.data);  
             console.log(response.data)
           }catch(e){
@@ -21,12 +22,6 @@ const View = (props) => {
     }
     return (
         <>
-        {/* <div>
-            <div>
-                <button onClick={onClick}>불러오기</button>
-            </div>
-            {data && <textarea rows={7} value={JSON.stringify(data, null, 2)} readOnly={true} />}
-        </div> */}
        
             <div class="container-xxl py-5 wow fadeInUp pdCon2" data-wow-delay="0.1s">
                 <div class="row g-5 maCon2" style={{width:'100vh',height:'100vh'}}>

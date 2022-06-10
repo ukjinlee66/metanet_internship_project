@@ -9,7 +9,7 @@ function Signup1()
     <div className="App">
       <Navbar />
       <div className="auth-wrapper">
-        <div className="auth-inner">
+        <div className="auth-inner2">
           <Signup />
         </div>
       </div>
