@@ -40,7 +40,7 @@ public class InfoServiceImpl implements InfoService
 	public List<Video> userRecKindList(int userNumber)
 	{
 		Users u = usersRepo.findByuserNumber(userNumber);
-		String userRecKind = u.getUserReckind(); // 게시글의 접속한 유저의 관심분야
+		String userRecKind = u.getUserRecKind(); // 게시글의 접속한 유저의 관심분야
 		List<Video> list = videoRepo.findAll(); // 전체비디오테이블
 		List<Video> ret_list = new ArrayList<>();
 		for(Video v : list)

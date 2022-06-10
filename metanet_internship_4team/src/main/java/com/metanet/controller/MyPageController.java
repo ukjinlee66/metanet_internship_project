@@ -2,6 +2,7 @@ package com.metanet.controller;
 
 import java.util.List;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.metanet.domain.Users;
 import com.metanet.domain.Video;
-import com.metanet.domain.dto.UsersDto;
 import com.metanet.service.MyPageService;
 
 import io.swagger.annotations.ApiOperation;

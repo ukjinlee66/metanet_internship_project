@@ -1,4 +1,4 @@
-package com.metanet.domain.dto;
+package com.metanet.domain.DTO;
 
 import com.metanet.domain.Charge;
 import com.metanet.domain.Refund;
@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-public class RefundDto {
+public class RefundDTO {
 
 	
 	@NoArgsConstructor

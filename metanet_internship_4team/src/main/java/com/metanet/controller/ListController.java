@@ -164,7 +164,6 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 			@RequestParam(value="list") String list,
 			@ApiParam(value="정렬 형태",required=true, example="정렬 형태 :  \"Time\",\"View\",\"Like\" 입력을 받는다.") 
 			@RequestParam String Color
->>>>>>> master
 			)
 	{
 		//List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();

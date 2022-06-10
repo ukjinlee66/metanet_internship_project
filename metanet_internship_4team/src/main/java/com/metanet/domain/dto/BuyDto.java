@@ -1,4 +1,4 @@
-package com.metanet.domain.dto;
+package com.metanet.domain.DTO;
 
 import javax.persistence.Column;
 
@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-public class BuyDto {
+public class BuyDTO {
 
 	
 	@NoArgsConstructor
