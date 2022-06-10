@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 @Data
 @SequenceGenerator( name = "REPORT_TABLE_SEQ_GEN",
 					sequenceName = "REPORT_TABLE_SEQ",
-					initialValue = - 1,
-					allocationSize = 1
+					initialValue =  1,
+					allocationSize = 50
 					)
 @NoArgsConstructor
 public class Report_Table 
@@ -27,7 +27,7 @@ public class Report_Table
 	@Id
 	@Column(name = "REPORT_TABLENUMBER")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REPORT_TABLE_SEQ_GEN")
-	private Integer reportTableNumber;
+	private int reportTableNumber;
 	
 	@Column(name = "REPORT_NAME", columnDefinition = "char")
 	private String reportName;
@@ -42,8 +42,8 @@ public class Report_Table
 	private String reportReply;
 	
 	@Column(name = "REPORT_CRDA")
-	private LocalDateTime crDa;
+	private java.sql.Date crDa;
 	
 	@Column(name = "REPORT_REDA")
-	private LocalDateTime reDa;
+	private java.sql.Date reDa;
 }

@@ -13,36 +13,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="SAVE")
+@Table(name="SEARCH_WORD")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
-@SequenceGenerator(	name = "SAVE_SEQ_GEN",
-sequenceName = "SAVE_SEQ",
+@SequenceGenerator(	name = "SEARCH_WORD_SEQ_GEN",
+sequenceName = "SEARCH_WORD_SEQ",
 initialValue = 1,
-allocationSize =50
-)
-
-public class Save {
+allocationSize =50)
+public class SearchWord {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SAVE_SEQ_GEN")
-	@Column(name = "SAVE_NUMBER")
-	private int saveNumber;
+	@Column(name = "SEARCH_WORD_NUMBER")
+	private int searchWordNumber;
 
-	@Column(name = "USER_NUMBER")
-	private int usersNumber;
+	@Column(name = "SEARCH_WORD_NAME")
+	private String searchWordName;
 	
-	@Column(name = "VIDEO_NUMBER")
-	private int videoNumber;
+	@Column(name = "SEARCH_WORD_COUNT")
+	private int searchWordCount;
 	
-	@Column(name = "SAVE_CRDA")
-	private java.sql.Date saveCrda;
-	
-	@Column(name = "SAVE_DEDA")
-	private java.sql.Date saveDeda;
-
-		
 }
-

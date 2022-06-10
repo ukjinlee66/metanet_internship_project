@@ -16,6 +16,7 @@ import com.metanet.domain.Video;
 import com.metanet.domain.Views;
 import com.metanet.repository.LikesRepository;
 import com.metanet.repository.SaveRepository;
+import com.metanet.repository.SearchWordRepository;
 import com.metanet.repository.UsersRepository;
 import com.metanet.repository.VideoRepository;
 import com.metanet.repository.ViewsRepository;
@@ -42,7 +43,7 @@ public class MyPageServiceImpl implements MyPageService {
 	@Autowired
 	VideoRepository videoRepository;
 	
-	
+
 	
 	public int addViews(String userId, String videoName) {
 		
@@ -75,8 +76,16 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<Video> getViews(String userId, String reckind){
 		
 		Optional<Users> findUsers = usersRepository.findByUserId(userId);
+		
+
+		System.out.println(findUsers.get().getUserNumber());
+		
 		List<Views> viewsList = viewsRepository.findByUsersNumber(findUsers.get().getUserNumber() );
+	
+		System.out.println(viewsList.size());
+		
 		List<Video> videoList= new ArrayList<Video>();
+	
 		
 		for( Views views : viewsList) {
 			Optional<Video> video = videoRepository.findByVideoNumberAndRecipeKind(views.getVideoNumber(),reckind); 			

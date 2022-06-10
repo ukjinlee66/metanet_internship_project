@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 @Data
 @SequenceGenerator(	name = "USER_SEQ_GEN",
 					sequenceName = "USERS_SEQ",
-					initialValue = 51,
-					allocationSize =1
+					initialValue = 1,
+					allocationSize =50
 				   )
 public class Users {
 	
@@ -52,10 +52,10 @@ public class Users {
 	private String userAddr;
 	
 	@Column(name = "USER_RECKIND")
-	private String userReckind;
+	private String userRecKind;
 	
 	@Column(name = "USER_KIND")
-	private String userKind;
+	private char userKind;
 	
 	@Column(name = "USER_DATE")
 	private java.sql.Date userDate;

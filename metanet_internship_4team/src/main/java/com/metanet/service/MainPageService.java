@@ -6,8 +6,12 @@ import com.metanet.domain.Video;
 
 public interface MainPageService {
 
+
 	
-	public List<String> getRecipeRank();
+	public List<String> getSearchWordRank();
+
+		
+	//public List<String> getRecipeRank();
 
 
 	// 비회원용 

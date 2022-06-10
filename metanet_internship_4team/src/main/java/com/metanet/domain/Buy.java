@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @SequenceGenerator( name = "BUY_SEQ_GEN",
 					sequenceName = "BUY_SEQ",
 					initialValue = 1,
-					allocationSize = 1
+					allocationSize = 50
 					)
 @NoArgsConstructor
 public class Buy 
@@ -30,19 +30,18 @@ public class Buy
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BUY_SEQ_GEN")
 	@Column(name = "BUY_NUMBER")
-	private Integer buyNumber;
+	private int buyNumber;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="USER_NUMBER")
-	private Users users;
+	@Column(name = "USER_NUMBER")
+	private int usersNumber;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="VIDEO_NUMBER")
-	private Video video;
-	
-	@Column(name = "BUY_DATE")
-	private LocalDateTime buyDate;
-	
+	@Column(name = "BUY_KIND")
+	private String buyKind;
+
 	@Column(name = "BUY_POINT")
 	private int buyPoint;
+	
+	@Column(name = "BUY_DATE")
+	private java.sql.Date  buyDate;
+	
 }
