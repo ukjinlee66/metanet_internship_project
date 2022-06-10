@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,6 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/List")
 public class ListController //게시글 리스트를 출력하기위한 Controller 
 {
-	
 	@Autowired
 	private ListService service;
 	
@@ -164,6 +164,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 			@RequestParam(value="list") String list,
 			@ApiParam(value="정렬 형태",required=true, example="정렬 형태 :  \"Time\",\"View\",\"Like\" 입력을 받는다.") 
 			@RequestParam String Color
+>>>>>>> master
 			)
 	{
 		//List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();

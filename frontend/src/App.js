@@ -1,46 +1,41 @@
 import React, { useEffect } from 'react';
-import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
-import './App.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import Signin from './Signin';
-import Signup from './Signup';
-function App() 
-{
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Main from './layouts/Main';
+import RecipeAttractionInfo from './layouts/RecipeAttractionInfo';
+import RecipeAttractionList from './layouts/RecipeAttractionList';
+import TouristAttractionListReco from './layouts/TouristAttractionListReco';
+import Admin from './layouts/Admin.js'
+import Signup from './views/Signup';
+import Mypage from './layouts/Mypage.js'
+import Login from './views/Login';
+import ServiceCenter from './layouts/ServiceCenter.js'
+import QuestionInfo from './layouts/QuestionInfo.js'
+
+
+function App() {
+  useEffect(async () => {
+    window.onpageshow = (event) => {
+      if (event.persisted) {
+        window.location.reload();
+      }
+    };
+  }, [])
+
   return (
-    <BrowserRouter>
-      <div className="App">
-        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-          <div className="container">
-            <Link className="navbar-brand" to={'/sign-in'}>
-              positronX
-            </Link>
-            <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link className="nav-link" to={'/sign-in'}>
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to={'/sign-up'}>
-                    Sign up
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <div className="auth-wrapper">
-          <div className="auth-inner">
-            <Routes>
-              <Route exact path="/" element={<Signin />} />
-              <Route path="/sign-in" element={<Signin />} />
-              <Route path="/sign-up" element={<Signup />} />
-            </Routes>
-          </div>
-        </div>
-      </div>
-    </BrowserRouter>
+      <BrowserRouter>
+          <Routes>
+              <Route path='/zipcook' element={<Main/>}/>
+              <Route path='/zipcook/RecipeAttractionList' element={<RecipeAttractionList/>}/>
+              <Route path='/zipcook/RecipeAttractionInfo' element={<RecipeAttractionInfo/>}/>
+              <Route path='/zipcook/TouristAttractionListReco' element={<TouristAttractionListReco/>}/>
+              <Route path='/zipcook/Maps' element={<Admin/>}/>
+              <Route path='/zipcook/Mypage/*' element={<Mypage/>}/>
+              <Route path='/zipcook/ServiceCenter' element={<ServiceCenter/>}/>
+              <Route path='/zipcook/QuestionInfo' element={<QuestionInfo/>}/>
+              <Route path='/zipcook/Login' element={<Login/>}/>
+              <Route path='/zipcook/Signup' element={<Signup/>}/>
+          </Routes>
+      </BrowserRouter>
   );
 }
 

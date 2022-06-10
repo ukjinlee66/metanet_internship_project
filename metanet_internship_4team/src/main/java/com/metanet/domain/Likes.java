@@ -37,6 +37,7 @@ public class Likes {
 	private int videoNumber;
 	
 	@Column(name = "LIKES_CRDA")
+	@NonNull
 	private java.sql.Date likesCrda;
 	
 	@Column(name = "LIKES_UPDA")
