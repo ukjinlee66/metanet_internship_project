@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.metanet.domain.Users;
-import com.metanet.domain.dto.UsersDto;
+import com.metanet.domain.DTO.UsersDTO;
 import com.metanet.service.AccountService;
 import com.metanet.service.impl.MailServiceImpl;
 
@@ -50,7 +50,7 @@ public class AccountController {
 	@CrossOrigin
 	@ApiOperation(value="회원가입",notes="회원정보를 통한 화원가입 / 성공시 userNumber 반환, 실패시 -1 반환 / userNumber, userDate 넣지말 것")
 	public int signUpAccount( 
-			 UsersDto.SignupRequest signupRequest  
+			 UsersDTO.SignupRequest signupRequest  
 			)
 	{
 			
@@ -64,7 +64,7 @@ public class AccountController {
 	@GetMapping("/getAccount")
 	@CrossOrigin
 	@ApiOperation(value="회원정보 요청",notes="성공시 회원정보 반환, 실패시 1 (=null) 반환 ")
-	public UsersDto.InfoResponse  getAccount( HttpServletRequest request )
+	public UsersDTO.InfoResponse  getAccount( HttpServletRequest request )
 	{
 		
 		
@@ -76,7 +76,7 @@ public class AccountController {
 		
 		if (session.getAttribute("state").equals("LOG_IN")) {
 			
-			UsersDto.InfoResponse infoResponse  = new UsersDto.InfoResponse();
+			UsersDTO.InfoResponse infoResponse  = new UsersDTO.InfoResponse();
 			infoResponse.transferFrom((Users)session.getAttribute("info") );
 			return infoResponse;
 		
@@ -92,7 +92,7 @@ public class AccountController {
 	@PostMapping("/updateAccount")
 	@CrossOrigin
 	@ApiOperation(value="회원정보 변경",notes="성공시 회원정보 반환, 실패시 1 (=null) 반환 / 유저 넘버와, 날짜만 제외하고 입력할것 ")
-	public UsersDto.InfoResponse updateAccount (UsersDto.UpdateRequest updateRequest   , HttpServletRequest request) {
+	public UsersDTO.InfoResponse updateAccount (UsersDTO.UpdateRequest updateRequest   , HttpServletRequest request) {
 	
 		HttpSession session = request.getSession(false);
 		if(session==null) {
@@ -109,7 +109,7 @@ public class AccountController {
 				
 				session.setAttribute("info", findUser.get());
 				
-				UsersDto.InfoResponse infoResponse = new UsersDto.InfoResponse();
+				UsersDTO.InfoResponse infoResponse = new UsersDTO.InfoResponse();
 				infoResponse.transferFrom(  (Users)session.getAttribute("info")  );
 				return infoResponse;
 			}
@@ -148,7 +148,7 @@ public class AccountController {
 	@CrossOrigin
 	@ApiOperation(value="로그인",notes="세션을 활용한 로그인 / 성공시 1 반환, 실패시 -1 반환 / userId, userPassword 만 넣을 것")
 	public int  login (
-			 UsersDto.LoginRequest loginRequest ,HttpServletRequest request
+			 UsersDTO.LoginRequest loginRequest ,HttpServletRequest request
 				
 			) 
 	{
@@ -188,7 +188,7 @@ public class AccountController {
 	@GetMapping("/snsLogin")
 	@CrossOrigin
 	@ApiOperation(value="SNS 로그인 ",notes="여유가 된다면 추후 진행할 예정")
-	public int  snsLogin(UsersDto usersDto )
+	public int  snsLogin(UsersDTO usersDto )
 	{
 		return 1; 	
 	}	
@@ -199,7 +199,7 @@ public class AccountController {
 	@PostMapping("/findId")
 	@CrossOrigin
 	@ApiOperation(value="아이디 찾기" , notes="회원이름, 핸드폰번호, 이메일을 통한 아이디찾기 / 성공시 userID 반환, 실패시 \"no ID\" 반환 / UserName,UserPhoneNumber,UserEmail 만 넣을 것")
-	public String  findId(UsersDto.FindRequest findRequest )
+	public String  findId(UsersDTO.FindRequest findRequest )
 	{
 		
 	
@@ -216,7 +216,7 @@ public class AccountController {
 	@PostMapping("/sendPasswordByEmail")
 	@CrossOrigin
 	@ApiOperation(value="이메일로 인증번호 보내기" , notes="회원아이디, 회원이름, 이메일을 통한 인증번호 보내기 / 성공시 1 반환, 실패시 -1 반환 / UserName,UserPhoneNumber 만 넣을 것")
-	public int  findPassword(UsersDto.FindRequest findRequest , HttpServletRequest request )
+	public int  findPassword(UsersDTO.FindRequest findRequest , HttpServletRequest request )
 	{
 		
 		HttpSession session = request.getSession(false);

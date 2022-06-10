@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.metanet.domain.Users;
 import com.metanet.domain.Video;
-import com.metanet.domain.dto.UsersDto;
+import com.metanet.domain.DTO.UsersDTO;
 import com.metanet.service.ListService;
 import com.metanet.service.MainPageService;
 

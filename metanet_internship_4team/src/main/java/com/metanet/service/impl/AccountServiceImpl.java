@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.metanet.domain.Users;
-import com.metanet.domain.dto.UsersDto;
+import com.metanet.domain.DTO.UsersDTO;
 import com.metanet.repository.UsersRepository;
 import com.metanet.service.AccountService;
 
@@ -31,7 +31,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 	
 	
-	public Optional<Users> signUpAccount(UsersDto.SignupRequest signupRequest ) {
+	public Optional<Users> signUpAccount(UsersDTO.SignupRequest signupRequest ) {
 			
 		Users users = new Users();
 		// 데이터 이동 
@@ -58,7 +58,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 	
 	
-	public Optional<Users>  updateAccount (UsersDto.UpdateRequest updateRequest) {
+	public Optional<Users>  updateAccount (UsersDTO.UpdateRequest updateRequest) {
 				
 		Users findUsers = usersRepository.findByUserId(updateRequest.getUserId()).get();
 		
@@ -95,7 +95,7 @@ public class AccountServiceImpl implements AccountService {
 	};
 	
 	
-	public Optional<Users> validateForLogin (UsersDto.LoginRequest loginRequest){
+	public Optional<Users> validateForLogin (UsersDTO.LoginRequest loginRequest){
 				
 		return usersRepository.findByUserIdAndUserPassword(loginRequest.getUserId(), loginRequest.getUserPassword() );
 	}

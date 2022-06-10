@@ -16,9 +16,9 @@ import com.metanet.domain.Buy;
 import com.metanet.domain.Charge;
 import com.metanet.domain.Refund;
 import com.metanet.domain.Users;
-import com.metanet.domain.dto.BuyDto;
-import com.metanet.domain.dto.ChargeDto;
-import com.metanet.domain.dto.RefundDto;
+import com.metanet.domain.DTO.BuyDTO;
+import com.metanet.domain.DTO.ChargeDTO;
+import com.metanet.domain.DTO.RefundDTO;
 import com.metanet.service.AccountService;
 import com.metanet.service.PointService;
 
@@ -39,7 +39,7 @@ public class PointController {
 	@PostMapping("/charge")
 	@CrossOrigin
 	@ApiOperation(value="포인트 충전",notes="성공시 1 반환, 실패시 -1 반환")
-	public int charge( HttpServletRequest request,  ChargeDto.ChargeRequest chargeRequest  )
+	public int charge( HttpServletRequest request,  ChargeDTO.ChargeRequest chargeRequest  )
 	{
 		
 		HttpSession session = request.getSession(false);
@@ -99,7 +99,7 @@ public class PointController {
 	@PostMapping("/buy")
 	@CrossOrigin
 	@ApiOperation(value="정기원 구매",notes="성공시 회원정보 반환, 실패시 1 (=null) 반환 ")
-	public int  buy( HttpServletRequest request,  BuyDto.BuyRequest buyRequest )
+	public int  buy( HttpServletRequest request,  BuyDTO.BuyRequest buyRequest )
 	{
 		
 		HttpSession session = request.getSession(false);
@@ -153,7 +153,7 @@ public class PointController {
 	@PostMapping("/refund")
 	@CrossOrigin
 	@ApiOperation(value="포인트 봔불 ",notes="성공시 회원정보 반환, 실패시 1 (=null) 반환 ")
-	public int  refundPoint( HttpServletRequest request, RefundDto.RefundRequest refundRequest )
+	public int  refundPoint( HttpServletRequest request, RefundDTO.RefundRequest refundRequest )
 	{
 		
 		HttpSession session = request.getSession(false);

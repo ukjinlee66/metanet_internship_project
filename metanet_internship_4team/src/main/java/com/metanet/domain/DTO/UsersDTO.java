@@ -1,4 +1,4 @@
-package com.metanet.domain.dto;
+package com.metanet.domain.DTO;
 
 import com.metanet.domain.Users;
 
@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-public class UsersDto {
+public class UsersDTO {
 
 	
 		@NoArgsConstructor
