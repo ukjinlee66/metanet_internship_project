@@ -1,7 +1,5 @@
 package com.metanet.domain;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,9 +10,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Entity
 @Table(name="REPORT_TABLE")
@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 					initialValue = - 1,
 					allocationSize = 1
 					)
+@AllArgsConstructor
 @NoArgsConstructor
 public class Report_Table 
 {
@@ -33,6 +34,7 @@ public class Report_Table
 	private int reportTableNumber;
 	
 	@Column(name = "REPORT_NAME", columnDefinition = "char")
+	@NonNull
 	private String reportName;
 	
 	@Column(name = "REPORT_KIND", columnDefinition = "char")
@@ -46,14 +48,17 @@ public class Report_Table
 	
 	@CreationTimestamp
 	@Column(name = "REPORT_CRDA")
-	private LocalDateTime crDa;
+	@NonNull
+	private java.sql.Date crDa;
 	
 	@CreationTimestamp
 	@Column(name = "REPORT_REDA")
-	private LocalDateTime reDa;
-	
+	private java.sql.Date reDa;
+
+
 	@Builder
-	public Report_Table(String reportName, String reportKind, String reportDetail) {
+	public Report_Table(int reportTableNumber, String reportName, String reportKind, String reportDetail) {
+		this.reportTableNumber = reportTableNumber;
 		this.reportName = reportName;
 		this.reportKind = reportKind;
 		this.reportDetail = reportDetail;

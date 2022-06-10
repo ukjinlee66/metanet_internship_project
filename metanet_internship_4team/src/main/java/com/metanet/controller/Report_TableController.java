@@ -31,33 +31,36 @@ public class Report_TableController {
 	private final Report_TableRepository reportTableRepository;
 	
 	@ApiOperation(value="문의글 저장")
+	@CrossOrigin
 	@PostMapping("/Post")
     public ReportBoardResponseDTO savePost(@RequestBody ReportBoardRequestDTO request) {
 
 		reportTableService.savePost(request);
 
         return new ReportBoardResponseDTO(
-                request.ToEntity().getReportName(),
-                request.ToEntity().getReportKind(),
-                request.ToEntity().getReportDetail());
+        		request.getReportTableNumber(), //수
+                request.getReportName(),
+                request.getReportKind(),
+                request.getReportDetail());
     }
 	
 	@ApiOperation(value="문의글 리스트")
-	@GetMapping("/Posts")
-	public List<ReportBoardRequestDTO> findPosts(){
-		List<Report_Table> findAll = reportTableRepository.findAll();
-		List<ReportBoardRequestDTO> allPost = new ArrayList<>();
-		
-		for(Report_Table reportTable : findAll) {
-			ReportBoardRequestDTO build = ReportBoardRequestDTO.builder()
-					.reportName(reportTable.getReportName())
-					.reportKind(reportTable.getReportKind())
-					.reportDetail(reportTable.getReportDetail())
-					.build();
-			
-			allPost.add(build);
-		}
-		return allPost;
+	@CrossOrigin
+	@GetMapping("/List")
+	public List<Report_Table> findPosts(){
+		List<Report_Table> findAll = reportTableRepository.findAll(); //마이페이지 문의글 리스트 findbyusernumber
+//		List<ReportBoardRequestDTO> allPost = new ArrayList<>();
+//		
+//		for(Report_Table reportTable : findAll) {
+//			ReportBoardRequestDTO build = ReportBoardRequestDTO.builder()
+//					.reportName(reportTable.getReportName())
+//					.reportKind(reportTable.getReportKind())
+//					.reportDetail(reportTable.getReportDetail())
+//					.build();
+//			
+//			allPost.add(build);
+//		}
+		return findAll;
 	}
 	
 	@GetMapping("/Posts/SearchPost")
@@ -67,21 +70,6 @@ public class Report_TableController {
 		@ApiParam(value="검색어",required=true, example="결제") @RequestParam String reportTitle)	{
 			System.out.println("IN: "+reportTitle);
 			List<ReportBoardRequestDTO> searchList = reportTableService.searchPosts(reportTitle);
-			
-/*			try {
-					System.out.println("IN: "+reportTitle);
-					List<ReportBoardRequestDTO> searchList = reportTableService.searchPosts(reportTitle);
-	            if (reportTitle!-) {
-	                return searchList;
-	            } else {
-	                return null;
-	            }
-	        }catch(Exception e){
-	            return null;
-	        }
-			
-			return searchList;
-	}*/
 			if(reportTitle == null) {
 				searchList = reportTableService.searchPosts(null);
 	        }else {
@@ -91,11 +79,13 @@ public class Report_TableController {
 			}
 	
 	@ApiOperation(value="문의 상세 페이지")
+	@CrossOrigin
 	@GetMapping("/Posts/{reportTableNumber}")
 	public ReportBoardResponseDTO findPost(@PathVariable("reportTableNumber") int reportTableNumber) {
 		ReportBoardRequestDTO post = reportTableService.getPost(reportTableNumber);
 		
 		return new ReportBoardResponseDTO(
+				post.getReportTableNumber(), //수정
 				post.getReportName(),
 				post.getReportKind(),
 				post.getReportDetail()
@@ -104,23 +94,9 @@ public class Report_TableController {
 	}
 
 	@ApiOperation(value="문의글 삭제")
+	@CrossOrigin
 	@DeleteMapping("/DeletePost/{reportTableNumber}")
 	public void delete(@PathVariable("reportTableNumber")int reportTableNumber) {
 		reportTableService.deletePost(reportTableNumber);
 	}
-	
-//	@ApiOperation(value="문의글 수정")
-//	@PutMapping("/api/post/{reportTableNumber}")
-//	public ReportBoardResponseDTO updatePost(@PathVariable("reportTableNumber") int reportTableNumber, @RequestBody ReportBoardRequestDTO request) {
-//	
-//	reportTableService.update(reportTableNumber, request);
-//	Optional<Report_Table> findPost = reportTableRepository.findById(reportTableNumber);
-//	Report_Table reportTable = findPost.get();
-//	
-//	return new ReportBoardResponseDTO(
-//			reportTable.getReportName(),
-//			reportTable.getReportKind(),
-//			reportTable.getReportDetail());
-//	}
-	
 }

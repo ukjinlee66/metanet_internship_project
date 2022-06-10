@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Entity
 @Table(name="USERS")
@@ -38,23 +39,28 @@ public class Users
 	private String userId;
 	
 	@Column(name = "USER_PASSWORD", columnDefinition = "char")
+	@NonNull
 	private String userPassWord;
 	
 	@Column(name = "USER_PHONE_NUMBER", columnDefinition = "char")
+	@NonNull
 	private String userPhoneNumber;
 	
 	@Column(name = "USER_POINT")
+	@NonNull
 	private int userPoint;
 	
 	@Column(name = "USER_ADDR", columnDefinition = "char")
 	private String userAddr;
 	
 	@Column(name = "USER_RECKIND", columnDefinition = "char")
+	@NonNull
 	private String userRecKind;
 
 	@Column(name = "USER_KIND", columnDefinition = "char")
 	private String userKind;
 
 	@Column(name = "USER_DATE")
+	@NonNull
 	private java.sql.Date userDate;
 }

@@ -40,9 +40,11 @@ public class Video
 	private String videoName;
 	
 	@Column(name = "RECIPE_LEVEL")
+	@NonNull
 	private String recipeLevel;
 	
 	@Column(name = "RECIPE_KIND")
+	@NonNull
 	private String recipeKind;
 	
 	@Column(name = "VIDEO_LENGTH")
