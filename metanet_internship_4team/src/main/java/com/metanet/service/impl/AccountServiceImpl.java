@@ -2,14 +2,13 @@
 package com.metanet.service.impl;
 
 
-import java.sql.SQLException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.metanet.domain.Users;
-import com.metanet.dto.UsersDto;
+import com.metanet.domain.dto.UsersDto;
 import com.metanet.repository.UsersRepository;
 import com.metanet.service.AccountService;
 
@@ -20,6 +19,8 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Autowired
 	UsersRepository usersRepository;
+
+	
 	
 	public int validateId(String userId) {
 		
@@ -30,16 +31,23 @@ public class AccountServiceImpl implements AccountService {
 	}
 	
 	
-	public Optional<Users> signUpAccount(UsersDto usersDto ) {
+	public Optional<Users> signUpAccount(UsersDto.SignupRequest signupRequest ) {
 			
+		Users users = new Users();
+		// 데이터 이동 
+		users = signupRequest.transferTo(users);
+		
+		// 날짜생성 
 		long millis=System.currentTimeMillis();  
 	    java.sql.Date date=new java.sql.Date(millis);  
-	
-		usersDto.setUserDate(date);		
-		Users users = usersDto.toEntity();
+	    users.setUserDate(date);
+	    	    
+	    System.out.println( "12345");
+	    System.out.println( users.toString());
+	    
 		usersRepository.save(users);
 		
-		return  usersRepository.findByUserId(usersDto.getUserId());
+		return  usersRepository.findByUserId(signupRequest.getUserId());
 	}
 	
 	
@@ -50,24 +58,24 @@ public class AccountServiceImpl implements AccountService {
 	}
 	
 	
-	public Optional<Users>  updateAccount (UsersDto usersDto) {
+	public Optional<Users>  updateAccount (UsersDto.UpdateRequest updateRequest) {
 				
-		Users findUsers = usersRepository.findByUserId(usersDto.getUserId()).get();
+		Users findUsers = usersRepository.findByUserId(updateRequest.getUserId()).get();
 		
-		// 키 넣기 
-		usersDto.setUserNumber(findUsers.getUserNumber());
+		findUsers= updateRequest.transferTo(findUsers);
 		
 		// 날짜 넣기 
 		long millis=System.currentTimeMillis();  
 	    java.sql.Date date=new java.sql.Date(millis);  
-		usersDto.setUserDate(date);
-		Users users = usersDto.toEntity();
-		
-		usersRepository.save(users);
+	    findUsers.setUserDate(date);
+	    
+		usersRepository.save(findUsers);
 
-		return  usersRepository.findByUserId(usersDto.getUserId());
-		
+		return  usersRepository.findByUserId(updateRequest.getUserId());
+	
 	}
+	
+		
 	
 	public int deleteAccount(String userId) {
 		
@@ -87,9 +95,9 @@ public class AccountServiceImpl implements AccountService {
 	};
 	
 	
-	public Optional<Users> validateForLogin (UsersDto usersDto){
+	public Optional<Users> validateForLogin (UsersDto.LoginRequest loginRequest){
 				
-		return usersRepository.findByUserIdAndUserPassword(usersDto.getUserId(),usersDto.getUserPassword() );
+		return usersRepository.findByUserIdAndUserPassword(loginRequest.getUserId(), loginRequest.getUserPassword() );
 	}
 	
 	
@@ -106,21 +114,23 @@ public class AccountServiceImpl implements AccountService {
 	};
 	
 	
-	public Optional<Users> validateForFindPassword( String userId , String userName, String usersEmail ){
+	public Optional<Users> validateForFindPassword( String userName, String usersPhoneNumber ){
 		
-		return usersRepository.findByUserIdAndUserNameAndUserEmail(userId, userName,usersEmail );
+		return usersRepository.findByUserNameAndUserPhoneNumber(userName, usersPhoneNumber  );
 	}
 	
 	
-	public  String updatePassword( String userId, String randomNumber) {
+	public  Optional<Users> updatePassword( String userPhoneNumber , String newPassword) {
 		
-		Users findUsers = usersRepository.findByUserId(userId).get();
+		Users findUsers = usersRepository.findByUserPhoneNumber(userPhoneNumber).get();
 		
-		findUsers.setUserPassword(randomNumber);
+		findUsers.setUserPassword(newPassword);
 		usersRepository.save(findUsers);
 		
-		return usersRepository.findByUserId(userId).get().getUserPassword();
+		return usersRepository.findByUserPhoneNumber(userPhoneNumber);
+	
 	};
+
 	
 }
 

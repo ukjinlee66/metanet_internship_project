@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.metanet.domain.Users;
 import com.metanet.domain.Video;
-import com.metanet.dto.UsersDto;
+import com.metanet.domain.dto.UsersDto;
 import com.metanet.service.MyPageService;
 
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +38,12 @@ public class MyPageController {
 	{
 		
 		HttpSession session = request.getSession(false);
-		if (session != null) {
+		if(session==null) {
+			session = request.getSession(true);
+			session.setAttribute("state", "NOT_LOG_IN");
+		}
+		
+		if (session.getAttribute("state").equals("LOG_IN"))  {
 			Users users = (Users)session.getAttribute("info");
 			return myPageService.addViews(users.getUserId(), videoName );
 		
@@ -57,7 +62,12 @@ public class MyPageController {
 	{
 		
 		HttpSession session = request.getSession(false);
-		if (session != null) {
+		if(session==null) {
+			session = request.getSession(true);
+			session.setAttribute("state", "NOT_LOG_IN");
+		}
+		
+		if (session.getAttribute("state").equals("LOG_IN"))  {
 			Users users = (Users)session.getAttribute("info");
 			return myPageService.getViews(users .getUserId(), reckind);
 		
@@ -77,7 +87,12 @@ public class MyPageController {
 		
 		
 		HttpSession session = request.getSession(false);
-		if (session != null) {
+		if(session==null) {
+			session = request.getSession(true);
+			session.setAttribute("state", "NOT_LOG_IN");
+		}
+		
+		if (session.getAttribute("state").equals("LOG_IN")) {
 			Users users = (Users)session.getAttribute("info");
 			return  myPageService.deleteViews(users.getUserId(), videoName);		
 			 	
@@ -101,7 +116,12 @@ public class MyPageController {
 	public int  getLikes(@RequestParam("videoName") String videoName,  HttpServletRequest request   )
 	{
 		HttpSession session = request.getSession(false);
-		if (session != null) {
+		if(session==null) {
+			session = request.getSession(true);
+			session.setAttribute("state", "NOT_LOG_IN");
+		}
+		
+		if (session.getAttribute("state").equals("LOG_IN"))  {
 			Users users = (Users)session.getAttribute("info");
 			return myPageService.addLikes(users.getUserId(), videoName );
 		
@@ -120,7 +140,12 @@ public class MyPageController {
 	{
 		
 		HttpSession session = request.getSession(false);
-		if (session != null) {
+		if(session==null) {
+			session = request.getSession(true);
+			session.setAttribute("state", "NOT_LOG_IN");
+		}
+		
+		if (session.getAttribute("state").equals("LOG_IN")) {
 			Users users = (Users)session.getAttribute("info");
 			return myPageService.getLikes(users.getUserId());
 		
@@ -141,7 +166,12 @@ public class MyPageController {
 		
 		
 		HttpSession session = request.getSession(false);
-		if (session != null) {
+		if(session==null) {
+			session = request.getSession(true);
+			session.setAttribute("state", "NOT_LOG_IN");
+		}
+		
+		if (session.getAttribute("state").equals("LOG_IN"))  {
 			Users users = (Users)session.getAttribute("info");
 			return  myPageService.deleteLikes(users.getUserId(), videoName);		
 			 	
@@ -170,7 +200,12 @@ public class MyPageController {
 	{
 		
 		HttpSession session = request.getSession(false);
-		if (session != null) {
+		if(session==null) {
+			session = request.getSession(true);
+			session.setAttribute("state", "NOT_LOG_IN");
+		}
+		
+		if (session.getAttribute("state").equals("LOG_IN"))  {
 			Users users = (Users)session.getAttribute("info");
 			return myPageService.addSave(users.getUserId(), videoName );
 		
@@ -190,7 +225,12 @@ public class MyPageController {
 	{
 		
 		HttpSession session = request.getSession(false);
-		if (session != null) {
+		if(session==null) {
+			session = request.getSession(true);
+			session.setAttribute("state", "NOT_LOG_IN");
+		}
+		
+		if (session.getAttribute("state").equals("LOG_IN"))  {
 			Users users = (Users)session.getAttribute("info");
 			return myPageService.getSave(users.getUserId());
 		
@@ -212,7 +252,12 @@ public class MyPageController {
 		
 		
 		HttpSession session = request.getSession(false);
-		if (session != null) {
+		if(session==null) {
+			session = request.getSession(true);
+			session.setAttribute("state", "NOT_LOG_IN");
+		}
+		
+		if (session.getAttribute("state").equals("LOG_IN"))  {
 			Users users = (Users)session.getAttribute("info");
 			return  myPageService.deleteSave(users.getUserId(), videoName);		
 			 	

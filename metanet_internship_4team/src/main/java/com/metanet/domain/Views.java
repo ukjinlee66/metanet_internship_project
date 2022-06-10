@@ -16,7 +16,7 @@ import lombok.Data;
 @SequenceGenerator(	name = "VIEWS_SEQ_GEN",
 sequenceName = "VIEWS_SEQ",
 initialValue = 1,
-allocationSize =1
+allocationSize =50
 )
 public class Views {
 	
