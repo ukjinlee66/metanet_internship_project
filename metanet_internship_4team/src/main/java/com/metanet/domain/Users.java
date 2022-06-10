@@ -17,47 +17,51 @@ import lombok.NonNull;
 @Table(name="USERS")
 @AllArgsConstructor
 @Data
-@SequenceGenerator( name = "USERS_SEQ_GEN",
+@SequenceGenerator(	name = "USER_SEQ_GEN",
 					sequenceName = "USERS_SEQ",
-					initialValue = - 1,
-					allocationSize = 1
-					)
-@NoArgsConstructor
-public class Users 
-{
+					initialValue = 1,
+					allocationSize =50
+				   )
+public class Users {
+	
+	
 	@Id
-	@Column(name ="USER_NUMBER")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_SEQ_GEN")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USER_SEQ_GEN")
+	@Column(name = "USER_NUMBER")
+
 	private int userNumber;
 	
-	@Column(name = "USER_NAME", columnDefinition = "char")
+	@Column(name = "USER_NAME")
 	private String userName;
-
-	@Column(name = "USER_ID", columnDefinition = "char")
+	
+	@Column(name = "USER_ID")
 	private String userId;
 	
-	@Column(name = "USER_PASSWORD", columnDefinition = "char")
+	@Column(name = "USER_PASSWORD")
 	@NonNull
-	private String userPassWord;
+	private String userPassword;
 	
-	@Column(name = "USER_PHONE_NUMBER", columnDefinition = "char")
-	@NonNull
+	@Column(name = "USER_PHONE_NUMBER")
+	@NonNull	
 	private String userPhoneNumber;
+	
+	@Column(name = "USER_EMAIL")
+	private String userEmail;
 	
 	@Column(name = "USER_POINT")
 	@NonNull
 	private int userPoint;
 	
-	@Column(name = "USER_ADDR", columnDefinition = "char")
+	@Column(name = "USER_ADDR")
 	private String userAddr;
 	
-	@Column(name = "USER_RECKIND", columnDefinition = "char")
+	@Column(name = "USER_RECKIND")
 	@NonNull
 	private String userRecKind;
-
-	@Column(name = "USER_KIND", columnDefinition = "char")
-	private String userKind;
-
+	
+	@Column(name = "USER_KIND")
+	private char userKind;
+	
 	@Column(name = "USER_DATE")
 	@NonNull
 	private java.sql.Date userDate;

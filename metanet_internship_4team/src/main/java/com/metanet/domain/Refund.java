@@ -12,31 +12,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="BUY")
+@Table(name="REFUND")
 @Data
-@SequenceGenerator( name = "BUY_SEQ_GEN",
-					sequenceName = "BUY_SEQ",
+@SequenceGenerator( name = "REFUND_SEQ_GEN",
+					sequenceName = "REFUND_SEQ",
 					initialValue = 1,
 					allocationSize = 50
 					)
 @NoArgsConstructor
-public class Buy 
-{
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BUY_SEQ_GEN")
-	@Column(name = "BUY_NUMBER")
-	private int buyNumber;
+public class Refund {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REFUND_SEQ_GEN")
+	@Column(name = "REFUND_NUMBER")
+	private int refundNumber;
+	
 	@Column(name = "USER_NUMBER")
 	private int usersNumber;
 	
-	@Column(name = "BUY_KIND")
-	private String buyKind;
-
-	@Column(name = "BUY_POINT")
-	private int buyPoint;
+	@Column(name = "REFUND_POINT")
+	private int refundPoint;
 	
-	@Column(name = "BUY_DATE")
-	private java.sql.Date  buyDate;
+	@Column(name = "REFUND_DATE")
+	private java.sql.Date  refundDate;
+	
+		
 	
 }

@@ -21,8 +21,8 @@ import lombok.NonNull;
 @Data
 @SequenceGenerator( name = "REPORT_TABLE_SEQ_GEN",
 					sequenceName = "REPORT_TABLE_SEQ",
-					initialValue = - 1,
-					allocationSize = 1
+					initialValue =  1,
+					allocationSize = 50
 					)
 @AllArgsConstructor
 @NoArgsConstructor
@@ -54,7 +54,6 @@ public class Report_Table
 	@CreationTimestamp
 	@Column(name = "REPORT_REDA")
 	private java.sql.Date reDa;
-
 
 	@Builder
 	public Report_Table(int reportTableNumber, String reportName, String reportKind, String reportDetail) {

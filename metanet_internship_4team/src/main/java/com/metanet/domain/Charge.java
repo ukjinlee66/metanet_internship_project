@@ -18,7 +18,7 @@ import lombok.NonNull;
 @SequenceGenerator( name = "CHARGE_SEQ_GEN",
 					sequenceName = "CHARGE_SEQ",
 					initialValue = 1,
-					allocationSize = 1
+					allocationSize = 50
 					)
 @NoArgsConstructor
 public class Charge 
@@ -28,17 +28,18 @@ public class Charge
 	@Column(name = "CHARGE_NUMBER")
 	private int chargeNumber;
 	
-	@Column(name="USER_NUMBER")
+	@Column(name = "USER_NUMBER")
 	private int usersNumber;
 	
-	@Column(name = "CHARGE_DATE")
-	@NonNull
-	private java.sql.Date chargeDate;
-	
-	@Column(name = "CHARGE_PRICE")
-	private int chargePrice;
-	
 	@Column(name = "CHARGE_KIND", columnDefinition = "char")
-	@NonNull
 	private String chargeKind;
+	
+	@Column(name = "CHARGE_POINT")
+	private int chargePoint;
+	
+	@Column(name = "CHARGE_DATE")
+	private java.sql.Date  chargeDate;
+	
+	
+
 }
