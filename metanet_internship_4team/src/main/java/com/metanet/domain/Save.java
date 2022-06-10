@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Entity
 @Table(name="SAVE")
@@ -38,6 +39,7 @@ public class Save {
 	private int videoNumber;
 	
 	@Column(name = "SAVE_CRDA")
+	@NonNull
 	private java.sql.Date saveCrda;
 	
 	@Column(name = "SAVE_DEDA")
@@ -45,4 +47,3 @@ public class Save {
 
 		
 }
-

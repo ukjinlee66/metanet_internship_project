@@ -14,10 +14,9 @@ import lombok.Data;
 @Table(name="VIEWS")
 @Data
 @SequenceGenerator(	name = "VIEWS_SEQ_GEN",
-sequenceName = "VIEWS_SEQ",
-initialValue = 1,
-allocationSize =1
-)
+					sequenceName = "VIEWS_SEQ",
+					initialValue = 1,
+					allocationSize =1 )
 public class Views {
 	
 	@Id

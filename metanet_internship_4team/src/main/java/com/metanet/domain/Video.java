@@ -1,9 +1,11 @@
 package com.metanet.domain;
 
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -14,10 +16,15 @@ import lombok.NonNull;
 @Entity
 @Table(name="VIDEO")
 @Data
+@SequenceGenerator( name = "VIDEO_SEQ_GEN",
+					sequenceName = "VIDEO_SEQ",
+					initialValue = 1,
+					allocationSize = 1)
 @NoArgsConstructor
 public class Video 
 {
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="VIDEO_SEQ_GEN")
 	@Column(name = "VIDEO_NUMBER")
 	private int videoNumber;
 	
@@ -33,9 +40,11 @@ public class Video
 	private String videoName;
 	
 	@Column(name = "RECIPE_LEVEL")
+	@NonNull
 	private String recipeLevel;
 	
 	@Column(name = "RECIPE_KIND")
+	@NonNull
 	private String recipeKind;
 	
 	@Column(name = "VIDEO_LENGTH")

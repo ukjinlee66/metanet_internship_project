@@ -2,12 +2,10 @@ package com.metanet.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -28,13 +26,11 @@ public class Report
 	@Id
 	@Column(name = "REPORT_NUMBER")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REPORT_SEQ_GEN")
-	private Integer reportNumber;
+	private int reportNumber;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="USER_NUMBER")
-	private Users users;
+	@Column(name="USER_NUMBER")
+	private int usersNumber;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="REPORT_TABLENUMBER")
-	private Report_Table report_Table;
+	private int reportTableNumber;
 }
