@@ -2,12 +2,9 @@ package com.metanet.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -37,10 +34,11 @@ public class Comments
 	@Column(name="VIDEO_NUMBER")
 	private int videoNumber;
 	
-	@Column(name="COMMENTS_CONTEXTS", columnDefinition = "char")
+	@Column(name = "COMMENTS_CONTEXTS")
 	private String commentsContexts;
 	
 	@Column(name="COMMENTS_CRDA")
+	@NonNull
 	private java.sql.Date crDa;
 	
 	@Column(name="COMMENTS_DEDA")

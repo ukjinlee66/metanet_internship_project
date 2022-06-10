@@ -38,6 +38,7 @@ public class Save {
 	private int videoNumber;
 	
 	@Column(name = "SAVE_CRDA")
+	@NonNull
 	private java.sql.Date saveCrda;
 	
 	@Column(name = "SAVE_DEDA")

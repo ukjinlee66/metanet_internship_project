@@ -16,6 +16,6 @@ public class TestOra
 	@Id
 	@Column(name = "USER_ID")
 	private int userId;
-	@Column(name = "USER_NAME", columnDefinition = "char")
+	@Column(name = "USER_NAME")
 	private String userName;
 }
