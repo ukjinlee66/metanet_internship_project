@@ -1,15 +1,10 @@
 package com.metanet.domain;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,18 +25,16 @@ public class Buy
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BUY_SEQ_GEN")
 	@Column(name = "BUY_NUMBER")
-	private Integer buyNumber;
+	private int buyNumber;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="USER_NUMBER")
-	private Users users;
+	@Column(name="USER_NUMBER")
+	private int usersNumber;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="VIDEO_NUMBER")
-	private Video video;
+	@Column(name="VIDEO_NUMBER")
+	private int videoNumber;
 	
 	@Column(name = "BUY_DATE")
-	private LocalDateTime buyDate;
+	private java.sql.Date buyDate;
 	
 	@Column(name = "BUY_POINT")
 	private int buyPoint;

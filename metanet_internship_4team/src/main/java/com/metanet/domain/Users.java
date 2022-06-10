@@ -1,6 +1,7 @@
 package com.metanet.domain;
 
 import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,10 +13,10 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Entity
 @Table(name="USERS")
-@NoArgsConstructor
 @AllArgsConstructor
 @Data
 @SequenceGenerator( name = "USERS_SEQ_GEN",
@@ -27,8 +28,9 @@ import lombok.NoArgsConstructor;
 public class Users 
 {
 	@Id
+	@Column(name ="USER_NUMBER")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_SEQ_GEN")
-	private Integer User_Number;
+	private int userNumber;
 	
 	@Column(name = "USER_NAME", columnDefinition = "char")
 	private String userName;
@@ -37,23 +39,28 @@ public class Users
 	private String userId;
 	
 	@Column(name = "USER_PASSWORD", columnDefinition = "char")
+	@NonNull
 	private String userPassWord;
 	
 	@Column(name = "USER_PHONE_NUMBER", columnDefinition = "char")
+	@NonNull
 	private String userPhoneNumber;
 	
 	@Column(name = "USER_POINT")
+	@NonNull
 	private int userPoint;
 	
 	@Column(name = "USER_ADDR", columnDefinition = "char")
 	private String userAddr;
 	
 	@Column(name = "USER_RECKIND", columnDefinition = "char")
+	@NonNull
 	private String userRecKind;
 
 	@Column(name = "USER_KIND", columnDefinition = "char")
 	private String userKind;
 
 	@Column(name = "USER_DATE")
-	private LocalDateTime userDate;
+	@NonNull
+	private java.sql.Date userDate;
 }

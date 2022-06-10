@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.metanet.domain.Users;
 
 @Repository
-public interface UsersRepository extends JpaRepository<Users, Integer>
+public interface UsersRepository extends JpaRepository<Users, Long>
 {
-
+	Users findByuserNumber(int userNumber);
 }
