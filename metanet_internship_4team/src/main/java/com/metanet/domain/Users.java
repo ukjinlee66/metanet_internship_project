@@ -16,6 +16,7 @@ import lombok.NonNull;
 @Entity
 @Table(name="USERS")
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @SequenceGenerator(	name = "USER_SEQ_GEN",
 					sequenceName = "USERS_SEQ",

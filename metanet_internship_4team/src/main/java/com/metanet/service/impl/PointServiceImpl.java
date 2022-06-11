@@ -10,9 +10,9 @@ import com.metanet.domain.Buy;
 import com.metanet.domain.Charge;
 import com.metanet.domain.Refund;
 import com.metanet.domain.Users;
-import com.metanet.domain.dto.BuyDto;
-import com.metanet.domain.dto.ChargeDto;
-import com.metanet.domain.dto.RefundDto;
+import com.metanet.domain.DTO.BuyDTO;
+import com.metanet.domain.DTO.ChargeDTO;
+import com.metanet.domain.DTO.RefundDTO;
 import com.metanet.repository.BuyRepository;
 import com.metanet.repository.ChargeRepository;
 import com.metanet.repository.RefundRepository;
@@ -36,7 +36,7 @@ public class PointServiceImpl implements PointService {
 	UsersRepository usersRepository;
 	
 	
-	public void addCharge(ChargeDto.ChargeRequest chargeRequest , int userNumber) {
+	public void addCharge(ChargeDTO.ChargeRequest chargeRequest , int userNumber) {
 		
 		
 		Charge charge = new Charge();
@@ -53,7 +53,7 @@ public class PointServiceImpl implements PointService {
 	}; 
 	
 	
-	public void addBuy(BuyDto.BuyRequest buyRequest, int userNumber) {
+	public void addBuy(BuyDTO.BuyRequest buyRequest, int userNumber) {
 		Buy buy = new Buy();
 		
 		buy = buyRequest.transferTo(buy);
@@ -68,7 +68,7 @@ public class PointServiceImpl implements PointService {
 		
 	}; 
 	
-	public void addRefund(RefundDto.RefundRequest refundRequest, int userNumber) {
+	public void addRefund(RefundDTO.RefundRequest refundRequest, int userNumber) {
 		
 		Refund refund = new Refund();
 		

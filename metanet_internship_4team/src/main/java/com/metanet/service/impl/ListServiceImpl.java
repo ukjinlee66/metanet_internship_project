@@ -143,8 +143,6 @@ public class ListServiceImpl implements ListService
 	
 	public List<Video> SearchKind(String videoTitle, String recipeKind) // 분야 검색
 	{
-		
-		System.out.println("IN kind : "+ videoTitle+" "+recipeKind);
 		List<Video> first = Search(videoTitle);
 		List<Video> second = new ArrayList<>();
 		for(Video v : first)

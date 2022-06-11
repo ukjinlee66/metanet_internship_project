@@ -47,15 +47,6 @@ public class Video
 	@NonNull
 	private String recipeLevel;
 	
-	@Column(name = "RECIPE_TIME")
-	private String recipeTime;
-	
-	@Column(name = "RECIPE_SIZE")
-	private String recipeSize;
-	
-	@Column(name = "RECIPE_INGREDIENT")
-	private String recipeIngredient;
-	
 	@Column(name = "RECIPE_KIND")
 	@NonNull
 	private String recipeKind;

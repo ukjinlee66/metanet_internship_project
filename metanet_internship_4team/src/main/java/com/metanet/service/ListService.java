@@ -2,13 +2,11 @@ package com.metanet.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.metanet.domain.Video;
-
 
 public interface ListService 
 {
+
 	List<Video> SearchAll(); // 검색
 	List<Video> SearchLevel(String recipeLevel); // findByLevel
 	List<Video> SearchKind(String recipeKind); // findByKind
