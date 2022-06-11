@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 import ChatButton from '../components/ChatButton';
 import Navbar from '../components/Navbar';
 import MainRecipeList from '../components/MainRecipeList';
-import MainFaq from '../MainFaq/Question';
+import MainFaq from '../components/MainFaq';
 
 function Main(props) {
 
