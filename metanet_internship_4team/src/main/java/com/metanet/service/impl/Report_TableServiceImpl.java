@@ -84,15 +84,4 @@ public class Report_TableServiceImpl implements Report_TableService{
 		return boardList;
     	
     }
-
-    // 게시글 수정 
-//    @Transactional
-//    @Override
-//    public void update(int reportTableNumber, ReportBoardRequestDTO dto) {
-//        Optional<Report_Table> byId = reportTableRepository.findById(reportTableNumber);
-//        Report_Table reportTable = byId.get();
-//
-//        reportTable.updateBoard(dto.getReportName(), dto.getReportKind(), dto.getReportDetail());
-//    }
-
 }
