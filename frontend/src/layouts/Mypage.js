@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
 import styled from "styled-components";
-import ListSearch from '../components/ListSearch';
 import Scrolltop from '../components/Scrolltop';
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';

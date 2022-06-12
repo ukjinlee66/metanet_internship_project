@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 const Signin = () => {
@@ -12,7 +13,6 @@ const Signin = () => {
   const handleInputPw = (e) => {
     setInputPw(e.target.value)
   }
-
   const BASEURL = "http://localhost:8443/Account/login"
   // login 버튼 클릭 이벤트
   const onClickLogin = () => {
@@ -81,7 +81,10 @@ const Signin = () => {
         </button>
       </div>
       <p className="forgot-password text-right">
-        Forgot <a href="#">password?</a>
+        Forgot <Link to="/zipcook/member/FindSignPa">password?</Link>
+      </p>
+      <p className="forgot-password text-right">
+        Forgot <Link to="/zipcook/member/FindSignId">Id?</Link>
       </p>
     </form>
   )
