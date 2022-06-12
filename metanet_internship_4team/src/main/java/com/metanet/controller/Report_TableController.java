@@ -29,19 +29,19 @@ public class Report_TableController {
 	private final Report_TableServiceImpl reportTableService;
 	private final Report_TableRepository reportTableRepository;
 	
-	@ApiOperation(value="문의글 저장")
-	@CrossOrigin
-	@PostMapping("/Post")
-    public ReportBoardResponseDTO savePost(@RequestBody ReportBoardRequestDTO request) {
-
-		reportTableService.savePost(request);
-
-        return new ReportBoardResponseDTO(
-        		request.getReportTableNumber(),
-                request.getReportName(),
-                request.getReportKind(),
-                request.getReportDetail());
-    }
+//	@ApiOperation(value="문의글 저장")
+//	@CrossOrigin
+//	@PostMapping("/Post")
+//    public ReportBoardResponseDTO savePost(@RequestBody ReportBoardRequestDTO request) {
+//
+//		reportTableService.savePost(request);
+//
+//        return new ReportBoardResponseDTO(
+//        		request.getReportTableNumber(),
+//                request.getReportName(),
+//                request.getReportKind(),
+//                request.getReportDetail());
+//    }
 	
 	@ApiOperation(value="문의글 리스트")
 	@CrossOrigin

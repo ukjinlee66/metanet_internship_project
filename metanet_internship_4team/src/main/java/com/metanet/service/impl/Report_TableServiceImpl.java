@@ -27,24 +27,24 @@ public class Report_TableServiceImpl implements Report_TableService{
 		reportTableRepository.save(boardDto.ToEntity());
 	}
 
-	@Transactional
-	@Override
-	public List<ReportBoardRequestDTO> getBoardList(){
-		
-		List<Report_Table> all = reportTableRepository.findAll();
-		List<ReportBoardRequestDTO> boardDtoList = new ArrayList<>();
-		
-		for(Report_Table reportTable : all) {
-			ReportBoardRequestDTO boardDto = ReportBoardRequestDTO.builder()
-					.reportName(reportTable.getReportName())
-					.reportKind(reportTable.getReportKind())
-					.reportDetail(reportTable.getReportDetail())
-					.build();
-			
-			boardDtoList.add(boardDto);
-		}
-		return boardDtoList;
-	}
+//	@Transactional
+//	@Override
+//	public List<ReportBoardRequestDTO> getBoardList(){
+//		
+//		List<Report_Table> all = reportTableRepository.findAll();
+//		List<ReportBoardRequestDTO> boardDtoList = new ArrayList<>();
+//		
+//		for(Report_Table reportTable : all) {
+//			ReportBoardRequestDTO boardDto = ReportBoardRequestDTO.builder()
+//					.reportName(reportTable.getReportName())
+//					.reportKind(reportTable.getReportKind())
+//					.reportDetail(reportTable.getReportDetail())
+//					.build();
+//			
+//			boardDtoList.add(boardDto);
+//		}
+//		return boardDtoList;
+//	}
 
 	@Transactional
 	@Override
