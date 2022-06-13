@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import axios from "axios";
 
 
@@ -40,7 +39,7 @@ const ChargePointPage = (props) => {
   return (
     <div className="App">
       <div className="auth-wrapper">
-        <div className="auth-inner" style={{width:"470px"}}>
+        <div className="auth-inner" style={{width:"475px"}}>
           <form>
             <h3>포인트 충전</h3>
               <input type='text'

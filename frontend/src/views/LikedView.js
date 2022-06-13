@@ -28,7 +28,7 @@ const LikedView = (props) => {
             {data && <textarea rows={7} value={JSON.stringify(data, null, 2)} readOnly={true} />}
         </div> */}
        
-            <div class="container-xxl py-5 wow fadeInUp pdCon" style={{backgroundColor:'#ffffff'}} data-wow-delay="0.1s">
+            <div class="container-xxl py-5 wow fadeInUp pdCon" style={{paddingLeft:"50px",backgroundColor:'#ffffff'}} data-wow-delay="0.1s">
                 <div class="row g-5 maCon" style={{width:'100vh',height:'100vh',backgroundColor:'#ffffff'}}>
                     <div class="col-lg-5" style={{width:'100%'}}>
                         <ViewList/>
