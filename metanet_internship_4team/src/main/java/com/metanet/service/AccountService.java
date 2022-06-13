@@ -26,11 +26,9 @@ public interface AccountService {
 	
 	public Optional<Users> validateForFindPassword( String userName, String usersPhoneNumber );
 	
-	public Optional<Users> updatePassword( String userPhoneNumber , String newPassword);
+	public int updatePassword( String userId , String newPassword);
 	
-	
-	
-	
+
 	
 	/*
 	public Optional<Users> validateForFindPassword( String userId , String userName, String usersEmail );

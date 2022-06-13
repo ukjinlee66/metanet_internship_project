@@ -19,9 +19,7 @@ class UsersRepositoryTest {
 	void test() {
 	
 		TestOra testOra = new TestOra();
-		
 
-		
 		testOraRepository.save(testOra);
 		
 		/*

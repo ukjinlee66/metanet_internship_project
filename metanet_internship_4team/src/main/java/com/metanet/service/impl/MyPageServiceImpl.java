@@ -144,7 +144,7 @@ public class MyPageServiceImpl implements MyPageService {
 		List<Likes> likesList = likesRepository.findByUsersNumber(findUsers.get().getUserNumber() );
 
 		List<Video> videoList= new ArrayList<Video>();
-		
+
 		for(Likes likes : likesList) {	
 			videoList.add(videoRepository.findByvideoNumber(likes.getVideoNumber()));	
 		}

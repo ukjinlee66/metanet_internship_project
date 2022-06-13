@@ -121,15 +121,17 @@ public class AccountServiceImpl implements AccountService
 	}
 	
 	
-	public  Optional<Users> updatePassword( String userPhoneNumber , String newPassword) {
+	public int updatePassword( String userId,  String newPassword) {
 		
-		Users findUsers = usersRepository.findByUserPhoneNumber(userPhoneNumber).get();
+		Optional<Users> findUser = usersRepository.findByUserId(userId);
 		
-		findUsers.setUserPassword(newPassword);
-		usersRepository.save(findUsers);
-		
-		return usersRepository.findByUserPhoneNumber(userPhoneNumber);
+		if(findUser.isPresent()) {
+			findUser.get().setUserPassword(newPassword);
+			usersRepository.save(findUser.get());	
+			return 1; 
 	
+		}else return -1;
+
 	};
 
 	

@@ -28,81 +28,43 @@ public class MyPageController {
 	MyPageService myPageService;
 	
 	
-
-	
 	// 시청 기록 영상  c r d
 	@GetMapping("/addViews")
 	@CrossOrigin
 	@ApiOperation(value="회원 시청 영상 저장",notes="성공시 1 반환, 실패시 -1 반환 ")
-	public int  addViews( @RequestParam("videoName") String videoName,  HttpServletRequest request )
+	public int  addViews( @RequestParam("videoName") String videoName,  @RequestParam(value = "userId", required=false, defaultValue="none") String userId )
 	{
-		
-		HttpSession session = request.getSession(false);
-		if(session==null) {
-			session = request.getSession(true);
-			session.setAttribute("state", "NOT_LOG_IN");
-		}
-		
-		if (session.getAttribute("state").equals("LOG_IN"))  {
-			Users users = (Users)session.getAttribute("info");
-			return myPageService.addViews(users.getUserId(), videoName );
-		
-		} else {
-			System.out.println("You need to login first login first");
-			return -1;
-		}
-		
+
+		if(userId.equals("none"))return -1;  // 토큰 값 없을 때 
+		else return myPageService.addViews(userId, videoName );
+
 	}
 	
 
 	@GetMapping("/getViews/{reckind}")
 	@CrossOrigin
 	@ApiOperation(value="회원 시청 영상 조회",notes="성공시 List<Video> 반환, 실패시 null 반환 ")
-	public List<Video>  getViews(@PathVariable String reckind  ,HttpServletRequest request   )
-	{
+	public List<Video>  getViews(@PathVariable String reckind  ,@RequestParam(value = "userId", required=false, defaultValue="none") String userId )
+	{	
 		
-		HttpSession session = request.getSession(false);
-		if(session==null) {
-			session = request.getSession(true);
-			session.setAttribute("state", "NOT_LOG_IN");
-		}
-		
-		if (session.getAttribute("state").equals("LOG_IN"))  {
-			Users users = (Users)session.getAttribute("info");
-			return myPageService.getViews(users .getUserId(), reckind);
-		
-		} else {
-			System.out.println("You need to login first login first");
-			return null;
-		}
-		
+		if(userId.equals("none"))return null;  // 토큰 값 없을 때 
+		else return myPageService.getViews(userId, reckind);
+
 	}
 	
 	
 	@GetMapping("/deleteViews")
 	@CrossOrigin
 	@ApiOperation(value="회원 시청 영상 삭제",notes="성공시 1 반환, 실패시 -1 반환 ")
-	public int  deleteViews(@RequestParam("videoName") String videoName,  HttpServletRequest request    )
+	public int  deleteViews(@RequestParam("videoName") String videoName, @RequestParam(value = "userId", required=false, defaultValue="none") String userId 
+    )
 	{
 		
-		
-		HttpSession session = request.getSession(false);
-		if(session==null) {
-			session = request.getSession(true);
-			session.setAttribute("state", "NOT_LOG_IN");
-		}
-		
-		if (session.getAttribute("state").equals("LOG_IN")) {
-			Users users = (Users)session.getAttribute("info");
-			return  myPageService.deleteViews(users.getUserId(), videoName);		
-			 	
-		
-		} else {
-			System.out.println("You need to login first login first");
-			return -1;
-		}
-			
-		 	
+
+		if(userId.equals("none"))return -1;  // 토큰 값 없을 때 
+		else return  myPageService.deleteViews(userId, videoName);  
+
+
 	}
 	
 	
@@ -113,78 +75,41 @@ public class MyPageController {
 	@GetMapping("/addLikes")
 	@CrossOrigin
 	@ApiOperation(value="회원 좋아요 영상 저장",notes="성공시 1 반환, 실패시 -1 반환 ")
-	public int  getLikes(@RequestParam("videoName") String videoName,  HttpServletRequest request   )
+	public int  getLikes(@RequestParam("videoName") String videoName, @RequestParam(value = "userId", required=false, defaultValue="none") String userId )
 	{
-		HttpSession session = request.getSession(false);
-		if(session==null) {
-			session = request.getSession(true);
-			session.setAttribute("state", "NOT_LOG_IN");
-		}
 		
-		if (session.getAttribute("state").equals("LOG_IN"))  {
-			Users users = (Users)session.getAttribute("info");
-			return myPageService.addLikes(users.getUserId(), videoName );
-		
-		} else {
-			System.out.println("You need to login first login first");
-			return -1;
-		}	
-		 	
+		if(userId.equals("none"))return -1;  // 토큰 값 없을 때 
+		else return myPageService.addLikes(userId, videoName );
+	
 	}
 	
 
 	@GetMapping("/getLikes")
 	@CrossOrigin
 	@ApiOperation(value="회원 좋아요 영상 조회",notes="성공시 List<Video> 반환, 실패시 null 반환 ")
-	public List<Video>  getLikes( HttpServletRequest request  )
-	{
+	public List<Video>  getLikes( @RequestParam(value = "userId", required=false, defaultValue="none") String userId 
+ )
+	{		
 		
-		HttpSession session = request.getSession(false);
-		if(session==null) {
-			session = request.getSession(true);
-			session.setAttribute("state", "NOT_LOG_IN");
-		}
-		
-		if (session.getAttribute("state").equals("LOG_IN")) {
-			Users users = (Users)session.getAttribute("info");
-			return myPageService.getLikes(users.getUserId());
-		
-		} else {
-			System.out.println("You need to login first login first");
-			return null;
-		}
-				 	
+		if(userId.equals("none"))return null;  // 토큰 값 없을 때 
+		else {
+			
+			System.out.println(userId);
+			return myPageService.getLikes(userId);
+		}		 	
 	}
 	
 	
 	@GetMapping("/deleteLikes")
 	@CrossOrigin
 	@ApiOperation(value="회원 좋아요 영상 삭제",notes="성공시 1 반환, 실패시 -1 반환 ")
-	public int  deleteLikes(@RequestParam("videoName") String videoName,  HttpServletRequest request  )
+	public int  deleteLikes(@RequestParam("videoName") String videoName, @RequestParam(value = "userId", required=false, defaultValue="none") String userId 
+ )
 	{
 		
-		
-		
-		HttpSession session = request.getSession(false);
-		if(session==null) {
-			session = request.getSession(true);
-			session.setAttribute("state", "NOT_LOG_IN");
-		}
-		
-		if (session.getAttribute("state").equals("LOG_IN"))  {
-			Users users = (Users)session.getAttribute("info");
-			return  myPageService.deleteLikes(users.getUserId(), videoName);		
-			 	
-		
-		} else {
-			System.out.println("You need to login first login first");
-			return -1;
-		}
-		
-		
-		
-	
-		 	
+		if(userId.equals("none"))return -1;  // 토큰 값 없을 때 
+		else return  myPageService.deleteLikes(userId, videoName);  
+				 	
 	}
 	
 	
@@ -196,24 +121,12 @@ public class MyPageController {
 	@GetMapping("/addSave")
 	@CrossOrigin
 	@ApiOperation(value="회원 저장 영상 저장",notes="성공시 1 반환, 실패시 -1 반환 ")
-	public int  addSave(@RequestParam("videoName") String videoName,  HttpServletRequest request  )
+	public int  addSave(@RequestParam("videoName") String videoName,  @RequestParam(value = "userId", required=false, defaultValue="none") String userId 
+ )
 	{
 		
-		HttpSession session = request.getSession(false);
-		if(session==null) {
-			session = request.getSession(true);
-			session.setAttribute("state", "NOT_LOG_IN");
-		}
-		
-		if (session.getAttribute("state").equals("LOG_IN"))  {
-			Users users = (Users)session.getAttribute("info");
-			return myPageService.addSave(users.getUserId(), videoName );
-		
-		} else {
-			System.out.println("You need to login first login first");
-			return -1;
-		}	
-		 	
+		if(userId.equals("none"))return -1;  // 토큰 값 없을 때 
+		else return myPageService.addSave(userId, videoName );
 	}
 	
 	
@@ -221,52 +134,24 @@ public class MyPageController {
 	@GetMapping("/getSave")
 	@CrossOrigin
 	@ApiOperation(value="회원 저장 영상 조회",notes="성공시 List<Video> 반환, 실패시 null 반환 ")
-	public List<Video>  getSave( HttpServletRequest request )
+	public List<Video>  getSave( @RequestParam(value = "userId", required=false, defaultValue="none") String userId )
 	{
 		
-		HttpSession session = request.getSession(false);
-		if(session==null) {
-			session = request.getSession(true);
-			session.setAttribute("state", "NOT_LOG_IN");
-		}
-		
-		if (session.getAttribute("state").equals("LOG_IN"))  {
-			Users users = (Users)session.getAttribute("info");
-			return myPageService.getSave(users.getUserId());
-		
-		} else {
-			System.out.println("You need to login first login first");
-			return null;
-		}
-		 	
+		if(userId.equals("none"))return null;  // 토큰 값 없을 때 
+		else return myPageService.getSave(userId);
+			
 	}
 	
 	
 	@GetMapping("/deleteSave")
 	@CrossOrigin
 	@ApiOperation(value="회원 저장 영상 삭제",notes="성공시 1 반환, 실패시 -1 반환 ")
-	public int  deleteSave( @RequestParam("videoName") String videoName,  HttpServletRequest request  )
+	public int  deleteSave( @RequestParam("videoName") String videoName,  @RequestParam(value = "userId", required=false, defaultValue="none") String userId 
+ )
 	{
 		
-		
-		
-		
-		HttpSession session = request.getSession(false);
-		if(session==null) {
-			session = request.getSession(true);
-			session.setAttribute("state", "NOT_LOG_IN");
-		}
-		
-		if (session.getAttribute("state").equals("LOG_IN"))  {
-			Users users = (Users)session.getAttribute("info");
-			return  myPageService.deleteSave(users.getUserId(), videoName);		
-			 	
-		
-		} else {
-			System.out.println("You need to login first login first");
-			return -1;
-		}
-		
+		if(userId.equals("none"))return -1;  // 토큰 값 없을 때 
+		else return  myPageService.deleteSave(userId, videoName);  		
 		
 		 	
 	}
