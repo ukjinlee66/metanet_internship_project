@@ -65,9 +65,6 @@ function Table1({ users } ) {
                 </Table>
             </TableContainer>
         );
-    
-       
-    
 }
 
 export default Table1;

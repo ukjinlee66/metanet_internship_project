@@ -1,8 +1,12 @@
-import React from "react";
+
+import React, { useState } from "react";
+import "antd/dist/antd.css";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import profile from "../assets/img/carousel-1.jpg";
 import SidebarItem from "./SidebarItem";
+
+  
 const Side = styled.div`
   display: flex;
   border-right: 1px solid #e0e0e0;
@@ -16,14 +20,15 @@ const Profile = styled.img`
   height: 150px;
   border-radius: 100%;
 `
-const Menu = styled.div`
+const Menu1 = styled.div`
   margin-top: 30px;
   width: 200px;
   display: flex;
   flex-direction: column;
 `
 
-function Sidebar() {
+const Sidebar = () => {
+
     const menus = [
         { name: "시청내역", path: "./View" },
         { name: "좋아요 누른 영상", path: "./LikedView" },
@@ -34,9 +39,10 @@ function Sidebar() {
         { name: "환불 페이지", path:"./refundPoint"}
     ];
     return (
+        
         <Side>
             <Profile src={profile}></Profile>
-            <Menu>
+            <Menu1>
                 {menus.map((menu, index) => {
 
                     return (
@@ -51,7 +57,7 @@ function Sidebar() {
                         </NavLink>
                     );
                 })}
-            </Menu>
+            </Menu1>
         </Side>
     );
 }
