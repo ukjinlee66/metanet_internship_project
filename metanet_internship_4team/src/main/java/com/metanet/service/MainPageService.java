@@ -15,10 +15,10 @@ public interface MainPageService {
 
 
 	// 비회원용 
-	public List<Video> getVideoListByLevel( String level);
+	public List<Video> getVideoListByLevel( );
 	
 	// 회원용 
-	public List<Video> getVideoListByLevel(String userId, String level);
+	public List<Video> getVideoListByLevel(String userId);
 	
 	
 }

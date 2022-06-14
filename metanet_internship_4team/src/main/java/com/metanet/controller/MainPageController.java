@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.metanet.domain.Users;
@@ -36,6 +37,22 @@ public class MainPageController {
 	}
 	
 	
+
+	@GetMapping("/getMainVideoList")
+	@CrossOrigin
+	@ApiOperation(value="상단 베너 실시간 랭킹 키워드 제공",notes="성공시 List<String> 반환, size=5 ")
+	public List<Video> getMainVideoList( @RequestParam(value = "userId", required=false, defaultValue="none") String userId ){
+		
+		if(userId.equals("none")) return mainPageService.getVideoListByLevel(); //로그인이 안되어있다면  단순 조회수 		
+		else return mainPageService.getVideoListByLevel(userId); // 로그인이 되어있다면 사용자 기반 조회수 
+
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	/*
@@ -49,6 +66,7 @@ public class MainPageController {
 	*/
 	
 	
+	/*
 	@GetMapping("/getVideo/{level}")
 	@CrossOrigin
 	@ApiOperation(value="메인화면 난이도 별 리스트 제공 ",notes="성공시 List<String> 반환 ")
@@ -71,7 +89,7 @@ public class MainPageController {
 		
 
 	}
-	
+	*/
 
 	/*
 	@PostMapping("/serch")

@@ -161,7 +161,7 @@ public class AccountController {
 		}
 		
 		// 입력정보를 통한 검증 
-		Optional<Users> findUser =  accountService.validateForFindPassword( findRequest.getUserName(), findRequest.getUserPhoneNumber());
+		Optional<Users> findUser =  accountService.validateForFindPassword( findRequest.getUserName(), findRequest.getUserEmail());
 		
 		if(findUser.isPresent()) {
 			

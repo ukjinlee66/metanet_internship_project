@@ -24,7 +24,7 @@ public interface AccountService {
 	
 	public Optional<Users> validateForFindId(String userName , String userPhoneNumber ,String usersEmail);
 	
-	public Optional<Users> validateForFindPassword( String userName, String usersPhoneNumber );
+	public Optional<Users> validateForFindPassword( String userName, String usersEmail );
 	
 	public int updatePassword( String userId , String newPassword);
 	

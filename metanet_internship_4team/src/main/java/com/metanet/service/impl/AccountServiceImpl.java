@@ -43,8 +43,7 @@ public class AccountServiceImpl implements AccountService
 	    java.sql.Date date=new java.sql.Date(millis);  
 	    users.setUserDate(date);
 	    	    
-	    System.out.println( "12345");
-	    System.out.println( users.toString());
+	 
 	    
 		usersRepository.save(users);
 		
@@ -115,9 +114,11 @@ public class AccountServiceImpl implements AccountService
 	};
 	
 	
-	public Optional<Users> validateForFindPassword( String userName, String usersPhoneNumber ){
+	
+	
+	public Optional<Users> validateForFindPassword( String userName, String usersEmail ){
 		
-		return usersRepository.findByUserNameAndUserPhoneNumber(userName, usersPhoneNumber  );
+		return usersRepository.findByUserNameAndUserEmail(userName, usersEmail  );
 	}
 	
 	

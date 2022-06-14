@@ -52,14 +52,7 @@ public class MainPageServiceImpl implements MainPageService{
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	/*
+
 	public List<String> getRecipeRank(){
 
 		List <Video> videoList = videoRepository.findAll();
@@ -80,14 +73,14 @@ public class MainPageServiceImpl implements MainPageService{
 		
 		return topNames;
 	}
-	*/
+	
 
 	// 비회원용 
-	public List<Video> getVideoListByLevel( String recipeLevel){
+	public List<Video> getVideoListByLevel( ){
 		
 		
-		List<Video> videoList = videoRepository.findByRecipeLevel(recipeLevel);
-		
+		List<Video> videoList = videoRepository.findAll();
+		List<Video> resultList  = new ArrayList<Video>();
 		
 		Comparator<Video> comparator = new Comparator<Video>() {
 		    @Override
@@ -99,18 +92,26 @@ public class MainPageServiceImpl implements MainPageService{
 		Collections.sort(videoList, comparator);
 		
 		
-		return videoList;
+		int listSize = 5;
+		if(videoList.size()<listSize) listSize = videoList.size();
 		
+		for( int i =0; i<listSize; i++ ) {
+			resultList.add(videoList.get(i));
+		}
 		
+		// 5개반 주어야함 
+		return resultList;
 		
 	};
 	
 	// 회원용 
-	public List<Video> getVideoListByLevel(String userId, String recipeLevel){
+	public List<Video> getVideoListByLevel(String userId){
 		
 		Users findUser = usersRepository.findByUserId(userId).get();
 		
-		List<Video> videoList = videoRepository.findByRecipeKindAndRecipeLevel(findUser.getUserRecKind(), recipeLevel);
+		List<Video> videoList = videoRepository.findByrecipeKind(findUser.getUserRecKind());
+		List<Video> resultList  = new ArrayList<Video>();
+		
 		
 		Comparator<Video> comparator = new Comparator<Video>() {
 		    @Override
@@ -122,8 +123,17 @@ public class MainPageServiceImpl implements MainPageService{
 		Collections.sort(videoList, comparator);
 		
 		
-		return videoList;
+		int listSize = 5;
+		if(videoList.size()<listSize) listSize = videoList.size();
 		
+		for( int i =0; i<listSize; i++ ) {
+			resultList.add(videoList.get(i));
+		}
+		
+		// 5개반 주어야함 
+		return resultList;
+		
+
 	};
 	
 	

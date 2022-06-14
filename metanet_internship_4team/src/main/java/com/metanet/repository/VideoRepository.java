@@ -19,5 +19,9 @@ public interface VideoRepository extends JpaRepository <Video, String>
 	Optional<Video> findByVideoNumberAndRecipeKind (int videoNumber, String recipeKind);
 	List<Video> findByRecipeLevel(String recipeLevel);
 	List<Video> findByRecipeKindAndRecipeLevel(String UserReckind, String recipeLevel);
+
 	Optional<Video> findByVideoName(String videoName);
+	Optional<Video> findByVideoTitle(String videoTitle);
+	
+
 }

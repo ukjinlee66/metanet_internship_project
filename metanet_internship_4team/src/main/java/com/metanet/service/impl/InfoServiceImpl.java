@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,5 +72,57 @@ public class InfoServiceImpl implements InfoService
 		}
 		return ret_list;
 	}
+	
+	
+	
+	
+	
+	
+	// 주웅 상세정보 삭제 
+
+	@Transactional 
+	public int deleteDetail(int videoNumber) {
+	
+		Video findVideo  = videoRepo.findByvideoNumber(videoNumber);
+		videoRepo.delete(findVideo);		
+		
+		return 1 ; 
+	};
+	
+	
+	// 주웅 상세정보 업데이트 
+	@Transactional 	
+	public int updateDetail(Video updateDetail) {
+		
+		int result = deleteDetail(updateDetail.getVideoNumber());
+		
+		videoRepo.save(updateDetail);
+		
+		return 1 ; 
+	};
+	
+	
+	@Transactional 
+	public void saveDetail(Video newDetail) {
+			
+		// 날짜생성 
+		long millis=System.currentTimeMillis();  
+	    java.sql.Date date=new java.sql.Date(millis);  
+	    newDetail.setCrDa(date);
+	    
+		videoRepo.save(newDetail);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
