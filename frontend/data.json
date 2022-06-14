@@ -147,31 +147,31 @@
       "videoView": "1"
     }
   ],
-  "users" : [
+  "users": [
     {
-      "User_Number":1 ,
-      "User_Name" :"정효재",
+      "id": 1,
+      "User_Name": "정효재",
       "User_Id": "jhj774",
       "User_Password": "1234",
       "User_Phone_Number": "01041731348",
-      "User_Email":  "jhj774@naver.com",	
+      "User_Email": "jhj774@naver.com",
       "User_Point": 1000,
-      "User_Addr": "서울시 서대문구",
+      "User_Addr": "서울",
       "User_RecKind": "한식",
-      "User_Kind":  "0",
+      "User_Kind": "0",
       "User_Date": "2022/06/08"
     },
     {
-      "User_Number":2 ,
-      "User_Name" :"김효재",
+      "id": 2,
+      "User_Name": "김효재",
       "User_Id": "www774",
       "User_Password": "1234",
       "User_Phone_Number": "01041731348",
-      "User_Email":  "www774@naver.com",	
+      "User_Email": "www774@naver.com",
       "User_Point": 2000,
       "User_Addr": "서울시 서대문구",
       "User_RecKind": "한식",
-      "User_Kind":  "0",
+      "User_Kind": "0",
       "User_Date": "2022/06/08"
     }
   ]

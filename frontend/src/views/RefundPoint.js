@@ -4,22 +4,25 @@ import axios from "axios";
 const RefundPoint = (props) => {
 
   const [inputText, setInputText] = useState('');
-  const [refundPoint, setRefundPoint] = useState(0);
-  const [recipe, setRecipe] = useState([
-    {
-      User_Number: 0, User_Name: '', User_Id: '', User_Password: '', User_Phone_Number: '', User_Email: '', User_Point: '', User_Addr: '',
-      User_RecKind: '', User_Kind: '', User_Date: ''
-    }
-  ])
-  const BASEURL = "http://localhost:4000/users"
+  const [refundPoint, setRefundPoint] = useState();
+  const [point,setPoint] = useState(0);
+
+  const BASEURL = "http://localhost:8443/Point/refund"
+  const FindURL = "http://localhost:8443/Account/getAccount"
   const handleSubmit = (e) => {
 
-    axios.put(BASEURL + "?User_id=" + recipe[0].User_Id, {
-      User_Point: refundPoint
+    axios.post(BASEURL, null,{
+      params:{
+      refundPoint: refundPoint,
+      userId: inputText
+    }
     })
       .then(function (response) {
-        alert("성공");
-        console.log(response);
+        if(response.data == -1){
+          alert("환불 실패")
+        }else if(response.data ==  1){
+          alert("환불 성공");
+      }
       })
       .catch(function (error) {
         alert("실패");
@@ -30,28 +33,30 @@ const RefundPoint = (props) => {
 
   const serachId = (e) => {
 
-    axios.get(BASEURL, {
+    axios.get(FindURL, {
       params: {
-        User_Id: inputText
+        userId: inputText
       }
     })
       .then(function (response) {
-        if (response.data != 0) {
+        if (response.data == "") {
+          alert("없는 아이디")
+          console.log("dfdf")
+          console.log(response)
+          console.log(response.data)
+        }else{
           alert("존재하는 아이디")
-          setRecipe(response.data)
-
+          setPoint(response.data.userPoint);
+          console.log("dfdf")
+          console.log(response)
+          console.log(response.data)
         }
-        else alert("없는 아이디")
+        
       })
       .catch(function (error) {
         console.log(error);
         alert("오류")
       })
-      .finally(() => {
-        console.log("지금 실행", recipe)
-
-      })
-    setInputText('');
   };
 
   const handleChange = (e) => {  // <- input값으로 text 변경 함수
@@ -63,7 +68,7 @@ const RefundPoint = (props) => {
 
   useEffect(() => { }, [inputText]);
   useEffect(() => { }, [refundPoint]);
-  useEffect(() => { console.log("유즈이펙트 실행", recipe) }, [recipe]);
+  useEffect(() => { }, [point]);
 
   return (
     <div className="App">
@@ -90,7 +95,8 @@ const RefundPoint = (props) => {
               <input
                 type='text'
                 className="form-control"
-                value={recipe[0].User_Point}
+                style={{textAlign:'end'}}
+                value={point}
                 name='point'
               ></input>
             </div>
@@ -99,6 +105,7 @@ const RefundPoint = (props) => {
               <input
                 type='text'
                 className="form-control"
+                style={{textAlign:'end'}}
                 value={refundPoint}
                 onChange={handleChange2}
               ></input>

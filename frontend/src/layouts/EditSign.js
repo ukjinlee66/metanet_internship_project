@@ -12,7 +12,7 @@ const EditSign = () => {
   const [inputAddr, setInputAddr] = useState('')
   const [inputRecKind, setInputRecKind] = useState('')
   const [users, setUsers] = useState([
-    {User_Number:0 ,User_Name:'',User_Id:'',User_Password:'',User_Phone_Number:'',
+    {id:0 ,User_Name:'',User_Id:'',User_Password:'',User_Phone_Number:'',
     User_Email:'',User_Point:0 ,User_Addr:'',User_RecKind:'',User_Kind:'',User_Date:''}
   ])
   
@@ -41,7 +41,7 @@ const EditSign = () => {
   // BASEURL + "/updateAccount"
   //회원 정보 수정
   const onClickEdit = () => {
-    axios.put(test,{
+    axios.patch(test + "/1",{
       
       User_Addr : inputAddr
     })
@@ -59,16 +59,17 @@ const EditSign = () => {
         alert("오류")
       })
   }
+
   //주소 변경
   const handleInputAddr = (e) => {
     setInputAddr(e.target.value)
   }
   useEffect(() => {console.log(inputAddr)}, [inputAddr])
 
-  const test = "http://localhost:4000/users?User_Id=jhj774"
+  const test = "http://localhost:4000/users"
   useEffect(() => {
     axios
-      .get(test)
+      .get(test + "?User_Id=jhj774")
       .then((res) =>{
         setUsers(res.data)
         console.log(res.data)

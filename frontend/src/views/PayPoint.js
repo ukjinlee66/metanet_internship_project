@@ -5,17 +5,17 @@ import axios from "axios";
 
 
 function PayPointPage() {
-  const reqUrl = 'http://localhost:4000/posts'
+  const reqUrl = 'http://localhost:8443/Point/getChargeList?userId='
 
   const [users, setUsers] = useState([
-      { id: '', name: '', point: '', date: '' }
+      { chargeNumber : '',usersNumber :'', chargeKind: '', chargePoint: '', chargeDate: '' }
   ])
   
-  useEffect(() => {
+    useEffect(() => {
       axios
-          .get(reqUrl)
+          .get(reqUrl + sessionStorage.getItem("User_Id"))
           .then((res) => {setUsers(res.data)
-              console.log(res.data)}
+              console.log("포인트",res.data)}
           );
           
   },[])

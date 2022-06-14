@@ -23,9 +23,10 @@ const Signin = () => {
       }
     })
       .then(function (response) {
-        if (response.data == 1) {
+        if (response.data) {
           alert("로그인 성공")
-          sessionStorage.setItem('User_Id', inputId)
+          sessionStorage.setItem('User_Id', response.data.userId)
+          
           document.location.href = "http://localhost:3000/zipcook"
 
         }

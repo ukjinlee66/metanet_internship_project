@@ -22,7 +22,16 @@ const Nav = styled.nav`
   }
 `;
 
-function Recipelistitem(props) {
+function Recipelistitem({data}) {
+       // 처음 렌더링시 한번 실행되는 함수
+       useEffect(() => {
+        let timer = setTimeout(() => {
+            setRecipe(data);
+        }, 1000)
+        console.log(recipe)
+        return ()=> clearTimeout(timer) 
+    }, [data])
+
     const [recipe, setRecipe] = useState([
         {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}
     ])
@@ -34,39 +43,9 @@ function Recipelistitem(props) {
 
     // 특정 페이지 요청 시 작동하는 함수
     const handlePageChange = nowPage => {
-        getListItem(nowPage);
         setPage(nowPage);
         sessionStorage.setItem("pageSession", nowPage);
     };
-
-    const reqUrl = 'http://localhost:8443/MyPage/getViews/한식'
-    const tourSizeUrl = 'http://localhost:4000/list'
-
-    // 페이지에 따른 관광지 리스트 요청
-    const getListItem = async (page) => {
-        await axios
-            .get(reqUrl, {
-            })
-            .then((res) => setRecipe(res.data),
-            console.log(recipe));
-        // .then((res)=>console.log("RES : ",res.data));
-    }
-
-    // 검색에 따른 관광지 리스트의 총 길이 요청
-    const getlistSize = async () => {
-        console.log("getListSize start");
-        await axios
-            .get(tourSizeUrl, {
-                params: {
-                    videoTitle: decodeURI(window.location.search.split('=')[1])
-                }
-            })
-            .then((res) => console.log(res.data));
-    }
-    // 처음 렌더링시 한번 실행되는 함수
-    useEffect(() => {
-        getListItem(page);
-    }, [])
 
     // 관광지 리스트 렌더링
     const recipeRender = () => {

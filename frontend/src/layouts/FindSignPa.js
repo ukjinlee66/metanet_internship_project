@@ -1,8 +1,25 @@
-import React, { Component } from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-export default class passWordFind extends Component {
 
-  render() {
+const FindSignPa =() => {
+  const [inputName, setInputName] = useState('')
+  const [inputEmail, setInputEmail] = useState('')
+  const [inputValidate, setInputValidate] = useState('')
+
+  const handleInputName = (e) => {
+    setInputName(e.target.value)
+  }
+  const handleInputValidate = (e) => {
+    setInputValidate(e.target.value)
+  }
+  const handleInputEmail = (e) => {
+    setInputEmail(e.target.value)
+  }
+  useEffect(() => { }, [inputName])
+  useEffect(() => { }, [inputValidate])
+  useEffect(() => { }, [inputEmail])
+  
     return (
       <form>
         <h3>비밀번호 찾기</h3>
@@ -10,6 +27,8 @@ export default class passWordFind extends Component {
           <label>이름 입력</label>
           <input
             type="name"
+            onChange={handleInputName}
+            value={inputName}
             className="form-control"
             placeholder="Name"
           />
@@ -19,6 +38,8 @@ export default class passWordFind extends Component {
           <input
             type="email"
             className="form-control"
+            onChange={handleInputEmail}
+            value={inputEmail}
             placeholder="Email"
           />
           <button type="submit" className="btn btn-primary">
@@ -30,6 +51,8 @@ export default class passWordFind extends Component {
           <input
             type="email"
             className="form-control"
+            onChange={handleInputValidate}
+            value={inputValidate}
             placeholder="Check!"
           ></input>
         </div>
@@ -41,11 +64,9 @@ export default class passWordFind extends Component {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;확인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </button>
             </Link>
-          </div>
 
-          <div class="col-xl">
             <Link to="/zipcook/member/Login">
-              <button type="submit" className="btn btn-primary" >
+              <button type="submit" style={{float:'right'}} className="btn btn-primary" >
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;취소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </button>
             </Link>
@@ -54,4 +75,4 @@ export default class passWordFind extends Component {
       </form>
     )
   }
-}
+export default FindSignPa;
