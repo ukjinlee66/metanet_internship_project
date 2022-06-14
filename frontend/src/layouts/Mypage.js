@@ -16,6 +16,7 @@ import ChargePoint from '../views/ChargePoint';
 import QnA from '../views/QnA';
 import RefundPointPage from '../views/RefundPoint';
 import MainSearch from '../components/MainSearch';
+import BuySubscribe from '../views/BuySubscribe';
 
 const Center = styled.div`
   height: 100vh;
@@ -43,6 +44,7 @@ function Mypage(props) {
                     <Route path="/ChargePoint" element={<ChargePoint />} />
                     <Route path="/QnA" element={<QnA />} />
                     <Route path="/refundPoint" element={<RefundPointPage />} />
+                    <Route path="/BuySubscribe" element={<BuySubscribe />} />
                 </Routes>
             </Center>
             <Scrolltop />
