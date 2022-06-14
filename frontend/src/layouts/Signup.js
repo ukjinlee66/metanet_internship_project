@@ -39,7 +39,7 @@ const SignUp = () => {
   useEffect(() => {}, [inputPhone])
   useEffect(() => {}, [inputEmail])
   useEffect(() => {}, [inputAddr])
-  useEffect(() => {console.log(inputRecKind)}, [inputRecKind])
+  useEffect(() => {}, [inputRecKind])
 
   // 아이디 중복 확인 이벤트
   const BASEURL = "http://localhost:8443/Account"
@@ -76,7 +76,7 @@ const SignUp = () => {
         if (response.data == -1) alert("회원 가입 실패")
         else{
           alert("회원 가입 성공")
-          document.location.href = "http://localhost:3000/zipcook/Login"
+          document.location.href = "http://localhost:3000/zipcook/member/Login"
         }
       })
       .catch(function (error) {

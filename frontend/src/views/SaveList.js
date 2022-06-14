@@ -10,15 +10,16 @@ width: 100vh;
 `
 const SaveList = (props) => {
     const [data, setData] = useState(null);
-    const onClick = async() => {
-        try{
-            const response = await axios.get('http://localhost:4000/posts');  
-            setData(response.data);  
-            console.log(response.data)
-          }catch(e){
-            console.log(e);
-          }
-    }
+    const reqUrl = 'http://localhost:8443/MyPage/getSave?userId='
+    useEffect(() => {
+        console.log(sessionStorage.getItem("User_Id"))
+        axios
+            .get(reqUrl + sessionStorage.getItem("User_Id"))
+            .then((res) => {setData(res.data)
+                console.log("세이브",res.data)}
+            );
+            
+    },[])
     return (
         <>
         {/* <div>
@@ -28,10 +29,10 @@ const SaveList = (props) => {
             {data && <textarea rows={7} value={JSON.stringify(data, null, 2)} readOnly={true} />}
         </div> */}
        
-            <div class="container-xxl py-5 wow fadeInUp "style={{paddingLeft:"50px",backgroundColor:'#ffffff'}} data-wow-delay="0.1s">
+            <div class="container-xxl py-5"style={{paddingLeft:"50px",backgroundColor:'#ffffff'}} data-wow-delay="0.1s">
             <div class="row g-5 maCon" style={{width:'100vh',height:'100vh',backgroundColor:'#ffffff'}}>
                     <div class="col-lg-5" style={{width:'100%'}}>
-                        <ViewList/>
+                        <ViewList data={data}/>
                     </div>
                 </div>
             </div>
