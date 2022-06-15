@@ -73,6 +73,18 @@
 		<!-- mail api End -->
 		
 		
+		<!-- ffmpeg api start -->
+		<dependency>
+		  <groupId>net.bramp.ffmpeg</groupId>
+		  <artifactId>ffmpeg</artifactId>
+		  <version>0.6.2</version>
+		</dependency>
+		<!-- ffmpeg api end -->
+		
+		
+		
+		
+		
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

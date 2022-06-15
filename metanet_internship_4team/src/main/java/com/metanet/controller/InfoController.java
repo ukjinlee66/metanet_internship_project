@@ -1,10 +1,6 @@
 package com.metanet.controller;
 
-
 import java.io.File;
-
-import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +23,10 @@ import com.metanet.service.MyPageService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import net.bramp.ffmpeg.FFmpeg;
+import net.bramp.ffmpeg.FFprobe;
+
+
 
 @RestController
 @RequestMapping("/Info")
@@ -66,15 +66,10 @@ public class InfoController
 	@CrossOrigin
 	@ApiOperation(value="해당 레시피 댓글정보 조회",notes="레시피아이디를 통한 댓글정보 조회")
 	public List<Comments> commetslist(
-			@ApiParam(value="레시피 아이디",required=true) @RequestParam(value="videoNumber", defaultValue="0") int videoNumber 
+			@ApiParam(value="레시피 아이디",required=true) @RequestParam int videoNumber 
 			)
 	{
-		if(videoNumber == 0)
-			return new ArrayList<Comments>();
-		List<Comments> c = infoService.videoCommentList(videoNumber);
-		if(c.isEmpty())
-			return new ArrayList<Comments>();
-		return(c);
+		return(infoService.videoCommentList(videoNumber));
 	}
 	
 	@GetMapping("/detailList")
@@ -190,25 +185,77 @@ public class InfoController
 	// 주웅 추가 (파일 업로드 다운로드 )
 	
 	
+	
+	
+
+	
 	/*
+	
 	@PostMapping("/fileUpload")
 	@CrossOrigin
 	@ApiOperation(value="파일 업로드 ",notes="회원 번호, , 성공시 1 반환")
-	public String uploadSingle(@RequestParam("files") MultipartFile file) throws Exception 
+	public String uploadSingle(@RequestParam("files") MultipartFile uploadFile) throws Exception 
 	{
 		
+		// 저장할 base url  :  fileRealPath
+		// ffmpeg , ffprobe .exe 위치 경로  
+		
+		//1. 영상을 저장할 path 설정 
+		String originalFileName = uploadFile.getOriginalFilename();
+		String saveFilePath = fileRealPath +originalFileName;
 
-		String originalfileName = file.getOriginalFilename();
+		//2. 영상 저장 
+		File dest = new File( saveFilePath);
+		uploadFile.transferTo(dest);
+		
+		/*
+		
+		//2.ts를 저장할 path 설정 
+		String onlyFileName = originalFileName.substring(0, originalFileName.lastIndexOf("."));
+		final String tsPath = fileRealPath + onlyFileName;
+		
+		//3.디렉토리 설정 
+		File tsPathFile = new File(tsPath);
+    	if(! tsPathFile.exists()) tsPathFile.mkdir();
+    	
+
+    	// ffmpeg 및 ffprobe 객체 생성 
+    	
+		FFmpeg ffmpeg = new FFmpeg(ffmpgRealPath+"ffmpeg");
+		FFprobe ffprobe = new FFprobe(ffmpgRealPath+"ffprobe");
+
 			
-		System.out.println("test1");
+    	
+    	
+	
+		
 		File dest = new File( fileRealPath +originalfileName);
+		
+		
 		file.transferTo(dest);
 		
+		
+		
+		String ffmpegPath = ffmpgRealPath+"ffmpeg";
+		String ffprobePath = ffmpgRealPath+"ffprobe";
+	
+		FFmpeg ffmpeg =  new FFmpeg ("dd");
+		FFprobe ffprobe = new FFprobe("dd"); 
+		
+		
+		
+		
+		
+		
+		
+		
 		System.out.println("test2");
+		*/
+		
 		return "good";
 	}
 	
-	
+	/*
 	@PostMapping("/hlsMake")
 	@ApiOperation(value="파일 업로드 ",notes="회원 번호, , 성공시 1 반환")
 	public String hlsMake() throws Exception 
@@ -225,9 +272,21 @@ public class InfoController
 		
 		
 	}
+	
+	
+	
+	// 이건 ffmpeg test 입니다. 삭제할 예장합니다. 
+	@PostMapping("/hlstest")
+	@ApiOperation(value="파일 업로드 ",notes="회원 번호, , 성공시 1 반환")
+	public String hlsMake() throws Exception 
+	{
+		
+
+		
+		return "good";
+	}
+	
 	*/
-	
-	
 	
 	
 	
