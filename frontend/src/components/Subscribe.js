@@ -1,141 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
-import axios from 'axios';
+import { Card, Row, Col, Typography  } from 'antd';
+import React from 'react';
+import img1 from '../assets/img/라면.png'
+import img2 from '../assets/img/떡국.jpg'
+import img3 from '../assets/img/해물탕.jpg'
+const { Meta } = Card;
+const {Text} = Typography;
 
-function Subscribe() {
 
-
-
-    return (
-        <>
-            <div className="App">
-                <h1>구독권 구매</h1>
-                <div className="auth-wrapper" style={{display:"-webkit-inline-box"}}>
-                    <div className="auth-inner" style={{ width: '300px', height: '500px', boxShadow: ' 0px 14px 80px rgb(34 35 58 / 5%' }}>
-                        <form>
-                            <h3>1개월 구독</h3>
-                            <div className="mb-3">
-                                <label>Id</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Enter Id"
-
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <label>Password</label>
-                                <input
-                                    type="password"
-                                    className="form-control"
-                                    placeholder="Enter password"
-
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <div className="custom-control custom-checkbox">
-                                    <input
-                                        type="checkbox"
-                                        className="custom-control-input"
-                                        id="customCheck1"
-                                    />
-                                    <label className="custom-control-label" htmlFor="customCheck1">
-                                        Remember me
-                                    </label>
-                                </div>
-                            </div>
-                            <div className="d-grid">
-                                <button type="button" className="btn btn-primary" >
-                                    Login
-                                </button>
-                            </div>
-                        </form>
+const Subscribe = () => (
+    <div className="site-card-wrapper" style={{ width: "100vh" }}>
+        <Row gutter={300}>
+            <Col span={8}>
+                <Card
+                    onClick={() => {alert("click")} }
+                    hoverable
+                    style={{
+                        width: 300,
+                        height: 500,
+                    }}
+                    cover={<img alt="src1" src={img1} height="240" />}
+                >
+                    <div className="mb-3" style={{ textAlign: 'center', display: "block" }}>
+                        <Text type="success" style={{ fontSize: "30px" }}>7일 구독권</Text>
                     </div>
-                    <div className="auth-inner" style={{ width: '300px', height: '500px', boxShadow: ' 0px 14px 80px rgb(34 35 58 / 5%' }}>
-                        <form>
-                            <h3>3개월 구독</h3>
-                            <div className="mb-3">
-                                <label>Id</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Enter Id"
+                    <Meta style={{ textAlign: 'center', display: "block" }}
+                        title="30,000 Point!"
+                    />
+                </Card>
+            </Col>
+            <Col span={8}>
+                <Card
+                    hoverable
+                    style={{
+                        width: 300,
+                        height: 500,
+                    }}
+                    cover={<img alt="src2" src={img2} />}
+                >
+                    <Meta style={{ textAlign: 'center', display: "block" }}
+                        title="1개월 구독권"
+                        description="www.instagram.com" />
+                </Card>
+            </Col>
+            <Col span={8}>
+                <Card
+                    hoverable
+                    style={{
+                        width: 300,
+                        height: 500,
+                    }}
+                    cover={<img alt="src1" src={img3} height="240" />}
+                >
+                    <Meta style={{ textAlign: 'center', display: "block" }}
+                        title="3개월 구독권"
+                        description="www.instagram.com" />
+                </Card>
+            </Col>
+        </Row>
+    </div>
 
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <label>Password</label>
-                                <input
-                                    type="password"
-                                    className="form-control"
-                                    placeholder="Enter password"
-
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <div className="custom-control custom-checkbox">
-                                    <input
-                                        type="checkbox"
-                                        className="custom-control-input"
-                                        id="customCheck1"
-                                    />
-                                    <label className="custom-control-label" htmlFor="customCheck1">
-                                        Remember me
-                                    </label>
-                                </div>
-                            </div>
-                            <div className="d-grid">
-                                <button type="button" className="btn btn-primary" >
-                                    Login
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <div className="auth-inner" style={{ width: '300px', height: '500px', boxShadow: ' 0px 14px 80px rgb(34 35 58 / 5%' }}>
-                        <form>
-                            <h3>6개월 구독</h3>
-                            <div className="mb-3">
-                                <label>Id</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Enter Id"
-
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <label>Password</label>
-                                <input
-                                    type="password"
-                                    className="form-control"
-                                    placeholder="Enter password"
-
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <div className="custom-control custom-checkbox">
-                                    <input
-                                        type="checkbox"
-                                        className="custom-control-input"
-                                        id="customCheck1"
-                                    />
-                                    <label className="custom-control-label" htmlFor="customCheck1">
-                                        Remember me
-                                    </label>
-                                </div>
-                            </div>
-                            <div className="d-grid">
-                                <button type="button" className="btn btn-primary" >
-                                    Login
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-        </>
-    );
-}
+);
 
 export default Subscribe;

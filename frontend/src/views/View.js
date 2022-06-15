@@ -28,7 +28,6 @@ const View = (props) => {
                 <div class="row g-5 maCon" style={{width:'100vh',height:'100vh',backgroundColor:'#ffffff'}}>
                     <div class="col-lg-5" style={{width:'100%'}}>
                         <ViewList data={data}/>
-                        
                     </div>
                     
                 </div>
