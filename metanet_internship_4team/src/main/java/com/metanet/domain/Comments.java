@@ -34,6 +34,9 @@ public class Comments
 	@Column(name="VIDEO_NUMBER")
 	private int videoNumber;
 	
+	@Column(name="USER_ID")
+	private String  userId;
+	
 	@Column(name = "COMMENTS_CONTEXTS")
 	private String commentsContexts;
 	

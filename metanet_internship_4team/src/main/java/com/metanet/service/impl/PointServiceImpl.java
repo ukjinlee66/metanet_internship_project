@@ -50,6 +50,8 @@ public class PointServiceImpl implements PointService {
 	    
 	    chargeRepository.save(charge);
 		
+	    
+	    
 	}; 
 	
 	

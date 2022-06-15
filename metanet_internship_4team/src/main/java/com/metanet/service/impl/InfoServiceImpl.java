@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.metanet.domain.Comments;
 import com.metanet.domain.Users;
 import com.metanet.domain.Video;
+import com.metanet.domain.DTO.VideoDTO;
 import com.metanet.repository.CommentsRepository;
 import com.metanet.repository.UsersRepository;
 import com.metanet.repository.VideoRepository;
@@ -81,36 +82,46 @@ public class InfoServiceImpl implements InfoService
 	// 주웅 상세정보 삭제 
 
 	@Transactional 
-	public int deleteDetail(int videoNumber) {
-	
+	public int deleteDetail(int videoNumber) {	
 		Video findVideo  = videoRepo.findByvideoNumber(videoNumber);
 		videoRepo.delete(findVideo);		
-		
 		return 1 ; 
 	};
 	
 	
 	// 주웅 상세정보 업데이트 
 	@Transactional 	
-	public int updateDetail(Video updateDetail) {
+	public int updateDetail(VideoDTO.updateDetailRequest updateDetail) {
 		
-		int result = deleteDetail(updateDetail.getVideoNumber());
 		
-		videoRepo.save(updateDetail);
+		Video updateVideo = videoRepo.findByvideoNumber(updateDetail.getVideoNumber());
+
+		updateVideo= updateDetail.transferTo(updateVideo);
+		
+
+		// 날짜생성 
+		long millis=System.currentTimeMillis();  
+	    java.sql.Date date=new java.sql.Date(millis);  
+	    updateVideo.setUpDa(date);
+		
+		videoRepo.save(updateVideo);
 		
 		return 1 ; 
 	};
 	
 	
 	@Transactional 
-	public void saveDetail(Video newDetail) {
-			
+	public void saveDetail(VideoDTO.addDetailRequest newDetail) {
+	
+		Video newVideo =  new Video();
+		newVideo = newDetail.transferTo(newVideo);
+		
 		// 날짜생성 
 		long millis=System.currentTimeMillis();  
 	    java.sql.Date date=new java.sql.Date(millis);  
-	    newDetail.setCrDa(date);
-	    
-		videoRepo.save(newDetail);
+	    newVideo.setCrDa(date);
+
+		videoRepo.save(newVideo);
 	}
 	
 	

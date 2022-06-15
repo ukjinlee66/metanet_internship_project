@@ -62,6 +62,7 @@ public class UsersDTO {
 			private String userName;
 			private String userId;
 			private String userPassword ;
+			private int userPoint;
 			private String userPhoneNumber;
 			private String userEmail;
 			private String userAddr;
@@ -74,6 +75,7 @@ public class UsersDTO {
 				userName =users.getUserName();
 				userId= users.getUserId();
 				userPassword= users.getUserPassword();
+				userPoint= users.getUserPoint();
 				userPhoneNumber= users.getUserPhoneNumber();
 				userEmail= users.getUserEmail();
 				userAddr= users.getUserAddr();

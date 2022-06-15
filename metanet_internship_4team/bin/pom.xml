@@ -55,6 +55,17 @@
 		  <version>2.6.1</version>
 		</dependency>
 		<!-- Swagger End -->
+		
+		
+		<!-- ffmpeg 동영상 인코더 연결 라이브러리 -->
+		<dependency>
+		  <groupId>net.bramp.ffmpeg</groupId>
+		  <artifactId>ffmpeg</artifactId>
+		  <version>0.6.2</version>
+		</dependency>
+	
+		
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>

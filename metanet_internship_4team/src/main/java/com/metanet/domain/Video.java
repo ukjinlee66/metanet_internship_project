@@ -2,6 +2,8 @@ package com.metanet.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
@@ -29,6 +31,7 @@ public class Video
 {
 	@Id
 	@Column(name = "VIDEO_NUMBER")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="VIDEO_SEQ_GEN")
 	private int videoNumber;
 
 	@Column(name = "VIDEO_TITLE")

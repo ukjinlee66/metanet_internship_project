@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.metanet.domain.SearchWord;
 import com.metanet.domain.Users;
 import com.metanet.domain.Video;
 import com.metanet.service.MainPageService;
@@ -32,8 +33,10 @@ public class MainPageController {
 	@GetMapping("/getSearchWordRank")
 	@CrossOrigin
 	@ApiOperation(value="상단 베너 실시간 랭킹 키워드 제공",notes="성공시 List<String> 반환, size=5 ")
-	public List<String> getSearchWordRank(){
-		 return mainPageService.getSearchWordRank();
+	public List <SearchWord> getSearchWordRank(){
+		 		
+		return mainPageService.getSearchWordRank();
+
 	}
 	
 	

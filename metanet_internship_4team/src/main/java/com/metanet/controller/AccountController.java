@@ -66,7 +66,7 @@ public class AccountController {
 	{
 				
 		Optional<Users> findUser = accountService.getAccount(userId);
-	
+			
 		if(findUser.isPresent()) {
 			UsersDTO.InfoResponse infoResponse  = new UsersDTO.InfoResponse();
 			infoResponse.transferFrom(findUser.get());
@@ -173,7 +173,7 @@ public class AccountController {
 			session.setAttribute("userPhoneNumber", findRequest.getUserPhoneNumber());	
 			session.setAttribute("userInfo", findUser.get());	
 			
-			return 1;	
+			return randomNumber;	
 		
 		}else  return -1;
 		 	

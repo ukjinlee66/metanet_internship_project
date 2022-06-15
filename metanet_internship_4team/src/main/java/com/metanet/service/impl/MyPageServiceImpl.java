@@ -72,7 +72,6 @@ public class MyPageServiceImpl implements MyPageService {
 		
 	}
 	
-	
 	public List<Video> getViews(String userId, String reckind){
 		
 		Optional<Users> findUsers = usersRepository.findByUserId(userId);
@@ -108,6 +107,8 @@ public class MyPageServiceImpl implements MyPageService {
 	
 	
 	
+	
+	
 	public int addLikes(String userId, String videoName) {
 
 		Optional<Users> findUsers = usersRepository.findByUserId(userId);
@@ -136,7 +137,6 @@ public class MyPageServiceImpl implements MyPageService {
 		
 	}
 	
-	
 	public List<Video> getLikes(String userId){
 		
 		Optional<Users> findUsers = usersRepository.findByUserId(userId);
@@ -151,7 +151,6 @@ public class MyPageServiceImpl implements MyPageService {
 		return videoList;
 	};
 	
-	
 	@Transactional
 	public int deleteLikes(String userId, String videoName) {
 		
@@ -165,7 +164,6 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		return 1; 
 	}
-	
 	
 	
 	
@@ -196,7 +194,6 @@ public class MyPageServiceImpl implements MyPageService {
 		}
 
 	}
-	
 	
 	public List<Video> getSave(String userId){
 		
@@ -231,6 +228,23 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		return 1; 
 	}
+	
+	
+	
+	
+	
+	
+	public int isLike( int videoNumber, int userNumber) {
+		
+		Optional<Likes> findLike = likesRepository.findByUsersNumberAndVideoNumber(userNumber, videoNumber);
+
+		if(findLike.isPresent()) return 1;
+		else return -1;
+		
+	};	
+	
+	
+	
 	
 	
 	

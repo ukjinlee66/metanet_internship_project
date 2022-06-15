@@ -1,13 +1,10 @@
 package com.metanet.service;
 
 import java.util.List;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
 
 import com.metanet.domain.Comments;
-import com.metanet.domain.Users;
 import com.metanet.domain.Video;
+import com.metanet.domain.DTO.VideoDTO;
 
 
 //레시피 상세조회 Service interface
@@ -26,11 +23,11 @@ public interface InfoService
 	int deleteDetail(int videoNumber);
 	
 	//(newDetail = 새로운  게시글 정보)
-	void saveDetail(Video newDetail);
+	void saveDetail(VideoDTO.addDetailRequest newDetail);
 	
 	
 	//(updateDetail =업데이트된 게시글 정보)
-	int updateDetail(Video newDetail);
+	int updateDetail(VideoDTO.updateDetailRequest updateDetail);
 	
 	
 	

@@ -30,8 +30,10 @@ public class MainPageServiceImpl implements MainPageService{
 	SearchWordRepository searchWordRepository;
 	
 	
-	public List<String> getSearchWordRank(){
+	public List <SearchWord> getSearchWordRank(){
 
+		int FIX_SIZE =5;
+		
 		List <SearchWord> searchWordList = searchWordRepository.findAll();
 				
 		Comparator<SearchWord> comparator = new Comparator<SearchWord>() {
@@ -42,13 +44,16 @@ public class MainPageServiceImpl implements MainPageService{
 		};
 		
 		Collections.sort(searchWordList , comparator);
-	
-		List<String > topNames = new ArrayList<String>();
-		for(int i =0; i<5 ; i++) {		
-			topNames.add(searchWordList.get(i).getSearchWordName());
+		
+		if(searchWordList.size()> FIX_SIZE) {
+			
+			for(int idx=searchWordList.size()-1 ; idx>FIX_SIZE-1 ; idx--){
+				searchWordList.remove(idx);
+			}
 		}
 		
-		return topNames;
+		
+		return searchWordList;
 	}
 	
 	
