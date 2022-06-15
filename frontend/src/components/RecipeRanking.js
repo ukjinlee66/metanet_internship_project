@@ -6,6 +6,7 @@ import axios from "axios";
 import rankSlide from "../assets/css/rankingSlide.css"
 import NewsTicker from "react-advanced-news-ticker"
 import { type } from '@testing-library/user-event/dist/type';
+import CategorySelect from "./CategorySelect"
 
 
 
@@ -113,11 +114,11 @@ function RecipeRanking(props) {
     };
 
     return (
-        <div class="container">
-                <div class="col-md-10">
-                        <p></p>
+        <div class="container" >
+                <div class="col-md-10" style={{display:'flex', marginTop:'20px'}}>
+                        <p>
                         <h4>실시간 검색어 랭킹</h4>
-                        <button onClick={btClick}  value={rankingList[0].searchWordName}>{rankingList[0].searchWordName}</button>
+                        
                         <NewsTicker
                                 ref = {searchWordRef}
                                 rowHeight = {45}
@@ -136,6 +137,8 @@ function RecipeRanking(props) {
                                 <div><button onClick={btClick} value={searchWordRef.current}>#5 {searchWordRef.current}</button></div>   
                                 
                         </NewsTicker>
+                        </p>
+                        <CategorySelect/>
                             
                             
                 </div>
