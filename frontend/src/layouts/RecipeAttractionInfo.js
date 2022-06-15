@@ -4,32 +4,25 @@ import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
 import Scrolltop from '../components/Scrolltop';
 import Footer from '../components/Footer';
-import Tourinfoitem from '../components/Tourinfoitem';
-import NaverBlog from '../components/NaverBlog';
-import MapInfo from '../components/MapInfo';
-import TourinfoTop from '../components/TourinfoTop';
+import Recipeinfoitem from '../components/Recipeinfoitem';
+import RecipeinfoComments from '../components/RecipeinfoComments';
+import Videoitem from './Recipeitem';
 import ChatButton from '../components/ChatButton';
 import Navbar from '../components/Navbar';
 
 function RecipeAttractionInfo(props) {
     return (
-        <div class="container-xxl bg-white p-0">
-            
-            <Navbar/>
-            
-        <h1>레시피 상세페이지</h1>
-            <TourinfoTop />
-            <div class="container-xxl py-5 wow fadeInUp pdCon" data-wow-delay="0.1s">
-                <hr className='info-hr'/>
-                <div class="row g-5 maCon" style={{width:'100%', minHeight:'1100px'}}>
-                    <div class="col-lg-5">
-                        <Tourinfoitem/>
-                        <hr/>
-                        <NaverBlog/>
+        <div>
+            <Navbar />
+                <div class="container-xxl py-5 wow fadeInUp pdCon" data-wow-delay="0.1s">
+                    <hr className='info-hr'/>
+                    <div class="row g-5 maCon" style={{width:'100%', minHeight:'1100px'}}>
+                        <div class="col-lg-9">
+                            <Recipeinfoitem/>
+                        </div>
+                        <Videoitem/>
                     </div>
-                    <MapInfo/>
                 </div>
-            </div>
             <Scrolltop />
             <ChatButton/>
             <Footer />

@@ -1,6 +1,10 @@
 package com.metanet.controller;
 
+
 import java.io.File;
+
+import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -62,10 +66,15 @@ public class InfoController
 	@CrossOrigin
 	@ApiOperation(value="해당 레시피 댓글정보 조회",notes="레시피아이디를 통한 댓글정보 조회")
 	public List<Comments> commetslist(
-			@ApiParam(value="레시피 아이디",required=true) @RequestParam int videoNumber 
+			@ApiParam(value="레시피 아이디",required=true) @RequestParam(value="videoNumber", defaultValue="0") int videoNumber 
 			)
 	{
-		return(infoService.videoCommentList(videoNumber));
+		if(videoNumber == 0)
+			return new ArrayList<Comments>();
+		List<Comments> c = infoService.videoCommentList(videoNumber);
+		if(c.isEmpty())
+			return new ArrayList<Comments>();
+		return(c);
 	}
 	
 	@GetMapping("/detailList")

@@ -9,9 +9,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-public class UsersDTO {
+public class UsersDTO 
+{
 
-	
 		@NoArgsConstructor
 		@AllArgsConstructor
 		@Data

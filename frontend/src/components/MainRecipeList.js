@@ -150,6 +150,7 @@ function MainRecipeList(props) {
 
     return (
         <div class="container-xxl py-5 rank-con">
+            <p><button onClick={lowClick}><a href = "/zipcook/RecipeAttractionList?search=초급">레시피 작성</a></button></p>
             <div class="container">
                 <h1 class="text-center mb-5">이런 관광지는 어떠세요?</h1>
                 <p><button onClick={lowClick}><a href = "/zipcook/RecipeAttractionList?search=초급">초급</a></button></p>

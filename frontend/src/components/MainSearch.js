@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
-import axios from "axios";
 import RecipeRanking from '../components/RecipeRanking';
 import CategorySelect from '../components/CategorySelect';
 

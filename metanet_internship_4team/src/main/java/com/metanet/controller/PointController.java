@@ -2,6 +2,8 @@ package com.metanet.controller;
 
 import java.util.List;
 
+
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,7 @@ public class PointController {
 	@PostMapping("/charge")
 	@CrossOrigin
 	@ApiOperation(value="포인트 충전",notes="성공시 1 반환, 실패시 -1 반환")
+
 	public int charge(  ChargeDTO.ChargeRequest chargeRequest, @RequestParam(value = "userId", required=false, defaultValue="none") String userId   )
 	{
 		
@@ -83,6 +86,7 @@ public class PointController {
 	@PostMapping("/buy")
 	@CrossOrigin
 	@ApiOperation(value="정기원 구매",notes="성공시 회원정보 반환, 실패시 1 (=null) 반환 ")
+
 	public int  buy(  BuyDTO.BuyRequest buyRequest,      @RequestParam(value = "userId", required=false, defaultValue="none") String userId  )
 	{
 			

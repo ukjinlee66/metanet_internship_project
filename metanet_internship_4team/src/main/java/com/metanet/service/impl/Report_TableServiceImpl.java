@@ -8,8 +8,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.metanet.domain.Report;
 import com.metanet.domain.Report_Table;
 import com.metanet.domain.DTO.ReportBoardRequestDTO;
+import com.metanet.repository.ReportRepository;
 import com.metanet.repository.Report_TableRepository;
 import com.metanet.service.Report_TableService;
 
@@ -20,35 +22,53 @@ import lombok.RequiredArgsConstructor;
 public class Report_TableServiceImpl implements Report_TableService{
 	
 	private final Report_TableRepository reportTableRepository;
+	private final ReportRepository reportRepository;
+	
 	
 	@Transactional
 	@Override
-	public void savePost(ReportBoardRequestDTO boardDto) {
-		reportTableRepository.save(boardDto.ToEntity());
+	public void saveReport(int userNumber, int reportTableNumber) {
+		
+		Report report = new Report();	
+		
+		report.setUsersNumber(userNumber);
+		report.setReportTableNumber(reportTableNumber); 
+		
+		reportRepository.save(report);
+		
 	}
-
+	
+	
 	@Transactional
 	@Override
-	public List<ReportBoardRequestDTO> getBoardList(){
+	public int saveAndFindNumber(ReportBoardRequestDTO request) {
 		
-		List<Report_Table> all = reportTableRepository.findAll();
-		List<ReportBoardRequestDTO> boardDtoList = new ArrayList<>();
 		
-		for(Report_Table reportTable : all) {
-			ReportBoardRequestDTO boardDto = ReportBoardRequestDTO.builder()
-					.reportName(reportTable.getReportName())
-					.reportKind(reportTable.getReportKind())
-					.reportDetail(reportTable.getReportDetail())
-					.build();
-			
-			boardDtoList.add(boardDto);
-		}
-		return boardDtoList;
+		savePost(request);
+
+		Report_Table findreportTable = reportTableRepository.findByReportName(request.getReportName());
+		
+		return findreportTable.getReportTableNumber();
+		
+
 	}
+	
+	
+	
+	@Transactional
+	@Override
+	public void savePost(ReportBoardRequestDTO request) {
+		
+		reportTableRepository.save(request.ToEntity());
+		
+	}
+
+
 
 	@Transactional
 	@Override
 	public ReportBoardRequestDTO getPost(int reportTableNumber) {
+		
 		Optional<Report_Table> reportTableWrapper = reportTableRepository.findById(reportTableNumber);
 		Report_Table reportTable = reportTableWrapper.get();
 		
@@ -84,15 +104,23 @@ public class Report_TableServiceImpl implements Report_TableService{
 		return boardList;
     	
     }
+    
+    
+    @Transactional
+    @Override
+    public List<Report_Table> findMyPosts(int usersNumber){
 
-    // 게시글 수정 
-//    @Transactional
-//    @Override
-//    public void update(int reportTableNumber, ReportBoardRequestDTO dto) {
-//        Optional<Report_Table> byId = reportTableRepository.findById(reportTableNumber);
-//        Report_Table reportTable = byId.get();
-//
-//        reportTable.updateBoard(dto.getReportName(), dto.getReportKind(), dto.getReportDetail());
-//    }
+    	List<Report> myreportdata = reportRepository.findByUsersNumber(usersNumber); 
+    	List<Report_Table> reporttablelist = new ArrayList<>();
+    	
+    	for(Report report :myreportdata) {
+    		
+    		System.out.println(report.toString());
+    		Report_Table reportTable = reportTableRepository.findByReportTableNumber(report.getReportTableNumber());   
+    		reporttablelist.add(reportTable);
+    	}
+    	
+    	return  reporttablelist;
 
+    }
 }

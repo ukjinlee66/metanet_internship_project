@@ -50,6 +50,11 @@ public class AccountServiceImpl implements AccountService
 		return  usersRepository.findByUserId(signupRequest.getUserId());
 	}
 	
+	public Users getSingleAccount(Integer userNumber)
+	{
+		return usersRepository.findByuserNumber(userNumber);
+	}
+	
 	
 	public Optional<Users> getAccount(String userId) {
 			

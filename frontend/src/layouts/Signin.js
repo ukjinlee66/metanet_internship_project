@@ -23,13 +23,16 @@ const Signin = () => {
       }
     })
       .then(function (response) {
-        if (response.data == 1) {
+        if (response.data) {
           alert("로그인 성공")
-          sessionStorage.setItem('User_Id', inputId)
+          sessionStorage.setItem('User_Id', response.data.userId)
+          
           document.location.href = "http://localhost:3000/zipcook"
 
         }
-        else alert("로그인 실패")
+        else{ 
+          alert("로그인 실패")
+          console.log(response)}
       })
       .catch(function (error) {
         console.log(error);
@@ -37,18 +40,18 @@ const Signin = () => {
       })
   }
   // 페이지 렌더링 후 가장 처음 호출되는 함수
-  useEffect(() => { console.log(inputId) }, [inputId])
-  useEffect(() => { console.log(inputPw) }, [inputPw])
+  useEffect(() => { }, [inputId])
+  useEffect(() => { }, [inputPw])
 
   return (
     <form>
       <h3>Sign In</h3>
       <div className="mb-3">
-        <label>Email address</label>
+        <label>Id</label>
         <input
-          type="email"
+          type="text"
           className="form-control"
-          placeholder="Enter email"
+          placeholder="Enter Id"
           value={inputId}
           onChange={handleInputId}
         />

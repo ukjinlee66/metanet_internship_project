@@ -50,6 +50,7 @@ public class AccountController {
 	@CrossOrigin
 	@ApiOperation(value="회원가입",notes="회원정보를 통한 화원가입 / 성공시 userNumber 반환, 실패시 -1 반환 / userNumber, userDate 넣지말 것")
 	public int signUpAccount( UsersDTO.SignupRequest signupRequest )
+
 	{
 
 		Optional<Users> users = accountService.signUpAccount(signupRequest);
@@ -63,19 +64,22 @@ public class AccountController {
 	@CrossOrigin
 	@ApiOperation(value="회원정보 요청",notes="성공시 회원정보 반환, 실패시 1 (=null) 반환 ")
 	public UsersDTO.InfoResponse  getAccount( @RequestParam("userId") String userId  )
+
 	{
 				
 		Optional<Users> findUser = accountService.getAccount(userId);
 			
+
 		if(findUser.isPresent()) {
 			UsersDTO.InfoResponse infoResponse  = new UsersDTO.InfoResponse();
 			infoResponse.transferFrom(findUser.get());
+
 			return infoResponse;
 		}else return null;
 		
 	}
 	
-	
+
 	@PostMapping("/updateAccount")
 	@CrossOrigin
 	@ApiOperation(value="회원정보 변경",notes="성공시 회원정보 반환, 실패시 1 (=null) 반환 / 유저 넘버와, 날짜만 제외하고 입력할것 ")
@@ -108,6 +112,7 @@ public class AccountController {
 	public Users  login ( UsersDTO.LoginRequest loginRequest ) 
 	{		
 		Optional<Users> validateUser= accountService.validateForLogin(loginRequest);	
+
 		
 		if(validateUser.isPresent()) return validateUser.get();
 		else return null;
