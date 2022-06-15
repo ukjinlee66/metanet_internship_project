@@ -83,12 +83,28 @@ public class Report_TableController {
 		return findAll;
 	}
 	
+//==============================================================================================================================
+//	@GetMapping("/Posts/SearchPost")
+//	@CrossOrigin
+//	@ApiOperation(value="문의글 검색")
+//	public List<ReportBoardRequestDTO> search(@ApiParam(value="검색어",required=true, example="결제") @RequestParam String reportTitle){
+//
+//			List<ReportBoardRequestDTO> searchList = reportTableService.searchPosts(reportTitle);
+//			
+//			if(reportTitle == null) {
+//				searchList = reportTableService.searchPosts(null);
+//	        }else {
+//	        	searchList = reportTableService.searchPosts(reportTitle);
+//	        }
+//			return searchList;
+//			}
+//==============================================================================================================================
 	@GetMapping("/Posts/SearchPost")
 	@CrossOrigin
 	@ApiOperation(value="문의글 검색")
-	public List<ReportBoardRequestDTO> search(@ApiParam(value="검색어",required=true, example="결제") @RequestParam String reportTitle){
+	public List<Report_Table> search(@ApiParam(value="검색어",required=true, example="결제") @RequestParam String reportTitle){
 
-			List<ReportBoardRequestDTO> searchList = reportTableService.searchPosts(reportTitle);
+			List<Report_Table> searchList = reportTableService.searchPosts(reportTitle);
 			
 			if(reportTitle == null) {
 				searchList = reportTableService.searchPosts(null);
@@ -97,22 +113,18 @@ public class Report_TableController {
 	        }
 			return searchList;
 			}
-	
+//==============================================================================================================================
 	@ApiOperation(value="문의 상세 페이지")
 	@CrossOrigin
 	@GetMapping("/Posts/{reportTableNumber}")
-	public ReportBoardResponseDTO findPost(@PathVariable("reportTableNumber") int reportTableNumber) {
+	public Report_Table findPost(@PathVariable("reportTableNumber") int reportTableNumber) {
 		
-		ReportBoardRequestDTO post = reportTableService.getPost(reportTableNumber);
+		Report_Table reportTable = reportTableService.getPost(reportTableNumber);
 		
-		return new ReportBoardResponseDTO(
-				post.getReportTableNumber(),
-				post.getReportName(),
-				post.getReportKind(),
-				post.getReportDetail()
-				);				
+		return reportTable;
 	}
-
+	
+	
 	@ApiOperation(value="문의글 삭제")
 	@CrossOrigin
 	@DeleteMapping("/DeletePost/{reportTableNumber}")

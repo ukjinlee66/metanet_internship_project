@@ -59,38 +59,30 @@ public class Report_TableServiceImpl implements Report_TableService{
 
 	@Transactional
 	@Override
-	public ReportBoardRequestDTO getPost(int reportTableNumber) {
+	public Report_Table getPost(int reportTableNumber) {
 		
 		Optional<Report_Table> reportTableWrapper = reportTableRepository.findById(reportTableNumber);
 		Report_Table reportTable = reportTableWrapper.get();
 		
-		return ReportBoardRequestDTO.builder()
-				.reportName(reportTable.getReportName())
-				.reportKind(reportTable.getReportKind())
-				.reportDetail(reportTable.getReportDetail())
-				.build();
+		return reportTable;
 	}
-
+	
     @Transactional
 	@Override
 	public void deletePost(int reportTableNumber) {
 		reportTableRepository.deleteById(reportTableNumber);
 	}
-	 
+    
     @Transactional
     @Override
-    public List<ReportBoardRequestDTO> searchPosts(String keyword){
-    	List<Report_Table> reportTables = reportTableRepository.findByreportNameContaining(keyword); 
-    	List<ReportBoardRequestDTO> boardList = new ArrayList<>();
+    public List<Report_Table> searchPosts(String keyword){
     	
-    	for(Report_Table reportTable : reportTables) {
-			ReportBoardRequestDTO build = ReportBoardRequestDTO.builder()
-					.reportName(reportTable.getReportName())
-					.reportKind(reportTable.getReportKind())
-					.reportDetail(reportTable.getReportDetail())
-					.build();
-			
-			boardList.add(build);
+    	List<Report_Table> data = reportTableRepository.findByreportNameContaining(keyword); 
+    	
+    	List<Report_Table> boardList = new ArrayList<>();
+    	
+    	for(Report_Table reportTable : data) {
+ 			boardList.add(reportTable);
 		}
 		return boardList;
     }
@@ -103,8 +95,6 @@ public class Report_TableServiceImpl implements Report_TableService{
     	List<Report_Table> reporttablelist = new ArrayList<>();
     	
     	for(Report report :myreportdata) {
-    		
-    		System.out.println(report.toString());
     		Report_Table reportTable = reportTableRepository.findByReportTableNumber(report.getReportTableNumber());   
     		reporttablelist.add(reportTable);
     	}
@@ -112,7 +102,6 @@ public class Report_TableServiceImpl implements Report_TableService{
     }
 
 	public void saveAdminReply(String reportReply, Report_Table reportTable) {
-		// 답변 날짜 생성 
 		long millis=System.currentTimeMillis();  
 	    java.sql.Date date=new java.sql.Date(millis);  
 	    reportTable.setReDa(date);
