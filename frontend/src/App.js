@@ -7,8 +7,15 @@ import TouristAttractionListReco from './layouts/TouristAttractionListReco';
 import Admin from './layouts/Admin.js'
 import Mypage from './layouts/Mypage.js'
 import ServiceCenter from './layouts/ServiceCenter.js'
-import QuestionInfo from './layouts/QuestionInfo.js'
 import Member from './views/Member';
+import QuestionInfo from './layouts/QuestionInfo.js'
+
+import QnaWriteForm from './layouts/QnaWriteForm';
+import PostMain from './layouts/PostMain';
+import PostView from './layouts/PostView';
+
+import Member from './views/Member';
+
 import NotFound from './layouts/NotFound';
 
 function App() {
@@ -30,8 +37,14 @@ function App() {
               <Route path='/zipcook/Maps' element={<Admin/>}/>
               <Route path='/zipcook/Mypage/*' element={<Mypage/>}/>
               <Route path='/zipcook/ServiceCenter' element={<ServiceCenter/>}/>
-              <Route path='/zipcook/QuestionInfo' element={<QuestionInfo/>}/>
+              <Route path='/zipcook/QnaWriteForm' element={<QnaWriteForm/>}/>
               <Route path='/zipcook/member/*' element={<Member/>}/>
+              <Route exact path='/zipcook/postView/:no' element={<PostView/>} />
+              <Route exact path='/zipcook/postMain' element={<PostMain/>} />
+              <Route path='/zipcook/QuestionInfo' element={<QuestionInfo/>}/>
+
+              <Route path='/zipcook/member/*' element={<Member/>}/>
+
               <Route path='*' element={<NotFound/>}/>
           </Routes>
       </BrowserRouter>
