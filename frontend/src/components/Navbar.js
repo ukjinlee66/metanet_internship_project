@@ -11,8 +11,13 @@ function Navbar(props) {
     // useRef를 통해 css 변경
     const stickyChange = useRef(null);
     function btClick(e) {
-        sessionStorage.setItem("pageSession", 1);
-        window.location.href = "/zipcook/" + e.target.value;
+        if(e.target.value === "MyPage"){
+            sessionStorage.setItem("pageSession", 1);
+            window.location.href = "/zipcook/" + e.target.value;
+        }else{
+            sessionStorage.setItem("pageSession", 1);
+            window.location.href = "/zipcook/member/" + e.target.value;
+        }
     }
     function AvClick(e){
         sessionStorage.setItem("pageSession", 1);
@@ -66,7 +71,7 @@ function Navbar(props) {
                 ) : (
                     <div class="justify-content-md-end">
                         <button class="btn btn-white border-0 w-20 m-3" onClick={logOut} value="Logout">로그아웃</button>
-                        <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="Signup">회원정보</button>
+                        <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="EditSign">회원정보</button>
                         <Avatar onClick={AvClick} shape="square" size={64} icon={<UserOutlined />}/>
                         {/* <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="MyPage">마이페이지</button> */}
                     </div>

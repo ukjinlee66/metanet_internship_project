@@ -8,7 +8,7 @@ function QnAPage() {
       { id: '', name: '', title: '', date: '' }
   ])
   const reqUrl = 'http://localhost:8443/Point/getChargeList?userId='
-  
+
     useEffect(() => {
       axios
           .get(reqUrl + sessionStorage.getItem("User_Id"))
