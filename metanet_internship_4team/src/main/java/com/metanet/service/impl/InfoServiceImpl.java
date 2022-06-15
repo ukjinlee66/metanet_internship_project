@@ -1,5 +1,6 @@
 package com.metanet.service.impl;
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -53,9 +54,22 @@ public class InfoServiceImpl implements InfoService
 	//생성일 기준 정렬해서 댓글 리스트 반환
 	public List<Comments> videoCommentList(int videoNumber)
 	{
+		if(videoNumber == 0) {
+			return new ArrayList<Comments>();
+		}
+		List<Comments> nv = new ArrayList<Comments>();
+		try {
 		List<Comments> v = commentsRepo.findByvideoNumber(videoNumber);
+		if (v.isEmpty())
+			return new ArrayList<Comments>();
 		Collections.sort(v, new SortTime());
 		return v;
+		}
+		catch(NullPointerException e)
+		{
+			System.out.println("videoCommentList Error!");
+			return nv;
+		}
 	}
 	//비회원일경우 해당 게시글과 같은 분야의 비디오리스트 반환
 	public List<Video> videosamekindList(int videoNumber)

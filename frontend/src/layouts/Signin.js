@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 const Signin = () => {
@@ -13,6 +12,7 @@ const Signin = () => {
   const handleInputPw = (e) => {
     setInputPw(e.target.value)
   }
+
   const BASEURL = "http://localhost:8443/Account/login"
   // login 버튼 클릭 이벤트
   const onClickLogin = () => {
@@ -26,6 +26,7 @@ const Signin = () => {
         if (response.data == 1) {
           alert("로그인 성공")
           sessionStorage.setItem('User_Id', inputId)
+          sessionStorage.setItem('userNumber', true);
           document.location.href = "http://localhost:3000/zipcook"
 
         }
@@ -81,10 +82,7 @@ const Signin = () => {
         </button>
       </div>
       <p className="forgot-password text-right">
-        Forgot <Link to="/zipcook/member/FindSignPa">password?</Link>
-      </p>
-      <p className="forgot-password text-right">
-        Forgot <Link to="/zipcook/member/FindSignId">Id?</Link>
+        Forgot <a href="#">password?</a>
       </p>
     </form>
   )

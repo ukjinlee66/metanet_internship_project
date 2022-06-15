@@ -28,7 +28,7 @@ export default function MapInfo()
   });
 
   return (
-    <div class="col-lg-7" style={{paddingRight:0}}>
+    <div class="col-lg-4" style={{paddingRight:0}}>
         <div id="TMapApp" style={{position:'sticky'}} ref={stickyChange}></div>
     </div>
   );
