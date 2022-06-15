@@ -20,7 +20,7 @@ function Recipelistitem(props) {
     const [page, setPage] = useState(Number(sessionStorage.getItem("pageSession")));
 
     const [priority, setPriority] = useState("SearchTotime");
-    const [color, setColor] = useState(false);
+    const [color, setColor] = useState("Time");
 
 
 
@@ -68,6 +68,8 @@ function Recipelistitem(props) {
     const sortBtClick = (e) =>{
         sessionStorage.setItem("sortType", e.target.value)
         getsortItem();
+
+
     }
     // 조회수에 따른 레시피 리스트 요청
     const getRecipeItem = async (page) => {
@@ -139,6 +141,7 @@ function Recipelistitem(props) {
 
    // 처음 렌더링시 한번 실행되는 함수
     useEffect(() => {
+        
         getRecipeItem(page);
     }, [])
     useEffect(() => {}, [color])
@@ -156,7 +159,7 @@ function Recipelistitem(props) {
                         </div>
                         <div class="col-md-8 list-info">
                             <div className='row'>
-                                <h4 class="col-md-10 text-left list-text" typeof='text' id='test' onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + recipe[i].videoNumber}>{recipe[i].videoTitle}</h4>
+                                <h4 class="col-md-10 text-left list-text" typeof='text' id='test' onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?tourSpot=" + recipe[i].id}>{recipe[i].videoTitle}</h4>
                                 <p className='col-md-2' id={'btn' + (i+1)}></p>
                             </div>
                             <hr className='list-hr'/>
