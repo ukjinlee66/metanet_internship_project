@@ -51,7 +51,6 @@ public class Report_Table
 	@NonNull
 	private java.sql.Date crDa;
 	
-	@CreationTimestamp
 	@Column(name = "REPORT_REDA")
 	private java.sql.Date reDa;
 
