@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 const Signin = () => {
@@ -12,7 +13,6 @@ const Signin = () => {
   const handleInputPw = (e) => {
     setInputPw(e.target.value)
   }
-
   const BASEURL = "http://localhost:8443/Account/login"
   // login 버튼 클릭 이벤트
   const onClickLogin = () => {
@@ -23,14 +23,16 @@ const Signin = () => {
       }
     })
       .then(function (response) {
-        if (response.data == 1) {
+        if (response.data) {
           alert("로그인 성공")
-          sessionStorage.setItem('User_Id', inputId)
-          sessionStorage.setItem('userNumber', true);
+          sessionStorage.setItem('User_Id', response.data.userId)
+          
           document.location.href = "http://localhost:3000/zipcook"
 
         }
-        else alert("로그인 실패")
+        else{ 
+          alert("로그인 실패")
+          console.log(response)}
       })
       .catch(function (error) {
         console.log(error);
@@ -38,18 +40,18 @@ const Signin = () => {
       })
   }
   // 페이지 렌더링 후 가장 처음 호출되는 함수
-  useEffect(() => { console.log(inputId) }, [inputId])
-  useEffect(() => { console.log(inputPw) }, [inputPw])
+  useEffect(() => { }, [inputId])
+  useEffect(() => { }, [inputPw])
 
   return (
     <form>
       <h3>Sign In</h3>
       <div className="mb-3">
-        <label>Email address</label>
+        <label>Id</label>
         <input
-          type="email"
+          type="text"
           className="form-control"
-          placeholder="Enter email"
+          placeholder="Enter Id"
           value={inputId}
           onChange={handleInputId}
         />
@@ -82,7 +84,10 @@ const Signin = () => {
         </button>
       </div>
       <p className="forgot-password text-right">
-        Forgot <a href="#">password?</a>
+        Forgot <Link to="/zipcook/member/FindSignPa">password?</Link>
+      </p>
+      <p className="forgot-password text-right">
+        Forgot <Link to="/zipcook/member/FindSignId">Id?</Link>
       </p>
     </form>
   )
