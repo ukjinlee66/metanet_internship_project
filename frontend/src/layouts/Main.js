@@ -26,7 +26,7 @@ function Main(props) {
             </div>
             {/* <TourImg /> */}
             <Scrolltop />
-            <ChatButton/>
+            {/* <ChatButton/> */}
             <Footer />
         </div>
     );

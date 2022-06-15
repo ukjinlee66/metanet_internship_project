@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+const SubTitleFont = styled.div`
+// font-size: 1.5em;
+text-align: center;
+width: 100vh;
+`
 const RefundPoint = (props) => {
 
   const [inputText, setInputText] = useState('');
@@ -12,10 +17,10 @@ const RefundPoint = (props) => {
     }
   ])
   const BASEURL = "http://localhost:4000/users"
-  const handleSubmit = (e) => {
-
-    axios.put(BASEURL + "?User_id=" + recipe[0].User_Id, {
-      User_Point: refundPoint
+  const handleSubmit = (e)=> {
+    
+    axios.put(BASEURL+"?User_id="+recipe[0].User_Id, {
+      User_Point : refundPoint
     })
       .then(function (response) {
         alert("성공");
@@ -25,9 +30,9 @@ const RefundPoint = (props) => {
         alert("실패");
         console.log(error);
       });
-
+    
   }
-
+  
   const serachId = (e) => {
 
     axios.get(BASEURL, {
@@ -36,10 +41,10 @@ const RefundPoint = (props) => {
       }
     })
       .then(function (response) {
-        if (response.data != 0) {
+        if(response.data != 0) {
           alert("존재하는 아이디")
           setRecipe(response.data)
-
+          
         }
         else alert("없는 아이디")
       })
@@ -47,86 +52,60 @@ const RefundPoint = (props) => {
         console.log(error);
         alert("오류")
       })
-      .finally(() => {
-        console.log("지금 실행", recipe)
-
+      .finally(() =>{
+        console.log("지금 실행",recipe)
+        
       })
     setInputText('');
   };
-
+  
   const handleChange = (e) => {  // <- input값으로 text 변경 함수
     setInputText(e.target.value)
   };
   const handleChange2 = (e) => {  // <- input값으로 text 변경 함수
     setRefundPoint(e.target.value)
   };
-
-  useEffect(() => { }, [inputText]);
-  useEffect(() => { }, [refundPoint]);
-  useEffect(() => { console.log("유즈이펙트 실행", recipe) }, [recipe]);
+  
+  useEffect(() => {}, [inputText]);
+  useEffect(() => {}, [refundPoint]);
+  useEffect(() => {console.log("유즈이펙트 실행",recipe)}, [recipe]);
 
   return (
-    <div className="App">
-      <div className="auth-wrapper">
-        <div className="auth-inner">
-          <form>
-            <h3>포인트 환불</h3>
-            <div className="mb-3">
-              <label>아이디 검색</label>
-              <div>
-                <input
-                  type='text'
-                  className="form-control"
-                  placeholder="아이디 검색"
-                  style={{ width: '65%', display: 'inline' }}
-                  value={inputText}
-                  onChange={handleChange}
-                />
-                <button type="button" className="btn btn-primary" style={{ float: 'right' }} onClick={serachId}>아이디 조회</button><br />
-              </div>
-            </div>
-            <div className="mb-3">
-              <label>환불 가능 포인트</label>
-              <input
-                type='text'
-                className="form-control"
-                value={recipe[0].User_Point}
-                name='point'
-              ></input>
-            </div>
-            <div className="mb-3">
-              <label>환불할 포인트</label>
-              <input
-                type='text'
-                className="form-control"
-                value={refundPoint}
-                onChange={handleChange2}
-              ></input>
-            </div>
-            <div className="mb-3">
-              <label>환불 계좌</label>
-              <select name="bank" className="form-control">
-                <option value="">은행선택</option>
-                <option value="shinhan">신한은행</option>
-                <option value="kakao">카카오뱅크</option>
-                <option value="naver">네이버페이</option>
-              </select>
-              <input type='text'
-                className="form-control"
-                //value={AccountNumber}
-                name='AccountNumber'
-                style={{marginTop:'2%'}}
-                placeholder="계좌 번호 입력"
-              ></input>
-            </div>
-            <div className="d-grid">
-              <button type="submit" className="btn btn-primary" onClick={handleSubmit}>환불하기</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
 
+    <SubTitleFont>
+      {/* <form onSubmit={handleSubmit}> */}
+      <h2>포인트 환불</h2><br />
+      아이디 검색 :&nbsp;
+      <input type='text'
+        placeholder="아이디 검색"
+        value={inputText}
+        onChange={handleChange}
+      ></input>
+      <button type="button" onClick={serachId}>아이디 조회</button><br />
+      환불 가능 포인트 :&nbsp;
+      <input type='text'
+        value={recipe[0].User_Point}
+        name='point'
+      ></input><br />
+      환불할 포인트 :&nbsp;
+      <input type='text'
+        value={refundPoint}
+        onChange={handleChange2}
+      ></input><br />
+      계좌 :&nbsp;
+      <select name="bank">
+        <option value="">은행선택</option>
+        <option value="shinhan">신한은행</option>
+        <option value="kakao">카카오뱅크</option>
+        <option value="naver">네이버페이</option>
+      </select>&nbsp;
+      <input type='text'
+        //value={AccountNumber}
+        name='AccountNumber'
+      ></input><br />
+      <br /><br /><button type="submit" onClick={handleSubmit}>환불하기</button>
+      {/* </form> */}
+    </SubTitleFont>
   );
 }
 

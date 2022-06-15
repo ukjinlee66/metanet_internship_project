@@ -15,4 +15,5 @@ public interface InfoService
 	List<Video> videosamekindList(int videoNumber);
 	//해당 게시글 번호를 기준으로 댓글 리스트 반환
 	List<Comments> videoCommentList(int videoNumber);
+	
 }

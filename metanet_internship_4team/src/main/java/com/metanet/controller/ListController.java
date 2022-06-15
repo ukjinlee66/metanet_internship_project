@@ -43,7 +43,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 			@ApiParam(value="분야",required=false, example="한식,중식,양식,일식,초급,중급,상급") 
 			@RequestParam(required = false) String Color,
 			@ApiParam(value="리스트",required=false, example="현재 리스트에서 Color기준으로 Select column요청") 
-			@RequestParam(required = false) List<Video> arr
+			@RequestParam(required = false) String arr
 			)
 	{
 		if (arr == null) // Param : videoTitle , Color
@@ -120,7 +120,9 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 			try 
 			{
 				List<Video> retlist = new ArrayList<>();
-				List<Video> ar = arr;
+				Gson g = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+				Video[] li = g.fromJson(arr, Video[].class);
+				ArrayList<Video> ar = new ArrayList<Video>(Arrays.asList(li));
 				if (ar.isEmpty()) return retlist;
 				if (Color.equals("한식") || Color.equals("중식") || Color.equals("일식") || Color.equals("양식"))
 				{
@@ -167,7 +169,6 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 			)
 	{
 		//List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
-		SqlDateTypeAdapter sqlAdapter = new SqlDateTypeAdapter();
 		Gson g = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		Video[] li = g.fromJson(list, Video[].class);
 		ArrayList<Video> v = new ArrayList<Video>(Arrays.asList(li));
@@ -194,7 +195,6 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 			@RequestParam(value="list") String list
 			)
 	{
-		SqlDateTypeAdapter sqlAdapter = new SqlDateTypeAdapter();
 		Gson g = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		Video[] li = g.fromJson(list, Video[].class);
 		ArrayList<Video> v = new ArrayList<Video>(Arrays.asList(li));

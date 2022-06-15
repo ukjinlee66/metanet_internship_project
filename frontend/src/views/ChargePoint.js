@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React,{useEffect,useState} from "react";
 import styled from "styled-components";
 import axios from "axios";
-
+const SubTitleFont = styled.div`
+// font-size: 1.5em;
+text-align: center;
+width: 100vh;
+`
 
 
 const ChargePointPage = (props) => {
@@ -12,16 +16,16 @@ const ChargePointPage = (props) => {
       User_Point: inputText
 
     })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
     alert("제출");
   }
   const [inputText, setInputText] = useState(0);
-
+  
   const onChangeInput1 = () => {
     setInputText(inputText => inputText + 10000);
   };
@@ -38,31 +42,23 @@ const ChargePointPage = (props) => {
     setInputText(0);
   };
   return (
-    <div className="App">
-      <div className="auth-wrapper">
-        <div className="auth-inner" style={{width:"470px"}}>
-          <form>
-            <h3>포인트 충전</h3>
-              <input type='text'
-                className="form-control"
-                style={{width:"65%",display:'inline'}}
-                value={inputText}
-                placeholder="금액을 입력해주세요."
-              /><button type="button" style={{float:'right'}} className="btn btn-primary" onClick={onReset}>금액 초기화</button><br />
-
-            잔여 포인트: <text> 0원</text><br /><br />
-
-            <button type="button" className="btn btn-primary" onClick={onChangeInput1}>+1만원</button>&nbsp;
-            <button type="button" className="btn btn-primary" onClick={onChangeInput2}>+5만원</button>&nbsp;
-            <button type="button" className="btn btn-primary" onClick={onChangeInput3}>+10만원</button>&nbsp;
-            <button type="button" className="btn btn-primary" onClick={onChangeInput4}>+100만원</button><br /><br /><br />
-            <div class="d-grid">
-            <button type="submit" style={{float:'center'}} className="btn btn-primary" onClick={handleSubmit}>제출</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    
+    <SubTitleFont>
+      {/* <form onSubmit={handleSubmit}> */}
+      <h2>포인트 충전</h2>
+      <input type='text'
+             value={inputText}
+             placeholder="금액을 입력해주세요."
+             ></input>
+      <button type="button" onClick={onReset}>금액 초기화</button><br />
+      잔여 포인트: <text> 0원</text><br /><br />
+      <button type="button" onClick={onChangeInput1}>+1만원</button>
+      <button type="button" onClick={onChangeInput2}>+5만원</button>
+      <button type="button" onClick={onChangeInput3}>+10만원</button>
+      <button type="button" onClick={onChangeInput4}>+100만원</button><br/><br /><br />
+      <button type="submit" onClick={handleSubmit}>제출</button>
+      {/* </form> */}
+    </SubTitleFont> 
   );
 }
 

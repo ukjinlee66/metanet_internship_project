@@ -23,13 +23,11 @@ import lombok.NonNull;
 					initialValue = 1,
 					allocationSize =50
 				   )
-public class Users {
-	
-	
+public class Users 
+{
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USER_SEQ_GEN")
 	@Column(name = "USER_NUMBER")
-
 	private int userNumber;
 	
 	@Column(name = "USER_NAME")
