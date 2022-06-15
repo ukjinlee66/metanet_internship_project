@@ -3,20 +3,20 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
 import logo from '../assets/img/logo.png';
-
+import { Avatar } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 function Navbar(props) {
     const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장 
 
     // useRef를 통해 css 변경
     const stickyChange = useRef(null);
     function btClick(e) {
-        if(e.target.value === "MyPage"){
-            sessionStorage.setItem("pageSession", 1);
-            window.location.href = "/zipcook/" + e.target.value;
-        }else{
         sessionStorage.setItem("pageSession", 1);
-        window.location.href = "/zipcook/member/" + e.target.value;
-        }
+        window.location.href = "/zipcook/" + e.target.value;
+    }
+    function AvClick(e){
+        sessionStorage.setItem("pageSession", 1);
+        window.location.href = "/zipcook/MyPage";
     }
     function logOut(e) {
         sessionStorage.removeItem("User_Id")
@@ -59,14 +59,16 @@ function Navbar(props) {
                 </a>
                 {isLogin === false ? (
                     <div class="justify-content-md-end">
-                        <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="Login">로그인</button>
-                        <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="Signup">회원가입</button>
+                        <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="Login">로그인</button>
+                        <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="Signup">회원가입</button>
+                        
                     </div>
                 ) : (
                     <div class="justify-content-md-end">
                         <button class="btn btn-white border-0 w-20 m-3" onClick={logOut} value="Logout">로그아웃</button>
-                        <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="EditSign">회원정보</button>
-                        <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="MyPage">마이페이지</button>
+                        <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="Signup">회원정보</button>
+                        <Avatar onClick={AvClick} shape="square" size={64} icon={<UserOutlined />}/>
+                        {/* <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="MyPage">마이페이지</button> */}
                     </div>
                 )}
 

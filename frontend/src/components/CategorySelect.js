@@ -10,6 +10,7 @@ function RecipeRanking(props) {
     // 레시피 클릭 시 이동
     function btClick(e) {
         sessionStorage.setItem("pageSession", 1);
+        sessionStorage.setItem("Color", e.target.value);
         window.location.href = "/zipcook/RecipeAttractionList?search=" + e.target.value;
         sessionStorage.setItem("listState", e.target.value)
     }

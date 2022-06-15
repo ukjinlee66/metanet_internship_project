@@ -16,7 +16,6 @@ public interface InfoService
 	List<Video> videosamekindList(int videoNumber);
 	//해당 게시글 번호를 기준으로 댓글 리스트 반환
 	List<Comments> videoCommentList(int videoNumber);
-
 	
 	//주웅 추가 
 	//게시글 번호로 게시글 삭제  
@@ -30,8 +29,6 @@ public interface InfoService
 	int updateDetail(VideoDTO.updateDetailRequest updateDetail);
 	
 	
-	
-	
-	
+
 	
 }

@@ -16,6 +16,8 @@ public interface AccountService {
 	
 	public Optional<Users> getAccount(String userId);
 	
+	public Users getSingleAccount(Integer userNumber);
+	
 	public Optional<Users> updateAccount(UsersDTO.UpdateRequest updateRequest);
 	
 	public int deleteAccount(String userId);

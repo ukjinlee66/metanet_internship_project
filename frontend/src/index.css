@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.ffon{
+  color:gray;
+  font-size: 25px;
+  font-family: "nucleo";
+}
+
+@font-face
+{
+  font-family: "nucleo";
+  src: url("./assets/fonts/nucleo-outline.ttf");
+}

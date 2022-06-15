@@ -75,7 +75,7 @@ public class AccountController {
 		
 	}
 	
-	
+
 	@PostMapping("/updateAccount")
 	@CrossOrigin
 	@ApiOperation(value="회원정보 변경",notes="성공시 회원정보 반환, 실패시 1 (=null) 반환 / 유저 넘버와, 날짜만 제외하고 입력할것 ")

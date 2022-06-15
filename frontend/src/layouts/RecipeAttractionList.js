@@ -5,8 +5,6 @@ import '../assets/css/style.css';
 import Scrolltop from '../components/Scrolltop';
 import Footer from '../components/Footer';
 import Recipelistitem from '../components/Recipelistitem';
-import Map from '../components/Map';
-import ChatButton from '../components/ChatButton';
 import Navbar from '../components/Navbar';
 import MainSearch from '../components/MainSearch';
 
@@ -21,7 +19,6 @@ function RecipeAttractionList(props) {
                     <div class="col-lg-10">
                         <Recipelistitem/>
                     </div>
-                    <Map/>
                 </div>
             </div>
             <Scrolltop />

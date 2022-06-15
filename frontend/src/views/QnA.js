@@ -4,21 +4,19 @@ import axios from "axios";
 
 
 function QnAPage() {
-  const reqUrl = 'http://localhost:4000/qna'
-
   const [qna, setQna] = useState([
       { id: '', name: '', title: '', date: '' }
   ])
+  const reqUrl = 'http://localhost:8443/Point/getChargeList?userId='
   
-  useEffect(() => {
+    useEffect(() => {
       axios
-          .get(reqUrl)
+          .get(reqUrl + sessionStorage.getItem("User_Id"))
           .then((res) => {setQna(res.data)
-              console.log(res.data)}
+              console.log("포인트",res.data)}
           );
           
   },[])
-  
   return (
        <Table qna={qna}/>
   );
