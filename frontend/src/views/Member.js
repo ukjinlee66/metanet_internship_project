@@ -11,25 +11,26 @@ import ChangePassWord from '../layouts/ChangePa';
 import IdFind from '../layouts/FindSignId'
 import EditSign from '../layouts/EditSign';
 function Member() {
-  return (
-    <div className="App">
-      <Navbar />
-      <div className="auth-wrapper">
-        <div className="auth-inner">
-        <Routes>
-                <Route path="/Login" element={<Signin/>} />
-                <Route path="/Signup" element={<SignUp/>} />
-                <Route path='/FindSignPa' element={<PassWordFind/>} />
-                <Route path='/ChangePa' element={<ChangePassWord/>}/>
-                <Route path='/FindSignId' element={<IdFind/>}/>
-                <Route path='/EditSign' element={<EditSign/>}/>
-                <Route path='*' element={<NotFound/>}/>
-        </Routes>
-        
+
+    return (
+        <div className="App">
+            <Navbar />
+            <div className="auth-wrapper">
+                <div className="auth-inner">
+                    <Routes>
+                        <Route path="/Login" element={<Signin/>} />
+                        <Route path="/Signup" element={<SignUp/>} />
+                        <Route path='/FindSignPa' element={<PassWordFind/>} />
+                        <Route path='/ChangePa' element={<ChangePassWord/>}/>
+                        <Route path='/FindSignId' element={<IdFind/>}/>
+                        <Route path='/EditSign' element={<EditSign/>}/>
+                        <Route path='*' element={<NotFound/>}/>
+                    </Routes>
+
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Member;
