@@ -19,4 +19,6 @@ public interface Report_TableService {
 	public void saveReport(int userNumber, int reportTableNumber);
 	
 	public List<Report_Table> findMyPosts(int usersNumber);
+	
+	public void saveAdminReply(String reportReply, Report_Table reportTable);
 }

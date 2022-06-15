@@ -24,7 +24,6 @@ public class Report_TableServiceImpl implements Report_TableService{
 	private final Report_TableRepository reportTableRepository;
 	private final ReportRepository reportRepository;
 	
-	
 	@Transactional
 	@Override
 	public void saveReport(int userNumber, int reportTableNumber) {
@@ -38,22 +37,17 @@ public class Report_TableServiceImpl implements Report_TableService{
 		
 	}
 	
-	
 	@Transactional
 	@Override
-	public int saveAndFindNumber(ReportBoardRequestDTO request) {
-		
+	public int saveAndFindNumber(ReportBoardRequestDTO request) {	
 		
 		savePost(request);
 
 		Report_Table findreportTable = reportTableRepository.findByReportName(request.getReportName());
 		
 		return findreportTable.getReportTableNumber();
-		
-
+			
 	}
-	
-	
 	
 	@Transactional
 	@Override
@@ -62,8 +56,6 @@ public class Report_TableServiceImpl implements Report_TableService{
 		reportTableRepository.save(request.ToEntity());
 		
 	}
-
-
 
 	@Transactional
 	@Override
@@ -84,8 +76,7 @@ public class Report_TableServiceImpl implements Report_TableService{
 	public void deletePost(int reportTableNumber) {
 		reportTableRepository.deleteById(reportTableNumber);
 	}
-	
-//  키워드 검색 
+	 
     @Transactional
     @Override
     public List<ReportBoardRequestDTO> searchPosts(String keyword){
@@ -102,9 +93,7 @@ public class Report_TableServiceImpl implements Report_TableService{
 			boardList.add(build);
 		}
 		return boardList;
-    	
     }
-    
     
     @Transactional
     @Override
@@ -119,8 +108,18 @@ public class Report_TableServiceImpl implements Report_TableService{
     		Report_Table reportTable = reportTableRepository.findByReportTableNumber(report.getReportTableNumber());   
     		reporttablelist.add(reportTable);
     	}
-    	
     	return  reporttablelist;
-
     }
+
+	public void saveAdminReply(String reportReply, Report_Table reportTable) {
+		// 답변 날짜 생성 
+		long millis=System.currentTimeMillis();  
+	    java.sql.Date date=new java.sql.Date(millis);  
+	    reportTable.setReDa(date);
+	    
+		reportTable.setReportReply(reportReply);
+		
+		reportTableRepository.save(reportTable);
+		
+	}
 }
