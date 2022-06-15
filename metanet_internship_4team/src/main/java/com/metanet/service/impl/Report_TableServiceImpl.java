@@ -48,8 +48,6 @@ public class Report_TableServiceImpl implements Report_TableService{
 
 		Report_Table findreportTable = reportTableRepository.findByReportName(request.getReportName());
 		
-//		System.out.println(findreportTable.getReportTableNumber());
-		
 		return findreportTable.getReportTableNumber();
 		
 
@@ -63,32 +61,14 @@ public class Report_TableServiceImpl implements Report_TableService{
 		
 		reportTableRepository.save(request.ToEntity());
 		
-		
-//		reportRepository.save(ReportDTO.reportTableNumber, ReportDTO.usersNumber);
 	}
 
-//	@Transactional
-//	@Override
-//	public List<ReportBoardRequestDTO> getBoardList(){
-//		
-//		List<Report_Table> all = reportTableRepository.findAll();
-//		List<ReportBoardRequestDTO> boardDtoList = new ArrayList<>();
-//		
-//		for(Report_Table reportTable : all) {
-//			ReportBoardRequestDTO boardDto = ReportBoardRequestDTO.builder()
-//					.reportName(reportTable.getReportName())
-//					.reportKind(reportTable.getReportKind())
-//					.reportDetail(reportTable.getReportDetail())
-//					.build();
-//			
-//			boardDtoList.add(boardDto);
-//		}
-//		return boardDtoList;
-//	}
+
 
 	@Transactional
 	@Override
 	public ReportBoardRequestDTO getPost(int reportTableNumber) {
+		
 		Optional<Report_Table> reportTableWrapper = reportTableRepository.findById(reportTableNumber);
 		Report_Table reportTable = reportTableWrapper.get();
 		
@@ -129,27 +109,18 @@ public class Report_TableServiceImpl implements Report_TableService{
     @Transactional
     @Override
     public List<Report_Table> findMyPosts(int usersNumber){
-    	// findbyuserNumber로 report값 저장.
+
     	List<Report> myreportdata = reportRepository.findByUsersNumber(usersNumber); 
-    	
     	List<Report_Table> reporttablelist = new ArrayList<>();
     	
     	for(Report report :myreportdata) {
+    		
     		System.out.println(report.toString());
-    	
-    		Report_Table reportTable = reportTableRepository.findByReportTableNumber(report.getReportTableNumber());
-    
+    		Report_Table reportTable = reportTableRepository.findByReportTableNumber(report.getReportTableNumber());   
     		reporttablelist.add(reportTable);
     	}
     	
-    	// findbyReportTableNumber로 reportTable 저장. 
-    	
-	
-    	//    	List<Report_Table> mypostlist = reportRepository.findByReportTableNumber(myreportdata);
+    	return  reporttablelist;
 
-    	
-         return  reporttablelist;
-    	//return myreportdata;
     }
-    
 }
