@@ -1,8 +1,11 @@
 package com.metanet.service.impl;
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.metanet.domain.Comments;
 import com.metanet.domain.Users;
 import com.metanet.domain.Video;
+import com.metanet.domain.DTO.VideoDTO;
 import com.metanet.repository.CommentsRepository;
 import com.metanet.repository.UsersRepository;
 import com.metanet.repository.VideoRepository;
@@ -53,9 +57,22 @@ public class InfoServiceImpl implements InfoService
 	//생성일 기준 정렬해서 댓글 리스트 반환
 	public List<Comments> videoCommentList(int videoNumber)
 	{
+		if(videoNumber == 0) {
+			return new ArrayList<Comments>();
+		}
+		List<Comments> nv = new ArrayList<Comments>();
+		try {
 		List<Comments> v = commentsRepo.findByvideoNumber(videoNumber);
+		if (v.isEmpty())
+			return new ArrayList<Comments>();
 		Collections.sort(v, new SortTime());
 		return v;
+		}
+		catch(NullPointerException e)
+		{
+			System.out.println("videoCommentList Error!");
+			return nv;
+		}
 	}
 	//비회원일경우 해당 게시글과 같은 분야의 비디오리스트 반환
 	public List<Video> videosamekindList(int videoNumber)
@@ -70,5 +87,67 @@ public class InfoServiceImpl implements InfoService
 		}
 		return ret_list;
 	}
+	
+	
+	
+	
+	
+	
+	// 주웅 상세정보 삭제 
+
+	@Transactional 
+	public int deleteDetail(int videoNumber) {	
+		Video findVideo  = videoRepo.findByvideoNumber(videoNumber);
+		videoRepo.delete(findVideo);		
+		return 1 ; 
+	};
+	
+	
+	// 주웅 상세정보 업데이트 
+	@Transactional 	
+	public int updateDetail(VideoDTO.updateDetailRequest updateDetail) {
+		
+		
+		Video updateVideo = videoRepo.findByvideoNumber(updateDetail.getVideoNumber());
+
+		updateVideo= updateDetail.transferTo(updateVideo);
+		
+
+		// 날짜생성 
+		long millis=System.currentTimeMillis();  
+	    java.sql.Date date=new java.sql.Date(millis);  
+	    updateVideo.setUpDa(date);
+		
+		videoRepo.save(updateVideo);
+		
+		return 1 ; 
+	};
+	
+	
+	@Transactional 
+	public void saveDetail(VideoDTO.addDetailRequest newDetail) {
+	
+		Video newVideo =  new Video();
+		newVideo = newDetail.transferTo(newVideo);
+		
+		// 날짜생성 
+		long millis=System.currentTimeMillis();  
+	    java.sql.Date date=new java.sql.Date(millis);  
+	    newVideo.setCrDa(date);
+
+		videoRepo.save(newVideo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

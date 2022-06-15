@@ -7,14 +7,13 @@ import com.metanet.domain.DTO.UsersDTO;
 
 public interface AccountService {
 
-
-	
 	public int validateId(String userId);
 	
 	public Optional<Users> signUpAccount(UsersDTO.SignupRequest signupRequest );
 	
-	
 	public Optional<Users> getAccount(String userId);
+	
+	public Users getSingleAccount(Integer userNumber);
 	
 	public Optional<Users> updateAccount(UsersDTO.UpdateRequest updateRequest);
 	
@@ -24,19 +23,8 @@ public interface AccountService {
 	
 	public Optional<Users> validateForFindId(String userName , String userPhoneNumber ,String usersEmail);
 	
-	public Optional<Users> validateForFindPassword( String userName, String usersPhoneNumber );
+	public Optional<Users> validateForFindPassword( String userName, String usersEmail );
 	
-	public Optional<Users> updatePassword( String userPhoneNumber , String newPassword);
-	
-	
-	
-	
-	
-	/*
-	public Optional<Users> validateForFindPassword( String userId , String userName, String usersEmail );
-	
-	
-
-	*/
+	public int updatePassword( String userId , String newPassword);
 	
 }

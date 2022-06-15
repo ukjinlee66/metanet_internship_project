@@ -17,12 +17,6 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
-		<!-- Hibernate -->
-		<!-- <dependency>
-		  <groupId>org.hibernate</groupId>
-		  <artifactId>hibernate-core</artifactId>
-		  <version>5.6.8.Final</version>
-		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -63,6 +57,14 @@
 		<!-- Swagger End -->
 		
 		
+		<!-- ffmpeg 동영상 인코더 연결 라이브러리 -->
+		<dependency>
+		  <groupId>net.bramp.ffmpeg</groupId>
+		  <artifactId>ffmpeg</artifactId>
+		  <version>0.6.2</version>
+		</dependency>
+	
+
 		<!-- mail api start -->
 		
 		<dependency>

@@ -21,6 +21,11 @@ public interface MyPageService {
 	public int deleteSave(String userId, String videoName);	
 	
 	
+	//좋아요 체크여부 확인 
+	public int isLike( int videoNumber, int userNumber);	
+	
+	
+	
 	
 }
 
