@@ -5,12 +5,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.metanet.domain.Comments;
 import com.metanet.domain.Users;
 import com.metanet.domain.Video;
+import com.metanet.domain.DTO.VideoDTO;
 import com.metanet.repository.CommentsRepository;
 import com.metanet.repository.UsersRepository;
 import com.metanet.repository.VideoRepository;
@@ -84,5 +87,67 @@ public class InfoServiceImpl implements InfoService
 		}
 		return ret_list;
 	}
+	
+	
+	
+	
+	
+	
+	// 주웅 상세정보 삭제 
+
+	@Transactional 
+	public int deleteDetail(int videoNumber) {	
+		Video findVideo  = videoRepo.findByvideoNumber(videoNumber);
+		videoRepo.delete(findVideo);		
+		return 1 ; 
+	};
+	
+	
+	// 주웅 상세정보 업데이트 
+	@Transactional 	
+	public int updateDetail(VideoDTO.updateDetailRequest updateDetail) {
+		
+		
+		Video updateVideo = videoRepo.findByvideoNumber(updateDetail.getVideoNumber());
+
+		updateVideo= updateDetail.transferTo(updateVideo);
+		
+
+		// 날짜생성 
+		long millis=System.currentTimeMillis();  
+	    java.sql.Date date=new java.sql.Date(millis);  
+	    updateVideo.setUpDa(date);
+		
+		videoRepo.save(updateVideo);
+		
+		return 1 ; 
+	};
+	
+	
+	@Transactional 
+	public void saveDetail(VideoDTO.addDetailRequest newDetail) {
+	
+		Video newVideo =  new Video();
+		newVideo = newDetail.transferTo(newVideo);
+		
+		// 날짜생성 
+		long millis=System.currentTimeMillis();  
+	    java.sql.Date date=new java.sql.Date(millis);  
+	    newVideo.setCrDa(date);
+
+		videoRepo.save(newVideo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

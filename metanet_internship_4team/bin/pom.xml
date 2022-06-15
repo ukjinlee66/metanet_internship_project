@@ -63,6 +63,15 @@
 		<!-- Swagger End -->
 		
 		
+
+		<!-- ffmpeg 동영상 인코더 연결 라이브러리 -->
+		<dependency>
+		  <groupId>net.bramp.ffmpeg</groupId>
+		  <artifactId>ffmpeg</artifactId>
+		  <version>0.6.2</version>
+		</dependency>
+	
+
 		<!-- mail api start -->
 		
 		<dependency>

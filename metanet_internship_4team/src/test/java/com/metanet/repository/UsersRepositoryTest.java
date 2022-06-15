@@ -19,10 +19,7 @@ class UsersRepositoryTest {
 	void test() {
 	
 		TestOra testOra = new TestOra();
-		
-		testOra.setUser_id(8);
-		testOra.setUser_name("juwooong");
-		
+
 		testOraRepository.save(testOra);
 		
 		/*
