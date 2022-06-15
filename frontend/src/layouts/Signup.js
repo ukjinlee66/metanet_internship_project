@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from 'react'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 
 const SignUp = () => {
@@ -180,7 +179,7 @@ const SignUp = () => {
           </button>
         </div>
         <p className="forgot-password text-right">
-          Already registered <Link to="/zipcook/member/Login">sign in?</Link>
+          Already registered <a href="/zipcook/Login">sign in?</a>
         </p>
 
       </form>

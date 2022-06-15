@@ -1,6 +1,7 @@
 package com.metanet.domain;
 
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -21,7 +23,8 @@ import lombok.NonNull;
 					allocationSize = 50
 					)
 @NoArgsConstructor
-public class Comments 
+@AllArgsConstructor
+public class Comments
 {
 	@Id
 	@Column(name="COMMENTS_NUMBER")
@@ -33,6 +36,9 @@ public class Comments
 	
 	@Column(name="VIDEO_NUMBER")
 	private int videoNumber;
+	
+	@Column(name = "USER_ID")
+	private String userId;
 	
 	@Column(name = "COMMENTS_CONTEXTS")
 	private String commentsContexts;
