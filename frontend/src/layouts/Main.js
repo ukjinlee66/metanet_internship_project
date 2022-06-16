@@ -21,8 +21,9 @@ function Main(props) {
             <div class="container-xxl py-3 rank-con">
                 <div class="row g-4">
                     <MainRecipeList />
-                    <MainFaq/>
+                    
                 </div>
+                <MainFaq/>
             </div>
             {/* <TourImg /> */}
             <Scrolltop />
