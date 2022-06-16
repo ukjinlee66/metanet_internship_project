@@ -6,13 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.metanet.domain.Report;
-import com.metanet.domain.DTO.ReportDTO;
 
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Integer>
 {
 
-	public void save(ReportDTO reportDTO);
+//	public void save(ReportDTO reportDTO);
 	
 //	List<Report_Table> findByReportTableNumber(int reportTableNumber);
 	
