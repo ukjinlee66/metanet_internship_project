@@ -25,6 +25,7 @@ function Navbar(props) {
     }
     function logOut(e) {
         sessionStorage.removeItem("User_Id")
+        sessionStorage.removeItem("User_Kind")
         window.location.href = "/zipcook"
     }
     // 스크롤의 Y축을 감시하여 특정 지점 이동 시 Navbar가 화면 일정 지점에 따라가도록 설정
@@ -52,7 +53,7 @@ function Navbar(props) {
             console.log('isLogin ?? ::', isLogin)
 
         }
-    })
+    },[])
 
     return (
         <Fragment>

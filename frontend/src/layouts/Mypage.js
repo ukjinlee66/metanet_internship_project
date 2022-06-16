@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
 import styled from "styled-components";
-import ListSearch from '../components/ListSearch';
 import Scrolltop from '../components/Scrolltop';
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import View from '../views/View';
 import LikedView from '../views/LikedView';
@@ -34,8 +33,7 @@ function Mypage(props) {
             <Navbar />
             <MainSearch />
             <Center>
-                        <Sidebar />
-
+                <Sidebar />
                 <Routes>
                     <Route exact path="/" element={<View />} />
                     <Route path="/View" element={<View />} />
