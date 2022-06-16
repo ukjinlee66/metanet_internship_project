@@ -29,16 +29,19 @@ function ServiceCenter(props) {
         
         return (
             <div>
-            <Navbar></Navbar>
-                <div class="container-xxl bg-white p-0">
-                    <div>
-                        <h1>고객센터</h1>
+                <div>
+                    <Navbar></Navbar>
+                </div>
+                <div>
+                    <div style={{height:'1000px', marginTop:'100px'}}>
+                        
+                        <h1 style={{marginTop : '100px'}}>고객센터</h1>
                     </div>
                     <div>
                         <Table qna={qna}/>
                     </div>
                     <div>
-                        <button onClick={btClick}>문의글 작성</button>
+                        <button onClick={btClick} style={{textAlign : "right"}}>문의글 작성</button>
                     </div>
                 </div>
             </div>

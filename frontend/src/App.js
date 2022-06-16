@@ -7,15 +7,11 @@ import TouristAttractionListReco from './layouts/TouristAttractionListReco';
 import Admin from './layouts/Admin.js'
 import Mypage from './layouts/Mypage.js'
 import ServiceCenter from './layouts/ServiceCenter.js'
-import Member from './views/Member';
 import QuestionInfo from './layouts/QuestionInfo.js'
-
 import QnaWriteForm from './layouts/QnaWriteForm';
 import PostMain from './layouts/PostMain';
 import PostView from './layouts/PostView';
-
 import Member from './views/Member';
-
 import NotFound from './layouts/NotFound';
 
 function App() {
