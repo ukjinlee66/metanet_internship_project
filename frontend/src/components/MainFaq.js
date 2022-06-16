@@ -5,13 +5,13 @@ import '../assets/css/style.css';
 import axios from "axios";
 import ReactDOM from "react-dom";
 import Faq from 'react-faq-component';
-
+import ReportSearch from '../components/ReportSearch'
 
 
 function MainFaq() {
   
   function btClick() {
-    window.location.href = "/zipcook/PostMain";
+    window.location.href = "/zipcook/PostMain?reportTitle=";
   }
 
   const [rows, setRowsOption] = useState(null);
@@ -47,6 +47,7 @@ function MainFaq() {
 
       <div className="faq-style-wrapper">
         <Faq data={data} getRowOptions={setRowsOption} />
+        <ReportSearch></ReportSearch>
         
       </div>
       <p></p><p></p><p></p><p></p>
