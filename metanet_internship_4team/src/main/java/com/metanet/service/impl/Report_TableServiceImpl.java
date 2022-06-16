@@ -8,10 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.metanet.domain.Report;
 import com.metanet.domain.Report_Table;
-import com.metanet.domain.DTO.ReportBoardRequestDTO;
-import com.metanet.repository.ReportRepository;
 import com.metanet.repository.Report_TableRepository;
 import com.metanet.service.Report_TableService;
 
@@ -22,38 +19,24 @@ import lombok.RequiredArgsConstructor;
 public class Report_TableServiceImpl implements Report_TableService{
 	
 	private final Report_TableRepository reportTableRepository;
-	private final ReportRepository reportRepository;
-	
-	@Transactional
-	@Override
-	public void saveReport(int userNumber, int reportTableNumber) {
-		
-		Report report = new Report();	
-		
-		report.setUsersNumber(userNumber);
-		report.setReportTableNumber(reportTableNumber); 
-		
-		reportRepository.save(report);
-		
-	}
-	
-	@Transactional
-	@Override
-	public int saveAndFindNumber(ReportBoardRequestDTO request) {	
-		
-		savePost(request);
 
-		Report_Table findreportTable = reportTableRepository.findByReportName(request.getReportName());
-		
-		return findreportTable.getReportTableNumber();
-			
-	}
 	
+
 	@Transactional
 	@Override
-	public void savePost(ReportBoardRequestDTO request) {
+	public Report_Table savePost(int userNumber, String reportName, String reportKind, String reportDetail) {
 		
-		reportTableRepository.save(request.ToEntity());
+		Report_Table report = new Report_Table();
+			report.setUserNumber(userNumber);
+			report.setReportName(reportName);
+			report.setReportKind(reportKind);
+			report.setReportDetail(reportDetail);
+			
+			long millis=System.currentTimeMillis();  
+		    java.sql.Date date=new java.sql.Date(millis);  
+		    report.setCrDa(date);
+
+		return report;
 		
 	}
 
@@ -87,20 +70,6 @@ public class Report_TableServiceImpl implements Report_TableService{
 		return boardList;
     }
     
-    @Transactional
-    @Override
-    public List<Report_Table> findMyPosts(int usersNumber){
-
-    	List<Report> myreportdata = reportRepository.findByUsersNumber(usersNumber); 
-    	List<Report_Table> reporttablelist = new ArrayList<>();
-    	
-    	for(Report report :myreportdata) {
-    		Report_Table reportTable = reportTableRepository.findByReportTableNumber(report.getReportTableNumber());   
-    		reporttablelist.add(reportTable);
-    	}
-    	return  reporttablelist;
-    }
-
 	public void saveAdminReply(String reportReply, Report_Table reportTable) {
 		long millis=System.currentTimeMillis();  
 	    java.sql.Date date=new java.sql.Date(millis);  

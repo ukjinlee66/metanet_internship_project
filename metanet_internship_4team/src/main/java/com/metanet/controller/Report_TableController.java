@@ -7,14 +7,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.metanet.domain.Report_Table;
-import com.metanet.domain.DTO.ReportBoardRequestDTO;
-import com.metanet.domain.DTO.ReportBoardResponseDTO;
 import com.metanet.repository.Report_TableRepository;
 import com.metanet.service.impl.Report_TableServiceImpl;
 
@@ -32,19 +29,12 @@ public class Report_TableController {
 	@ApiOperation(value="문의글 저장")
 	@CrossOrigin
 	@PostMapping("/Post")
-    public ReportBoardResponseDTO savePost(@RequestBody ReportBoardRequestDTO request, int userNumber) {
-		
-		int reportTableNumber = reportTableService.saveAndFindNumber(request);
-		
-		reportTableService.saveReport(userNumber, reportTableNumber);
-        
-		return new ReportBoardResponseDTO(
-        		request.getReportTableNumber(),
-                request.getReportName(),
-                request.getReportKind(),
-                request.getReportDetail());
+    public void savePost(@RequestParam int userNumber, String reportName, String reportKind, String reportDetail) {
+
+		Report_Table reportTable = reportTableService.savePost(userNumber, reportName, reportKind, reportDetail);
+		reportTableRepository.save(reportTable);
 	}
-	
+		
 	@ApiOperation(value="문의글 답변", notes="성공시 1 반환, 실패시 -1 반환")
 	@CrossOrigin
 	@PostMapping("/Reply")
@@ -67,11 +57,10 @@ public class Report_TableController {
 	@GetMapping("/MyReportList")
 	public List<Report_Table> MyPosts(@RequestParam int userNumber) {
 		
-	    List<Report_Table> findMyPostsList = reportTableService.findMyPosts(userNumber);
+	    List<Report_Table> findMyPostsList = reportTableRepository.findByUserNumber(userNumber);
 		
 	    return findMyPostsList;
 	}
-
 	
 	@ApiOperation(value="문의글 리스트")
 	@CrossOrigin
@@ -82,23 +71,7 @@ public class Report_TableController {
 		
 		return findAll;
 	}
-	
-//==============================================================================================================================
-//	@GetMapping("/Posts/SearchPost")
-//	@CrossOrigin
-//	@ApiOperation(value="문의글 검색")
-//	public List<ReportBoardRequestDTO> search(@ApiParam(value="검색어",required=true, example="결제") @RequestParam String reportTitle){
-//
-//			List<ReportBoardRequestDTO> searchList = reportTableService.searchPosts(reportTitle);
-//			
-//			if(reportTitle == null) {
-//				searchList = reportTableService.searchPosts(null);
-//	        }else {
-//	        	searchList = reportTableService.searchPosts(reportTitle);
-//	        }
-//			return searchList;
-//			}
-//==============================================================================================================================
+
 	@GetMapping("/Posts/SearchPost")
 	@CrossOrigin
 	@ApiOperation(value="문의글 검색")
@@ -113,7 +86,7 @@ public class Report_TableController {
 	        }
 			return searchList;
 			}
-//==============================================================================================================================
+
 	@ApiOperation(value="문의 상세 페이지")
 	@CrossOrigin
 	@GetMapping("/Posts/{reportTableNumber}")
