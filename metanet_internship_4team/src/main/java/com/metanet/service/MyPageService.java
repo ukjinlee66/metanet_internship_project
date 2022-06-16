@@ -22,7 +22,10 @@ public interface MyPageService {
 	
 	
 	//좋아요 체크여부 확인 
-	public int isLike( int videoNumber, int userNumber);	
+	public boolean isLike( int videoNumber, int userNumber);	
+	
+	//저장영상 판별 여부 
+	public boolean isSave( int videoNumber, int userNumber);	
 	
 	
 	

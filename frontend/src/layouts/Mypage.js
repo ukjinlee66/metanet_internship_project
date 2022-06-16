@@ -44,7 +44,6 @@ function Mypage(props) {
                     <Route path="/PayPoint" element={<PayPoint />} />
                     <Route path="/ChargePoint" element={<ChargePoint />} />
                     <Route path="/QnA" element={<QnA />} />
-                    <Route path="/refundPoint" element={<RefundPointPage />} />
                     <Route path="/BuySubscribe" element={<BuySubscribe />} />
                 </Routes>
             </Center>

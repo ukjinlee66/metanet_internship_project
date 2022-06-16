@@ -5,11 +5,19 @@ import '../assets/css/style.css';
 import axios from "axios";
 import ReactDOM from "react-dom";
 import Faq from 'react-faq-component';
+import ReportSearch from '../components/ReportSearch'
+
 
 function MainFaq() {
+  
+  function btClick() {
+    window.location.href = "/zipcook/PostMain?reportTitle=";
+  }
+
   const [rows, setRowsOption] = useState(null);
+  
   const data = {
-    title: "FAQ | 자주 찾는 질문",
+    title: "| 자주 찾는 질문",
     rows: [
       {
         title: "환불이 안돼요",
@@ -30,30 +38,20 @@ function MainFaq() {
       }
     ]
   };
-  // useEffect(() => {
-  //     if (rows) {
-  //         setTimeout(() => {
-  //             rows[0].expand();
-  //         }, 2500);
-
-  //         setTimeout(() => {
-  //             rows[0].close();
-  //         }, 5000);
-
-  //         setTimeout(() => {
-  //             rows[0].scrollIntoView();
-  //             // rows[0].scrollIntoView(true);
-  //         }, 10000);
-  //     }
-  // }, [rows]);
+  
+  
 
   return (
     <div>
-      <h2 className="section-title">FAQ section</h2>
+      <h2 className="section-title">FAQ</h2>
 
       <div className="faq-style-wrapper">
         <Faq data={data} getRowOptions={setRowsOption} />
+        <ReportSearch></ReportSearch>
+        
       </div>
+      <p></p><p></p><p></p><p></p>
+      <button onClick={btClick}>고객센터</button>
     </div>
   );
 }

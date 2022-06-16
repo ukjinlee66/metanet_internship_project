@@ -1,6 +1,7 @@
 package com.metanet.controller;
 
 import java.util.ArrayList;
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,10 @@ import com.metanet.service.MyPageService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import net.bramp.ffmpeg.FFmpeg;
+import net.bramp.ffmpeg.FFprobe;
+
+
 
 @RestController
 @RequestMapping("/Info")
@@ -113,15 +118,10 @@ public class InfoController
 	@CrossOrigin
 	@ApiOperation(value="해당 레시피 댓글정보 조회",notes="레시피아이디를 통한 댓글정보 조회")
 	public List<Comments> commetslist(
-			@ApiParam(value="레시피 아이디",required=true) @RequestParam(value="videoNumber", defaultValue="0") int videoNumber 
+			@ApiParam(value="레시피 아이디",required=true) @RequestParam int videoNumber 
 			)
 	{
-		if(videoNumber == 0)
-			return new ArrayList<Comments>();
-		List<Comments> c = infoService.videoCommentList(videoNumber);
-		if(c.isEmpty())
-			return new ArrayList<Comments>();
-		return(c);
+		return(infoService.videoCommentList(videoNumber));
 	}
 	
 	@GetMapping("/getlikecount")
@@ -247,45 +247,42 @@ public class InfoController
 	
 	
 	
-	// 주웅 추가 (파일 업로드 다운로드 )
+	
+	// 주웅 추가  (저장영상  판별여부, 및 좋아요 삭제 ) 
 	
 	
-	/*
-	@PostMapping("/fileUpload")
+	@GetMapping("/isSaved")
 	@CrossOrigin
-	@ApiOperation(value="파일 업로드 ",notes="회원 번호, , 성공시 1 반환")
-	public String uploadSingle(@RequestParam("files") MultipartFile file) throws Exception 
+	@ApiOperation(value="레시피에 대한 좋아요 여부 확인 ",notes=" 좋아요일시 1, 좋아요가 아닐시 -1, 비회원일시 -1 반환")
+	public boolean isSaved(
+			@RequestParam int videoNumber ,
+			@RequestParam(value = "userId", required=false, defaultValue="-1") int userNumber
+			)
 	{
+	
+		if(userNumber == -1) return false;  // 비회원이라면 false을 반환함 
+		else return myPageService.isSave(videoNumber, userNumber);
 		
-
-		String originalfileName = file.getOriginalFilename();
-			
-		System.out.println("test1");
-		File dest = new File( fileRealPath +originalfileName);
-		file.transferTo(dest);
-		
-		System.out.println("test2");
-		return "good";
 	}
 	
 	
-	@PostMapping("/hlsMake")
-	@ApiOperation(value="파일 업로드 ",notes="회원 번호, , 성공시 1 반환")
-	public String hlsMake() throws Exception 
+	@GetMapping("/deleteSave")
+	@CrossOrigin
+	@ApiOperation(value="회원 레시피 좋아요 삭제",notes="회원 번호, , 성공시 1 반환")
+	public int deleteSave(
+			@ApiParam(value="레시피 아이디",required=true) @RequestParam String userId,
+			String videoName
+			)
 	{
-		
-		String ffmpegPath = ffmpgRealPath+"ffmpeg";
-		String ffprobePath = ffmpgRealPath+"ffprobe";
 	
-		
-	   	final String FFMPEG_PATH = ffmpegProperties.getPath();
-    	final String FFMPEG = ffmpegProperties.getFfmpeg();
-    	final String FFPROBE = ffmpegProperties.getFfprobe();
-
-		
-		
+		myPageService.deleteSave(userId, videoName);
+		return 1;
 	}
-	*/
+	
+	
+	
+	
+	
 	
 	
 	

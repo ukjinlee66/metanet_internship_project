@@ -8,10 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.metanet.domain.Report;
 import com.metanet.domain.Report_Table;
-import com.metanet.domain.DTO.ReportBoardRequestDTO;
-import com.metanet.repository.ReportRepository;
 import com.metanet.repository.Report_TableRepository;
 import com.metanet.service.Report_TableService;
 
@@ -22,105 +19,71 @@ import lombok.RequiredArgsConstructor;
 public class Report_TableServiceImpl implements Report_TableService{
 	
 	private final Report_TableRepository reportTableRepository;
-	private final ReportRepository reportRepository;
-	
-	
-	@Transactional
-	@Override
-	public void saveReport(int userNumber, int reportTableNumber) {
-		
-		Report report = new Report();	
-		
-		report.setUsersNumber(userNumber);
-		report.setReportTableNumber(reportTableNumber); 
-		
-		reportRepository.save(report);
-		
-	}
-	
-	
-	@Transactional
-	@Override
-	public int saveAndFindNumber(ReportBoardRequestDTO request) {
-		
-		
-		savePost(request);
 
-		Report_Table findreportTable = reportTableRepository.findByReportName(request.getReportName());
-		
-		return findreportTable.getReportTableNumber();
-		
+	
 
-	}
-	
-	
-	
 	@Transactional
 	@Override
-	public void savePost(ReportBoardRequestDTO request) {
+	public Report_Table savePost(int userNumber, String reportName, String reportKind, String reportDetail) {
 		
-		reportTableRepository.save(request.ToEntity());
+		Report_Table report = new Report_Table();
+			report.setUserNumber(userNumber);
+			report.setReportName(reportName);
+			report.setReportKind(reportKind);
+			report.setReportDetail(reportDetail);
+			
+			long millis=System.currentTimeMillis();  
+		    java.sql.Date date=new java.sql.Date(millis);  
+		    report.setCrDa(date);
+
+		return report;
 		
 	}
 
-
-
 	@Transactional
 	@Override
-	public ReportBoardRequestDTO getPost(int reportTableNumber) {
+	public Report_Table getPost(int reportTableNumber) {
 		
 		Optional<Report_Table> reportTableWrapper = reportTableRepository.findById(reportTableNumber);
 		Report_Table reportTable = reportTableWrapper.get();
 		
-		return ReportBoardRequestDTO.builder()
-				.reportName(reportTable.getReportName())
-				.reportKind(reportTable.getReportKind())
-				.reportDetail(reportTable.getReportDetail())
-				.build();
+		return reportTable;
 	}
-
+	
     @Transactional
 	@Override
 	public void deletePost(int reportTableNumber) {
 		reportTableRepository.deleteById(reportTableNumber);
 	}
-	
-//  키워드 검색 
+    
     @Transactional
     @Override
-    public List<ReportBoardRequestDTO> searchPosts(String keyword){
-    	List<Report_Table> reportTables = reportTableRepository.findByreportNameContaining(keyword); 
-    	List<ReportBoardRequestDTO> boardList = new ArrayList<>();
+    public List<Report_Table> searchPosts(String keyword){
     	
-    	for(Report_Table reportTable : reportTables) {
-			ReportBoardRequestDTO build = ReportBoardRequestDTO.builder()
-					.reportName(reportTable.getReportName())
-					.reportKind(reportTable.getReportKind())
-					.reportDetail(reportTable.getReportDetail())
-					.build();
-			
-			boardList.add(build);
+    	List<Report_Table> data = reportTableRepository.findByreportNameContaining(keyword); 
+    	
+    	List<Report_Table> boardList = new ArrayList<>();
+    	
+    	for(Report_Table reportTable : data) {
+ 			boardList.add(reportTable);
 		}
 		return boardList;
-    	
     }
     
-    
-    @Transactional
-    @Override
-    public List<Report_Table> findMyPosts(int usersNumber){
+	public void saveAdminReply(String reportReply, Report_Table reportTable) {
+		long millis=System.currentTimeMillis();  
+	    java.sql.Date date=new java.sql.Date(millis);  
+	    reportTable.setReDa(date);
+	    
+		reportTable.setReportReply(reportReply);
+		
+		reportTableRepository.save(reportTable);
+		
+	}
 
-    	List<Report> myreportdata = reportRepository.findByUsersNumber(usersNumber); 
-    	List<Report_Table> reporttablelist = new ArrayList<>();
-    	
-    	for(Report report :myreportdata) {
-    		
-    		System.out.println(report.toString());
-    		Report_Table reportTable = reportTableRepository.findByReportTableNumber(report.getReportTableNumber());   
-    		reporttablelist.add(reportTable);
-    	}
-    	
-    	return  reporttablelist;
-
-    }
+	
+	public String findByUserNumber(int userNumber) {
+		
+		return null;
+	}
 }

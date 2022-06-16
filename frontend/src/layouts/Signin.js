@@ -16,7 +16,11 @@ const Signin = () => {
   const BASEURL = "http://localhost:8443/Account/login"
   // login 버튼 클릭 이벤트
   const onClickLogin = () => {
-    axios.post(BASEURL, null, {
+    axios.post(BASEURL, null,{
+      headers: {
+        'Content-Type': 'multipart/form-data'
+    },
+      
       params: {
         userId: inputId,
         userPassword: inputPw

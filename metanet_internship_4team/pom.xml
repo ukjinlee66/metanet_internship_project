@@ -73,6 +73,28 @@
 		<!-- mail api End -->
 		
 		
+		<!-- ffmpeg api start -->
+		<dependency>
+		  <groupId>net.bramp.ffmpeg</groupId>
+		  <artifactId>ffmpeg</artifactId>
+		  <version>0.6.2</version>
+		</dependency>
+		<!-- ffmpeg api end -->
+		
+		<!-- CharMatcher api start -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>26.0-jre</version>
+		</dependency>
+		<!-- CharMatcher api end -->
+
+		
+		
+		
+		
+		
+		
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

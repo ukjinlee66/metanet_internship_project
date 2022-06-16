@@ -234,15 +234,24 @@ public class MyPageServiceImpl implements MyPageService {
 	
 	
 	
-	public int isLike( int videoNumber, int userNumber) {
+	public boolean isLike( int videoNumber, int userNumber) {
 		
 		Optional<Likes> findLike = likesRepository.findByUsersNumberAndVideoNumber(userNumber, videoNumber);
 
-		if(findLike.isPresent()) return 1;
-		else return -1;
+		if(findLike.isPresent()) return true;
+		else return false;
 		
 	};	
 	
+	
+	public boolean isSave( int videoNumber, int userNumber){
+		
+		Optional<Save> findSave = saveRepository.findByUsersNumberAndVideoNumber(userNumber, videoNumber);
+
+		if(findSave.isPresent()) return true;
+		else return false;
+		
+	};
 	
 	
 	

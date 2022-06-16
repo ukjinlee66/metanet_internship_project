@@ -51,13 +51,19 @@ function CreateRecipe()
       <div className="auth-wrapper">
         <div className="auth-inner" style={{width: "950px"}}>
             <Form name="basic"
-                
+                labelCol={{
+                    span: 8,
+                }}
+                wrapperCol={{
+                    span: 16,
+                }}
                 initialValues={{
                     remember: true,
                 }}
                 autoComplete="off">
                 
                     <h3 style={{textAlign: "center"}}>레시피 등록</h3>
+                    <div class="form-group">
                     <Form.Item
                         label="레시피 이름 : "
                         name="username"
@@ -71,6 +77,7 @@ function CreateRecipe()
                         <Input />
                     </Form.Item>
                     {/* <Input type="name" class="form-control" id="RecipeName" placeholder="Write RecipeName"/> */}
+                    </div>
                     <div class="form-group">
                     <label for="exampleInputPassword1" class="form-label mt-4">조리시간</label>
                     <Input type="time" class="form-control" name="exampleInputPassword1" min="00:00" max="100:00" format="MM/SS"/>
