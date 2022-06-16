@@ -151,7 +151,7 @@ public class PointController {
 	public int  refundPoint( RefundDTO.RefundRequest refundRequest,     @RequestParam(value = "userId", required=false, defaultValue="none") String userId  )
 	{
 
-		if(userId.equals("none")) return -1;
+		if(userId.equals("none")) return -1; 
 		else {
 			
 			Users findUser =  accountService.getAccount(userId).get();
