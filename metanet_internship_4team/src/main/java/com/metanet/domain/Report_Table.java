@@ -34,7 +34,7 @@ public class Report_Table
 	private int reportTableNumber;
 	
 	@Column(name = "USER_NUMBER")
-	private int usersNumber;
+	private int userNumber;
 	
 	@Column(name = "REPORT_NAME", columnDefinition = "char")
 	@NonNull
@@ -49,8 +49,6 @@ public class Report_Table
 	@Column(name = "REPORT_REPLY", columnDefinition = "char")
 	private String reportReply;
 	
-	@Column(name = "USER_NUMBER")
-	private int userNumber;
 	
 	@CreationTimestamp
 	@Column(name = "REPORT_CRDA")
