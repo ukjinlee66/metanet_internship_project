@@ -10,7 +10,6 @@ import ChatButton from '../components/ChatButton';
 import Navbar from '../components/Navbar';
 import MainRecipeList from '../components/MainRecipeList';
 import MainFaq from '../components/MainFaq';
-
 function Main(props) {
 
     return (

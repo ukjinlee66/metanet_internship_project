@@ -23,7 +23,15 @@ useEffect(() => {
   getPostView();
 }, []);
 
-
+  const moveRefundPage = () =>{
+    window.location.href = "zipcook/refundPoint?userId="+'wwong7247';
+  }
+  
+  const deleteUrl = "http://localhost:8443/Report/DeletePost/"+data.reportTableNumber;
+  const deleteReport = async (page) => {
+    await axios
+        .get(deleteUrl)
+};
   return (
     <>
     <Navbar></Navbar>
@@ -43,6 +51,11 @@ useEffect(() => {
               <div className="post-view-row">
                 <label>| 제목</label>
                 <label>{ data.reportName }</label>
+              </div>
+              <hr></hr>
+              <div className="post-view-row">
+                <label>| 작성자</label>
+                <label>{ data.userId }</label>
               </div>
               <hr></hr>
               <div className="post-view-row">
@@ -79,7 +92,10 @@ useEffect(() => {
             </>
           ) : '해당 게시글을 찾을 수 없습니다.'
         }
-        <button className="post-view-go-list-btn" onClick={() => navigate(-1)}>목록으로 돌아가기</button>
+        <button className="post-view-go-list-btn" onClick={moveRefundPage} >환불 이동</button>
+        <button style={{marginLeft:"10px"}}className="post-view-go-list-btn" onClick={deleteReport}>문의사항 삭제</button>
+        <button style={{marginLeft:"10px"}}className="post-view-go-list-btn" onClick={() => navigate(-1)}>목록으로 돌아가기</button>
+        
       </div>
       <Footer />
     </>

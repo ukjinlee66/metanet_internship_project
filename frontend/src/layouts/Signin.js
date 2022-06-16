@@ -16,7 +16,11 @@ const Signin = () => {
   const BASEURL = "http://localhost:8443/Account/login"
   // login 버튼 클릭 이벤트
   const onClickLogin = () => {
-    axios.post(BASEURL, null, {
+    axios.post(BASEURL, null,{
+      headers: {
+        'Content-Type': 'multipart/form-data'
+    },
+      
       params: {
         userId: inputId,
         userPassword: inputPw
@@ -26,6 +30,7 @@ const Signin = () => {
         if (response.data) {
           alert("로그인 성공")
           sessionStorage.setItem('User_Id', response.data.userId)
+
           sessionStorage.setItem('User_Number', response.data.userNumber)
           document.location.href = "http://localhost:3000/zipcook"
 
