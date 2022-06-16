@@ -1,9 +1,11 @@
+/*
 package com.metanet.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -22,9 +24,12 @@ public class Report_TableServiceImpl implements Report_TableService{
 
 	
 
+	
+
 	@Transactional
 	@Override
 	public Report_Table savePost(int userNumber, String reportName, String reportKind, String reportDetail) {
+
 		
 		Report_Table report = new Report_Table();
 			report.setUserNumber(userNumber);
@@ -40,34 +45,46 @@ public class Report_TableServiceImpl implements Report_TableService{
 		
 	}
 
+
+
 	@Transactional
 	@Override
-	public Report_Table getPost(int reportTableNumber) {
+	public ReportBoardRequestDTO getPost(int reportTableNumber) {
 		
 		Optional<Report_Table> reportTableWrapper = reportTableRepository.findById(reportTableNumber);
 		Report_Table reportTable = reportTableWrapper.get();
 		
-		return reportTable;
+		return ReportBoardRequestDTO.builder()
+				.reportName(reportTable.getReportName())
+				.reportKind(reportTable.getReportKind())
+				.reportDetail(reportTable.getReportDetail())
+				.build();
 	}
-	
+
     @Transactional
 	@Override
 	public void deletePost(int reportTableNumber) {
 		reportTableRepository.deleteById(reportTableNumber);
 	}
-    
+	
+//  키워드 검색 
     @Transactional
     @Override
-    public List<Report_Table> searchPosts(String keyword){
+    public List<ReportBoardRequestDTO> searchPosts(String keyword){
+    	List<Report_Table> reportTables = reportTableRepository.findByreportNameContaining(keyword); 
+    	List<ReportBoardRequestDTO> boardList = new ArrayList<>();
     	
-    	List<Report_Table> data = reportTableRepository.findByreportNameContaining(keyword); 
-    	
-    	List<Report_Table> boardList = new ArrayList<>();
-    	
-    	for(Report_Table reportTable : data) {
- 			boardList.add(reportTable);
+    	for(Report_Table reportTable : reportTables) {
+			ReportBoardRequestDTO build = ReportBoardRequestDTO.builder()
+					.reportName(reportTable.getReportName())
+					.reportKind(reportTable.getReportKind())
+					.reportDetail(reportTable.getReportDetail())
+					.build();
+			
+			boardList.add(build);
 		}
 		return boardList;
+    	
     }
     
 	public void saveAdminReply(String reportReply, Report_Table reportTable) {

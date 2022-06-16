@@ -1,3 +1,4 @@
+/*
 package com.metanet.controller;
 
 import java.util.List;
@@ -122,3 +123,4 @@ public class Report_TableController {
 	
 	}
 }
+*/

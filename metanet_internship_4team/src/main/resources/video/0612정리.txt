@@ -1,0 +1,55 @@
+
+ UserDetails, UserDetailsService, Authentication
+
+
+
+Spring Security = 여러개의 Filter객체들이 순차적으로 수행
+
+
+
+DelegatingFilterProxy 서블릿 필터 - > FilterChainProxy  -> getFilters() 
+
+
+===
+https://cjw-awdsd.tistory.com/45
+======
+
+UsernamePasswordAuthenticationFilter
+
+	doFilter() 
+
+		a= attemptAuthentication()  (  authResult = attemptAuthentication(request, response);)
+
+			b = UsernamePasswordAuthenticationToken  (name, pw)  // 생성자 1 
+
+			this.getAuthenticationManager.authenticate( b ) //=AuthenticationManager -> ProviderManager
+
+				.authenticate( Token b )		// AuthenticationProvider 돌리면서 인증 진행 		
+
+					provider.authenticate( b   )  // 실제 인증로직 					
+									   // Authentication객체에 맞는 AuthenticationProvider를 찾는다
+				
+							
+
+
+		sessionStrategy.onAuthentiication(a, req, res)
+
+
+== 
+실습 자료 
+==
+https://gregor77.github.io/2021/05/18/spring-security-03/
+
+https://mangkyu.tistory.com/77
+
+https://oingdaddy.tistory.com/206
+
+https://webfirewood.tistory.com/115
+
+https://sas-study.tistory.com/362
+
+
+
+
+
+	
