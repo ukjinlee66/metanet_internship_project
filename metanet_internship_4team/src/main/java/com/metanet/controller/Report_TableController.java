@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.metanet.domain.Report_Table;
+import com.metanet.domain.Users;
 import com.metanet.repository.Report_TableRepository;
+import com.metanet.repository.UsersRepository;
 import com.metanet.service.impl.Report_TableServiceImpl;
 
 import io.swagger.annotations.ApiOperation;
@@ -25,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class Report_TableController {
 	private final Report_TableServiceImpl reportTableService;
 	private final Report_TableRepository reportTableRepository;
+	private final UsersRepository userrepo;
 
 	@ApiOperation(value="문의글 저장")
 	@CrossOrigin
@@ -93,10 +96,22 @@ public class Report_TableController {
 	public Report_Table findPost(@PathVariable("reportTableNumber") int reportTableNumber) {
 		
 		Report_Table reportTable = reportTableService.getPost(reportTableNumber);
-		
+	
+//		Users user = userrepo.findByuserNumber(userNumber);
+//		String userId = user.getUserId();
+
 		return reportTable;
 	}
 	
+	@ApiOperation(value="사용자 아이디")
+	@CrossOrigin
+	@GetMapping("/Posts")
+	public Users finduserId(@RequestParam int userNumber) {
+		
+		Users user = userrepo.findByuserNumber(userNumber);
+
+		return user;
+	}
 	
 	@ApiOperation(value="문의글 삭제")
 	@CrossOrigin

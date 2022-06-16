@@ -80,4 +80,10 @@ public class Report_TableServiceImpl implements Report_TableService{
 		reportTableRepository.save(reportTable);
 		
 	}
+
+	
+	public String findByUserNumber(int userNumber) {
+		
+		return null;
+	}
 }
