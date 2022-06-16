@@ -13,6 +13,7 @@ import PostMain from './layouts/PostMain';
 import PostView from './layouts/PostView';
 import Member from './views/Member';
 import NotFound from './layouts/NotFound';
+import BuySubscribe from './views/BuySubscribe';
 
 function App() {
   useEffect(async () => {
@@ -36,9 +37,10 @@ function App() {
               <Route path='/zipcook/QnaWriteForm' element={<QnaWriteForm/>}/>
               <Route path='/zipcook/member/*' element={<Member/>}/>
               <Route exact path='/zipcook/postView/:no' element={<PostView/>} />
+              <Route exact path='/zipcook/postView/*' element={<PostView/>} />
               <Route exact path='/zipcook/postMain' element={<PostMain/>} />
               <Route path='/zipcook/QuestionInfo' element={<QuestionInfo/>}/>
-
+              <Route path='/zipcook/BuySubscribe' element={<BuySubscribe/>}/>
               <Route path='/zipcook/member/*' element={<Member/>}/>
 
               <Route path='*' element={<NotFound/>}/>

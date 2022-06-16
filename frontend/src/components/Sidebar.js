@@ -36,8 +36,8 @@ const Sidebar = () => {
         { name: "포인트 사용 내역", path: "./PayPoint" },
         { name: "포인트 충전", path: "./ChargePoint" },
         { name: "문의 내역", path: "./QnA" },
-        { name: "환불 페이지", path:"./refundPoint"},
-        { name: "구독권 구매", path:"./BuySubscribe"}
+        // { name: "환불 페이지", path:"./refundPoint"},
+        // { name: "구독권 구매", path:"./BuySubscribe"}
     ];
     return (
         
