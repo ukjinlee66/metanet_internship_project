@@ -1,6 +1,5 @@
 package com.metanet.domain.DTO;
 
-import com.metanet.domain.Users;
 import com.metanet.domain.Video;
 
 import lombok.AllArgsConstructor;
