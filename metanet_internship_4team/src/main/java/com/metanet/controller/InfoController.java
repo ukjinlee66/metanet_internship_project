@@ -1,26 +1,25 @@
 package com.metanet.controller;
 
-
-import java.io.File;
-
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.metanet.domain.Comments;
 import com.metanet.domain.Video;
 import com.metanet.domain.DTO.VideoDTO;
+import com.metanet.repository.CommentsRepository;
+import com.metanet.repository.LikesRepository;
+import com.metanet.repository.UsersRepository;
 import com.metanet.repository.VideoRepository;
 import com.metanet.service.InfoService;
 import com.metanet.service.MyPageService;
@@ -38,9 +37,17 @@ public class InfoController
 	@Autowired
 	private  MyPageService myPageService ;
 	
+	@Autowired
+	private CommentsRepository CommRepo;
+	
+	@Autowired
+	private UsersRepository UserRepo;
 	
 	@Autowired
 	private VideoRepository videoRepo;
+	
+	@Autowired
+	private LikesRepository likeRepo;
 	
 	@Value("${file.path}")
 	private String fileRealPath;
@@ -49,7 +56,47 @@ public class InfoController
 	private String ffmpgRealPath;
 	
 	
+	@PostMapping("/addcomment")
+	@CrossOrigin
+	@ApiOperation(value="댓글 입력", notes="회원 유저가 댓글을 입력")
+	public void addcom(
+			@ApiParam(value="댓글 내용과 회원 아이디와 게시글 번호를 받는다", required=true)
+			@RequestParam(value="Comments",required=true, defaultValue="") String Comments,
+			@RequestParam(value="userNumber",required=true, defaultValue="0") int userNumber,
+			@RequestParam(value="videoNumber",required=true, defaultValue="0") int videoNumber)
+	{
+		Comments com = new Comments();
+		com.setCommentsContexts(Comments);
+		com.setUserId(UserRepo.findByuserNumber(userNumber).getUserId());
+		com.setUserNumber(userNumber);
+		com.setVideoNumber(videoNumber);
+		com.setCrDa(new java.sql.Date(System.currentTimeMillis()));
+		CommRepo.save(com);
+	}
 	
+	@PostMapping("/editcomment")
+	@CrossOrigin
+	@ApiOperation(value="댓글 수정", notes="회원 유저가 댓글을 입력")
+	public void editcom(
+			@ApiParam(value="새로운 댓글 내용과 댓글번호를 받는다", required=true)
+			@RequestParam(value="Comments",required=true, defaultValue="") String Comments,
+			@RequestParam(value="commentsNumber",required=true, defaultValue="0") int commentsNumber)
+	{
+		Comments com = CommRepo.findBycommentsNumber(commentsNumber);
+		com.setCommentsContexts(Comments);
+		CommRepo.save(com);
+	}
+	
+	@DeleteMapping("/deletecomment")
+	@CrossOrigin
+	@ApiOperation(value="댓글 삭제", notes="회원 유저가 댓글을 입력")
+	public void deletecom(
+			@ApiParam(value="삭제할 댓글번호를 받는다", required=true)
+			@RequestParam(value="commentsNumber",required=true, defaultValue="0") int commentsNumber)
+	{
+		Comments com = CommRepo.findBycommentsNumber(commentsNumber);
+		CommRepo.delete(com);
+	}
 	
 	
 	@GetMapping("/detail")
@@ -75,6 +122,16 @@ public class InfoController
 		if(c.isEmpty())
 			return new ArrayList<Comments>();
 		return(c);
+	}
+	
+	@GetMapping("/getlikecount")
+	@CrossOrigin
+	@ApiOperation(value="해당 게시물의 좋아요 개수 확인",notes="게시글 번호를 통해 해당 게시글의 좋아요 개수 확인")
+	public int getlike(
+			@ApiParam(value="게시글 번호",required=true)
+			@RequestParam int videoNumber)
+	{
+		return likeRepo.countByvideoNumber(videoNumber);	
 	}
 	
 	@GetMapping("/detailList")
@@ -159,18 +216,22 @@ public class InfoController
 	
 	@GetMapping("/isLiked")
 	@CrossOrigin
-	@ApiOperation(value="레시피에 대한 좋아요 여부 확인 ",notes=" 좋아요일시 1, 좋아요가 아닐시 -1, 비회원일시 -1 반환")
+	@ApiOperation(value="레시피에 대한 좋아요 여부 확인 ",notes=" 좋아요일시 1, 좋아요가 아닐시 -1")
 	public int isLiked(
 			@RequestParam int videoNumber ,
-			@RequestParam(value = "userId", required=false, defaultValue="-1") int userNumber
+			@RequestParam(required=false) int userNumber
 			)
 	{
-	
-		if(userNumber == -1) return -1;  // 비회원이라면  -1을 반환함 
-		else return myPageService.isLike(videoNumber, userNumber);
-		
+		return myPageService.isLike(videoNumber, userNumber);
 	}
 	
+	@GetMapping("/addLikes")
+	@CrossOrigin
+	@ApiOperation(value="회원 좋아요 영상 저장",notes="성공시 1 반환, 실패시 -1 반환 ")
+	public int  getLikes(@RequestParam("videoName") String videoName, @RequestParam String userId )
+	{
+		return myPageService.addLikes(userId, videoName );
+	}
 	
 	@GetMapping("/deleteLikes")
 	@CrossOrigin
@@ -180,7 +241,6 @@ public class InfoController
 			String videoName
 			)
 	{
-	
 		myPageService.deleteLikes(userId, videoName);
 		return 1;
 	}

@@ -42,29 +42,52 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 			@RequestParam(required = false) String videoTitle,
 			@ApiParam(value="분야",required=false, example="한식,중식,양식,일식,초급,중급,상급") 
 			@RequestParam(required = false) String Color,
-			@ApiParam(value="리스트",required=false, example="현재 리스트에서 Color기준으로 Select column요청") 
-			@RequestParam(required = false) String arr
+			@ApiParam(value="분야2",required=false, example="한식,중식,양식,일식,초급,중급,상급") 
+			@RequestParam(required = false) String Color2
 			)
 	{
-		if (arr == null) // Param : videoTitle , Color
+		if (videoTitle != null && Color == null && Color2 == null) // 검색의 경우.
 		{
-			if (videoTitle != null && Color == null) // 검색의 경우.
+			try 
+			{
+				List<Video> v = service.Search(videoTitle);
+				return v;
+			}
+			catch(NullPointerException e)
+			{
+				System.out.println("List Service Search Function videoTitle Not null Color null region Error");
+				return new ArrayList<>();
+			}
+		}
+		else if(videoTitle == null && (Color != null || Color2 != null)) //단일 Color 선택의 경우.
+		{
+			if (Color == null && Color2 != null)
 			{
 				try 
 				{
-					List<Video> v = service.Search(videoTitle);
-					return v;
+					System.out.println("Color null");
+					switch(Color2)
+					{
+						case "한식": return service.SearchKind(Color2); 
+						case "일식": return service.SearchKind(Color2);
+						case "중식": return service.SearchKind(Color2);
+						case "양식": return service.SearchKind(Color2);
+						case "초급": return service.SearchLevel(Color2);
+						case "중급": return service.SearchLevel(Color2);
+						case "상급": return service.SearchLevel(Color2);
+					}
 				}
 				catch(NullPointerException e)
 				{
-					System.out.println("List Service Search Function videoTitle Not null Color null region Error");
+					System.out.println("List Service Search Function videoTitle null Color Not null Color null region Error");
 					return new ArrayList<>();
 				}
 			}
-			else if(videoTitle == null && Color != null) //단일 Color 선택의 경우.
+			else if (Color2 == null && Color != null)
 			{
 				try 
 				{
+					System.out.println("Color2 null");
 					switch(Color)
 					{
 						case "한식": return service.SearchKind(Color); 
@@ -78,74 +101,105 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 				}
 				catch(NullPointerException e)
 				{
-					System.out.println("List Service Search Function videoTitle null Color Not null region Error");
+					System.out.println("List Service Search Function videoTitle null Color Not null Color2 null region Error");
 					return new ArrayList<>();
 				}
 			}
-			else
+			else if (Color != null && Color2 != null)
 			{
-				List<Video> retlist = new ArrayList<>();
 				try 
 				{
-					List<Video> ar = service.Search(videoTitle);
-					
-					if (ar.isEmpty()) return retlist;
-					if (Color.equals("한식") || Color.equals("중식") || Color.equals("일식") || Color.equals("양식"))
+					List<Video> first = new ArrayList<>();
+					List<Video> ret_list = new ArrayList<>();
+					switch(Color)
 					{
+						case "한식": first = service.SearchKind(Color); 
+							break;
+						case "일식": first = service.SearchKind(Color); 
+							break;
+						case "중식": first = service.SearchKind(Color); 
+							break;
+						case "양식": first = service.SearchKind(Color);
+							break;
+						case "초급": first = service.SearchLevel(Color);
+							break;
+						case "중급": first = service.SearchLevel(Color);
+							break;
+						case "상급": first = service.SearchLevel(Color);
+							break;
+					}
+					for (Video v : first)
+					{
+						if(Color.equals("한식") || Color.equals("중식") || Color.equals("일식") || Color.equals("양식"))
+						{
+							if (v.getRecipeLevel().equals(Color2))
+								ret_list.add(v);
+						}
+						else //한중양일이 아닐 경우 무조건 초중상 의 경우
+						{
+							if (v.getRecipeKind().equals(Color2))
+								ret_list.add(v);
+						}
+					}
+					return ret_list;
+				}
+				catch(NullPointerException e)
+				{
+					System.out.println("123List Service Search Function videoTitle null Color Not null region Error");
+					return new ArrayList<>();
+				}
+			}
+		}
+		else if(videoTitle != null && (Color != null || Color2 != null))
+		{
+			List<Video> retlist = new ArrayList<>();
+			try 
+			{
+				
+				if (Color == null && Color2 != null)
+				{
+					if(Color2.equals("한식") || Color2.equals("중식") || Color2.equals("일식") || Color2.equals("양식"))
+						return service.SearchKind(videoTitle, Color2);
+					else
+						return service.SearchLevel(videoTitle, Color2);
+				}
+				else if (Color2 == null && Color != null)
+				{
+					if(Color.equals("한식") || Color.equals("중식") || Color.equals("일식") || Color.equals("양식"))
+						return service.SearchKind(videoTitle, Color);
+					else
+						return service.SearchLevel(videoTitle, Color);
+				}
+				else // Color, Color2 exist
+				{
+					List<Video> ar = new ArrayList<>();
+					if(Color.equals("한식") || Color.equals("중식") || Color.equals("일식") || Color.equals("양식"))
+					{	
+						ar = service.SearchKind(videoTitle, Color);
 						for(Video v : ar)
 						{
-							if(v.getRecipeKind().equals(Color))
+							if (v.getRecipeLevel().equals(Color2))
 								retlist.add(v);
 						}
 					}
 					else
 					{
+						ar = service.SearchLevel(videoTitle, Color);
 						for(Video v : ar)
 						{
-							if(v.getRecipeLevel().equals(Color))
+							if (v.getRecipeKind().equals(Color2))
 								retlist.add(v);
 						}
 					}
 					return retlist;
 				}
-				catch(NullPointerException e)
-				{
-					System.out.println("List Service Search Function videoTitle Not null Color Not null region Error");
-					return retlist;
-				}
-			}
-		}
-		else // param : Array , Color
-		{
-			try 
-			{
-				List<Video> retlist = new ArrayList<>();
-				Gson g = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-				Video[] li = g.fromJson(arr, Video[].class);
-				ArrayList<Video> ar = new ArrayList<Video>(Arrays.asList(li));
-				if (ar.isEmpty()) return retlist;
-				if (Color.equals("한식") || Color.equals("중식") || Color.equals("일식") || Color.equals("양식"))
-				{
-					for(Video v : ar)
-					{
-						if(v.getRecipeKind().equals(Color))
-							retlist.add(v);
-					}
-				}
-				else
-				{
-					for(Video v : ar)
-					{
-						if(v.getRecipeLevel().equals(Color))
-							retlist.add(v);
-					}
-				}
-				return retlist;
+				
+				
 			}
 			catch(NullPointerException e)
 			{
-				System.out.println("List Service Search Function videoTitle null Color Not null region Error");
-				return new ArrayList<>();
+				System.out.println("456List Service Search Function videoTitle Not null Color Not null region Error");
+				return retlist;
 			}
 		}
 		System.out.println("List Service Search Function Outer region Error!");

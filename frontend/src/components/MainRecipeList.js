@@ -97,6 +97,8 @@ function MainRecipeList(props) {
 
     // 처음 렌더링시 한번 실행되는 함수
     useEffect(() => {
+        console.log("isManager ? ",sessionStorage["isManager"]);
+        console.log("islogin ? ",sessionStorage["User_Id"]);
         lowInfo();
         midInfo();
         highInfo();
@@ -150,7 +152,13 @@ function MainRecipeList(props) {
 
     return (
         <div class="container-xxl py-5 rank-con">
-            <p><button onClick={lowClick}><a href = "/zipcook/RecipeAttractionList?search=초급">레시피 작성</a></button></p>
+            
+            {(sessionStorage["User_Id"] === null) || (sessionStorage["isManager"] === null) //관리자일 경우 버튼 표시
+            ?
+            <p><button onClick={lowClick}><a href = "/zipcook/CreateRecipe">레시피 작성</a></button></p>
+            :
+            <p/>
+            }
             <div class="container">
                 <h1 class="text-center mb-5">이런 관광지는 어떠세요?</h1>
                 <p><button onClick={lowClick}><a href = "/zipcook/RecipeAttractionList?search=초급">초급</a></button></p>

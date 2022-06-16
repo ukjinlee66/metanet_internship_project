@@ -22,11 +22,13 @@ const Signin = () => {
         userPassword: inputPw
       }
     })
-      .then(function (response) {
+      .then(function (response)  
+      {
         if (response.data) {
           alert("로그인 성공")
           sessionStorage.setItem('User_Id', response.data.userId)
-          
+          sessionStorage.setItem('isManager', response.data.userKind === 0 ? 0 : 1) // 관리자 회원인지 확인
+          sessionStorage.setItem('User_Number', response.data.userNumber)
           document.location.href = "http://localhost:3000/zipcook"
 
         }

@@ -10,7 +10,7 @@ import ServiceCenter from './layouts/ServiceCenter.js'
 import QuestionInfo from './layouts/QuestionInfo.js'
 import Member from './views/Member';
 import NotFound from './layouts/NotFound';
-
+import CreateRecipe from './layouts/CreateRecipe';
 function App() {
   useEffect(async () => {
     window.onpageshow = (event) => {
@@ -32,6 +32,7 @@ function App() {
               <Route path='/zipcook/ServiceCenter' element={<ServiceCenter/>}/>
               <Route path='/zipcook/QuestionInfo' element={<QuestionInfo/>}/>
               <Route path='/zipcook/member/*' element={<Member/>}/>
+              <Route path='/zipcook/CreateRecipe' element={<CreateRecipe/>}/>
               <Route path='*' element={<NotFound/>}/>
           </Routes>
       </BrowserRouter>
