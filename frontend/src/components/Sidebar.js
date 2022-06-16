@@ -1,12 +1,12 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "antd/dist/antd.css";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import profile from "../assets/img/logo.png";
+import profile from "../assets/img/carousel-1.jpg";
 import SidebarItem from "./SidebarItem";
 
-
+  
 const Side = styled.div`
   display: flex;
   border-right: 1px solid #e0e0e0;
@@ -28,15 +28,6 @@ const Menu1 = styled.div`
 `
 
 const Sidebar = () => {
-    const [isAdmin, setIsAdmin] = useState(false)
-    useEffect(() => {
-        if (sessionStorage.getItem('User_Kind') == 0) {
-            console.log("admin",isAdmin)
-        } else {
-            setIsAdmin(true)
-            console.log("admin",isAdmin)
-        }
-    }, [])
 
     const menus = [
         { name: "시청내역", path: "./View" },
@@ -45,37 +36,22 @@ const Sidebar = () => {
         { name: "포인트 사용 내역", path: "./PayPoint" },
         { name: "포인트 충전", path: "./ChargePoint" },
         { name: "문의 내역", path: "./QnA" },
-        { name: "구독권 구매", path: "./BuySubscribe" }
+        // { name: "환불 페이지", path:"./refundPoint"},
+        // { name: "구독권 구매", path:"./BuySubscribe"}
     ];
-
-    const Adminmenus = [
-        { name: "문의 내역", path: "./QnA" },
-        { name: "환불 페이지", path: "./refundPoint" },
-        { name: "레시피 댓글", path:"./"}
-    ];
-
-    let Kind = null;
-    if(isAdmin === false){
-         Kind = menus 
-        console.log("false",Kind)
-    }else if(isAdmin === true){
-         Kind = Adminmenus
-         console.log("true",Kind)
-    }
-
     return (
-
+        
         <Side>
             <Profile src={profile}></Profile>
             <Menu1>
-                {Kind.map((menu, index) => {
+                {menus.map((menu, index) => {
 
                     return (
                         <NavLink
                             exact
                             style={{ color: "gray", textDecoration: "none" }}
                             to={menu.path}
-                            key="{menu}"
+                            key={index}
                             activeStyle={{ color: "black" }}
                         >
                             <SidebarItem menu={menu} />

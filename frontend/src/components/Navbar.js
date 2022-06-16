@@ -5,6 +5,8 @@ import '../assets/css/style.css';
 import logo from '../assets/img/logo.png';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import axios from 'axios';
+
 function Navbar(props) {
     const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장 
 
@@ -14,7 +16,11 @@ function Navbar(props) {
         if(e.target.value === "MyPage"){
             sessionStorage.setItem("pageSession", 1);
             window.location.href = "/zipcook/" + e.target.value;
-        }else{
+        }else if(e.target.value === "BuySubscribe"){
+            sessionStorage.setItem("pageSession", 1);
+            window.location.href = "/zipcook/" + e.target.value;
+        }
+        else{
             sessionStorage.setItem("pageSession", 1);
             window.location.href = "/zipcook/member/" + e.target.value;
         }
@@ -25,7 +31,6 @@ function Navbar(props) {
     }
     function logOut(e) {
         sessionStorage.removeItem("User_Id")
-        sessionStorage.removeItem("User_Kind")
         window.location.href = "/zipcook"
     }
     // 스크롤의 Y축을 감시하여 특정 지점 이동 시 Navbar가 화면 일정 지점에 따라가도록 설정
@@ -47,12 +52,24 @@ function Navbar(props) {
     const [isLogin, setIsLogin] = useState(false)
     useEffect(() => {
         if (sessionStorage.getItem('User_Id') === null) {
-            console.log('isLogin ?? ::', isLogin)
         } else {
             setIsLogin(true)
-            console.log('isLogin ?? ::', isLogin)
 
         }
+    })
+    const BASEURL = "http://localhost:8443/Account"
+    const [point, setPoint] = useState(0)
+    useEffect(()=>{
+        axios
+      .get(BASEURL + "/getAccount", {
+        params: {
+          userId: sessionStorage.getItem("User_Id")
+        }
+      })
+      .then((res) => {
+        setPoint(res.data.userPoint)
+
+      })
     },[])
 
     return (
@@ -71,6 +88,9 @@ function Navbar(props) {
                     </div>
                 ) : (
                     <div class="justify-content-md-end">
+                        {/* <p style={{fontSize:'12px'}}>구독 마감 날짜 : {buy}</p> */}
+                        <p style={{fontSize:'12px'}}>포인트 : {point}</p>
+                        <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="BuySubscribe">구독권 구입</button>
                         <button class="btn btn-white border-0 w-20 m-3" onClick={logOut} value="Logout">로그아웃</button>
                         <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="EditSign">회원정보</button>
                         <Avatar onClick={AvClick} shape="square" size={64} icon={<UserOutlined />}/>

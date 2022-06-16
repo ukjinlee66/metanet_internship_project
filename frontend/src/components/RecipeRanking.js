@@ -6,12 +6,16 @@ import axios from "axios";
 import rankSlide from "../assets/css/rankingSlide.css"
 import NewsTicker from "react-advanced-news-ticker"
 import { type } from '@testing-library/user-event/dist/type';
-import CategorySelect from "./CategorySelect"
+import { faBuildingShield } from '@fortawesome/free-solid-svg-icons';
+import Ticker1 from "./Ticker1"
+import Ticker2 from "./Ticker2"
+import Ticker3 from "./Ticker3"
+import Ticker4 from "./Ticker4"
+import Ticker5 from "./Ticker5"
+var rankingTitle = [];
 
-
-
-function RecipeRanking(props) {
-
+const RecipeRanking=()=>
+{
             //로그인시 선호도영상 데이터
     const [rankingList, setRankingList] = useState([
         {id:'', searchWordName:''},
@@ -40,107 +44,91 @@ function RecipeRanking(props) {
             .then((res) => {
                 console.log("res.data:   "+res.data)
                 setRankingList(res.data)
-                searchWordRef.current = res.data
+
+                console.log("getRankingList 함수에서 setRankingList 실행 후 값" + rankingList[0].searchWordName)
+
             }
             )
 
             
     }; 
+    // const changeType = async () =>{
+    //     for(let i=0; i<5; i++) {
+    //         if(rankingList[i].searchWordName === )
+    //     }
+    // }
     // 처음 렌더링시 한번 실행되는 함수
     useEffect(() => {
     getRankingList();
-    
-        }, [])
+    // changeType();
+    console.log("첫 useEffect의 getRankingList() 실행 후 콘솔");
 
-
-    //  useEffect(() => { }, [rankingList])
-
-    
-
+        }, []);
 
 
     // 레시피 클릭 시 이동
-    function btClick(e) {
+    const btClick=(e)=> {
         alert(sessionStorage.getItem("first"))
         sessionStorage.setItem("pageSession", 1);
         window.location.href = "/zipcook/RecipeAttractionList?search=" + e.target.value;
         sessionStorage.setItem('listState', 'none')
     }
 
-    const rankingRender1 = () => {
-        const result = [];
-        result.push(
-            <Fragment>
-               
-            </Fragment>
-        )
-        return result;
-    };
-    const rankingRender2 = () => {
-        const result = [];
-        result.push(
-            <Fragment>
-                
-            </Fragment>
-        )
-        return result;
-    };
-    const rankingRender3 = () => {
-        const result = [];
-        result.push(
-            <Fragment>
-             
-            </Fragment>
-        )
-        return result;
-    };
-    const rankingRender4 = () => {
-        const result = [];
-        result.push(
-            <Fragment>
-              
-            </Fragment>
-        )
-        return result;
-    };
-    const rankingRender5 = () => {
-        const result = [];
-        result.push(
-            <Fragment>
-                
-            </Fragment>
-        )
-        return result;
-    };
+    const finish=() =>{
+        console.log("newsticker 끝!!!!!!"+rankingList[0].searchWordName)
+    }
+
+
+    const consolecheck = () => {
+        console.log("NewsTick 실행")
+    }
+
+
+    const out = () =>
+    {
+        var res = [];
+        console.log("out함수 실행 / out 함수 내의 rankingTitle: " + rankingList + "랭킹타이틀 타입: " + type(rankingList[0]))
+        for(let con of rankingList)
+        {
+            console.log(con.searchWordName)
+            res.push(
+                <Fragment><a onClick={btClick}>
+                    {con.searchWordName}
+                    </a></Fragment>
+            );
+        }
+
+
+        console.log("out함수 return 값 : " + res)
+        // return (<Fragment><a onClick={btClick}>{rankingTitle[0]}</a></Fragment>);
+        return (res);
+    }
+    // useEffect(()=>{
+    //     out();
+    //     console.log("useEffect out 함수 실행/ rankingTitle 값 : " + rankingTitle)
+    // },[]);
+
 
     return (
-        <div class="container" >
-                <div class="col-md-10" style={{display:'flex', marginTop:'20px'}}>
-                        <p>
+        <div class="container">
+                <div class="col-md-10">
+                        <p></p>
                         <h4>실시간 검색어 랭킹</h4>
-                        
                         <NewsTicker
-                                ref = {searchWordRef}
-                                rowHeight = {45}
-                                maxRows = {2}
+                                rowHeight = {30}
+                                maxRows = {1}
                                 speed = {600}
                                 duration = {4000}
                                 autoStart = {true}
-                                pauseOnHover = {true}
-                                id = "myId"
-                                className = "myClassName1 myClassName2"
-                                style = {{marginTop: 34}}>
-                                <div><button onClick={btClick} value={searchWordRef.current}>#1 {searchWordRef.current}</button></div>   
-                                <div><button onClick={btClick} value={searchWordRef.current}>#2 {searchWordRef.current}</button></div> 
-                                <div><button onClick={btClick} value={searchWordRef.current}>#3 {searchWordRef.current}</button></div>  
-                                <div><button onClick={btClick} value={searchWordRef.current}>#4 {searchWordRef.current}</button></div>  
-                                <div><button onClick={btClick} value={searchWordRef.current}>#5 {searchWordRef.current}</button></div>   
-                                
+                                pauseOnHover = {true}>
+                                <Ticker1></Ticker1>
+                                <Ticker2></Ticker2>
+                                <Ticker3></Ticker3>
+                                <Ticker4></Ticker4>
+                                <Ticker5></Ticker5>
                         </NewsTicker>
-                        </p>
-                        <CategorySelect/>
-                            
-                            
+                        {finish()}
+
                 </div>
         </div>
     );

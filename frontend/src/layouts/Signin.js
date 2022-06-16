@@ -25,9 +25,8 @@ const Signin = () => {
       .then(function (response) {
         if (response.data) {
           alert("로그인 성공")
-          console.log(response.data)
           sessionStorage.setItem('User_Id', response.data.userId)
-          sessionStorage.setItem('User_Kind',response.data.userKind)
+          sessionStorage.setItem('User_Number', response.data.userNumber)
           document.location.href = "http://localhost:3000/zipcook"
 
         }

@@ -14,9 +14,11 @@ const PostMain = props => {
   return (
     <>
       <Navbar  />
+      <br></br><br></br>
       <h2 align="center">고객센터</h2>
+      <br></br><br></br>
       <PostList />
-      <div>
+      <div><br></br><br></br><br></br><br></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <button onClick={btClick}>문의글 작성</button>
       </div>
       <Footer />

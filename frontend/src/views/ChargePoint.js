@@ -20,15 +20,14 @@ const ChargePointPage = (props) => {
         if (response.data == -1) {
           alert("충전 실패")
         } else {
-          console.log(response);
           alert("충전완료")
+          document.location.href = "http://localhost:3000/zipcook/MyPage"
         }
       })
       .catch(function (error) {
         console.log(error);
         alert("에러")
       });
-    alert("제출");
   }
   const [inputText, setInputText] = useState(0);
   const [kind, setKind] = useState('');
