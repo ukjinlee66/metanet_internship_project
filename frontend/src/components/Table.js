@@ -40,14 +40,14 @@ function Table1({ users } ) {
                     <TableBody>
                         {users
                             .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
-                            .map(({ chargeNumber , chargeKind , chargePoint , chargeDate }, i) => (
-                                <TableRow key={chargeNumber}>
+                            .map(({ Number , Kind , Point , Date }, i) => (
+                                <TableRow key={Number}>
                                     <TableCell component="th" scope="row">
                                         {page * rowsPerPage + i + 1}
                                     </TableCell>
-                                    <TableCell align="right">{chargeKind}</TableCell>
-                                    <TableCell align="right">{chargePoint}</TableCell>
-                                    <TableCell align="right">{chargeDate}</TableCell>
+                                    <TableCell align="right">{Kind}</TableCell>
+                                    <TableCell align="right">{Point}</TableCell>
+                                    <TableCell align="right">{Date}</TableCell>
                                 </TableRow>
                             ))}
                     </TableBody>

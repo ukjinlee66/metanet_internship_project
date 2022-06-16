@@ -5,15 +5,20 @@ import axios from "axios";
 
 function QnAPage() {
   const [qna, setQna] = useState([
-      { id: '', name: '', title: '', date: '' }
+      { reportTableNumber: '', reportName: '', reportKind: '', reportDetail: '',reportReply:'',crDa:'' }
   ])
-  const reqUrl = 'http://localhost:8443/Point/getChargeList?userId='
+  const reqUrl = 'http://localhost:8443/Report/MyReportList'
 
     useEffect(() => {
       axios
-          .get(reqUrl + sessionStorage.getItem("User_Id"))
-          .then((res) => {setQna(res.data)
-              console.log("포인트",res.data)}
+          .get(reqUrl,{
+            params:{
+              userNumber : sessionStorage.getItem("User_Number")
+            }
+          })
+          .then((res) => {
+              setQna(res.data)
+              console.log("qna",res.data)}
           );
           
   },[])

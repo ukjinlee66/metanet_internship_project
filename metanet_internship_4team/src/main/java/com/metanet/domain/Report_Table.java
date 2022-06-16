@@ -33,6 +33,9 @@ public class Report_Table
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REPORT_TABLE_SEQ_GEN")
 	private int reportTableNumber;
 	
+	@Column(name = "USER_NUMBER")
+	private int usersNumber;
+	
 	@Column(name = "REPORT_NAME", columnDefinition = "char")
 	@NonNull
 	private String reportName;
@@ -45,6 +48,9 @@ public class Report_Table
 	
 	@Column(name = "REPORT_REPLY", columnDefinition = "char")
 	private String reportReply;
+	
+	@Column(name = "USER_NUMBER")
+	private int userNumber;
 	
 	@CreationTimestamp
 	@Column(name = "REPORT_CRDA")

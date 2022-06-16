@@ -26,7 +26,17 @@ function Table1({ qna }) {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+
+    const getDetail =(e)=> {
+        const BASEURL = "http://localhost:3000/zipcook/postView/"
+        const Number = e.value
+        console.log(Number)
+        const QNAURL = BASEURL + Number
+        document.location.href = QNAURL
+      }
+
     return (
+
 
         <TableContainer component={Paper}>
             <Table size="small">
@@ -35,27 +45,28 @@ function Table1({ qna }) {
                         <TableCell>No</TableCell>
                         <TableCell align="right">종류</TableCell>
                         <TableCell align="right">제목</TableCell>
+                        <TableCell align="right">내용</TableCell>
                         <TableCell align="right">날짜</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {qna
                         .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
-                        .map(({ id, name, title, date }, i) => (
+                        .map(({ reportTableNumber, reportKind, reportName, reportDetail, crDa },i) => (
 
-                            <TableRow key={id}>
+                            <TableRow key={reportTableNumber}>
                                 <TableCell component="th" scope="row">
                                     {page * rowsPerPage + i + 1}
                                 </TableCell>
-                                <TableCell align="right">{name}</TableCell>
-
+                                <TableCell align="right">{reportKind}</TableCell>
+                                
                                 <TableCell align="right">
-                                    <Link href="#" color="inherit" underline="hover">
-                                        {title}
-                                    </Link>
+                                        {reportName}
                                 </TableCell>
-
-                                <TableCell align="right">{date}</TableCell>
+                                <TableCell align="right">
+                                        {reportDetail}
+                                </TableCell>
+                                <TableCell align="right">{crDa}</TableCell>
                             </TableRow>
 
                         ))}

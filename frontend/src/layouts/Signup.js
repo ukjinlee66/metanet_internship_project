@@ -43,7 +43,7 @@ const SignUp = () => {
   // 아이디 중복 확인 이벤트
   const BASEURL = "http://localhost:8443/Account"
   const checkId = () => {
-    axios.post(BASEURL + "/validateId", null, {
+    axios.get(BASEURL + "/validateId", {
       params: {
         userId: inputId
       }

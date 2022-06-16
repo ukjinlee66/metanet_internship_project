@@ -46,7 +46,7 @@ const PostList = () => {
               <CommonTableRow key={index}>
                 <CommonTableColumn>{ item.reportTableNumber }</CommonTableColumn>
                 <CommonTableColumn>
-                  <Link to={`/zipcook/postView/${item.reportTableNumber}`}>{ item.reportName }</Link>
+                  <Link to={`/zipcook/postView/${item.reportTableNumber}`}>{item.reportName}</Link>
                 </CommonTableColumn>
                 <CommonTableColumn>{ item.crDa }</CommonTableColumn>
                 <CommonTableColumn>{ item.reportKind }</CommonTableColumn>
