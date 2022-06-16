@@ -32,7 +32,6 @@ const Ticker=()=>
             .then((res) => {
                 setRankingList(res.data)
                 
-                console.log("getRankingList 함수에서 setRankingList 실행 후 값" + rankingList[0].searchWordName)
                
             }
             )
@@ -48,7 +47,6 @@ const Ticker=()=>
     useEffect(() => {
     getRankingList();
     // changeType();
-    console.log("첫 useEffect의 getRankingList() 실행 후 콘솔");
  
         }, []);
    
@@ -61,13 +59,10 @@ const Ticker=()=>
     }
     
     const finish=() =>{
-        console.log("newsticker 끝!!!!!!"+rankingList[0].searchWordName)
     } 
 
 
-    const consolecheck = () => {
-        console.log("NewsTick 실행")
-    }
+    const consolecheck = () => {}
 
     
     const out = () =>

@@ -49,6 +49,9 @@ public class Report_Table
 	@Column(name = "REPORT_REPLY", columnDefinition = "char")
 	private String reportReply;
 	
+	@Column(name = "USER_NUMBER")
+	private int userNumber;
+	
 	@CreationTimestamp
 	@Column(name = "REPORT_CRDA")
 	@NonNull
