@@ -81,6 +81,16 @@
 		</dependency>
 		<!-- ffmpeg api end -->
 		
+		<!-- CharMatcher api start -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>26.0-jre</version>
+		</dependency>
+		<!-- CharMatcher api end -->
+
+		
+		
 		
 		
 		

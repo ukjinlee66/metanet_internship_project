@@ -1,9 +1,11 @@
+/*
 package com.metanet.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -22,21 +24,9 @@ import lombok.RequiredArgsConstructor;
 public class Report_TableServiceImpl implements Report_TableService{
 	
 	private final Report_TableRepository reportTableRepository;
-	private final ReportRepository reportRepository;
+
 	
-	
-	@Transactional
-	@Override
-	public void saveReport(int userNumber, int reportTableNumber) {
-		
-		Report report = new Report();	
-		
-		report.setUsersNumber(userNumber);
-		report.setReportTableNumber(reportTableNumber); 
-		
-		reportRepository.save(report);
-		
-	}
+
 	
 	
 	@Transactional
@@ -58,6 +48,9 @@ public class Report_TableServiceImpl implements Report_TableService{
 	@Transactional
 	@Override
 	public void savePost(ReportBoardRequestDTO request) {
+
+		
+	
 		
 		reportTableRepository.save(request.ToEntity());
 		
@@ -124,3 +117,4 @@ public class Report_TableServiceImpl implements Report_TableService{
 
     }
 }
+*/

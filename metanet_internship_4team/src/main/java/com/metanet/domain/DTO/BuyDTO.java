@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 
 public class BuyDTO {
 
-	
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Data
@@ -22,8 +21,7 @@ public class BuyDTO {
 
 	@Column(name = "BUY_POINT")
 	private int buyPoint;
-	
-	
+		
 	public Buy transferTo( Buy buy ) {
 
 		buy.setBuyKind(buyKind);

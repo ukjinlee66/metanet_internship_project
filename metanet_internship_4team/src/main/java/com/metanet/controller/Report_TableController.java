@@ -1,3 +1,4 @@
+/*
 package com.metanet.controller;
 
 import java.util.List;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.metanet.domain.Report;
 import com.metanet.domain.Report_Table;
 import com.metanet.domain.DTO.ReportBoardRequestDTO;
 import com.metanet.domain.DTO.ReportBoardResponseDTO;
@@ -123,3 +123,4 @@ public class Report_TableController {
 	
 	}
 }
+*/

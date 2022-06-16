@@ -41,14 +41,7 @@ public class InfoController
 	
 	@Autowired
 	private VideoRepository videoRepo;
-	
-	@Value("${file.path}")
-	private String fileRealPath;
-	
-	@Value("${ffmpg.path}")
-	private String ffmpgRealPath;
-	
-	
+
 	
 	
 	
@@ -155,13 +148,13 @@ public class InfoController
 	@GetMapping("/isLiked")
 	@CrossOrigin
 	@ApiOperation(value="레시피에 대한 좋아요 여부 확인 ",notes=" 좋아요일시 1, 좋아요가 아닐시 -1, 비회원일시 -1 반환")
-	public int isLiked(
+	public boolean isLiked(
 			@RequestParam int videoNumber ,
 			@RequestParam(value = "userId", required=false, defaultValue="-1") int userNumber
 			)
 	{
 	
-		if(userNumber == -1) return -1;  // 비회원이라면  -1을 반환함 
+		if(userNumber == -1) return false;  // 비회원이라면  false을 반환함 
 		else return myPageService.isLike(videoNumber, userNumber);
 		
 	}
@@ -182,111 +175,44 @@ public class InfoController
 	
 	
 	
-	// 주웅 추가 (파일 업로드 다운로드 )
+	
+	// 주웅 추가  (저장영상  판별여부, 및 좋아요 삭제 ) 
 	
 	
-	
-	
-
-	
-	/*
-	
-	@PostMapping("/fileUpload")
+	@GetMapping("/isSaved")
 	@CrossOrigin
-	@ApiOperation(value="파일 업로드 ",notes="회원 번호, , 성공시 1 반환")
-	public String uploadSingle(@RequestParam("files") MultipartFile uploadFile) throws Exception 
+	@ApiOperation(value="레시피에 대한 좋아요 여부 확인 ",notes=" 좋아요일시 1, 좋아요가 아닐시 -1, 비회원일시 -1 반환")
+	public boolean isSaved(
+			@RequestParam int videoNumber ,
+			@RequestParam(value = "userId", required=false, defaultValue="-1") int userNumber
+			)
 	{
-		
-		// 저장할 base url  :  fileRealPath
-		// ffmpeg , ffprobe .exe 위치 경로  
-		
-		//1. 영상을 저장할 path 설정 
-		String originalFileName = uploadFile.getOriginalFilename();
-		String saveFilePath = fileRealPath +originalFileName;
-
-		//2. 영상 저장 
-		File dest = new File( saveFilePath);
-		uploadFile.transferTo(dest);
-		
-		/*
-		
-		//2.ts를 저장할 path 설정 
-		String onlyFileName = originalFileName.substring(0, originalFileName.lastIndexOf("."));
-		final String tsPath = fileRealPath + onlyFileName;
-		
-		//3.디렉토리 설정 
-		File tsPathFile = new File(tsPath);
-    	if(! tsPathFile.exists()) tsPathFile.mkdir();
-    	
-
-    	// ffmpeg 및 ffprobe 객체 생성 
-    	
-		FFmpeg ffmpeg = new FFmpeg(ffmpgRealPath+"ffmpeg");
-		FFprobe ffprobe = new FFprobe(ffmpgRealPath+"ffprobe");
-
-			
-    	
-    	
 	
-		
-		File dest = new File( fileRealPath +originalfileName);
-		
-		
-		file.transferTo(dest);
-		
-		
-		
-		String ffmpegPath = ffmpgRealPath+"ffmpeg";
-		String ffprobePath = ffmpgRealPath+"ffprobe";
-	
-		FFmpeg ffmpeg =  new FFmpeg ("dd");
-		FFprobe ffprobe = new FFprobe("dd"); 
-		
-		
-		
-		
-		
-		
-		
-		
-		System.out.println("test2");
-		*/
-		
-		return "good";
-	}
-	
-	/*
-	@PostMapping("/hlsMake")
-	@ApiOperation(value="파일 업로드 ",notes="회원 번호, , 성공시 1 반환")
-	public String hlsMake() throws Exception 
-	{
-		
-		String ffmpegPath = ffmpgRealPath+"ffmpeg";
-		String ffprobePath = ffmpgRealPath+"ffprobe";
-	
-		
-	   	final String FFMPEG_PATH = ffmpegProperties.getPath();
-    	final String FFMPEG = ffmpegProperties.getFfmpeg();
-    	final String FFPROBE = ffmpegProperties.getFfprobe();
-
-		
+		if(userNumber == -1) return false;  // 비회원이라면 false을 반환함 
+		else return myPageService.isSave(videoNumber, userNumber);
 		
 	}
 	
 	
-	
-	// 이건 ffmpeg test 입니다. 삭제할 예장합니다. 
-	@PostMapping("/hlstest")
-	@ApiOperation(value="파일 업로드 ",notes="회원 번호, , 성공시 1 반환")
-	public String hlsMake() throws Exception 
+	@GetMapping("/deleteSave")
+	@CrossOrigin
+	@ApiOperation(value="회원 레시피 좋아요 삭제",notes="회원 번호, , 성공시 1 반환")
+	public int deleteSave(
+			@ApiParam(value="레시피 아이디",required=true) @RequestParam String userId,
+			String videoName
+			)
 	{
-		
-
-		
-		return "good";
+	
+		myPageService.deleteSave(userId, videoName);
+		return 1;
 	}
 	
-	*/
+	
+	
+	
+	
+	
+	
 	
 	
 	

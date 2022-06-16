@@ -1,6 +1,7 @@
 package com.metanet.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,10 @@ public interface SaveRepository extends JpaRepository<Save, Integer>
 
 	List<Save> findByUsersNumber(int usersNumber);
 
-	
 	int deleteByUsersNumberAndVideoNumber (int usersNumber,int videoNumber );
+	
+	Optional<Save> findByUsersNumberAndVideoNumber(int userNumber, int videoNumber);
+
+	
 	
 }
