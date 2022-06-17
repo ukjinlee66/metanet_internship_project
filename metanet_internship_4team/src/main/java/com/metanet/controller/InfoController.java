@@ -1,7 +1,5 @@
 package com.metanet.controller;
 
-import java.util.ArrayList;
-import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +25,6 @@ import com.metanet.service.MyPageService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import net.bramp.ffmpeg.FFmpeg;
-import net.bramp.ffmpeg.FFprobe;
 
 
 
@@ -217,7 +213,7 @@ public class InfoController
 	@GetMapping("/isLiked")
 	@CrossOrigin
 	@ApiOperation(value="레시피에 대한 좋아요 여부 확인 ",notes=" 좋아요일시 1, 좋아요가 아닐시 -1")
-	public int isLiked(
+	public boolean isLiked(
 			@RequestParam int videoNumber ,
 			@RequestParam(required=false) int userNumber
 			)
