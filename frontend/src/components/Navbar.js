@@ -90,7 +90,7 @@ function Navbar(props) {
                     <div class="justify-content-md-end">
                         <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="Login">로그인</button>
                         <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="Signup">회원가입</button>
-                        
+
                     </div>
                 ) : ((sessionStorage.getItem("User_Kind") == 1 ?(
                     <div class="justify-content-md-end">
@@ -109,7 +109,7 @@ function Navbar(props) {
                     {/* <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="MyPage">마이페이지</button> */}
                     </div>
                 ))
-  
+
                 )
 }
 

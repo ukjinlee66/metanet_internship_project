@@ -7,18 +7,30 @@ import axios from "axios";
 const PostList = () => {
   const [ dataList, setDataList ] = useState([
   ]);
-
-  const PostListUrl = 'http://localhost:8443/Report/List';
-
+  const searchReport = decodeURI(window.location.search.split('=')[1])
+  const searchPostListUrl = 'http://localhost:8443/Report/Posts/SearchPost?reportTitle='+ searchReport;
+  const PostListUrl = 'http://localhost:8443/Report/List'
   // 7개의 검색어 랭킹 리스트 요청
   const getPostList = async () => {
+    if(searchReport != ''){
       await axios
+          .get(searchPostListUrl)
+          .then((res) => {
+            setDataList(res.data)
+            console.log(dataList)
+          }
+          )}
+        else if(searchReport == ''){
+          await axios
           .get(PostListUrl)
           .then((res) => {
             setDataList(res.data)
             console.log(dataList)
           }
-          )}; 
+          )
+        }
+        }; 
+        
 
   useEffect(() => {
     getPostList();

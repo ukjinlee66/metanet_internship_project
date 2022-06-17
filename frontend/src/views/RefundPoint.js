@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const RefundPoint = (props) => {
-
-  const [inputText, setInputText] = useState('');
+  const getUserId = decodeURI(window.location.search.split('=')[1])
+  const [inputText, setInputText] = useState(getUserId);
   const [refundPoint, setRefundPoint] = useState();
   const [point,setPoint] = useState(0);
-
+  
   const BASEURL = "http://localhost:8443/Point/refund"
   const FindURL = "http://localhost:8443/Account/getAccount"
   const handleSubmit = (e) => {

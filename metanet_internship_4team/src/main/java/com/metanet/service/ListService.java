@@ -12,6 +12,7 @@ public interface ListService
 	List<Video> SearchKind(String recipeKind); // findByKind
 	List<Video> Search(String videoTitle); // 기본 검색
 	List<Video> SearchKind(String videoTitle, String recipeKind); // 분야 검색
+	List<Video> SearchLevel(String videoTitle, String recipeLevel); // 레벨 검
 	List<Video> SearchCreateTitle(List<Video> arr); // 시간순 정렬 검색
 	List<Video> SearchViewTitle(List<Video> arr); // 조회순 정렬 검색
 	List<Video> SearchtoLikes(List<Video> arr); // 좋아요순 정렬 검색

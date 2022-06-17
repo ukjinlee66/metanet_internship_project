@@ -12,7 +12,40 @@ import {Carousel} from '3d-react-carousal';
 
 
 
-function MainRecipeList(props) {
+function MainRecipeList(props) 
+{
+    const axio = axios.create({baseURL: 'http://localhost:8443'})
+    const reqgetimg = '/Streaming/getImage'
+    function MyUploader() {
+    const [image, setImage] = useState("");
+    
+    const getImage = (props) => {
+        axio
+        .get(reqgetimg, 
+            {
+            params: {
+                videoNumber: (props.number)
+            }
+        })
+        .then((res) => {
+        const base64 = btoa(
+        new Uint8Array(res.data).reduce(
+            (data, byte) => data + String.fromCharCode(byte),
+            ''
+        )
+        )
+        setImage(base64)
+        })
+        return image;
+    }
+    
+    return (
+        <div className="App">
+        <img src={image} alt=""/>
+        <button onClick={getImage}>getdata</button>
+        </div>
+    );
+    }
 
     // 인기 영상 데이터
     const [popular, setPopular] = useState([

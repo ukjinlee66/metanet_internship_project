@@ -4,11 +4,20 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+
+const getToday=()=>{
+  var date = new Date();
+  var year = date.getFullYear();
+  var month = ("0" + (1 + date.getMonth())).slice(-2);
+  var day = ("0" + date.getDate()).slice(-2);
+
+  return year + "-" + month + "-" + day;
+}
 const QnaWriteForm = () => {
   const [reportName, setReportName] = useState('')
   const [reportDetail, setReportDetail] = useState('')
   const [inputReportKind, setInputReportKind] = useState('')
-
+  const [refundMoney, setRefundMoney]= useState('')
   const handleInputTitle = (e) => {
     setReportName(e.target.value)
   }
@@ -16,47 +25,36 @@ const QnaWriteForm = () => {
   const handleInputDetail = (e) => {
     setReportDetail(e.target.value)
   }
+  const handleInputRefundMoney = (e) => {
+    setRefundMoney(e.target.value)
+  }
 
   const handleInputReportKind = (e) => {
+    
     setInputReportKind(e.target.value)
   }
   useEffect(() => {}, [reportName])
   useEffect(() => {}, [reportDetail])
   useEffect(() => {console.log(inputReportKind)}, [inputReportKind])
 
-  // 아이디 중복 확인 이벤트
-  const BASEURL = "http://localhost:8443/Account"
-  const checkId = () => {
-    axios.post(BASEURL + "/validateId", null, {
+  // 문의글 등록
+  const BASEURL = "http://localhost:8443/Report/Post"
+
+  const submitReport = () => {
+    axios.post(BASEURL, sessionStorage.getItem("User_number"), {
       params: {
-        userId: sessionStorage.getItem("id")
-      }
-    })
-      .then(function (response) {
-        if (response.data == 1) {
-          alert("사용가능 한 아이디입니다")
-        }
-        else alert("이미 존재하는 아이디입니다")
-      })
-      .catch(function (error) {
-        console.log(error);
-        alert("오류")
-      })
-  }
-  const onClickSignUp = () => {
-    axios.post(BASEURL + "/signUpAccount", null, {
-      params: {
+        crDa: getToday(),
+        reportDetail : reportDetail,
+        reportKind: inputReportKind,
         reportName: reportName,
-        reportDetail: reportDetail,
-        userReckind: inputReportKind,
-        userNumber : sessionStorage.getItem("userNumber")
+        reportTableNumber: 0
       }
     })
       .then(function (response) {
         if (response.data == -1) alert("문의글 작성 실패")
         else{
           alert("문의글 작성 성공")
-          document.location.href = "http://localhost:3000/zipcook/Login" //문의글 백 연결
+          document.location.href = "http://localhost:3000/zipcook/PostMain" //문의글 백 연결
         }
       })
       .catch(function (error) {
@@ -64,6 +62,19 @@ const QnaWriteForm = () => {
         alert("오류")
       })
   }
+  // const refundRender = () => {
+  //   if(refundMoney === '취소/환불 접수'){
+  //     alert("취소/환불");
+  //   return <div className="mb-3">
+  //           <label>환불 희망 금액</label>
+  //           <br />
+  //           <input type="text" name="refundMoney" placeholder="Enter refund Money" value={refundMoney} onChange={handleInputRefundMoney} />
+  //         </div>
+  //   }
+  //   else{
+  //     return ''
+  //   }
+  // }
     return (
         <Fragment>
         <Navbar></Navbar>
@@ -86,11 +97,13 @@ const QnaWriteForm = () => {
         <div className="mb-3">
           <label>문의 분류</label>
           <br />
-          <input type="radio" name="User_RecKind" value="환불" onChange={handleInputReportKind} />환불&nbsp;&nbsp;&nbsp;
-          <input type="radio" name="User_RecKind" value="영상" onChange={handleInputReportKind} />영상&nbsp;&nbsp;&nbsp;
-          <input type="radio" name="User_RecKind" value="로그인" onChange={handleInputReportKind} />로그인&nbsp;&nbsp;&nbsp;
-          <input type="radio" name="User_RecKind" value="결제" onChange={handleInputReportKind} />결제
+          <input type="radio" name="User_RecKind" value="포인트 결제 문의" onChange={handleInputReportKind} />포인트 결제 문의&nbsp;&nbsp;&nbsp;
+          <input type="radio" name="User_RecKind" value="취소/환불 접수" onChange={handleInputReportKind} />취소/환불 접수&nbsp;&nbsp;&nbsp;
+          <input type="radio" name="User_RecKind" value="불편사항" onChange={handleInputReportKind} />불편사항&nbsp;&nbsp;&nbsp;
+          <input type="radio" name="User_RecKind" value="콘텐츠 요청" onChange={handleInputReportKind} />콘텐츠 요청&nbsp;&nbsp;&nbsp;
+          <input type="radio" name="User_RecKind" value="기타" onChange={handleInputReportKind} />기타&nbsp;&nbsp;&nbsp;
         </div>
+        
 
         <div className="mb-3" style={{height:'500px'}}>
           <label>문의내용</label>
@@ -118,7 +131,7 @@ const QnaWriteForm = () => {
           />
         </div>
         <div className="d-grid">
-          <button type="submit" className="btn btn-primary" onClick={onClickSignUp}>
+          <button type="submit" className="btn btn-primary" onClick={submitReport}>
             등 록
           </button>
         </div>

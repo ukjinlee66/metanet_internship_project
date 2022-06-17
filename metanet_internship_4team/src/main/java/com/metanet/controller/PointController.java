@@ -1,6 +1,7 @@
 package com.metanet.controller;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.metanet.domain.Buy;
 import com.metanet.domain.Charge;
 import com.metanet.domain.Refund;
@@ -151,7 +151,7 @@ public class PointController {
 	public int  refundPoint( RefundDTO.RefundRequest refundRequest,     @RequestParam(value = "userId", required=false, defaultValue="none") String userId  )
 	{
 
-		if(userId.equals("none")) return -1;
+		if(userId.equals("none")) return -1; 
 		else {
 			
 			Users findUser =  accountService.getAccount(userId).get();
