@@ -67,7 +67,7 @@ function RecipeinfoComments(props)
             {
                 result.push(
                     <Space
-                    direction="vertical"
+                    direction="horizontal"
                     size="middle"
                     style={{
                         display: "flex",
