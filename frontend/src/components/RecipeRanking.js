@@ -45,7 +45,7 @@ const RecipeRanking=()=>
                 console.log("res.data:   "+res.data)
                 setRankingList(res.data)
 
-                console.log("getRankingList 함수에서 setRankingList 실행 후 값" + rankingList[0].searchWordName)
+                //console.log("getRankingList 함수에서 setRankingList 실행 후 값" + rankingList[0].searchWordName)
 
             }
             )
@@ -61,7 +61,7 @@ const RecipeRanking=()=>
     useEffect(() => {
     getRankingList();
     // changeType();
-    console.log("첫 useEffect의 getRankingList() 실행 후 콘솔");
+    //console.log("첫 useEffect의 getRankingList() 실행 후 콘솔");
 
         }, []);
 
@@ -75,22 +75,22 @@ const RecipeRanking=()=>
     }
 
     const finish=() =>{
-        console.log("newsticker 끝!!!!!!"+rankingList[0].searchWordName)
+        //console.log("newsticker 끝!!!!!!"+rankingList[0].searchWordName)
     }
 
 
     const consolecheck = () => {
-        console.log("NewsTick 실행")
+        //console.log("NewsTick 실행")
     }
 
 
     const out = () =>
     {
         var res = [];
-        console.log("out함수 실행 / out 함수 내의 rankingTitle: " + rankingList + "랭킹타이틀 타입: " + type(rankingList[0]))
+        //console.log("out함수 실행 / out 함수 내의 rankingTitle: " + rankingList + "랭킹타이틀 타입: " + type(rankingList[0]))
         for(let con of rankingList)
         {
-            console.log(con.searchWordName)
+            //console.log(con.searchWordName)
             res.push(
                 <Fragment><a onClick={btClick}>
                     {con.searchWordName}

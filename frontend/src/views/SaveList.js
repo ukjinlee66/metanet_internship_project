@@ -7,7 +7,6 @@ const SaveList = (props) => {
     const [data, setData] = useState(null);
     const reqUrl = 'http://localhost:8443/MyPage/getSave?userId='
     useEffect(() => {
-        console.log(sessionStorage.getItem("User_Id"))
         axios
             .get(reqUrl + sessionStorage.getItem("User_Id"))
             .then((res) => {setData(res.data)

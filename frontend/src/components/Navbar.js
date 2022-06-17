@@ -19,6 +19,10 @@ function Navbar(props) {
         }else if(e.target.value === "BuySubscribe"){
             sessionStorage.setItem("pageSession", 1);
             window.location.href = "/zipcook/" + e.target.value;
+        }else if(e.target.value === "PostMain"){
+            window.location.href = "/zipcook/" + e.target.value;
+        }else if(e.target.value === "RefundPage"){
+            window.location.href = "/zipcook/" + e.target.value;
         }
         else{
             sessionStorage.setItem("pageSession", 1);
@@ -31,6 +35,8 @@ function Navbar(props) {
     }
     function logOut(e) {
         sessionStorage.removeItem("User_Id")
+        sessionStorage.removeItem("User_Number")
+        sessionStorage.removeItem("User_Kind")
         window.location.href = "/zipcook"
     }
     // 스크롤의 Y축을 감시하여 특정 지점 이동 시 Navbar가 화면 일정 지점에 따라가도록 설정
@@ -86,17 +92,26 @@ function Navbar(props) {
                         <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="Signup">회원가입</button>
                         
                     </div>
+                ) : ((sessionStorage.getItem("User_Kind") == 1 ?(
+                    <div class="justify-content-md-end">
+                    <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="PostMain">고객센터</button>
+                    <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="RefundPage">환불 페이지</button>
+                    <button class="btn btn-white border-0 w-20 m-3" onClick={logOut} value="Logout">로그아웃</button>
+                    </div>
                 ) : (
                     <div class="justify-content-md-end">
-                        {/* <p style={{fontSize:'12px'}}>구독 마감 날짜 : {buy}</p> */}
-                        <p style={{fontSize:'12px'}}>포인트 : {point}</p>
-                        <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="BuySubscribe">구독권 구입</button>
-                        <button class="btn btn-white border-0 w-20 m-3" onClick={logOut} value="Logout">로그아웃</button>
-                        <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="EditSign">회원정보</button>
-                        <Avatar onClick={AvClick} shape="square" size={64} icon={<UserOutlined />}/>
-                        {/* <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="MyPage">마이페이지</button> */}
+                    {/* <p style={{fontSize:'12px'}}>구독 마감 날짜 : {buy}</p> */}
+                    <p style={{fontSize:'12px'}}>포인트 : {point}</p>
+                    <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="BuySubscribe">구독권 구입</button>
+                    <button class="btn btn-white border-0 w-20 m-3" onClick={logOut} value="Logout">로그아웃</button>
+                    <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="EditSign">회원정보</button>
+                    <Avatar onClick={AvClick} shape="square" size={64} icon={<UserOutlined />}/>
+                    {/* <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="MyPage">마이페이지</button> */}
                     </div>
-                )}
+                ))
+  
+                )
+}
 
 
                 <div className="collapse navbar-collapse" id="navbarCollapse">

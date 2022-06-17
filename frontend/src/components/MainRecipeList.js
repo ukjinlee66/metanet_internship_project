@@ -70,7 +70,7 @@ function MainRecipeList(props) {
 
     // 처음 렌더링시 한번 실행되는 함수
     useEffect(() => {
-        popularInfo;
+        popularInfo();
     }, [])
 
 

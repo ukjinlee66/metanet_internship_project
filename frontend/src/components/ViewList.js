@@ -28,7 +28,6 @@ function Recipelistitem({data}) {
         let timer = setTimeout(() => {
             setRecipe(data);
         }, 500)
-        console.log(recipe)
         return ()=> clearTimeout(timer) 
     }, [data])
 

@@ -19,8 +19,8 @@ function RecipeRanking(props) {
                 setInputLevel(e.target.value)
         }
 
-        useEffect(() => { console.log("분류", inputRecKind) }, [inputRecKind])
-        useEffect(() => { console.log("난이도", inputLevel) }, [inputLevel])
+        useEffect(() => { }, [inputRecKind])
+        useEffect(() => { }, [inputLevel])
 
         // 레시피 클릭 시 이동
         function btClick(e) {
