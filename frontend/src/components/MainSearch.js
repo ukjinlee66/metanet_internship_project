@@ -15,6 +15,9 @@ function MainSearch(props) {
         sessionStorage.setItem('listState', 'none')
     }
 
+    const colorClick= () => {
+
+    }
     // 검색창에 ENTER 치는 경우에 검색 버튼 클릭으로 간주
     const onKeyPress = (e) => {
         if(e.key=='Enter'){
@@ -38,8 +41,48 @@ function MainSearch(props) {
                     </div>
                 </div>
             </div>
-            <RecipeRanking/>
-            <CategorySelect/>
+
+                <div class="d-flex flex-row-reverse">
+                    
+                    <div class="item"><button onClick={colorClick} style={{color : "green",backgroundColor: "#FFA778", marginTop:"50px", marginRight:"150px"}}>검색</button></div>
+                    
+                    <div class="item" style={{marginTop:"30px", marginLeft:"50px", marginRight:"20px"}}>     
+                                    {/* <button class="btn btn-dark border-3 w-90 m-1"  onClick={btClick}>카테고리별</button> */}
+                                    
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="options1" id="option1" autocomplete="off" value='한식'/> 한식
+                                        </label>
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="options1" id="option2" autocomplete="off" value='중식'/> 중식
+                                        </label>
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="options1" id="option3" autocomplete="off" value='양식'/> 양식
+                                        </label>
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="options1" id="option3" autocomplete="off" value='일식'/> 일식
+                                        </label>
+                                    </div>
+                                    {/* <button class="btn btn-dark border-3 w-90 m-1"  onClick={btClick}>난이도별</button> */}
+                                    <div style={{marginLeft:"50px"}} class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="options" id="option1" autocomplete="off" value='초급'/> 초급
+                                        </label>
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="options" id="option2" autocomplete="off" value='중급'/> 중급
+                                        </label>
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="options" id="option3" autocomplete="off" value='상급'/> 상급
+                                        </label>
+                                        
+                                    </div>
+                    </div>
+                    <div class="item" style={{marginLeft:"100px"}}></div>
+                    <div class="item" style={{marginTop:"30px", marginLeft:"50px"}}><RecipeRanking/></div>
+                    
+                </div>
+                
+            
         </div>
     );
 }

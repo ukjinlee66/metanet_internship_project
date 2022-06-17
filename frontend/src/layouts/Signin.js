@@ -17,24 +17,27 @@ const Signin = () => {
   // login 버튼 클릭 이벤트
   const onClickLogin = () => {
     axios.post(BASEURL, null,{
+      
+      
       params: {
         userId: inputId,
         userPassword: inputPw
       }
     })
-      .then(function (response)  
-      {
+      .then(function (response) {
         if (response.data) {
           alert("로그인 성공")
           sessionStorage.setItem('User_Id', response.data.userId)
-          sessionStorage.setItem('isManager', response.data.userKind === 0 ? 0 : 1) // 관리자 회원인지 확인
+
           sessionStorage.setItem('User_Number', response.data.userNumber)
+
+          sessionStorage.setItem("User_Kind", response.data.userKind)
           document.location.href = "http://localhost:3000/zipcook"
 
         }
         else{ 
           alert("로그인 실패")
-          }
+          console.log(response)}
       })
       .catch(function (error) {
         console.log(error);
