@@ -33,6 +33,7 @@ function Recipeinfo(props)
     const requnlike = '/Info/deleteLikes'; // 좋아요 삭제
     const reqislike = '/Info/isLiked'; // 좋아요 확인
     const reqcountlike = '/Info/getlikecount'; //좋아요 개수 확인
+    const reqaddView = '/List/Views'; // 조회수 증가
     const Button = withImportantStyle('button');
 
     // 레시피에 대한 상세정보 요청
@@ -44,6 +45,13 @@ function Recipeinfo(props)
                 }
             })
             .then((res) => setRecipe(res.data));
+        await axio
+            .post(reqaddView,{},{
+                params: {
+                    videoNumber: Number(decodeURI(window.location.search.split('=')[1]))
+                }
+            })
+            .then((res)=> console.log("조회수 증가"));
     }
 
     // 레시피에 대한 좋아요 수 요청
