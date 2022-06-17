@@ -39,6 +39,7 @@ function MainSearch(props) {
                 </div>
             </div>
             <RecipeRanking/>
+            <CategorySelect/>
         </div>
     );
 }
