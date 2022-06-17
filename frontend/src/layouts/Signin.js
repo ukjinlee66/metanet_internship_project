@@ -17,10 +17,6 @@ const Signin = () => {
   // login 버튼 클릭 이벤트
   const onClickLogin = () => {
     axios.post(BASEURL, null,{
-      headers: {
-        'Content-Type': 'multipart/form-data'
-    },
-      
       params: {
         userId: inputId,
         userPassword: inputPw
@@ -38,7 +34,7 @@ const Signin = () => {
         }
         else{ 
           alert("로그인 실패")
-          console.log(response)}
+          }
       })
       .catch(function (error) {
         console.log(error);

@@ -18,7 +18,7 @@ function QnAPage() {
           })
           .then((res) => {
               setQna(res.data)
-              console.log("qna",res.data)}
+            }
           );
           
   },[])

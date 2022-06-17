@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import axios from "axios";
+
 const RefundPoint = (props) => {
   const getUserId = decodeURI(window.location.search.split('=')[1])
   const [inputText, setInputText] = useState(getUserId);
@@ -18,9 +18,9 @@ const RefundPoint = (props) => {
     }
     })
       .then(function (response) {
-        if(response.data == -1){
+        if(response.data === -1){
           alert("환불 실패")
-        }else if(response.data ==  1){
+        }else if(response.data ===  1){
           alert("환불 성공");
       }
       })
@@ -39,17 +39,11 @@ const RefundPoint = (props) => {
       }
     })
       .then(function (response) {
-        if (response.data == "") {
+        if (response.data === "") {
           alert("없는 아이디")
-          console.log("dfdf")
-          console.log(response)
-          console.log(response.data)
         }else{
           alert("존재하는 아이디")
           setPoint(response.data.userPoint);
-          console.log("dfdf")
-          console.log(response)
-          console.log(response.data)
         }
         
       })

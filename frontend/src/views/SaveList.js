@@ -1,18 +1,12 @@
-import React, { Component, useState, useEffect } from 'react';
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
 import Scrolltop from '../components/Scrolltop';
 import axios from 'axios';
 import ViewList from '../components/ViewList';
-const Center = styled.h2`
-text-align: center;
-height: 100vh;
-width: 100vh;
-`
+
 const SaveList = (props) => {
     const [data, setData] = useState(null);
     const reqUrl = 'http://localhost:8443/MyPage/getSave?userId='
     useEffect(() => {
-        console.log(sessionStorage.getItem("User_Id"))
         axios
             .get(reqUrl + sessionStorage.getItem("User_Id"))
             .then((res) => {setData(res.data)

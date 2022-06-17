@@ -37,7 +37,6 @@ function App() {
               <Route path='/zipcook/QnaWriteForm' element={<QnaWriteForm/>}/>
               <Route path='/zipcook/member/*' element={<Member/>}/>
               <Route exact path='/zipcook/postView/:no' element={<PostView/>} />
-              <Route exact path='/zipcook/postView/*' element={<PostView/>} />
               <Route exact path='/zipcook/postMain' element={<PostMain/>} />
               <Route path='/zipcook/QuestionInfo' element={<QuestionInfo/>}/>
               <Route path='/zipcook/BuySubscribe' element={<BuySubscribe/>}/>

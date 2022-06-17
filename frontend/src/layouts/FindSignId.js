@@ -33,7 +33,6 @@ const FindSignId = () => {
       .then(function (response) {
         if (response.data == "no ID") alert("회원을 찾을 수 없습니다.")
         else {
-          console.log(response.data)
           let id = response.data
           alert("회원님의 아이디는 : "+id+" 입니다.")
           document.location.href = "http://localhost:3000/zipcook/member/Login"
