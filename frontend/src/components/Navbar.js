@@ -12,7 +12,8 @@ function Navbar(props) {
 
     // useRef를 통해 css 변경
     const stickyChange = useRef(null);
-    function btClick(e) {
+    function btClick(e)
+    {
         if(e.target.value === "MyPage"){
             sessionStorage.setItem("pageSession", 1);
             window.location.href = "/zipcook/" + e.target.value;
@@ -54,7 +55,6 @@ function Navbar(props) {
         if (sessionStorage.getItem('User_Id') === null) {
         } else {
             setIsLogin(true)
-
         }
     })  
     const BASEURL = "http://localhost:8443/Account"
@@ -71,12 +71,9 @@ function Navbar(props) {
 
       })
     },[])
-
     return (
         <Fragment>
-
             <nav className="navbar bg-white navbar-light shadow sticky-top p-0" ref={stickyChange}>
-
                 <a href="/zipcook" className="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
                     <img class="logo" src={logo} />
                 </a>
@@ -84,7 +81,6 @@ function Navbar(props) {
                     <div class="justify-content-md-end">
                         <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="Login">로그인</button>
                         <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="Signup">회원가입</button>
-                        
                     </div>
                 ) : (
                     <div class="justify-content-md-end">
@@ -97,21 +93,15 @@ function Navbar(props) {
                         {/* <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="MyPage">마이페이지</button> */}
                     </div>
                 )}
-
-
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                     <div className="navbar-nav ms-auto p-4 p-lg-0">
                         {/* <a href="/zipcook/Maps" className="nav-item nav-link">Map</a>
                         <a href="/zipcook/TouristAttractionList?search=" className="nav-item nav-link">List</a>
                         <a href="/zipcook/TouristAttractionInfo" className="nav-item nav-link">Info</a> */}
-
                         {/* <a href="/zipcook" className="btn btn-primary bg-zipcook-nav rounded-0 py-4 px-lg-5 d-none d-lg-block">Home<i class="fa fa-arrow-right ms-3"></i></a> */}
                     </div>
                 </div>
-
             </nav>
-
-
         </Fragment>
     );
 }

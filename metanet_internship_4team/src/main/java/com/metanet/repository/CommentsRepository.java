@@ -10,4 +10,6 @@ import com.metanet.domain.Comments;
 public interface CommentsRepository extends JpaRepository<Comments, Integer>
 {
 	List<Comments> findByvideoNumber(int videoNumber);
+	Comments findBycrDa(java.sql.Date crDa);
+	Comments findBycommentsNumber(int commentsNumber);
 }

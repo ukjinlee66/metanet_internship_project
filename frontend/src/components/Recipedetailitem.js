@@ -1,5 +1,5 @@
 import React from 'react';
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import axios from "axios";
 import VideoHover from './VideoHoverPlay.js';
 import vide from "../Recipe/고등어조림.mp4";
@@ -16,6 +16,10 @@ const GetVideo = '/Info/Videonum'; // 해당 게시글의 동영상 파일을 �
 
 const Recipedetaillist=()=>
 {
+  const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장 
+
+  // useRef를 통해 css 변경
+  const stickyChange = useRef(null);
   // const [subList, SetsubList] = useState=([
   //   {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
   //   {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
@@ -49,10 +53,13 @@ const Recipedetaillist=()=>
   //   }
   // }
   
-  // useEffect(()=>
-  //   {
-  //     checkUserLogin();
-  //   },[]);
+  useEffect(()=>
+  {
+    function scrollListener() { window.addEventListener("scroll", handleScroll); } //  window 에서 스크롤을 감시 시작
+    scrollListener(); // window 에서 스크롤을 감시
+    return () => { window.removeEventListener("scroll", handleScroll); }; //  window 에서 스크롤을 감시를 종료
+    //checkUserLogin();
+  },[]);
   
   const videoRender = async () =>
   {
@@ -66,9 +73,17 @@ const Recipedetaillist=()=>
     // }
     //return result;
   }
-  
+  // 스크롤의 Y축을 감시하여 특정 지점 이동 시 Navbar가 화면 일정 지점에 따라가도록 설정
+  function handleScroll() {
+  setScrollY(window.pageYOffset);
+  if (ScrollY > 600) {
+      stickyChange.current.style.top = '0px';
+  } else {
+      stickyChange.current.style.top = '50px';
+  }
+}
   return(
-    <div>
+    <nav className="navbar bg-white navbar-light shadow sticky-top p-0" ref={stickyChange}>
       <VideoHover name = {vide}/>
       <h3>Video1</h3>
       <VideoHover name = {vide}/>
@@ -76,7 +91,7 @@ const Recipedetaillist=()=>
       <VideoHover name = {vide}/>
       <h3>Video3</h3>
         {/* {videoRender()} */}
-    </div>
+    </nav>
   );
 };
 

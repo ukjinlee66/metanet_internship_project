@@ -161,4 +161,25 @@ public class ListServiceImpl implements ListService
 		else
 			return second;
 	}
+	
+	public List<Video> SearchLevel(String videoTitle, String recipeLevel) // 분야 검색
+	{
+		List<Video> first = Search(videoTitle);
+		List<Video> second = new ArrayList<>();
+		for(Video v : first)
+		{
+			try {
+				if(v.getRecipeLevel().equals(recipeLevel))
+					second.add(v);
+			}
+			catch(NullPointerException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		if(second.isEmpty())
+			return (new ArrayList<>());
+		else
+			return second;
+	}
 }

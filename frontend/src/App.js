@@ -13,8 +13,8 @@ import PostMain from './layouts/PostMain';
 import PostView from './layouts/PostView';
 import Member from './views/Member';
 import NotFound from './layouts/NotFound';
+import CreateRecipe from './layouts/CreateRecipe';
 import BuySubscribe from './views/BuySubscribe';
-
 function App() {
   useEffect(async () => {
     window.onpageshow = (event) => {
@@ -42,7 +42,7 @@ function App() {
               <Route path='/zipcook/QuestionInfo' element={<QuestionInfo/>}/>
               <Route path='/zipcook/BuySubscribe' element={<BuySubscribe/>}/>
               <Route path='/zipcook/member/*' element={<Member/>}/>
-
+              <Route path='/zipcook/CreateRecipe' element={<CreateRecipe/>}/>
               <Route path='*' element={<NotFound/>}/>
           </Routes>
       </BrowserRouter>
