@@ -28,6 +28,8 @@ public interface UsersRepository extends JpaRepository<Users, Long>
 	
 	Users findByuserNumber(int userNumber);
 
+	Users findByuserId(String userId);
+
 	
 	//Optional<Users> findByUserIdAndUserNameAndUserEmail( String userId,  String userName, String usersEmail );
 
