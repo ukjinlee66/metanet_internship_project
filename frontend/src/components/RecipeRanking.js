@@ -12,6 +12,7 @@ import Ticker2 from "./Ticker2"
 import Ticker3 from "./Ticker3"
 import Ticker4 from "./Ticker4"
 import Ticker5 from "./Ticker5"
+import CategorySelect from "../components/CategorySelect"
 var rankingTitle = [];
 
 const RecipeRanking=()=>
@@ -25,13 +26,6 @@ const RecipeRanking=()=>
         {id:'', searchWordName:''}
     ]);
 
-    const searchWordRef = useRef();
-
-    
-
-  
-
-    
 
     // 검색어 랭킹리스트 가져오는 url
     const rankingUrl = 'http://localhost:8443/MainPage/getSearchWordRank';
@@ -40,13 +34,11 @@ const RecipeRanking=()=>
     const getRankingList = async () => {
         await axios
             .get(rankingUrl)
-            
             .then((res) => {
-                console.log("res.data:   "+res.data)
                 setRankingList(res.data)
-
-                //console.log("getRankingList 함수에서 setRankingList 실행 후 값" + rankingList[0].searchWordName)
-
+                
+                console.log("getRankingList 함수에서 setRankingList 실행 후 값" + rankingList[0].searchWordName)
+               
             }
             )
 
@@ -61,10 +53,10 @@ const RecipeRanking=()=>
     useEffect(() => {
     getRankingList();
     // changeType();
-    //console.log("첫 useEffect의 getRankingList() 실행 후 콘솔");
-
+    console.log("첫 useEffect의 getRankingList() 실행 후 콘솔");
+ 
         }, []);
-
+   
 
     // 레시피 클릭 시 이동
     const btClick=(e)=> {
@@ -73,32 +65,32 @@ const RecipeRanking=()=>
         window.location.href = "/zipcook/RecipeAttractionList?search=" + e.target.value;
         sessionStorage.setItem('listState', 'none')
     }
-
+    
     const finish=() =>{
-        //console.log("newsticker 끝!!!!!!"+rankingList[0].searchWordName)
-    }
+        console.log("newsticker 끝!!!!!!"+rankingList[0].searchWordName)
+    } 
 
 
     const consolecheck = () => {
-        //console.log("NewsTick 실행")
+        console.log("NewsTick 실행")
     }
 
-
+    
     const out = () =>
     {
         var res = [];
-        //console.log("out함수 실행 / out 함수 내의 rankingTitle: " + rankingList + "랭킹타이틀 타입: " + type(rankingList[0]))
+        console.log("out함수 실행 / out 함수 내의 rankingTitle: " + rankingList + "랭킹타이틀 타입: " + type(rankingList[0]))
         for(let con of rankingList)
         {
-            //console.log(con.searchWordName)
+            console.log(con.searchWordName)
             res.push(
                 <Fragment><a onClick={btClick}>
                     {con.searchWordName}
                     </a></Fragment>
             );
         }
-
-
+            
+            
         console.log("out함수 return 값 : " + res)
         // return (<Fragment><a onClick={btClick}>{rankingTitle[0]}</a></Fragment>);
         return (res);
@@ -111,8 +103,7 @@ const RecipeRanking=()=>
 
     return (
         <div class="container">
-                <div class="col-md-10">
-                        <p></p>
+                <div class="col-md-15">
                         <h4>실시간 검색어 랭킹</h4>
                         <NewsTicker
                                 rowHeight = {30}
@@ -127,8 +118,6 @@ const RecipeRanking=()=>
                                 <Ticker4></Ticker4>
                                 <Ticker5></Ticker5>
                         </NewsTicker>
-                        {finish()}
-
                 </div>
         </div>
     );

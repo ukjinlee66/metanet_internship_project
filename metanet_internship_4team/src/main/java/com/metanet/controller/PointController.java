@@ -105,8 +105,8 @@ public class PointController {
 
 	public int  buy(  BuyDTO.BuyRequest buyRequest,      @RequestParam(value = "userId", required=false, defaultValue="none") String userId  )
 	{
-		if(userId.equals("none")) return -1;
-		else {
+//		if(userId.equals("none")) return -1;
+//		else {
 			
 			Users findUser =  accountService.getAccount(userId).get();
 						
@@ -117,7 +117,7 @@ public class PointController {
 			}else 	return -1;
 				
 			
-		}   
+//		}   
 	}
 	
 	
