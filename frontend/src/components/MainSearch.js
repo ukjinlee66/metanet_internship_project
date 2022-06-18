@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
@@ -7,11 +7,23 @@ import CategorySelect from '../components/CategorySelect';
 
 function MainSearch(props) {
     const [searchInput, setSearchInput] = useState("")
+    const [inputColor1, setInputColor1] = useState('')
+    const [inputColor2, setInputColor2] = useState('')
+    const handleInputColor1 = (e) => {
+        setInputColor1(e.target.value)
+        
+      }
 
+      const handleInputColor2 = (e) => {
+        setInputColor2(e.target.value)
+      }
+
+    useEffect(() => {}, [inputColor1])
+    useEffect(() => {}, [inputColor2])
     // 검색 버튼 클릭 시 이동
     function btClick(e) {
         sessionStorage.setItem("pageSession", 1);
-        window.location.href = "/zipcook/RecipeAttractionList?search=" + searchInput;
+        window.location.href = "/zipcook/RecipeAttractionList?search=" + searchInput+inputColor1+inputColor2;
         sessionStorage.setItem('listState', 'none')
     }
 
@@ -44,35 +56,35 @@ function MainSearch(props) {
 
                 <div class="d-flex flex-row-reverse">
                     
-                    <div class="item"><button onClick={colorClick} style={{color : "green",backgroundColor: "#FFA778", marginTop:"50px", marginRight:"150px"}}>검색</button></div>
+                    <div class="item" style={{ marginTop:"50px", marginRight:"170px"}}></div>
                     
                     <div class="item" style={{marginTop:"30px", marginLeft:"50px", marginRight:"20px"}}>     
                                     {/* <button class="btn btn-dark border-3 w-90 m-1"  onClick={btClick}>카테고리별</button> */}
                                     
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-secondary">
-                                            <input type="radio" name="options1" id="option1" autocomplete="off" value='한식'/> 한식
+                                            <input type="radio" name="options1" id="option1" autocomplete="off" value='&한식' onChange={handleInputColor1}/> 한식
                                         </label>
                                         <label class="btn btn-secondary">
-                                            <input type="radio" name="options1" id="option2" autocomplete="off" value='중식'/> 중식
+                                            <input type="radio" name="options1" id="option2" autocomplete="off" value='&중식' onChange={handleInputColor1}/> 중식
                                         </label>
                                         <label class="btn btn-secondary">
-                                            <input type="radio" name="options1" id="option3" autocomplete="off" value='양식'/> 양식
+                                            <input type="radio" name="options1" id="option3" autocomplete="off" value='&양식' onChange={handleInputColor1}/> 양식
                                         </label>
                                         <label class="btn btn-secondary">
-                                            <input type="radio" name="options1" id="option3" autocomplete="off" value='일식'/> 일식
+                                            <input type="radio" name="options1" id="option3" autocomplete="off" value='&일식' onChange={handleInputColor1}/> 일식
                                         </label>
                                     </div>
                                     {/* <button class="btn btn-dark border-3 w-90 m-1"  onClick={btClick}>난이도별</button> */}
                                     <div style={{marginLeft:"50px"}} class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-secondary">
-                                            <input type="radio" name="options" id="option1" autocomplete="off" value='초급'/> 초급
+                                            <input type="radio" name="options" id="option1" autocomplete="off" value='&초급' onChange={handleInputColor2}/> 초급
                                         </label>
                                         <label class="btn btn-secondary">
-                                            <input type="radio" name="options" id="option2" autocomplete="off" value='중급'/> 중급
+                                            <input type="radio" name="options" id="option2" autocomplete="off" value='&중급' onChange={handleInputColor2}/> 중급
                                         </label>
                                         <label class="btn btn-secondary">
-                                            <input type="radio" name="options" id="option3" autocomplete="off" value='상급'/> 상급
+                                            <input type="radio" name="options" id="option3" autocomplete="off" value='&상급' onChange={handleInputColor2}/> 상급
                                         </label>
                                         
                                     </div>
