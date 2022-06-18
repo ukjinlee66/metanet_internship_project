@@ -8,6 +8,10 @@ import qs from 'qs';
 
 function Recipelistitem(props) {
    
+    const [item, setItem] = useState([
+        {videoTitle:'', color1:'', color2:''}
+    ])
+
     const [recipe, setRecipe] = useState([
         {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
         {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
@@ -32,44 +36,42 @@ function Recipelistitem(props) {
         setPage(nowPage);
         sessionStorage.setItem("pageSession", nowPage);
     };
-  
+    const getListInfo = () => {
+    const info = decodeURI(window.location.search.split('&'))
+    if (info.split(',').length== 3){
+        let title = info.split(',')[0].split('=')[1];
+        let color1 = info.split(',')[1]; 
+        let color2 = info.split(',')[2]; 
+        console.log("1"+title,"2" +color1, "3"+color2);
+    }
+    else if(info.split(',').length==2){
+    
+    
+    }
+}
+    useEffect(() => {
+        getListInfo();
+    }, [])
 
-    // const changePriority = (e) => {
-    //     setPriority(e.target.name)
-    //     const priorValue= e.target.name;
-    //     changePagePriority(priorValue);
-        
-    // }
-    // useEffect(()=> {
-    //     console.log(priority);
-    // }, [priority])
-
-    // const changePagePriority =async (priorValue) => {
-        
-    //     // if(priorValue ==="searchToTime") {
-    //     //     getToTimeItem(page);
-    //     // }else if(priorValue ==="searchToView"){
-    //     //     getToViewItem(page);
-    //     // }else if(priorValue ==="searchToLike"){
-    //     //     getToLikeItem(page);
-    //     // }
-    // }
     
   
     
 
-    const reqwUrl = 'http://localhost:8443/List/Search'
+    const reqwUrl = 'http://localhost:8443/List/Search';
     
-    const sortUrl = 'http://localhost:8443/List/Sort'
+    const sortUrl = 'http://localhost:8443/List/Sort';
     
-    const tourSizeUrl = 'http://localhost:8443/List/Search'
-    const elaUrl = '/log/searchKeyword'
+    const tourSizeUrl = 'http://localhost:8443/List/Search';
+    const elaUrl = '/log/searchKeyword';
 
     const sortBtClick = (e) =>{
-        sessionStorage.setItem("sortType", e.target.value)
+        sessionStorage.setItem("sortType", e.target.value);
         getsortItem();
+    
 
-
+    
+    const info = decodeURI(window.location.search.split('='))
+    alert(info);
     }
     // 조회수에 따른 레시피 리스트 요청
     const getRecipeItem = async (page) => {
@@ -96,7 +98,6 @@ function Recipelistitem(props) {
     // 업로드 시간 순서에 따른 레시피 리스트 요청
     const getsortItem = async (page) => {
 
-        alert(sessionStorage.getItem("sortType"))
         console.log("레시피 0번: "+recipe[0])
         console.log("getListItem start", decodeURI(window.location.search.split('=')[1]));
 
