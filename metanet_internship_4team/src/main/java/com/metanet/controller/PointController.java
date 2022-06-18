@@ -1,5 +1,6 @@
 package com.metanet.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import com.metanet.domain.DTO.BuyDTO;
 import com.metanet.domain.DTO.ChargeDTO;
 import com.metanet.domain.DTO.PointDTO;
 import com.metanet.domain.DTO.RefundDTO;
+import com.metanet.repository.UsersRepository;
 import com.metanet.service.AccountService;
 import com.metanet.service.PointService;
 
@@ -33,6 +35,9 @@ public class PointController {
 		
 	@Autowired
 	private PointService pointService;
+	
+	@Autowired
+	private UsersRepository UsersRepo;
 	
 	
 	@PostMapping("/charge")
@@ -100,7 +105,6 @@ public class PointController {
 
 	public int  buy(  BuyDTO.BuyRequest buyRequest,      @RequestParam(value = "userId", required=false, defaultValue="none") String userId  )
 	{
-			
 		if(userId.equals("none")) return -1;
 		else {
 			
@@ -108,14 +112,13 @@ public class PointController {
 						
 			if( 1 == pointService.subtractPoint(findUser.getUserId(), buyRequest.getBuyPoint())) {
 				pointService.addBuy( buyRequest , findUser.getUserNumber()); 
+				pointService.addUserEndsubscribe(buyRequest, findUser.getUserNumber());
 				return 1; 
 			}else 	return -1;
 				
 			
-		}
-		
+		}   
 	}
-	
 	
 	
 	@GetMapping("/getBuyList")

@@ -1,5 +1,7 @@
 package com.metanet.service.impl;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +13,7 @@ import com.metanet.domain.Charge;
 import com.metanet.domain.Refund;
 import com.metanet.domain.Users;
 import com.metanet.domain.DTO.BuyDTO;
+import com.metanet.domain.DTO.BuyDTO.BuyRequest;
 import com.metanet.domain.DTO.ChargeDTO;
 import com.metanet.domain.DTO.RefundDTO;
 import com.metanet.repository.BuyRepository;
@@ -34,6 +37,7 @@ public class PointServiceImpl implements PointService {
 	
 	@Autowired
 	UsersRepository usersRepository;
+	
 	
 	
 	public void addCharge(ChargeDTO.ChargeRequest chargeRequest , int userNumber) {
@@ -158,34 +162,54 @@ public class PointServiceImpl implements PointService {
 		
 		
 	};
+	public void addUserEndsubscribe(BuyRequest buyRequest, int userNumber) {
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	 	long millis = System.currentTimeMillis();  
+	 	Date now = new java.sql.Date(millis);
+		
+	    Users user = usersRepository.findByuserNumber(userNumber);
+	    Date userSubDate = user.getUserEndsubscribe();
+	    
+	    int compare = now.compareTo(userSubDate);
+	    int buyPoint = buyRequest.getBuyPoint();
+	    
+	    Calendar cal1 = Calendar.getInstance();
+	    Calendar cal2 = Calendar.getInstance();
+	    cal1.setTime(now);
+	    cal2.setTime(userSubDate);
+	   
+	    if(compare < 1) //구독권 진행중 
+	    {
+		    if(buyPoint == 30000)
+		    	cal1.add(Calendar.DATE,7);
+		    if(buyPoint == 100000)
+		    	cal1.add(Calendar.DATE,90);
+		    if(buyPoint == 250000)
+		    	cal1.add(Calendar.DATE,365);
+		    
+		    java.util.Date date1 = (Date) cal1.getTime();		    
+		    java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
+		    user.setUserEndsubscribe(sqlDate);
+		    System.out.println(user);
+		    usersRepository.save(user);
+	    }
+	    else //구독권 경과
+	    {
+		    if(buyPoint == 30000)
+		    	cal2.add(Calendar.DATE,7);
+		    if(buyPoint == 100000)
+		    	cal2.add(Calendar.DATE,90);
+		    if(buyPoint == 250000)
+		    	cal2.add(Calendar.DATE,365);
+	    
+		    java.util.Date date2 = cal2.getTime();
+		    java.sql.Date sqlDate = new java.sql.Date(date2.getTime());
+		    user.setUserEndsubscribe(sqlDate);
+		    System.out.println(user);
+		    usersRepository.save(user);
+	    }
+	    
+        
+	    
+	};
 }
