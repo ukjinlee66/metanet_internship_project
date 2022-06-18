@@ -3,10 +3,9 @@ package com.metanet.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.InputStream;
 
-import javax.servlet.http.HttpServletResponse;
-
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -15,7 +14,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -122,12 +120,12 @@ public class StreamingController {
 	
 	
 	
-	
+	///// 바이트 어레일로 리엑트에 넘겨주기  
 
 	@GetMapping("/getImage")
 	@CrossOrigin
 	@ApiOperation(value="이미지 받기",notes="비디오 넘버로 이미지 받기")
-	public ResponseEntity<Resource> getImage( @RequestParam("videoNumber")  int videoNumber )
+	public ResponseEntity<Resource> getImageByte( @RequestParam("videoNumber")  int videoNumber )
 	{
 	
 		// videoNumber를 통해  videoname을 찾는다.
@@ -140,8 +138,9 @@ public class StreamingController {
 		
 		onlyFileName = onlyFileName.substring(lastIdx+1)+".png";
 				
-		
 		String fileFullPath = video.getVideoName() +  "\\" + onlyFileName;
+		
+		
 		
 		System.out.println(fileFullPath );
 		
@@ -159,6 +158,56 @@ public class StreamingController {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	@GetMapping("/getImageByte")
+	@CrossOrigin
+	@ApiOperation(value="이미지 받기",notes="비디오 넘버로 이미지 받기")
+	public ResponseEntity<byte[]> getImage( @RequestParam("videoNumber")  int videoNumber )
+			 throws IOException{
+	
+		// videoNumber를 통해  videoname을 찾는다.
+		
+		Video video = videoRepository.findByvideoNumber(videoNumber);
+				
+		String onlyFileName = video.getVideoName();
+		
+		int lastIdx = onlyFileName .lastIndexOf("\\");
+		
+		onlyFileName = onlyFileName.substring(lastIdx+1)+".png";
+				
+		
+		String fileFullPath = video.getVideoName() +  "\\" + onlyFileName;
+		
+		InputStream imageStream = new FileInputStream(fileFullPath);
+		
+		byte[] imageByteArray = IOUtils.toByteArray(imageStream);
+		imageStream.close();
+			
+		return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
+	
+	
+	}
+	
+	
+	
+	
+	/*
+	 * https://redbinalgorithm.tistory.com/382   이미지 바이트 배열로 보내기 
+	 * 
+	 */
 	
 	
 	
