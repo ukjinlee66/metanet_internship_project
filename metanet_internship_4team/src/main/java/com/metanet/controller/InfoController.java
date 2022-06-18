@@ -1,5 +1,6 @@
 package com.metanet.controller;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.metanet.domain.Comments;
+import com.metanet.domain.Users;
 import com.metanet.domain.Video;
 import com.metanet.domain.DTO.VideoDTO;
 import com.metanet.repository.CommentsRepository;
@@ -49,6 +51,9 @@ public class InfoController
 	
 	@Autowired
 	private LikesRepository likeRepo;
+	
+	@Autowired
+	private UsersRepository UsersRepo;
 	
 	@Value("${file.path}")
 	private String fileRealPath;
@@ -275,14 +280,26 @@ public class InfoController
 		return 1;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@GetMapping("/subscribe")
+	@CrossOrigin
+	@ApiOperation(value = "게시글 접근")
+	public boolean subscribe(int userNumber) {
+		
+		long millis = System.currentTimeMillis();  
+		Date now = new java.sql.Date(millis);
+		
+	    Users user = UsersRepo.findByuserNumber(userNumber);
+	    Date userSubDate = user.getUserEndsubscribe();
+	    int compare = now.compareTo(userSubDate);
+	    
+//	    System.out.println("오늘날짜 : "+ now);
+//	    System.out.println("구독만료 : "+userSubDate);
+//	    System.out.println(compare);
+	    
+	    if(compare < 1)
+	    	return true;
+	    else
+	    	return false;
+	    }
+	    
 }

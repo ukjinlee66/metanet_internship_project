@@ -68,4 +68,7 @@ public class Users
 	@Column(name = "USER_DATE")
 	@NonNull
 	private java.sql.Date userDate;
+	
+	@Column(name = "USER_ENDSUBSCRIBE")
+	private java.sql.Date userEndsubscribe;
 }
