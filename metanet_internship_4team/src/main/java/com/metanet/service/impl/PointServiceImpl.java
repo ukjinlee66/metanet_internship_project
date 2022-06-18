@@ -163,6 +163,7 @@ public class PointServiceImpl implements PointService {
 		
 	};
 	public void addUserEndsubscribe(BuyRequest buyRequest, int userNumber) {
+
 		
 	 	long millis = System.currentTimeMillis();  
 	 	Date now = new java.sql.Date(millis);
@@ -268,5 +269,5 @@ public class PointServiceImpl implements PointService {
 //		    usersRepository.save(user);
 //	    }
 //	};
-	
+
 }
