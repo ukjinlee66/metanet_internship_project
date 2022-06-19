@@ -7,6 +7,7 @@ import com.metanet.domain.Buy;
 import com.metanet.domain.Charge;
 import com.metanet.domain.Refund;
 import com.metanet.domain.DTO.BuyDTO;
+import com.metanet.domain.DTO.BuyDTO.BuyRequest;
 import com.metanet.domain.DTO.ChargeDTO;
 import com.metanet.domain.DTO.RefundDTO;
 
@@ -29,6 +30,8 @@ public interface PointService {
 	public List<Buy> getBuyList( int userNumber);
 	
 	public List<Refund> getRefundList( int userNumber);
+
+	public void addUserEndsubscribe(BuyRequest buyRequest, int userNumber);
 	
 	
 	

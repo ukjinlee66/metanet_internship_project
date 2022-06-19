@@ -36,7 +36,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 	@ApiOperation(value="조회수 저장")
 	public void VideoViews(@RequestParam int videoNumber){
 		
-//		videoRepo.findByvideoNumber(videoNumber); 
+		videoRepo.findByvideoNumber(videoNumber); 
 		service.updateView(videoNumber);
 
 	}
