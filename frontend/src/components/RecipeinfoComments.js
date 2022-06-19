@@ -35,7 +35,7 @@ function RecipeinfoComments(props)
         await axio
         .post(reqedit,{},{
                 Comments: String(props.Comm),
-                CommentsNumber: Number(sessionStorage.getItem("userNumber"))
+                CommentsNumber: Number(sessionStorage.getItem("User_Number"))
         })
         .then((res)=>{
             alert("댓글 수정 완료");
@@ -65,7 +65,7 @@ function RecipeinfoComments(props)
         {
             var temp = Comments[i].commentsNumber;
             var check = false;
-            if(sessionStorage['User_Id'] === Comments[i].userId)
+            if(sessionStorage['User_Id'] === Comments[i].userId || sessionStorage['User_Kind'] == 1)
                 check = true;
             if (Comments[i].userNumber != 0 && Comments[i].deDa == null)
             {

@@ -51,7 +51,7 @@ function MainFaq() {
         
       </div>
       <p></p><p></p><p></p><p></p>
-      <button onClick={btClick}>고객센터</button>
+      <button class="btn btn-secondary" style={{color:"white"}}onClick={btClick}>고객센터</button>
     </div>
   );
 }

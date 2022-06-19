@@ -68,7 +68,7 @@ const Ticker=()=>
     const out = () =>
     {
         
-        return <button onClick = {btClick} value={rankingList[1].searchWordName}>{rankingList[1].searchWordName}</button>;
+        return <button style={{backgroundColor: "transparent",borderColor: "transparent"}}onClick = {btClick} value={rankingList[1].searchWordName}>{rankingList[1].searchWordName}</button>;
     }
 
     
