@@ -15,6 +15,7 @@ import Member from './views/Member';
 import NotFound from './layouts/NotFound';
 import CreateRecipe from './layouts/CreateRecipe';
 import BuySubscribe from './views/BuySubscribe';
+import RefundPoint from './views/RefundPoint';
 function App() {
   useEffect(async () => {
     window.onpageshow = (event) => {
@@ -37,13 +38,13 @@ function App() {
               <Route path='/zipcook/QnaWriteForm' element={<QnaWriteForm/>}/>
               <Route path='/zipcook/member/*' element={<Member/>}/>
               <Route exact path='/zipcook/postView/:no' element={<PostView/>} />
-              <Route exact path='/zipcook/postView/*' element={<PostView/>} />
               <Route exact path='/zipcook/postMain' element={<PostMain/>} />
               <Route path='/zipcook/QuestionInfo' element={<QuestionInfo/>}/>
               <Route path='/zipcook/BuySubscribe' element={<BuySubscribe/>}/>
               <Route path='/zipcook/member/*' element={<Member/>}/>
               <Route path='/zipcook/CreateRecipe' element={<CreateRecipe/>}/>
               <Route path='*' element={<NotFound/>}/>
+              <Route path='/zipcook/RefundPoint/*' element={<RefundPoint/>}/>
           </Routes>
       </BrowserRouter>
   );

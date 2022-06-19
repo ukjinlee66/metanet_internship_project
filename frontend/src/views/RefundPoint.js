@@ -22,6 +22,8 @@ const RefundPoint = (props) => {
           alert("환불 실패")
         }else if(response.data ==  1){
           alert("환불 성공");
+          document.location.href = "http://localhost:3000/zipcook/PostMain?reportTitle="
+
       }
       })
       .catch(function (error) {
@@ -127,7 +129,7 @@ const RefundPoint = (props) => {
               ></input>
             </div>
             <div className="d-grid">
-              <button type="submit" className="btn btn-primary" onClick={handleSubmit}>환불하기</button>
+              <button type="button" className="btn btn-primary" onClick={handleSubmit}>환불하기</button>
             </div>
           </form>
         </div>

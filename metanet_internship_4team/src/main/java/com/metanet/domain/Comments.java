@@ -29,7 +29,7 @@ public class Comments
 	@Id
 	@Column(name="COMMENTS_NUMBER")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COMMENTS_SEQ_GEN")
-	private int commentsNumber;
+	private Integer commentsNumber;
 	
 	@Column(name="USER_NUMBER")
 	private int  userNumber;

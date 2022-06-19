@@ -12,6 +12,7 @@ import Ticker2 from "./Ticker2"
 import Ticker3 from "./Ticker3"
 import Ticker4 from "./Ticker4"
 import Ticker5 from "./Ticker5"
+import CategorySelect from "../components/CategorySelect"
 var rankingTitle = [];
 
 const RecipeRanking=()=>
@@ -102,8 +103,7 @@ const RecipeRanking=()=>
 
     return (
         <div class="container">
-                <div class="col-md-10">
-                        <p></p>
+                <div class="col-md-15">
                         <h4>실시간 검색어 랭킹</h4>
                         <NewsTicker
                                 rowHeight = {30}
@@ -118,8 +118,6 @@ const RecipeRanking=()=>
                                 <Ticker4></Ticker4>
                                 <Ticker5></Ticker5>
                         </NewsTicker>
-                        {finish()}
-
                 </div>
         </div>
     );

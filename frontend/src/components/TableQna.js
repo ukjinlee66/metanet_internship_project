@@ -27,13 +27,12 @@ function Table1({ qna }) {
         setPage(0);
     };
 
-    const getDetail =(e)=> {
-        const BASEURL = "http://localhost:3000/zipcook/postView/"
-        const Number = e.value
-        console.log(Number)
-        const QNAURL = BASEURL + Number
-        document.location.href = QNAURL
-      }
+    // const getDetail =(e)=> {
+    //     const BASEURL = "http://localhost:3000/zipcook/postView/"
+    //     const Number = e.value
+    //     const QNAURL = BASEURL + Number
+    //     document.location.href = QNAURL
+    //   }
 
     return (
 

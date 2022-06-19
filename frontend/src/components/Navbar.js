@@ -12,13 +12,16 @@ function Navbar(props) {
 
     // useRef를 통해 css 변경
     const stickyChange = useRef(null);
-    function btClick(e)
-    {
+    function btClick(e) {
         if(e.target.value === "MyPage"){
             sessionStorage.setItem("pageSession", 1);
             window.location.href = "/zipcook/" + e.target.value;
         }else if(e.target.value === "BuySubscribe"){
             sessionStorage.setItem("pageSession", 1);
+            window.location.href = "/zipcook/" + e.target.value;
+        }else if(e.target.value === "PostMain"){
+            window.location.href = "/zipcook/" + e.target.value;
+        }else if(e.target.value === "RefundPage"){
             window.location.href = "/zipcook/" + e.target.value;
         }
         else{
@@ -32,6 +35,8 @@ function Navbar(props) {
     }
     function logOut(e) {
         sessionStorage.removeItem("User_Id")
+        sessionStorage.removeItem("User_Number")
+        sessionStorage.removeItem("User_Kind")
         window.location.href = "/zipcook"
     }
     // 스크롤의 Y축을 감시하여 특정 지점 이동 시 Navbar가 화면 일정 지점에 따라가도록 설정
@@ -55,11 +60,15 @@ function Navbar(props) {
         if (sessionStorage.getItem('User_Id') === null) {
         } else {
             setIsLogin(true)
+
         }
-    })  
+    })
     const BASEURL = "http://localhost:8443/Account"
     const [point, setPoint] = useState(0)
-    useEffect(()=>{
+    useEffect(()=>
+    {
+        if (sessionStorage["User_Id"] != null)
+        {
         axios
       .get(BASEURL + "/getAccount", {
         params: {
@@ -67,13 +76,17 @@ function Navbar(props) {
         }
       })
       .then((res) => {
-        setPoint(res.data.userPoint)
-
+        if (res.data != null)
+            setPoint(res.data.userPoint);
       })
+    }
     },[])
+
     return (
         <Fragment>
+
             <nav className="navbar bg-white navbar-light shadow sticky-top p-0" ref={stickyChange}>
+
                 <a href="/zipcook" className="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
                     <img class="logo" src={logo} />
                 </a>
@@ -81,27 +94,43 @@ function Navbar(props) {
                     <div class="justify-content-md-end">
                         <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="Login">로그인</button>
                         <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="Signup">회원가입</button>
+
+                    </div>
+                ) : ((sessionStorage.getItem("User_Kind") == 1 ?(
+                    <div class="justify-content-md-end">
+                    <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="PostMain">고객센터</button>
+                    <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="RefundPage">환불 페이지</button>
+                    <button class="btn btn-white border-0 w-20 m-3" onClick={logOut} value="Logout">로그아웃</button>
                     </div>
                 ) : (
                     <div class="justify-content-md-end">
-                        {/* <p style={{fontSize:'12px'}}>구독 마감 날짜 : {buy}</p> */}
-                        <p style={{fontSize:'12px'}}>포인트 : {point}</p>
-                        <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="BuySubscribe">구독권 구입</button>
-                        <button class="btn btn-white border-0 w-20 m-3" onClick={logOut} value="Logout">로그아웃</button>
-                        <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="EditSign">회원정보</button>
-                        <Avatar onClick={AvClick} shape="square" size={64} icon={<UserOutlined />}/>
-                        {/* <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="MyPage">마이페이지</button> */}
+                    {/* <p style={{fontSize:'12px'}}>구독 마감 날짜 : {buy}</p> */}
+                    <p style={{fontSize:'12px'}}>포인트 : {point}</p>
+                    <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="BuySubscribe">구독권 구입</button>
+                    <button class="btn btn-white border-0 w-20 m-3" onClick={logOut} value="Logout">로그아웃</button>
+                    <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="EditSign">회원정보</button>
+                    <Avatar onClick={AvClick} shape="square" size={64} icon={<UserOutlined />}/>
+                    {/* <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="MyPage">마이페이지</button> */}
                     </div>
-                )}
+                ))
+
+                )
+}
+
+
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                     <div className="navbar-nav ms-auto p-4 p-lg-0">
                         {/* <a href="/zipcook/Maps" className="nav-item nav-link">Map</a>
                         <a href="/zipcook/TouristAttractionList?search=" className="nav-item nav-link">List</a>
                         <a href="/zipcook/TouristAttractionInfo" className="nav-item nav-link">Info</a> */}
+
                         {/* <a href="/zipcook" className="btn btn-primary bg-zipcook-nav rounded-0 py-4 px-lg-5 d-none d-lg-block">Home<i class="fa fa-arrow-right ms-3"></i></a> */}
                     </div>
                 </div>
+
             </nav>
+
+
         </Fragment>
     );
 }

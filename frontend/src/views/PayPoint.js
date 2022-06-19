@@ -4,24 +4,11 @@ import Table from "../components/Table";
 import axios from "axios";
 
 
-function PayPointPage() {
+const PayPointPage = () => {
   const reqUrl = 'http://localhost:8443/Point/'
   const [users, setUsers] = useState([
-    { Number: '', usersNumber: '', Kind: '', Point: '', Date: '' }
+    { number: '', usersNumber: '', kind: '', point: '', date: '' }
   ])
-  
-
-
-  // useEffect(() => {
-  //   axios
-  //     .get(reqUrl + sessionStorage.getItem("User_Id"))
-  //     .then((res) => {
-  //       setUsers(res.data)
-  //       console.log("포인트", res.data)
-  //     }
-  //     );
-
-  // }, [])
 
   const BtClick = (e) => {
     sessionStorage.setItem("searchType", e.target.value)
@@ -38,12 +25,21 @@ function PayPointPage() {
         })
         .then((res) =>{
           setUsers(res.data)
-          console.log(test)
-          console.log("포인트", users)
         });  
   }
+  // useEffect(() => {
+  //   axios
+  //     .get(reqUrl + "getChargeList"),{
+  //       params:{
+  //         userId: sessionStorage.getItem("User_Id")
+  //       }
+  //     }
+  //     .then((res) => {
+  //       setUsers(res.data)
+  //     }
+  //     );
 
-
+  // },[])
   return (
     <div style={{ width: "100vh" }}>
       <div >

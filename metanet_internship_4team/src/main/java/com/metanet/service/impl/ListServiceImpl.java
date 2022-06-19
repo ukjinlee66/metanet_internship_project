@@ -1,9 +1,10 @@
 package com.metanet.service.impl;
 import java.util.ArrayList;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -182,4 +183,9 @@ public class ListServiceImpl implements ListService
 		else
 			return second;
 	}
+	
+	@Transactional
+	public int updateView(int videoNumber) {
+	        return videoRepo.updateView(videoNumber);
+	    }
 }

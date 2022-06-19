@@ -36,7 +36,7 @@ public class InfoController
 	private InfoService infoService; // InfoService service
 	
 	@Autowired
-	private  MyPageService myPageService ;
+	private  MyPageService myPageService;
 	
 	@Autowired
 	private CommentsRepository CommRepo;
@@ -83,20 +83,25 @@ public class InfoController
 			@RequestParam(value="Comments",required=true, defaultValue="") String Comments,
 			@RequestParam(value="commentsNumber",required=true, defaultValue="0") int commentsNumber)
 	{
-		Comments com = CommRepo.findBycommentsNumber(commentsNumber);
-		com.setCommentsContexts(Comments);
-		CommRepo.save(com);
+//		Comments com = CommRepo.findBycommentsNumber(commentsNumber);
+//		com.setCommentsContexts(Comments);
+//		CommRepo.save(com);
 	}
 	
-	@DeleteMapping("/deletecomment")
+	@PostMapping("/deletecomment")
 	@CrossOrigin
 	@ApiOperation(value="댓글 삭제", notes="회원 유저가 댓글을 입력")
 	public void deletecom(
 			@ApiParam(value="삭제할 댓글번호를 받는다", required=true)
-			@RequestParam(value="commentsNumber",required=true, defaultValue="0") int commentsNumber)
+			@RequestParam(value="commentsNumber") int commentsNumber)
 	{
-		Comments com = CommRepo.findBycommentsNumber(commentsNumber);
-		CommRepo.delete(com);
+		try {
+			infoService.deleteComment(commentsNumber);
+		}
+		catch(NullPointerException e)
+		{
+			System.out.println("deleteComment Function NullPointer Exception Error!");
+		}
 	}
 	
 	
@@ -221,20 +226,21 @@ public class InfoController
 		return myPageService.isLike(videoNumber, userNumber);
 	}
 	
-	@GetMapping("/addLikes")
+	@PostMapping("/addLikes")
 	@CrossOrigin
 	@ApiOperation(value="회원 좋아요 영상 저장",notes="성공시 1 반환, 실패시 -1 반환 ")
 	public int  getLikes(@RequestParam("videoName") String videoName, @RequestParam String userId )
 	{
-		return myPageService.addLikes(userId, videoName );
+		myPageService.addLikes(userId, videoName );
+		return 1;
 	}
 	
-	@GetMapping("/deleteLikes")
+	@PostMapping("/deleteLikes")
 	@CrossOrigin
 	@ApiOperation(value="회원 레시피 좋아요 삭제",notes="회원 번호, , 성공시 1 반환")
 	public int deleteDetail(
-			@ApiParam(value="레시피 아이디",required=true) @RequestParam String userId,
-			String videoName
+			@ApiParam(value="레시피 아이디",required=true) @RequestParam String videoName,
+			@RequestParam String userId
 			)
 	{
 		myPageService.deleteLikes(userId, videoName);

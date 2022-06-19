@@ -17,4 +17,5 @@ public interface ListService
 	List<Video> SearchViewTitle(List<Video> arr); // 조회순 정렬 검색
 	List<Video> SearchtoLikes(List<Video> arr); // 좋아요순 정렬 검색
 	//List<Video> findByvideoTitleContainsAndrecipeKind(String videoTitle, String recipeKind); //해당 레시피 종류의 리스트 검색
+	int updateView(int videoNumber);
 }

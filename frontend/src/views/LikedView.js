@@ -13,7 +13,6 @@ const LikedView = (props) => {
 
     const reqUrl = 'http://localhost:8443/MyPage/getLikes?userId='
     useEffect(() => {
-        console.log(sessionStorage.getItem("User_Id"))
         axios
             .get(reqUrl + sessionStorage.getItem("User_Id"))
             .then((res) => {setData(res.data)

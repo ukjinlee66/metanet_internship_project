@@ -18,14 +18,16 @@ function RecipeRanking(props) {
 
     return (
             <div class="container">
-                    <div class="col-md-10">   
-                            <button class="btn btn-dark border-3 w-60 m-2" onClick={btClick} value="한식">한식</button>
-                            <button class="btn btn-dark border-3 w-60 m-2" onClick={btClick} value="중식">중식</button>
-                            <button class="btn btn-dark border-3 w-60 m-2" onClick={btClick} value="양식">양식</button>
-                            <button class="btn btn-dark border-3 w-60 m-2" onClick={btClick} value="일식">일식</button>
-                            <button class="btn btn-dark border-3 w-60 m-2" onClick={btClick} value="초급">초급</button>
-                            <button class="btn btn-dark border-3 w-60 m-2" onClick={btClick} value="중급">중급</button>
-                            <button class="btn btn-dark border-3 w-60 m-2" onClick={btClick} value="상급">상급</button>
+                    <div class="col-md-8">   
+                        <button class="btn btn-dark border-3 w-90 m-1"  onClick={btClick}>카테고리별</button>
+                            <button class="btn btn-dark border-3 w-80 m-2" onClick={btClick} value="한식">한식</button>
+                            <button class="btn btn-dark border-3 w-80 m-2" onClick={btClick} value="중식">중식</button>
+                            <button class="btn btn-dark border-3 w-80 m-2" onClick={btClick} value="양식">양식</button>
+                            <button class="btn btn-dark border-3 w-80 m-2" onClick={btClick} value="일식">일식</button>
+                        <button class="btn btn-dark border-3 w-90 m-1"  onClick={btClick}>난이도별</button>
+                            <button class="btn btn-dark border-3 w-80 m-2" onClick={btClick} value="초급">초급</button>
+                            <button class="btn btn-dark border-3 w-80 m-2" onClick={btClick} value="중급">중급</button>
+                            <button class="btn btn-dark border-3 w-80 m-2" onClick={btClick} value="상급">상급</button>
                             
                     </div>
             </div>

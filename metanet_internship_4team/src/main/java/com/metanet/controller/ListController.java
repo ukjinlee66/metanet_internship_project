@@ -3,18 +3,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.internal.bind.SqlDateTypeAdapter;
 import com.metanet.domain.Video;
+import com.metanet.repository.VideoRepository;
 import com.metanet.service.ListService;
 
 import io.swagger.annotations.ApiOperation;
@@ -28,6 +28,18 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 {
 	@Autowired
 	private ListService service;
+	@Autowired
+	private VideoRepository videoRepo;
+	
+	@PostMapping("/Views")
+	@CrossOrigin
+	@ApiOperation(value="조회수 저장")
+	public void VideoViews(@RequestParam int videoNumber){
+		
+//		videoRepo.findByvideoNumber(videoNumber); 
+		service.updateView(videoNumber);
+
+	}
 	
 	@GetMapping("/Search")
 	@ApiResponses({

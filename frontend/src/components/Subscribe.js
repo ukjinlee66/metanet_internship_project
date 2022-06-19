@@ -24,8 +24,6 @@ const Subscribe = () => {
         } else if (e == 90) {
             point = 250000
         }
-        console.log(e)
-        console.log(point)
         axios.post(BASEURL, null,
             {
                 params: {
