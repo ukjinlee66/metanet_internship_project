@@ -163,7 +163,8 @@ public class PointServiceImpl implements PointService {
 		
 	};
 	public void addUserEndsubscribe(BuyRequest buyRequest, int userNumber) {
-	
+
+		
 	 	long millis = System.currentTimeMillis();  
 	 	Date now = new java.sql.Date(millis);
 		
@@ -177,26 +178,27 @@ public class PointServiceImpl implements PointService {
 	    Calendar cal2 = Calendar.getInstance();
 	    cal1.setTime(now);
 	    cal2.setTime(userSubDate);
-	   
-	    if(compare < 1) //구독권 진행중 
+	    
+	    if(compare >= 0)
 	    {
 		    if(buyPoint == 30000)
-		    	cal1.add(Calendar.DATE,7);
+		    	cal1.add(Calendar.DATE,30);
 		    if(buyPoint == 100000)
 		    	cal1.add(Calendar.DATE,90);
 		    if(buyPoint == 250000)
 		    	cal1.add(Calendar.DATE,365);
 		    
-		    java.util.Date date1 = (Date) cal1.getTime();		    
+		    java.util.Date date1 = cal1.getTime();		    
 		    java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
 		    user.setUserEndsubscribe(sqlDate);
-		    System.out.println(user);
 		    usersRepository.save(user);
+		    System.out.println(user);
+		    
 	    }
 	    else //구독권 경과
 	    {
 		    if(buyPoint == 30000)
-		    	cal2.add(Calendar.DATE,7);
+		    	cal2.add(Calendar.DATE,30);
 		    if(buyPoint == 100000)
 		    	cal2.add(Calendar.DATE,90);
 		    if(buyPoint == 250000)
@@ -205,11 +207,67 @@ public class PointServiceImpl implements PointService {
 		    java.util.Date date2 = cal2.getTime();
 		    java.sql.Date sqlDate = new java.sql.Date(date2.getTime());
 		    user.setUserEndsubscribe(sqlDate);
-		    System.out.println(user);
 		    usersRepository.save(user);
+		    System.out.println(user);
 	    }
 	    
         
 	    
 	};
+	
+	/* buyKind 기준 날짜 갱신, 30일 에러, 90일,365일 구독권 구매 시 성공으로 뜨나,날짜 갱신 안됨...*/
+//	public void addUserEndsubscribe(BuyRequest buyRequest, int userNumber) {
+//		
+//		//현재 날짜를 now에 저장 
+//	 	Date now = new java.sql.Date(System.currentTimeMillis());
+//		
+//	 	//구독 만료일을 userSubEndDate에 저장 
+//	    Users user = usersRepository.findByuserNumber(userNumber);
+//	    Date userSubEndDate = user.getUserEndsubscribe();
+//	    
+//	    //현재날짜와 구독만료일 비교 / 현재날짜 < 구독만료일 :-1 / 현재날짜 > 구독만료일 :1
+//	    int compare = now.compareTo(userSubEndDate);
+//	    
+//	    //구독권 종류 저장 (buy 테이블의 Buykind = 30, 90, 365), 컨트롤러에서 입력받은 값 저   
+//	    String buyKind = buyRequest.getBuyKind(); 
+//	    
+//	    //구독일 갱신을 위해 calendar사용, cal1 = 현재 날짜, cal2 = 구독만료날짜 
+//	    Calendar cal1 = Calendar.getInstance();
+//	    Calendar cal2 = Calendar.getInstance();
+//	    cal1.setTime(now);
+//	    cal2.setTime(userSubEndDate);
+//	   
+////	    1. 구독만료됐을 경우, 오늘날짜 + 구독일 
+////	    2. 구독중일 경우, 구독만료일 + 구독일 
+//	    
+//	    if(compare >= 0) //구독만료 -> 구독일 경과, 오늘날짜 + 구독일
+//	    {
+//		    if(buyKind == "30")
+//		    	cal1.add(Calendar.DATE,30);
+//		    if(buyKind == "90")
+//		    	cal1.add(Calendar.DATE,90);
+//		    if(buyKind == "365")
+//		    	cal1.add(Calendar.DATE,365);
+//		    
+//		    java.util.Date date1 = cal1.getTime();		    
+//		    java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
+//		    user.setUserEndsubscribe(sqlDate);
+//		    usersRepository.save(user);
+//	    }
+//	    else //구독중 -> 구독만료일 + 구독일 
+//	    {
+//		    if(buyKind == "30")
+//		    	cal2.add(Calendar.DATE,30);
+//		    if(buyKind == "90")
+//		    	cal2.add(Calendar.DATE,90);
+//		    if(buyKind == "365")
+//		    	cal2.add(Calendar.DATE,365);
+//	    
+//		    java.util.Date date2 = cal2.getTime();
+//		    java.sql.Date sqlDate = new java.sql.Date(date2.getTime());
+//		    user.setUserEndsubscribe(sqlDate);
+//		    usersRepository.save(user);
+//	    }
+//	};
+
 }
