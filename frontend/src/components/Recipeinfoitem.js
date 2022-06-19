@@ -11,14 +11,9 @@ import withImportantStyle from 'react-with-important-style';
 import RecipeinfoComments from './RecipeinfoComments.js';
 
 const { TextArea } = Input;
-function Recipeinfo(props) 
+const Recipeinfo = (props) => 
 {
-    // 처음 렌더링시 한번 실행되는 함수
-    useEffect(() => {
-        getInfoItem(); // 기본 레시피 정보를 가져오는 함수
-        countlike(); // 좋아요 수 확인
-        checkUserLike(); // 좋아요 여부를 확인하는 함수
-    }, [])
+    
 
     // 상세 페이지 출력 관광지 정보 
     const [Recipe, setRecipe] = useState({id:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', crDa:'' ,upDa:'', deDa:'', videoView: ''})
@@ -35,6 +30,13 @@ function Recipeinfo(props)
     const reqcountlike = '/Info/getlikecount'; //좋아요 개수 확인
     const reqaddView = '/List/Views'; // 조회수 증가
     const Button = withImportantStyle('button');
+
+    // 처음 렌더링시 한번 실행되는 함수
+    useEffect(() => {
+        getInfoItem(); // 기본 레시피 정보를 가져오는 함수
+        countlike(); // 좋아요 수 확인
+        checkUserLike(); // 좋아요 여부를 확인하는 함수
+    }, [])
 
     // 레시피에 대한 상세정보 요청
     const getInfoItem = async () => {
@@ -55,8 +57,8 @@ function Recipeinfo(props)
     }
 
     // 레시피에 대한 좋아요 수 요청
-    const countlike = async () => {
-        await axio
+    const countlike =() => {
+        axio
             .get(reqcountlike, {
                 params: {
                     videoNumber: Number(decodeURI(window.location.search.split('=')[1]))
@@ -65,38 +67,58 @@ function Recipeinfo(props)
             .then((res) => setLikecount(res.data));
     }
 
-    const UnLikefunc = async() => // DB에 해당 회원이 해당 게시글의 좋아요를 취소했기 때문에 좋아요테이블의 데이터 삭제.
+
+    const UnLikefunc =()=> // DB에 해당 회원이 해당 게시글의 좋아요를 취소했기 때문에 좋아요테이블의 데이터 삭제.
     {
-        await axio
-            .post(requnlike,{}, {
-                params: {
-                    videoNumber: Number(decodeURI(window.location.search.split('=')[1])),
-                    userId: sessionStorage["User_Id"]
-                }
-            })
+        if (Like == true)
+        {
+            axio
+                .post(requnlike,{}, {
+                    params: {
+                        videoName: Recipe.videoName,
+                        userId: sessionStorage["User_Id"]
+                    }
+                })
+                .then((res)=>{
+                    setLikecount(Likecount - 1);
+                    setLike(!Like);
+                });
+        }
+        return;
     }
 
-    const Likefunc = async() => // DB에 해당 회원이 게시글의 좋아요 했기 때문에 좋아요 테이블의 데이터 추가.
+    const Likefunc =()=> // DB에 해당 회원이 게시글의 좋아요 했기 때문에 좋아요 테이블의 데이터 추가.
     {
-        await axio
-            .post(reqlike,{}, {
-                params: {
-                    videoNumber: Number(decodeURI(window.location.search.split('=')[1])),
-                    userId: sessionStorage["User_Id"]
-                }
-            })
+        if (Like == false)
+        {
+            axio
+                .post(reqlike,{}, {
+                    params: {
+                        videoName: Recipe.videoName,
+                        userId: sessionStorage["User_Id"]
+                    }
+                })
+                .then((res)=>{
+                    setLikecount(Likecount + 1);
+                    setLike(!Like);
+                });
+        }
+        return;
     }
 
     const checkUserLike = async () =>  // 회원의 좋아요 여부 확인
     {
-        await axio
-        .get(reqislike,{
-            params:{
-                videoNumber: Number(decodeURI(window.location.search.split('=')[1])),
-                userNumber: sessionStorage['User_Number']
-            }
-        })
-        .then((res)=>setLike(res.data)); // 좋아요면 true 아니면 false
+        if (sessionStorage["User_Id"] != null)
+        {
+            await axio
+            .get(reqislike,{
+                params:{
+                    videoNumber: Number(decodeURI(window.location.search.split('=')[1])),
+                    userNumber: sessionStorage['User_Number']
+                }
+            })
+            .then((res)=>setLike(res.data)); // 좋아요면 true 아니면 false
+        }
     }
 
     
@@ -123,9 +145,14 @@ function Recipeinfo(props)
         await setcommentval(event.currentTarget.value);
     }
 
+    const changelike = async(event) =>
+    {
+        await setLikecount(Likecount);
+    }
+
     // 상세페이지 관광지 정보 렌더링
     const tourSpotRender = () => {
-        console.log("comments info : ",sessionStorage["User_Id"],sessionStorage["userNumber"]);
+        console.log("comments info : ",sessionStorage['User_Id'],sessionStorage["User_Number"], {Like});
         return(
             <Fragment>
             <div class="mb-5" style={{fontFamily: "Roboto"}}>
@@ -145,23 +172,26 @@ function Recipeinfo(props)
                 </div>
                 {/* 회원 여부와 세션에따른 like, unlike 버튼 표시. */}
                 
-                {Like 
+                {(sessionStorage["User_Id"] != undefined)
                 ? 
-                (<div><p style={{textAlign:"right"}}>좋아요 : {Likecount}</p><Button style={{backgroundColor: "#886A08 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}} onClick={UnLikefunc}><DislikeOutlined/></Button>
-                <Button style={{backgroundColor: "#088A85 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}} onClick={Likefunc}><LikeOutlined /></Button></div>)
+                (
+                <div>
+                <p style={{textAlign:"right"}}>좋아요 : {Likecount}</p>
+                <Button style={{backgroundColor: "#886A08 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}} onClick={UnLikefunc}><DislikeOutlined/></Button>
+                <Button style={{backgroundColor: "#088A85 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}} onClick={Likefunc}><LikeOutlined /></Button>
+                </div>)
                 : 
                 (
                 <div><p style={{textAlign:"right"}}>좋아요 : {Likecount}</p><Button style={{backgroundColor: "#088A85 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}}><DislikeOutlined /></Button>
                 <Button style={{backgroundColor: "#886A08 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}}><LikeOutlined /></Button></div>)
                 }
                 <br/><br/>
-                <hr/>
-                {(sessionStorage["User_Id"] === null)
+                {(sessionStorage["User_Id"] === undefined)
                 ?
                 (<p/>)
                 :
-                <div><TextArea style={{width: "800px" ,display: "flex", float:"left"}}rows={4} placeholder="댓글을 입력 하세요." onChange={AddComment} value={commentval}/>
-                <Button style={{backgroundColor: "#F2F2F2 !important", color: "white !important", height: "100px !important", width: "100px !important"}} onClick={AppendComments}>등록</Button></div>
+                (<div><hr/><TextArea style={{width: "800px" ,display: "flex", float:"left"}}rows={4} placeholder="댓글을 입력 하세요." onChange={AddComment} value={commentval}/>
+                <Button style={{backgroundColor: "#F2F2F2 !important", color: "white !important", height: "100px !important", width: "100px !important"}} onClick={AppendComments}>등록</Button></div>)
                 }
                 <br/><br/>
                 <hr/>
