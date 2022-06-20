@@ -63,8 +63,6 @@ public class Video
 	@Column(name = "RECIPE_INGREDIENT")
 	private String recipeIngredient;
 		
-
-
 	@Column(name = "VIDEO_VIEW")
 	private int videoView;
 	

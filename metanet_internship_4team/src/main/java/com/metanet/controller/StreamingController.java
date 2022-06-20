@@ -16,9 +16,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -71,16 +73,12 @@ public class StreamingController {
 		if(!saveDir.exists()) 
 		{
 			saveDir.mkdir();
+
 			newDetail.setVideoName(saveDirPath);
 			infoService.saveDetail(newDetail);
-    	
+	        
 			File dest = new File(savefilePath);
 			uploadFile.transferTo(dest);
-			
-			
-			// 어디에 사용되니 
-			//FFmpegProbeResult probeResult = ffprobe.probe(FILEPATH);
-			 
 			
 			// ts 파일 생성  
 			FFmpeg ffmpeg = new FFmpeg(ffmpgRealPath + "ffmpeg" );
@@ -110,76 +108,37 @@ public class StreamingController {
 	        FFmpegExecutor executorThumbNail = new FFmpegExecutor(ffmpeg, ffprobe);
 	        executorThumbNail.createJob(builderThumbNail).run();
 		
+	        
+	        //이미지 찾고 바이트 어래이 연동 
+	        
+	        
+	        String fileFullPath =  saveDirPath +"\\" + onlyFileName + ".png";
+	        InputStream imageStream = new FileInputStream(fileFullPath);
+			
+			byte[] imageByteArray = IOUtils.toByteArray(imageStream);
+			imageStream.close();
+			
+			
+	        
 			return "완료";
 		}
 		
 		return "실패";
 	}
 	
-	
-	
-	
-	
-	///// 바이트 어레일로 리엑트에 넘겨주기  
-
-	@GetMapping("/getImage")
+		
+		
+	@GetMapping(		
+			value ="/getImageByte",
+			produces = MediaType.IMAGE_JPEG_VALUE
+			)
 	@CrossOrigin
 	@ApiOperation(value="이미지 받기",notes="비디오 넘버로 이미지 받기")
-	public ResponseEntity<Resource> getImageByte( @RequestParam("videoNumber")  int videoNumber )
-	{
-	
-		// videoNumber를 통해  videoname을 찾는다.
-		
-		Video video = videoRepository.findByvideoNumber(videoNumber);
-				
-		String onlyFileName = video.getVideoName();
-		
-		int lastIdx = onlyFileName .lastIndexOf("\\");
-		
-		onlyFileName = onlyFileName.substring(lastIdx+1)+".png";
-				
-		String fileFullPath = video.getVideoName() +  "\\" + onlyFileName;
-		
-		
-		
-		System.out.println(fileFullPath );
-		
-		Resource resource = new FileSystemResource(fileFullPath); 
-
-		
-		HttpHeaders headers = new HttpHeaders();
-		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + onlyFileName);
-		
-		headers.setContentType(MediaType.IMAGE_PNG);
-		
-		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
-
-	
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	@GetMapping("/getImageByte")
-	@CrossOrigin
-	@ApiOperation(value="이미지 받기",notes="비디오 넘버로 이미지 받기")
-	public ResponseEntity<byte[]> getImage( @RequestParam("videoNumber")  int videoNumber )
+	public @ResponseBody byte[] getImage( @RequestParam("videoNumber")  int videoNumber )
 			 throws IOException{
 	
 		// videoNumber를 통해  videoname을 찾는다.
-		
+	
 		Video video = videoRepository.findByvideoNumber(videoNumber);
 				
 		String onlyFileName = video.getVideoName();
@@ -187,102 +146,72 @@ public class StreamingController {
 		int lastIdx = onlyFileName .lastIndexOf("\\");
 		
 		onlyFileName = onlyFileName.substring(lastIdx+1)+".png";
-				
-		
+						
 		String fileFullPath = video.getVideoName() +  "\\" + onlyFileName;
 		
 		InputStream imageStream = new FileInputStream(fileFullPath);
 		
 		byte[] imageByteArray = IOUtils.toByteArray(imageStream);
 		imageStream.close();
-			
-		return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
+		
+		return imageByteArray;
 	
-	
+		
 	}
 	
-	
-	
-	
-	/*
-	 * https://redbinalgorithm.tistory.com/382   이미지 바이트 배열로 보내기 
-	 * 
-	 */
-	
-	
-	
-	
-	
-	/*
 
-	@GetMapping("/getImage")
+	
+	
+	@GetMapping("/getFileName")
 	@CrossOrigin
-	@ApiOperation(value="이미지 받기",notes="비디오 넘버로 이미지 받기")
-	public void  getImage( @RequestParam("videoNumber")  int videoNumber, HttpServletResponse response )
+	@ApiOperation(value="아이디 중복 확인",notes="회원가입시 아이디 중복여부 확인 / 중복시 -1, 중복 아닐시 1 반환")
+	public String getFileName( @RequestParam("videoNumber")  int videoNumber)
 	{
 	
-		// videoNumber를 통해  videoname을 찾는다.
-		
 		Video video = videoRepository.findByvideoNumber(videoNumber);
-				
 		String onlyFileName = video.getVideoName();
-		
 		int lastIdx = onlyFileName .lastIndexOf("\\");
+		onlyFileName = onlyFileName.substring(lastIdx+1);
 		
-		onlyFileName = onlyFileName.substring(lastIdx+1)+".png";
-				
+		return onlyFileName ;
 		
-		String fileFullPath = video.getVideoName() +  "\\" + onlyFileName;
-		
-		System.out.println(fileFullPath );
-		
-		
-		File file = new File(fileFullPath);
-		FileInputStream fis = null;
-		
-		
-		try {
-		OutputStream out = response.getOutputStream();
-		
-		fis = new FileInputStream(file);
-		
-		FileCopyUtils.copy(fis,out);
-		out.flush();
-		} catch(IOException e) {
-			e.printStackTrace();
-		} finally {
-			
-			try {
-				if(fis!=null) fis.close();
-			}catch(IOException e) {}
-			
-		}
-		
+	}
 	
 	
+	@GetMapping("/hls/{fileName}/{fileName}.m3u8")
+	@CrossOrigin
+	public ResponseEntity<Resource> videoHlsM3U8(@PathVariable String fileName)
+	{
+		
+		String fileFullPath = baseSavefilePath + fileName + "\\" + fileName+ ".m3u8";
 		Resource resource = new FileSystemResource(fileFullPath); 
-		
 		HttpHeaders headers = new HttpHeaders();
-		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + onlyFileName);
-		
-		headers.setContentType(MediaType.IMAGE_PNG);
-		
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName + ".m3u8");
+		headers.setContentType(MediaType.parseMediaType("application/vnd.apple.mpegurl"));
+		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);	
+	}
+	
+	
+	
+	@GetMapping("/hls/{fileName}/{tsName}.ts")
+	@CrossOrigin
+	public ResponseEntity<Resource> videoHlsTs(@PathVariable String fileName, @PathVariable String tsName) 
+	{
+		String fileFullPath = baseSavefilePath + fileName + "/" + tsName + ".ts";
+		Resource resource = new FileSystemResource(fileFullPath); 
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + tsName + ".ts");
+		headers.setContentType(MediaType.parseMediaType(MediaType.APPLICATION_OCTET_STREAM_VALUE));
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 
-	
 	}
-	*/
-	
-	
-
 	
 	
 	
 	
 	
 	
-	
-	
+	/*
 	
 	@GetMapping("/getM3U8")
 	@CrossOrigin
@@ -330,7 +259,7 @@ public class StreamingController {
 	
 	
 	
-	
+	*/
 	
 	
 	
