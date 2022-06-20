@@ -16,7 +16,7 @@ function RecipeinfoComments(props)
         GetRecipeComments();
     },[]);
     // 상세 페이지 출력 댓글 정보 
-    const [Comments, setComments] = useState([{id:'', userNumber:'', videoNumber:'', userId:'', commentsContexts:'', crDa:'', deDa:''}])
+    const [Comments, setComments] = useState([{id:'', commentsNumber:'',userNumber:'', videoNumber:'', userId:'', commentsContexts:'', crDa:'', deDa:''}])
     const reqUrl = '/Info/comments'; // 한 레시피의 댓글정보 조회
 
     const GetRecipeComments = async () =>
@@ -32,11 +32,10 @@ function RecipeinfoComments(props)
 
     const EditComment = async () =>
     {
-        console.log("Edit ! ", props.Comm);
         await axio
         .post(reqedit,{},{
                 Comments: String(props.Comm),
-                CommentsNumber: Number(sessionStorage.getItem("userNumber"))
+                CommentsNumber: Number(sessionStorage.getItem("User_Number"))
         })
         .then((res)=>{
             alert("댓글 수정 완료");
@@ -44,12 +43,13 @@ function RecipeinfoComments(props)
         });
     }
 
-    const DeleteComment = async () =>
+    const DeleteComment = async (num) =>
     {
         await axio
-        .post(reqdel,{},{
-                Comments: String(props.Comm),
-                CommentsNumber: Number(sessionStorage.getItem("userNumber"))
+        .post(reqdel,{}, {
+            params:{
+                commentsNumber: num
+            }   
         })
         .then((res)=>{
             alert("댓글 삭제 완료");
@@ -63,8 +63,13 @@ function RecipeinfoComments(props)
         var result=[];
         for (let i = 0; i < Comments.length;i++)
         {
-            if (Comments[i].userNumber != 0)
+            var temp = Comments[i].commentsNumber;
+            var check = false;
+            if(sessionStorage['User_Id'] === Comments[i].userId || sessionStorage['User_Kind'] == 1)
+                check = true;
+            if (Comments[i].userNumber != 0 && Comments[i].deDa == null)
             {
+                var temp = Comments[i].commentsNumber;
                 result.push(
                     <Space
                     direction="horizontal"
@@ -74,8 +79,13 @@ function RecipeinfoComments(props)
                     }}
                     >
                     {Comments[i].userId} : {Comments[i].commentsContexts} | {Comments[i].crDa}
-                    <button onClick={EditComment}>수정</button>
-                    <button onClick={DeleteComment}>삭제</button>
+                    {/* <button onClick={EditComment}>수정</button> */}
+                    {check == true
+                    ?
+                        <button value={temp} onClick={()=>DeleteComment(temp)}value>삭제</button>
+                    :
+                        <p/>
+                    }
                     </Space>
                 )
             }
