@@ -1,4 +1,4 @@
-import React ,{useState, useEffect, Fragment} from 'react';
+import React ,{useState, useEffect, Fragment, useRef} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
@@ -7,10 +7,12 @@ import Pagination from 'react-js-pagination';
 import qs from 'qs';
 
 function Recipelistitem(props) {
-   
+    
+
     const [item, setItem] = useState([
         {videoTitle:'', color1:'', color2:''}
     ])
+
 
     const [recipe, setRecipe] = useState([
         {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
@@ -24,7 +26,7 @@ function Recipelistitem(props) {
     const [page, setPage] = useState(Number(sessionStorage.getItem("pageSession")));
 
     const [priority, setPriority] = useState("SearchTotime");
-    const [color, setColor] = useState("Time");
+    const [sortColor, setSortColor] = useState("Time");
 
 
 
@@ -36,18 +38,35 @@ function Recipelistitem(props) {
         setPage(nowPage);
         sessionStorage.setItem("pageSession", nowPage);
     };
+
+    const itemRef = useRef(item)
     const getListInfo = () => {
-    const info = decodeURI(window.location.search.split('&'))
-    if (info.split(',').length== 3){
-        let title = info.split(',')[0].split('=')[1];
-        let color1 = info.split(',')[1]; 
-        let color2 = info.split(',')[2]; 
-        console.log("1"+title,"2" +color1, "3"+color2);
-    }
-    else if(info.split(',').length==2){
     
-    
+    if( decodeURI(window.location.search).indexOf('&') != -1){
+        const info = decodeURI(window.location.search.split('&'))
+        if (window.location.search.match(/&/g).length==2){
+            let title = info.split(',')[0].split('=')[1];
+            let color1 = info.split(',')[1]; 
+            let color2 = info.split(',')[2]; 
+            let result = [{videoTitle:title, color1:color1, color2:color2}]
+            itemRef.current = result
+        }
+        else if(window.location.search.match(/&/g).length==1){
+            let title = info.split(',')[0].split('=')[1];
+            let color1 = info.split(',')[1]; 
+            let result = [{videoTitle:title, color1:color1, color2: ''}]
+            itemRef.current = result
+        }
     }
+    else if(decodeURI(window.location.search).indexOf('&') == -1) {
+        let title = decodeURI(window.location.search.split('=')[1]);
+        let result = [{videoTitle : title, color1:'', color2: ''}]
+        itemRef.current = result
+        
+    }
+
+
+    
 }
     useEffect(() => {
         getListInfo();
@@ -65,36 +84,65 @@ function Recipelistitem(props) {
     const elaUrl = '/log/searchKeyword';
 
     const sortBtClick = (e) =>{
-        sessionStorage.setItem("sortType", e.target.value);
-        getsortItem();
+        console.log(item)
+        // getsortItem();
     
-
-    
-    const info = decodeURI(window.location.search.split('='))
-    alert(info);
     }
     // 조회수에 따른 레시피 리스트 요청
     const getRecipeItem = async (page) => {
-        console.log("getSearchItem start", decodeURI(window.location.search.split('=')[1]));
-        if (sessionStorage.getItem("listState") != 'none') {
+        if( decodeURI(window.location.search).indexOf('&') != -1){
+            const info = decodeURI(window.location.search.split('&'))
+            if (window.location.search.match(/&/g).length==2){
+                await axios
+                .get(reqwUrl, {
+                    params: {
+                        videoTitle: itemRef.current[0].videoTitle,
+                        Color : itemRef.current[0].color1,
+                        Color2 : itemRef.current[0].color2
+                    }
+                    })
+                    .then((res) => {
+                        setRecipe(res.data);
+                        console.log("item",item)
+                    }
+                    )
+            }
+            else if(window.location.search.match(/&/g).length==1){
+                await axios
+                .get(reqwUrl, {
+                    params: {
+                        videoTitle: itemRef.current[0].videoTitle,
+                        Color : itemRef.current[0].color1
+                    }
+                })
+                .then((res) => {
+                    setRecipe(res.data);
+                }
+                )
+            }
+        }
+        else if(decodeURI(window.location.search).indexOf('&') == -1) {
             await axios
             .get(reqwUrl, {
                 params: {
-                    videoTitle: decodeURI(window.location.search.split('=')[1]),
-                    Color : sessionStorage.getItem("listState")
+                    videoTitle: itemRef.current[0].videoTitle
                 }
             })
-            .then((res) => setRecipe(res.data));  
-        }else{
-        await axios
-            .get(reqwUrl, {
-                params: {
-                    videoTitle: decodeURI(window.location.search.split('=')[1])
-                }
-            })
-            .then((res) => setRecipe(res.data));  
+            .then((res) => {
+                setRecipe(res.data);
+                console.log("item",item)
+            }
+            )
+            
         }
-    }
+          
+        }
+
+
+        useEffect(() => {
+            getRecipeItem();
+        }, [item])
+    
     // 업로드 시간 순서에 따른 레시피 리스트 요청
     const getsortItem = async (page) => {
 
@@ -114,17 +162,7 @@ function Recipelistitem(props) {
             })
             .then((res) => setRecipe(res.data));  
     }
-    // 좋아요 수 순위에 따른 레시피 리스트 요청
-    const getToLikeItem = async (page) => {
-        console.log("getListItem start", decodeURI(window.location.search.split('=')[1]));
-        await axios
-            .get(reqwUrl, {
-                params: {
-                    videoTitle: decodeURI(window.location.search.split('=')[1])
-                }
-            })
-            .then((res) => setRecipe(res.data));  
-    }
+
 
     // 검색에 따른 관광지 리스트의 총 길이 요청
     const getlistSize = async () => {
@@ -145,7 +183,6 @@ function Recipelistitem(props) {
         
         getRecipeItem(page);
     }, [])
-    useEffect(() => {}, [color])
 
     // 관광지 리스트 렌더링
     const recipelistRender = () => {

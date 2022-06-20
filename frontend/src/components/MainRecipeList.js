@@ -89,15 +89,32 @@ function MainRecipeList(props)
         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + popular[2].videoNumber}/><p>{popular[2].videoTitle}</p></a> ,
         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + popular[3].videoNumber}/><p>{popular[3].videoTitle}</p></a> ,
         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + popular[4].videoNumber}/><p>{popular[4].videoTitle}</p></a>  ];
-
+    
+    
     let loginVideoSlides = [
         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + prefer[0].videoNumber}/><p>{prefer[0].videoTitle}</p></a>,
         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + prefer[1].videoNumber}/><p>{prefer[1].videoTitle}</p></a> ,
         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + prefer[2].videoNumber}/><p>{prefer[2].videoTitle}</p></a> ,
         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + prefer[3].videoNumber}/><p>{prefer[3].videoTitle}</p></a> ,
         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + prefer[4].videoNumber}/><p>{prefer[4].videoTitle}</p></a>  ];
-    
-    
+        
+
+
+
+
+//     let loginVideoSlides = [];
+//     const getPreferVideoList = () =>{
+//     for(let i =0; i< prefer.length; i++){
+//     loginVideoSlides.push(
+//         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + prefer[i].videoNumber}/><p>{prefer[i].videoTitle}</p></a>,
+//     )
+//     }
+//     return loginVideoSlides;
+// }
+// useEffect(() => {
+//     getPreferVideoList();
+// }, [loginVideoSlides])
+
 
 
 
@@ -121,15 +138,15 @@ function MainRecipeList(props)
             .then((res) => setPopular(res.data)); 
             }else {
         await axios
-            .get(preferUrl, 
+            .get(popularUrl, 
                 {
                     params : {
-                        userId : sessionStorage.getItem("User_ID")
+                        userId : sessionStorage.getItem("User_Id")
                     }
                 })
             .then((res) => {
                 setPrefer(res.data);
-                console.log("resdata:    "+res.data)
+                
             }
                 ); 
             }
@@ -149,21 +166,21 @@ function MainRecipeList(props)
         <div class="container-xxl py-5 rank-con">
             <div class="container" >
 
-            {(sessionStorage["User_Id"] === null) || (sessionStorage["isManager"] === null) //관리자일 경우 버튼 표시
+            {(sessionStorage["User_Id"] === null) || (sessionStorage["User_Kind"] == 1) //관리자일 경우 버튼 표시
              ?
-             <p><a href = "/zipcook/CreateRecipe">레시피 작성</a></p>
+             <button class="btn btn-secondary" style={{color:"white",float:"right"}} onClick={(e)=>{window.location.href="/zipcook/CreateRecipe"}}>레시피 작성</button>
              :
              <p/>
              }
             {isLogin === false ? (
                 <Fragment>
-                    <h1 class="text-center mb-5">인기영상</h1>
+                    <h1 className="text-center mb-5">인기영상</h1>
                     <Carousel slides={videoSlides} autoplay={true} interval={5000} onSlideChange={callback} />
                 <p></p><p></p>
                 </Fragment>
                 ) : (
                 <Fragment>
-                    <h1 class="text-center mb-5">선호 영상</h1>
+                    <h1 className="text-center mb-5">선호 영상</h1>
                     <Carousel slides={loginVideoSlides} autoplay={true} interval={5000} onSlideChange={callback} />
                     <p></p><p></p>
                 </Fragment>

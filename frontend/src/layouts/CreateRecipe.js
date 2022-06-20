@@ -1,10 +1,10 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, Fragment} from 'react';
 import '../views/sign.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { UploadOutlined } from '@ant-design/icons';
-import { Form, Input, Button, Checkbox, Upload } from 'antd';
+import { Form, Input, Button, Checkbox, Upload, Space } from 'antd';
 
 const props = {
     action: '//jsonplaceholder.typicode.com/posts/',
@@ -46,16 +46,17 @@ function CreateRecipe()
     return isJpgOrPng && isLt2M;
     };
   return (
-    <div className="App">
+    <Fragment>
       <Navbar />
       <div className="auth-wrapper">
         <div className="auth-inner" style={{width: "950px"}}>
-            <Form name="basic"
+            <Form 
+                name="basic"
                 labelCol={{
-                    span: 8,
+                    span: 2.5,
                 }}
                 wrapperCol={{
-                    span: 16,
+                    span: 25,
                 }}
                 initialValues={{
                     remember: true,
@@ -79,7 +80,7 @@ function CreateRecipe()
                     {/* <Input type="name" class="form-control" id="RecipeName" placeholder="Write RecipeName"/> */}
                     </div>
                     <div class="form-group">
-                    <label for="exampleInputPassword1" class="form-label mt-4">조리시간</label>
+                    <label for="exampleInputPassword1" class="form-label mt-4" >조리시간</label>
                     <Input type="time" class="form-control" name="exampleInputPassword1" min="00:00" max="100:00" format="MM/SS"/>
                     <small id="emailHelp" class="form-text text-muted">평균적인 조리시간으로 작성해주세요.</small>
                     </div>
@@ -118,7 +119,7 @@ function CreateRecipe()
         </div>
       </div>
       <Footer/>
-    </div>
+    </Fragment>
   );
 }
 

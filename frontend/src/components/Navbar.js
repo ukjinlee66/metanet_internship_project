@@ -65,7 +65,10 @@ function Navbar(props) {
     })
     const BASEURL = "http://localhost:8443/Account"
     const [point, setPoint] = useState(0)
-    useEffect(()=>{
+    useEffect(()=>
+    {
+        if (sessionStorage["User_Id"] != null)
+        {
         axios
       .get(BASEURL + "/getAccount", {
         params: {
@@ -73,9 +76,10 @@ function Navbar(props) {
         }
       })
       .then((res) => {
-        setPoint(res.data.userPoint)
-
+        if (res.data != null)
+            setPoint(res.data.userPoint);
       })
+    }
     },[])
 
     return (

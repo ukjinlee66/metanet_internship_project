@@ -28,7 +28,7 @@ public interface InfoService
 	//(updateDetail =업데이트된 게시글 정보)
 	int updateDetail(VideoDTO.updateDetailRequest updateDetail);
 	
-	
+	void deleteComment(int commentsNumber);
 
 	
 }

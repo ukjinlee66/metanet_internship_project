@@ -89,8 +89,21 @@ public class InfoServiceImpl implements InfoService
 	}
 	
 	
-	
-	
+	@Transactional
+	public void deleteComment(int commentsNumber)
+	{
+		try {
+			System.out.println("commentsNumber : "+commentsNumber);
+			Comments c = commentsRepo.findBycommentsNumber(commentsNumber);
+			c.setDeDa(new java.sql.Date(System.currentTimeMillis()));
+			System.out.println("comments object : "+c);
+			commentsRepo.save(c);
+		}
+		catch(NullPointerException e)
+		{
+			System.out.println("DeleteComment Error!");
+		}
+	}
 	
 	
 	// 주웅 상세정보 삭제 

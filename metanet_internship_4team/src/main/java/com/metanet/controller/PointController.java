@@ -107,6 +107,7 @@ public class PointController {
 	{
 		if(userId.equals("none")) return -1;
 		else {
+
 			
 			Users findUser =  accountService.getAccount(userId).get();
 						
