@@ -48,7 +48,6 @@ public class UsersDTO
 		public static class LoginRequest {
 	
 			private String userId;
-			
 			private String userPassword;
 			
 		}
