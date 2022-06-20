@@ -149,9 +149,9 @@ function MainRecipeList(props)
         <div class="container-xxl py-5 rank-con">
             <div class="container" >
 
-            {(sessionStorage["User_Id"] === null) || (sessionStorage["isManager"] === null) //관리자일 경우 버튼 표시
+            {(sessionStorage["User_Id"] === null) || (sessionStorage["User_Kind"] == 1) //관리자일 경우 버튼 표시
              ?
-             <p><a href = "/zipcook/CreateRecipe">레시피 작성</a></p>
+             <button class="btn btn-secondary" style={{color:"white",float:"right"}} onClick={(e)=>{window.location.href="/zipcook/CreateRecipe"}}>레시피 작성</button>
              :
              <p/>
              }
