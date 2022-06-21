@@ -107,7 +107,7 @@ public class ListServiceImpl implements ListService
 	public List<Video> SearchCreateTitle(List<Video> arr) // 시간순 정렬 검색
 	{
 		List<Video> first = arr;//검색어에따른 리스트
-		Collections.sort(first, new SortTime());// 해당 게시글의 시간을 비교해서 정렬
+		Collections.sort(first, new SortTime().reversed());// 해당 게시글의 시간을 비교해서 정렬
 		return first; 
 	}
 
@@ -122,6 +122,7 @@ public class ListServiceImpl implements ListService
 	{
 		List<Video> first = arr; //검색어에따른 리스트
 		List<Video> second = new ArrayList<>();
+		List<Video> third = new ArrayList<>();
 		//likes 테이블에 존재하는 게시글 기준 정렬하기위한 새로운 리스트 생성
 		for(Video v : first)
 		{	
@@ -132,6 +133,8 @@ public class ListServiceImpl implements ListService
 				{
 					second.add(v);
 				}
+				else
+					third.add(v);
 			}
 			catch(NullPointerException e)
 			{
@@ -139,6 +142,7 @@ public class ListServiceImpl implements ListService
 			}
 		}
 		Collections.sort(second, new SortLike()); //해당 게시글의 좋아요수를 비교해서 정렬.
+		second.addAll(third);
 		return second;
 	}
 	

@@ -15,11 +15,11 @@ function Recipelistitem(props) {
 
 
     const [recipe, setRecipe] = useState([
-        {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-        {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-        {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-        {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-        {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}
+        {id:'' ,img:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+        {id:'' ,img:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+        {id:'' ,img:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+        {id:'' ,img:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+        {id:'' ,img:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}
     ])
 
     const [listSize, setListSize] = useState(1);
@@ -33,11 +33,12 @@ function Recipelistitem(props) {
     // 특정 페이지 요청 시 작동하는 함수
     const handlePageChange = nowPage => {
         
-        getRecipeItem(nowPage);
         alert('페이지 변경'+nowPage)
         setPage(nowPage);
         sessionStorage.setItem("pageSession", nowPage);
     };
+    useEffect(() => {
+    }, [page])
 
     const itemRef = useRef(item)
     const getListInfo = () => {
@@ -84,10 +85,12 @@ function Recipelistitem(props) {
     const elaUrl = '/log/searchKeyword';
 
     const sortBtClick = (e) =>{
-        console.log(item)
-        // getsortItem();
+        setSortColor(e.target.value)
+        getsortItem(e.target.value);
     
     }
+    
+
     // 조회수에 따른 레시피 리스트 요청
     const getRecipeItem = async (page) => {
         if( decodeURI(window.location.search).indexOf('&') != -1){
@@ -144,19 +147,13 @@ function Recipelistitem(props) {
         }, [item])
     
     // 업로드 시간 순서에 따른 레시피 리스트 요청
-    const getsortItem = async (page) => {
-
-        console.log("레시피 0번: "+recipe[0])
-        console.log("getListItem start", decodeURI(window.location.search.split('=')[1]));
-
+    const getsortItem = async (e) => {
+        console.log("click sort", e.target.value)
         await axios
             .get(sortUrl, {
                 params: {
-                recipe
-                    // Color : sessionStorage.getItem("sortType")
-                },
-                paramsSerializer: params => {
-                  return qs.stringify(params, {arrayFormat: 'brackets'})
+                list : JSON.stringify(recipe),
+                Color : e.target.value
                 }
                 
             })
@@ -178,26 +175,25 @@ function Recipelistitem(props) {
 
     
 
-   // 처음 렌더링시 한번 실행되는 함수
-    useEffect(() => {
-        
-        getRecipeItem(page);
-    }, [])
+
 
     // 관광지 리스트 렌더링
-    const recipelistRender = () => {
+    const recipelistRender = (page) => {
         const result = [];
-        for (let i = 0; i < recipe.length; i++) {
+        for (let i = page*5-5; i < page*5; i++) {
+            if(i > recipe.length-1) break;
+            else{
+                console.log(recipe.length)
             result.push(
                 // 출력 관광지 리스트의 관광지 id을 값으로 상세페이지에 보냄
                 <div class="list-item p-4 mb-4">
                     <div class="row g-4 list-section">
                         <div class="col-md-4 d-flex align-items-start">
-                            <img class="img-list" src={recipe[i].img} onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?tourSpot=" + recipe[i].id} />
+                            <img class="img-list" src={recipe[i].img} onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + recipe[i].videoNumber} />
                         </div>
                         <div class="col-md-8 list-info">
                             <div className='row'>
-                                <h4 class="col-md-10 text-left list-text" typeof='text' id='test' onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?tourSpot=" + recipe[i].id}>{recipe[i].videoTitle}</h4>
+                                <h4 class="col-md-10 text-left list-text" typeof='text' id='test' onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + recipe[i].videoNumber}>{recipe[i].videoTitle}</h4>
                                 <p className='col-md-2' id={'btn' + (i+1)}></p>
                             </div>
                             <hr className='list-hr'/>
@@ -212,7 +208,7 @@ function Recipelistitem(props) {
                     </div>
                 </div>
             );}
-        
+        }
              
         
         return result;
@@ -224,17 +220,17 @@ function Recipelistitem(props) {
             <div class="tab-class wow fadeInUp" data-wow-delay="0.3s">
                 <div class="tab-content-tourlist">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
-                        <button name='searchToTime' onClick={sortBtClick} value="Time">시간순</button> &nbsp;&nbsp;
-                        <button name='searchToView' onClick={sortBtClick} value="View">조회순</button> &nbsp;&nbsp;
-                        <button name='searchToLike' onClick={sortBtClick} value="Like">인기순</button> &nbsp;&nbsp;
-                        {recipelistRender()}
+                        <button name='searchToTime' onClick={getsortItem} value="Time">시간순</button> &nbsp;&nbsp;
+                        <button name='searchToView' onClick={getsortItem} value="View">조회순</button> &nbsp;&nbsp;
+                        <button name='searchToLike' onClick={getsortItem} value="Like">인기순</button> &nbsp;&nbsp;
+                        {recipelistRender(sessionStorage.getItem('pageSession'))}
                     </div>
                 </div>
             </div>
             <Pagination
                     activePage={page}
                     itemsCountPerPage={5}
-                    totalItemsCount={15}
+                    totalItemsCount={recipe.length}
                     pageRangeDisplayed={5}
                     prevPageText="<"
                     nextPageText=">"
