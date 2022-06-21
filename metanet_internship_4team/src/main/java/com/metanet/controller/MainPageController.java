@@ -1,6 +1,8 @@
 
 package com.metanet.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.metanet.domain.SearchWord;
 import com.metanet.domain.Video;
+import com.metanet.domain.DTO.VideoDTO;
+import com.metanet.domain.DTO.VideoDTO.detailResponse;
+import com.metanet.repository.VideoRepository;
 import com.metanet.service.MainPageService;
 
 import io.swagger.annotations.ApiOperation;
@@ -23,7 +28,30 @@ public class MainPageController {
 	@Autowired
 	MainPageService mainPageService;
 
+	@Autowired	
+	VideoRepository videoRepository;
 
+	@Autowired
+	VideoDTO videoDTO;
+	
+
+	public List<VideoDTO.detailResponse> changeResult(List<Video> v)throws  IOException{
+		
+		List<VideoDTO.detailResponse> vList = new ArrayList<>();
+
+		for(int i =0 ; i< v.size(); i++) {
+			
+			VideoDTO.detailResponse temp = videoDTO.new detailResponse();
+			temp.transferFrom(v.get(i));	
+			vList.add(temp);
+		}
+		return vList;		
+	}
+	
+	
+	
+	
+	
 	@GetMapping("/getSearchWordRank")
 	@CrossOrigin
 	@ApiOperation(value="상단 베너 실시간 랭킹 키워드 제공",notes="성공시 List<String> 반환, size=5 ")
@@ -38,12 +66,41 @@ public class MainPageController {
 	@GetMapping("/getMainVideoList")
 	@CrossOrigin
 	@ApiOperation(value="상단 베너 실시간 랭킹 키워드 제공",notes="성공시 List<String> 반환, size=5 ")
-	public List<Video> getMainVideoList( @RequestParam(value = "userId", required=false, defaultValue="none") String userId ){
+	public List<VideoDTO.detailResponse> getMainVideoList( @RequestParam(value = "userId", required=false, defaultValue="none") String userId ) throws IOException{
 		
-		if(userId.equals("none")) return mainPageService.getVideoListByLevel(); //로그인이 안되어있다면  단순 조회수 		
-		else return mainPageService.getVideoListByLevel(userId); // 로그인이 되어있다면 사용자 기반 조회수 
+		if(userId.equals("none")) return changeResult(mainPageService.getVideoListByLevel()); //로그인이 안되어있다면  단순 조회수 		
+		else return changeResult(mainPageService.getVideoListByLevel(userId)); // 로그인이 되어있다면 사용자 기반 조회수 
 
 	}
+	
+//	
+//	@GetMapping("/getDetail")
+//	@CrossOrigin
+//	@ApiOperation(value="상단 베너 실시간 랭킹 키워드 제공",notes="성공시 List<String> 반환, size=5 ")
+//	public VideoDTO.detailResponse getMainVideoList( @RequestParam int videoNumber ) throws IOException{
+//		
+//		Video video = videoRepository.findByvideoNumber(videoNumber);
+//
+//		VideoDTO.detailResponse response = new VideoDTO.detailResponse();
+//		response.transferFrom(video);
+//		return response;
+//	}
+	
+	
+	
+	
+	@GetMapping("/getDetail")
+	@CrossOrigin
+	@ApiOperation(value="상단 베너 실시간 랭킹 키워드 제공",notes="성공시 List<String> 반환, size=5 ")
+	public VideoDTO.detailResponse getMainVideoList( @RequestParam int videoNumber ) throws IOException{
+		
+		Video video = videoRepository.findByvideoNumber(videoNumber);
+
+		VideoDTO.detailResponse response = videoDTO.new detailResponse();
+		response.transferFrom(video);
+		return response;
+	}
+	
 	
 	
 	
