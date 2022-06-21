@@ -16,7 +16,7 @@ public class VideoDTO {
 		
 		private String videoTitle;
 		private String videoContexts;
-		private String videoName;
+		private String videoName;		
 		private String recipeLevel;
 		private String recipeKind;
 		private int recipeTime;
@@ -28,7 +28,7 @@ public class VideoDTO {
 			
 			video.setVideoTitle(videoTitle);
 			video.setVideoName(videoName);
-			video.setVideoContexts(videoContexts);
+			video.setVideoContexts(videoContexts);	
 			video.setRecipeLevel(recipeLevel);
 			video.setRecipeKind(recipeKind);
 			video.setRecipeTime(recipeTime);

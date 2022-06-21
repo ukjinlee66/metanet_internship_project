@@ -178,7 +178,7 @@ public class PointServiceImpl implements PointService {
 	    Calendar cal2 = Calendar.getInstance();
 	    cal1.setTime(now);
 	    cal2.setTime(userSubDate);
-	    
+  
 	    if(compare >= 0)
 	    {
 		    if(buyPoint == 30000)
@@ -188,8 +188,13 @@ public class PointServiceImpl implements PointService {
 		    if(buyPoint == 250000)
 		    	cal1.add(Calendar.DATE,365);
 		    
+
 		    java.util.Date date1 = cal1.getTime();		    
+
 		    java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
+
+		 
+		    
 		    user.setUserEndsubscribe(sqlDate);
 		    usersRepository.save(user);
 		    System.out.println(user);

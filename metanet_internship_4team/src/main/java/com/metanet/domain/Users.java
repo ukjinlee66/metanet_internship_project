@@ -60,6 +60,7 @@ public class Users
 	
 	@Column(name = "USER_KIND")
 	private char userKind;
+
 	
 	@Column(name = "USER_DATE")
 	@NonNull
