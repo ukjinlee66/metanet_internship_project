@@ -61,7 +61,6 @@ public class StreamingController {
 			@RequestParam("file")  MultipartFile  uploadFile,
 			VideoDTO.addDetailRequest newDetail) throws Exception {
 				
-		
 		// 파일 업로드 진행 
 		String originalFileName = uploadFile.getOriginalFilename();
 		String onlyFileName = originalFileName.substring(0, originalFileName.lastIndexOf("."));
@@ -74,7 +73,7 @@ public class StreamingController {
 		{
 			saveDir.mkdir();
 
-			newDetail.setVideoName(saveDirPath);
+			newDetail.setVideoName(onlyFileName);
 			infoService.saveDetail(newDetail);
 	        
 			File dest = new File(savefilePath);
@@ -107,97 +106,32 @@ public class StreamingController {
 	    			.done();
 	        FFmpegExecutor executorThumbNail = new FFmpegExecutor(ffmpeg, ffprobe);
 	        executorThumbNail.createJob(builderThumbNail).run();
-		
-	        
-	        //이미지 찾고 바이트 어래이 연동 
-	        
-	        
-	        String fileFullPath =  saveDirPath +"\\" + onlyFileName + ".png";
-	        InputStream imageStream = new FileInputStream(fileFullPath);
-			
-			byte[] imageByteArray = IOUtils.toByteArray(imageStream);
-			imageStream.close();
-			
-			
-	        
+		    
 			return "완료";
-		}
-		
+		}		
 		return "실패";
 	}
 	
-		
-		
-	@GetMapping(		
-			value ="/getImageByte",
-			produces = MediaType.IMAGE_JPEG_VALUE
-			)
-	@CrossOrigin
-	@ApiOperation(value="이미지 받기",notes="비디오 넘버로 이미지 받기")
-	public @ResponseBody byte[] getImage( @RequestParam("videoNumber")  int videoNumber )
-			 throws IOException{
-	
-		// videoNumber를 통해  videoname을 찾는다.
-	
-		Video video = videoRepository.findByvideoNumber(videoNumber);
-				
-		String onlyFileName = video.getVideoName();
-		
-		int lastIdx = onlyFileName .lastIndexOf("\\");
-		
-		onlyFileName = onlyFileName.substring(lastIdx+1)+".png";
-						
-		String fileFullPath = video.getVideoName() +  "\\" + onlyFileName;
-		
-		InputStream imageStream = new FileInputStream(fileFullPath);
-		
-		byte[] imageByteArray = IOUtils.toByteArray(imageStream);
-		imageStream.close();
-		
-		return imageByteArray;
-	
-		
-	}
-	
-
-	
-	
-	@GetMapping("/getFileName")
-	@CrossOrigin
-	@ApiOperation(value="아이디 중복 확인",notes="회원가입시 아이디 중복여부 확인 / 중복시 -1, 중복 아닐시 1 반환")
-	public String getFileName( @RequestParam("videoNumber")  int videoNumber)
-	{
-	
-		Video video = videoRepository.findByvideoNumber(videoNumber);
-		String onlyFileName = video.getVideoName();
-		int lastIdx = onlyFileName .lastIndexOf("\\");
-		onlyFileName = onlyFileName.substring(lastIdx+1);
-		
-		return onlyFileName ;
-		
-	}
-	
-	
 	@GetMapping("/hls/{fileName}/{fileName}.m3u8")
 	@CrossOrigin
-	public ResponseEntity<Resource> videoHlsM3U8(@PathVariable String fileName)
+	public ResponseEntity<Resource> videoHlsM3U8(@PathVariable String videoName)
 	{
 		
-		String fileFullPath = baseSavefilePath + fileName + "\\" + fileName+ ".m3u8";
+		String fileFullPath = baseSavefilePath + videoName + "\\" + videoName+ ".m3u8";
 		Resource resource = new FileSystemResource(fileFullPath); 
 		HttpHeaders headers = new HttpHeaders();
-		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName + ".m3u8");
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + videoName + ".m3u8");
 		headers.setContentType(MediaType.parseMediaType("application/vnd.apple.mpegurl"));
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);	
 	}
 	
-	
+
 	
 	@GetMapping("/hls/{fileName}/{tsName}.ts")
 	@CrossOrigin
-	public ResponseEntity<Resource> videoHlsTs(@PathVariable String fileName, @PathVariable String tsName) 
+	public ResponseEntity<Resource> videoHlsTs(@PathVariable String videoName, @PathVariable String tsName) 
 	{
-		String fileFullPath = baseSavefilePath + fileName + "/" + tsName + ".ts";
+		String fileFullPath = baseSavefilePath + videoName + "/" + tsName + ".ts";
 		Resource resource = new FileSystemResource(fileFullPath); 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + tsName + ".ts");
@@ -208,63 +142,55 @@ public class StreamingController {
 	
 	
 	
-	
-	
-	
-	/*
-	
-	@GetMapping("/getM3U8")
-	@CrossOrigin
-	@ApiOperation(value="아이디 중복 확인",notes="회원가입시 아이디 중복여부 확인 / 중복시 -1, 중복 아닐시 1 반환")
-	public ResponseEntity<Resource> getM3U8( @RequestParam("videoNumber")  int videoNumber)
-	{
-	
-		Video video = videoRepository.findByvideoNumber(videoNumber);
-		String onlyFileName = video.getVideoName();
-		int lastIdx = onlyFileName .lastIndexOf("\\");
-		onlyFileName = onlyFileName.substring(lastIdx+1)+".m3u8";
-	
-		String fileFullPath = video.getVideoName() +  "\\" + onlyFileName;
-		Resource resource = new FileSystemResource(fileFullPath ); 
-		
-		HttpHeaders headers = new HttpHeaders();
-		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + onlyFileName + ".m3u8");
-		headers.setContentType(MediaType.parseMediaType("application/vnd.apple.mpegurl"));
-		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
-		
-	}
-	
-	
-	@GetMapping("/getTs")
-	@CrossOrigin
-	@ApiOperation(value="아이디 중복 확인",notes="회원가입시 아이디 중복여부 확인 / 중복시 -1, 중복 아닐시 1 반환")
-	public ResponseEntity<Resource> getTs( 
-			@RequestParam("videoNumber")  int videoNumber,
-			@RequestParam("tsfileName")  String tsfileName
-			)
-	{
-	
-		Video video = videoRepository.findByvideoNumber(videoNumber);
-	
-		String fileFullPath = video.getVideoName() +  "\\" + tsfileName;
-		Resource resource = new FileSystemResource(fileFullPath); 
-		
-		HttpHeaders headers = new HttpHeaders();
-		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + tsfileName);
-		headers.setContentType(MediaType.parseMediaType(MediaType.APPLICATION_OCTET_STREAM_VALUE));
-		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
-
-	}
-	
-	
-	
-	
-	*/
-	
-	
-	
-	
-	
+//	
+//	사실상 불필요한 메서드이지만 혹시나 방법이 바뀔떄를 위해 남겨둠 
+//	
+//	@GetMapping(		
+//			value ="/getImageByte",
+//			produces = MediaType.IMAGE_JPEG_VALUE
+//			)
+//	@CrossOrigin
+//	@ApiOperation(value="이미지 받기",notes="비디오 넘버로 이미지 받기")
+//	public @ResponseBody byte[] getImage( @RequestParam("videoNumber")  int videoNumber )
+//			 throws IOException{
+//	
+//		// videoNumber를 통해  videoname을 찾는다.
+//	
+//		Video video = videoRepository.findByvideoNumber(videoNumber);
+//				
+//		String onlyFileName = video.getVideoName();
+//		
+//		int lastIdx = onlyFileName .lastIndexOf("\\");
+//		
+//		onlyFileName = onlyFileName.substring(lastIdx+1)+".png";
+//						
+//		String fileFullPath = video.getVideoName() +  "\\" + onlyFileName;
+//		
+//		InputStream imageStream = new FileInputStream(fileFullPath);
+//		
+//		byte[] imageByteArray = IOUtils.toByteArray(imageStream);
+//		imageStream.close();
+//		
+//		return imageByteArray;
+//			
+//	}
+//	
+//
+//	@GetMapping("/getFileName")
+//	@CrossOrigin
+//	@ApiOperation(value="아이디 중복 확인",notes="회원가입시 아이디 중복여부 확인 / 중복시 -1, 중복 아닐시 1 반환")
+//	public String getFileName( @RequestParam("videoNumber")  int videoNumber)
+//	{
+//	
+//		Video video = videoRepository.findByvideoNumber(videoNumber);
+//		String onlyFileName = video.getVideoName();
+//		int lastIdx = onlyFileName .lastIndexOf("\\");
+//		onlyFileName = onlyFileName.substring(lastIdx+1);
+//		
+//		return onlyFileName ;
+//		
+//	}
+//	
 	
 	
 	

@@ -1,6 +1,8 @@
 package com.metanet.controller;
 
+import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,7 @@ import com.metanet.domain.Comments;
 import com.metanet.domain.Users;
 import com.metanet.domain.Video;
 import com.metanet.domain.DTO.VideoDTO;
+import com.metanet.domain.DTO.VideoDTO.detailResponse;
 import com.metanet.repository.CommentsRepository;
 import com.metanet.repository.LikesRepository;
 import com.metanet.repository.UsersRepository;
@@ -38,7 +41,7 @@ public class InfoController
 	private InfoService infoService; // InfoService service
 	
 	@Autowired
-	private  MyPageService myPageService;
+	private  MyPageService myPageService ;
 	
 	@Autowired
 	private CommentsRepository CommRepo;
@@ -55,11 +58,24 @@ public class InfoController
 	@Autowired
 	private UsersRepository UsersRepo;
 	
-	@Value("${file.path}")
-	private String fileRealPath;
+	@Autowired
+	VideoDTO videoDTO;
 	
-	@Value("${ffmpg.path}")
-	private String ffmpgRealPath;
+	
+	
+	public List<VideoDTO.detailResponse> changeResult(List<Video> v)throws  IOException{
+		
+		List<VideoDTO.detailResponse> vList = new ArrayList<>();
+
+		for(int i =0 ; i< v.size(); i++) {
+			
+			VideoDTO.detailResponse temp = videoDTO.new detailResponse();
+			temp.transferFrom(v.get(i));	
+			vList.add(temp);
+		}
+		return vList;		
+	}
+	
 	
 	
 	@PostMapping("/addcomment")
@@ -88,36 +104,35 @@ public class InfoController
 			@RequestParam(value="Comments",required=true, defaultValue="") String Comments,
 			@RequestParam(value="commentsNumber",required=true, defaultValue="0") int commentsNumber)
 	{
-//		Comments com = CommRepo.findBycommentsNumber(commentsNumber);
-//		com.setCommentsContexts(Comments);
-//		CommRepo.save(com);
+		Comments com = CommRepo.findBycommentsNumber(commentsNumber);
+		com.setCommentsContexts(Comments);
+		CommRepo.save(com);
 	}
 	
-	@PostMapping("/deletecomment")
+	@DeleteMapping("/deletecomment")
 	@CrossOrigin
 	@ApiOperation(value="댓글 삭제", notes="회원 유저가 댓글을 입력")
 	public void deletecom(
 			@ApiParam(value="삭제할 댓글번호를 받는다", required=true)
-			@RequestParam(value="commentsNumber") int commentsNumber)
+			@RequestParam(value="commentsNumber",required=true, defaultValue="0") int commentsNumber)
 	{
-		try {
-			infoService.deleteComment(commentsNumber);
-		}
-		catch(NullPointerException e)
-		{
-			System.out.println("deleteComment Function NullPointer Exception Error!");
-		}
+		Comments com = CommRepo.findBycommentsNumber(commentsNumber);
+		CommRepo.delete(com);
 	}
 	
 	
 	@GetMapping("/detail")
 	@CrossOrigin
 	@ApiOperation(value="해당 레시피 정보 조회",notes="레시피아이디를 통한 상세정보 조회")
-	public Video detail(
+	public VideoDTO.detailResponse detail(
 			@ApiParam(value="레시피 아이디",required=true) @RequestParam int videoNumber 
-			)
+			) throws IOException
 	{
-		return(videoRepo.findByvideoNumber(videoNumber));
+		
+
+		VideoDTO.detailResponse response = videoDTO.new detailResponse();
+		response.transferFrom(videoRepo.findByvideoNumber(videoNumber));	
+		return response;
 	}
 	
 	@GetMapping("/comments")
@@ -143,12 +158,12 @@ public class InfoController
 	@GetMapping("/detailList")
 	@CrossOrigin
 	@ApiOperation(value="비회원일 경우 해당 레시피 사이드 리스트 조회",notes="레시피아이디를 통한 리스트 정보 조회")
-	public List<Video> detaillist
+	public List<VideoDTO.detailResponse>  detaillist
 	(
 			@ApiParam(value="레시피 아이디",required=true) @RequestParam int videoNumber 
-			)
+			) throws IOException
 	{
-		return(infoService.videosamekindList(videoNumber));
+		return changeResult( infoService.videosamekindList(videoNumber));
 	}
 	
 
@@ -156,12 +171,12 @@ public class InfoController
 	@GetMapping("/detailUserList")
 	@CrossOrigin
 	@ApiOperation(value="회원일 경우 해당 레시피 사이드 리스트 조회",notes="회원 관심분야를 통한 리스트 정보 조회")
-	public List<Video> detailuserlist
+	public List<VideoDTO.detailResponse>  detailuserlist
 	(
 			@ApiParam(value="회원 번호",required=true) @RequestParam int userNumber 
-			)
+			) throws IOException
 	{
-		return(infoService.userRecKindList(userNumber));
+		return  changeResult(infoService.userRecKindList(userNumber));
 	}
 		
 	
@@ -231,21 +246,20 @@ public class InfoController
 		return myPageService.isLike(videoNumber, userNumber);
 	}
 	
-	@PostMapping("/addLikes")
+	@GetMapping("/addLikes")
 	@CrossOrigin
 	@ApiOperation(value="회원 좋아요 영상 저장",notes="성공시 1 반환, 실패시 -1 반환 ")
 	public int  getLikes(@RequestParam("videoName") String videoName, @RequestParam String userId )
 	{
-		myPageService.addLikes(userId, videoName );
-		return 1;
+		return myPageService.addLikes(userId, videoName );
 	}
 	
-	@PostMapping("/deleteLikes")
+	@GetMapping("/deleteLikes")
 	@CrossOrigin
 	@ApiOperation(value="회원 레시피 좋아요 삭제",notes="회원 번호, , 성공시 1 반환")
 	public int deleteDetail(
-			@ApiParam(value="레시피 아이디",required=true) @RequestParam String videoName,
-			@RequestParam String userId
+			@ApiParam(value="레시피 아이디",required=true) @RequestParam String userId,
+			String videoName
 			)
 	{
 		myPageService.deleteLikes(userId, videoName);
