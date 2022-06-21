@@ -112,11 +112,11 @@ const RecipeRanking=()=>
                                 duration = {4000}
                                 autoStart = {true}
                                 pauseOnHover = {true}>
-                                {/* <Ticker1></Ticker1>
+                                <Ticker1></Ticker1>
                                 <Ticker2></Ticker2>
                                 <Ticker3></Ticker3>
                                 <Ticker4></Ticker4>
-                                <Ticker5></Ticker5> */}
+                                <Ticker5></Ticker5>
                         </NewsTicker>
                 </div>
         </div>

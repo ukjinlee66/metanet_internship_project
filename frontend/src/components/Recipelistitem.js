@@ -84,11 +84,6 @@ function Recipelistitem(props) {
     const tourSizeUrl = 'http://localhost:8443/List/Search';
     const elaUrl = '/log/searchKeyword';
 
-    const sortBtClick = (e) =>{
-        setSortColor(e.target.value)
-        getsortItem(e.target.value);
-    
-    }
     
 
     // 조회수에 따른 레시피 리스트 요청
@@ -161,23 +156,11 @@ function Recipelistitem(props) {
     }
 
 
-    // 검색에 따른 관광지 리스트의 총 길이 요청
-    const getlistSize = async () => {
-        console.log("getListSize start");
-        await axios
-            .get(tourSizeUrl, {
-                params: {
-                    videoTitle: decodeURI(window.location.search.split('=')[1])
-                }
-            })
-            .then((res) => console.log(res.data));  
-    }
-
     
 
 
 
-    // 관광지 리스트 렌더링
+    // 레시피 리스트 렌더링
     const recipelistRender = (page) => {
         const result = [];
         for (let i = page*5-5; i < page*5; i++) {
@@ -185,7 +168,7 @@ function Recipelistitem(props) {
             else{
                 console.log(recipe.length)
             result.push(
-                // 출력 관광지 리스트의 관광지 id을 값으로 상세페이지에 보냄
+                // 출력 레시피 리스트의 레시피 번호를 값으로 상세페이지에 보냄
                 <div class="list-item p-4 mb-4">
                     <div class="row g-4 list-section">
                         <div class="col-md-4 d-flex align-items-start">
