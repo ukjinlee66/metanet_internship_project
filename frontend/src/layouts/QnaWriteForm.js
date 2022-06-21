@@ -53,7 +53,7 @@ const QnaWriteForm = () => {
         if (response.data == -1) alert("문의글 작성 실패")
         else{
           alert("문의글 작성 성공")
-          document.location.href = "http://localhost:3000/zipcook/PostMain?reportTitle=" //문의글 백 연결
+          document.location.href = "/zipcook/PostMain?reportTitle=" //문의글 백 연결
         }
       })
       .catch(function (error) {
@@ -135,7 +135,7 @@ const QnaWriteForm = () => {
           </button>
         </div>
         <p className="forgot-password text-right">
-          <Link to="/zipcook/PostMain"><h5>취 소</h5></Link>
+          <Link to="/zipcook/PostMain?reportTitle="><h5>취 소</h5></Link>
         </p>
 
       </form>
