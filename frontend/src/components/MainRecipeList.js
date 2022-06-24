@@ -84,7 +84,7 @@ function MainRecipeList(props)
 
 
     let videoSlides = [
-        <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + popular[0].videoNumber}/><p>{popular[0].videoTitle}</p></a>,
+        <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + popular[0].videoNumber}/><p>{popular[0].videoTitle}</p></a> ,
         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + popular[1].videoNumber}/><p>{popular[1].videoTitle}</p></a> ,
         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + popular[2].videoNumber}/><p>{popular[2].videoTitle}</p></a> ,
         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + popular[3].videoNumber}/><p>{popular[3].videoTitle}</p></a> ,
@@ -92,11 +92,11 @@ function MainRecipeList(props)
     
     
     let loginVideoSlides = [
-        <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + prefer[0].videoNumber}/><p>{prefer[0].videoTitle}</p></a>,
+        <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + prefer[0].videoNumber}/><p>{prefer[0].videoTitle}</p></a> ,
         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + prefer[1].videoNumber}/><p>{prefer[1].videoTitle}</p></a> ,
         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + prefer[2].videoNumber}/><p>{prefer[2].videoTitle}</p></a> ,
         <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + prefer[3].videoNumber}/><p>{prefer[3].videoTitle}</p></a> ,
-        <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + prefer[4].videoNumber}/><p>{prefer[4].videoTitle}</p></a>  ];
+        <a style={{cursor:'pointer'}}><img  src="https://picsum.photos/800/300/?random" alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + prefer[4].videoNumber}/><p>{prefer[4].videoTitle}</p></a>    ];
         
 
 

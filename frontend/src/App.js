@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import Main from './layouts/Main';
 import RecipeAttractionInfo from './layouts/RecipeAttractionInfo';
 import RecipeAttractionList from './layouts/RecipeAttractionList';
@@ -28,6 +28,7 @@ function App() {
   return (
       <BrowserRouter>
           <Routes>
+              <Route path="/" element={<Navigate replace to="/zipcook"/>}/>
               <Route path='/zipcook' element={<Main/>}/>
               <Route path='/zipcook/RecipeAttractionList' element={<RecipeAttractionList/>}/>
               <Route path='/zipcook/RecipeAttractionInfo' element={<RecipeAttractionInfo/>}/>
