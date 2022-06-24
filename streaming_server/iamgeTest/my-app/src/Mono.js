@@ -35,8 +35,8 @@ function Mono() {
             
             
             <ReactHlsPlayer
-            src="http://localhost:8443/Streaming/hls/시원하고든든한일식요리웰빙양배추탑냉돈까스만개의레시피/시원하고든든한일식요리웰빙양배추탑냉돈까스만개의레시피.m3u8"
-            
+            //src="http://localhost:8443/Streaming/hls/시원하고든든한일식요리웰빙양배추탑냉돈까스만개의레시피/시원하고든든한일식요리웰빙양배추탑냉돈까스만개의레시피.m3u8"
+            src="videos/output.m3u8"
             autoPlay={false}
             controls={true}
             width="100%"

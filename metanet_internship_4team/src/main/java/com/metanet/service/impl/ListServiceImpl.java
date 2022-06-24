@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.metanet.domain.Likes;
 import com.metanet.domain.Video;
 import com.metanet.repository.LikesRepository;
 import com.metanet.repository.VideoRepository;
@@ -63,21 +64,14 @@ public class ListServiceImpl implements ListService
 		{	
 			try 
 			{
-				if (likesRepo.existsByvideoNumber(v.getVideoNumber()) && likesRepo.existsByvideoNumber(v2.getVideoNumber()))
-				{
-					if (likesRepo.countByvideoNumber(v.getVideoNumber()) > likesRepo.countByvideoNumber(v2.getVideoNumber()))
-						return 1;
-					else if ((likesRepo.countByvideoNumber(v.getVideoNumber())) == likesRepo.countByvideoNumber(v2.getVideoNumber()))
-						return 0;
-					else
-						return -1;
-				}
+				if (likesRepo.countByvideoNumber(v.getVideoNumber()) >= likesRepo.countByvideoNumber(v2.getVideoNumber()))
+					return 1;
 				else
-					return 0;
+					return -1;
 			}
 			catch(NullPointerException e)
 			{
-				return 0;
+				return -1;
 			}
 		}
 	}
@@ -120,30 +114,39 @@ public class ListServiceImpl implements ListService
 	
 	public List<Video> SearchtoLikes(List<Video> arr) // 좋아요순 정렬 검색
 	{
-		List<Video> first = arr; //검색어에따른 리스트
-		List<Video> second = new ArrayList<>();
-		List<Video> third = new ArrayList<>();
-		//likes 테이블에 존재하는 게시글 기준 정렬하기위한 새로운 리스트 생성
-		for(Video v : first)
-		{	
-			try 
+		try
+		{
+			List<Likes> temp = new ArrayList<>();
+			List<Video> temp2 = new ArrayList<>();
+			List<Likes> alltemp = likesRepo.findAll();
+			for (Video v : arr)
 			{
-				//검색결과 리스트에서 좋아요테이블의 게시글이 한개 이상 존재할 경우 -> 좋아요가 있을경우
-				if(likesRepo.countByvideoNumber(v.getVideoNumber()) > 0)
+				for (Likes l : alltemp)
 				{
-					second.add(v);
+					if(l.getVideoNumber() == v.getVideoNumber())
+					{
+						temp.add(l);
+						break;
+					}
 				}
-				else
-					third.add(v);
 			}
-			catch(NullPointerException e)
-			{
-				e.printStackTrace();
-			}
+			List<Integer> check = likesRepo.SearchtoLike(temp);
+			
+			for (Integer v : check)
+				temp2.add(videoRepo.findByvideoNumber(v));
+			
+			for(Video t : temp2)
+				arr.remove(t);
+			
+			temp2.addAll(arr);
+			
+			return temp2;
 		}
-		Collections.sort(second, new SortLike()); //해당 게시글의 좋아요수를 비교해서 정렬.
-		second.addAll(third);
-		return second;
+		catch(NullPointerException e)
+		{
+			e.printStackTrace();
+			return new ArrayList<Video>();
+		}
 	}
 	
 	public List<Video> SearchKind(String videoTitle, String recipeKind) // 분야 검색

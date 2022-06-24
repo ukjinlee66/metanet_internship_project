@@ -112,6 +112,7 @@ public class StreamingController {
 		return "실패";
 	}
 	
+
 	@GetMapping("/hls/{fileName}/{fileName}.m3u8")
 	@CrossOrigin
 	public ResponseEntity<Resource> videoHlsM3U8(@PathVariable String videoName)
