@@ -114,13 +114,13 @@ public class StreamingController {
 	
 	@GetMapping("/hls/{fileName}/{fileName}.m3u8")
 	@CrossOrigin
-	public ResponseEntity<Resource> videoHlsM3U8(@PathVariable String videoName)
+	public ResponseEntity<Resource> videoHlsM3U8(@PathVariable String fileName)
 	{
 		
-		String fileFullPath = baseSavefilePath + videoName + "\\" + videoName+ ".m3u8";
+		String fileFullPath = baseSavefilePath + fileName + "\\" + fileName+ ".m3u8";
 		Resource resource = new FileSystemResource(fileFullPath); 
 		HttpHeaders headers = new HttpHeaders();
-		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + videoName + ".m3u8");
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName + ".m3u8");
 		headers.setContentType(MediaType.parseMediaType("application/vnd.apple.mpegurl"));
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);	
 	}
@@ -129,9 +129,9 @@ public class StreamingController {
 	
 	@GetMapping("/hls/{fileName}/{tsName}.ts")
 	@CrossOrigin
-	public ResponseEntity<Resource> videoHlsTs(@PathVariable String videoName, @PathVariable String tsName) 
+	public ResponseEntity<Resource> videoHlsTs(@PathVariable String fileName, @PathVariable String tsName) 
 	{
-		String fileFullPath = baseSavefilePath + videoName + "/" + tsName + ".ts";
+		String fileFullPath = baseSavefilePath + fileName + "/" + tsName + ".ts";
 		Resource resource = new FileSystemResource(fileFullPath); 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + tsName + ".ts");
