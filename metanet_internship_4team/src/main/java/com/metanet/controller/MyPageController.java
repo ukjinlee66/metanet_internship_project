@@ -1,5 +1,7 @@
 package com.metanet.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.metanet.domain.Users;
 import com.metanet.domain.Video;
+import com.metanet.domain.DTO.VideoDTO;
 import com.metanet.service.MyPageService;
 
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +29,27 @@ public class MyPageController {
 
 	@Autowired
 	MyPageService myPageService;
+	
+	@Autowired
+	VideoDTO videoDTO;
+	
+	
+	
+	public List<VideoDTO.detailResponse> changeResult(List<Video> v)throws  IOException{
+		
+		List<VideoDTO.detailResponse> vList = new ArrayList<>();
+
+		for(int i =0 ; i< v.size(); i++) {
+			VideoDTO.detailResponse temp = videoDTO.new detailResponse();
+			temp.transferFrom(v.get(i));	
+			vList.add(temp);
+		}
+		return vList;		
+	}
+	
+	
+	
+	
 	
 	
 	// 시청 기록 영상  c r d
@@ -44,11 +68,11 @@ public class MyPageController {
 	@GetMapping("/getViews/{reckind}")
 	@CrossOrigin
 	@ApiOperation(value="회원 시청 영상 조회",notes="성공시 List<Video> 반환, 실패시 null 반환 ")
-	public List<Video>  getViews(@PathVariable String reckind  ,@RequestParam(value = "userId", required=false, defaultValue="none") String userId )
+	public List<VideoDTO.detailResponse>  getViews(@PathVariable String reckind  ,@RequestParam(value = "userId", required=false, defaultValue="none") String userId ) throws IOException
 	{	
 		
 		if(userId.equals("none"))return null;  // 토큰 값 없을 때 
-		else return myPageService.getViews(userId, reckind);
+		else return changeResult(myPageService.getViews(userId, reckind));
 
 	}
 	
@@ -87,15 +111,15 @@ public class MyPageController {
 	@GetMapping("/getLikes")
 	@CrossOrigin
 	@ApiOperation(value="회원 좋아요 영상 조회",notes="성공시 List<Video> 반환, 실패시 null 반환 ")
-	public List<Video>  getLikes( @RequestParam(value = "userId", required=false, defaultValue="none") String userId 
- )
+	public List<VideoDTO.detailResponse>  getLikes( @RequestParam(value = "userId", required=false, defaultValue="none") String userId 
+ ) throws IOException
 	{		
 		
 		if(userId.equals("none"))return null;  // 토큰 값 없을 때 
 		else {
 			
 			System.out.println(userId);
-			return myPageService.getLikes(userId);
+			return changeResult(myPageService.getLikes(userId));
 		}		 	
 	}
 	
@@ -134,11 +158,11 @@ public class MyPageController {
 	@GetMapping("/getSave")
 	@CrossOrigin
 	@ApiOperation(value="회원 저장 영상 조회",notes="성공시 List<Video> 반환, 실패시 null 반환 ")
-	public List<Video>  getSave( @RequestParam(value = "userId", required=false, defaultValue="none") String userId )
+	public List<VideoDTO.detailResponse>  getSave( @RequestParam(value = "userId", required=false, defaultValue="none") String userId ) throws IOException
 	{
 		
 		if(userId.equals("none"))return null;  // 토큰 값 없을 때 
-		else return myPageService.getSave(userId);
+		else return changeResult(myPageService.getSave(userId));
 			
 	}
 	
