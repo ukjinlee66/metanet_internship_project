@@ -15,11 +15,11 @@ function Recipelistitem(props) {
 
 
     const [recipe, setRecipe] = useState([
-        {id:'' ,img:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-        {id:'' ,img:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-        {id:'' ,img:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-        {id:'' ,img:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-        {id:'' ,img:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}
+        {id:'' ,recipeImg:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+        {id:'' ,recipeImg:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+        {id:'' ,recipeImg:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+        {id:'' ,recipeImg:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+        {id:'' ,recipeImg:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}
     ])
 
     const [listSize, setListSize] = useState(1);
@@ -172,7 +172,7 @@ function Recipelistitem(props) {
                 <div class="list-item p-4 mb-4">
                     <div class="row g-4 list-section">
                         <div class="col-md-4 d-flex align-items-start">
-                            <img class="img-list" src={recipe[i].img} onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + recipe[i].videoNumber} />
+                            <img class="img-list" src={"data:image/png;base64,"+recipe[i].recipeImg} onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + recipe[i].videoNumber} />
                         </div>
                         <div class="col-md-8 list-info">
                             <div className='row'>
