@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +22,6 @@ import com.metanet.domain.Comments;
 import com.metanet.domain.Users;
 import com.metanet.domain.Video;
 import com.metanet.domain.DTO.VideoDTO;
-import com.metanet.domain.DTO.VideoDTO.detailResponse;
 import com.metanet.repository.CommentsRepository;
 import com.metanet.repository.LikesRepository;
 import com.metanet.repository.UsersRepository;
@@ -109,7 +110,7 @@ public class InfoController
 		CommRepo.save(com);
 	}
 	
-	@DeleteMapping("/deletecomment")
+	@PostMapping("/deletecomment")
 	@CrossOrigin
 	@ApiOperation(value="댓글 삭제", notes="회원 유저가 댓글을 입력")
 	public void deletecom(
@@ -158,12 +159,12 @@ public class InfoController
 	@GetMapping("/detailList")
 	@CrossOrigin
 	@ApiOperation(value="비회원일 경우 해당 레시피 사이드 리스트 조회",notes="레시피아이디를 통한 리스트 정보 조회")
-	public List<VideoDTO.detailResponse>  detaillist
+	public List<Video>  detaillist
 	(
 			@ApiParam(value="레시피 아이디",required=true) @RequestParam int videoNumber 
 			) throws IOException
 	{
-		return changeResult( infoService.videosamekindList(videoNumber));
+		return infoService.videosamekindList(videoNumber);
 	}
 	
 
@@ -171,12 +172,12 @@ public class InfoController
 	@GetMapping("/detailUserList")
 	@CrossOrigin
 	@ApiOperation(value="회원일 경우 해당 레시피 사이드 리스트 조회",notes="회원 관심분야를 통한 리스트 정보 조회")
-	public List<VideoDTO.detailResponse>  detailuserlist
+	public List<Video>  detailuserlist
 	(
 			@ApiParam(value="회원 번호",required=true) @RequestParam int userNumber 
 			) throws IOException
 	{
-		return  changeResult(infoService.userRecKindList(userNumber));
+		return  infoService.userRecKindList(userNumber);
 	}
 		
 	
@@ -208,14 +209,19 @@ public class InfoController
 	}
 	
 	
-	@GetMapping("/deleteDetail")
+	@DeleteMapping("/deleteDetail/{videoNumber}")
 	@CrossOrigin
 	@ApiOperation(value="해당 레시피 정보 삭제",notes="레시피아이디를 통한 상세정보 삭제, 성공시 1 반환")
-	public int deleteDetail(
-			@ApiParam(value="레시피 아이디",required=true) @RequestParam int videoNumber 
+	public ResponseEntity<Integer> deleteDetail(
+			@ApiParam(value="레시피 아이디",required=true) @PathVariable Integer videoNumber 
 			)
 	{
-		return infoService.deleteDetail(videoNumber);		
+		boolean isOK = infoService.deleteDetail(videoNumber);
+		if (!isOK)
+		{
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Integer>(videoNumber, HttpStatus.OK);
 	}
 	
 

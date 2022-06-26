@@ -159,7 +159,6 @@ function Hello() {
             <button onClick={ onEventHandle3 }>이미지 바이트 어레이</button>
             <img src={window.URL.createObjectURL(imgUrl)} alt="W3Schools.com" width="104" height="142"/>
             
-         
         </div>
       );
 

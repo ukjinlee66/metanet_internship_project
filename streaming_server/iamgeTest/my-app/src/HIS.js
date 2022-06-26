@@ -4,22 +4,23 @@ import ReactHlsPlayer from 'react-hls-player'
 import axios from 'axios';
 
 
-function Mono() {
+function HIS() {
 
 
-    const [ videoName, setVideoName] = useState('초기값');
-    const [data2, setData2] = useState('초기값');
+    const [ videoName, setVideoName] = useState('');
+    const [data2, setData2] = useState('');
 
     const getVideoFileName = () =>{
 
         axios.get(
-            'http://localhost:8443/Streaming/getFileName',    
+            'http://localhost:8443/MainPage/getDetail',    
             { params: { videoNumber : 552 } }
          )
      .then(res => { 
          console.log(res);
-         console.log(res.data); 
-         setVideoName(res.data);
+         console.log(res.data.videoName); 
+         let url = 'http://localhost:8443/Streaming/hls/' + res.data.videoName + '/' + res.data.videoName + '.m3u8';
+         setVideoName(url);
      })
      .catch(()=>console.log("실패"));
  }      
@@ -35,7 +36,7 @@ function Mono() {
             
             
             <ReactHlsPlayer
-            src="http://localhost:8443/Streaming/hls/시원하고든든한일식요리웰빙양배추탑냉돈까스만개의레시피/시원하고든든한일식요리웰빙양배추탑냉돈까스만개의레시피.m3u8"
+            src={videoName}
             
             autoPlay={false}
             controls={true}
@@ -53,4 +54,4 @@ function Mono() {
 
 
 
-export default Mono;
+export default HIS;

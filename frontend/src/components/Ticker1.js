@@ -55,7 +55,6 @@ const Ticker=()=>
     const btClick=(e)=> {
         sessionStorage.setItem("pageSession", 1);
         window.location.href = "/zipcook/RecipeAttractionList?search=" + e.target.value;
-        sessionStorage.setItem('listState', 'none')
     }
     
     const finish=() =>{

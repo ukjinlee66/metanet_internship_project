@@ -1,11 +1,6 @@
 package com.metanet.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -20,11 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.metanet.domain.Video;
 import com.metanet.domain.DTO.VideoDTO;
 import com.metanet.repository.VideoRepository;
 import com.metanet.service.InfoService;
@@ -112,15 +105,16 @@ public class StreamingController {
 		return "실패";
 	}
 	
+
 	@GetMapping("/hls/{fileName}/{fileName}.m3u8")
 	@CrossOrigin
-	public ResponseEntity<Resource> videoHlsM3U8(@PathVariable String videoName)
+	public ResponseEntity<Resource> videoHlsM3U8(@PathVariable String fileName)
 	{
 		
-		String fileFullPath = baseSavefilePath + videoName + "\\" + videoName+ ".m3u8";
+		String fileFullPath = baseSavefilePath + fileName + "\\" + fileName+ ".m3u8";
 		Resource resource = new FileSystemResource(fileFullPath); 
 		HttpHeaders headers = new HttpHeaders();
-		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + videoName + ".m3u8");
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName + ".m3u8");
 		headers.setContentType(MediaType.parseMediaType("application/vnd.apple.mpegurl"));
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);	
 	}
@@ -129,9 +123,9 @@ public class StreamingController {
 	
 	@GetMapping("/hls/{fileName}/{tsName}.ts")
 	@CrossOrigin
-	public ResponseEntity<Resource> videoHlsTs(@PathVariable String videoName, @PathVariable String tsName) 
+	public ResponseEntity<Resource> videoHlsTs(@PathVariable String fileName, @PathVariable String tsName) 
 	{
-		String fileFullPath = baseSavefilePath + videoName + "/" + tsName + ".ts";
+		String fileFullPath = baseSavefilePath + fileName + "/" + tsName + ".ts";
 		Resource resource = new FileSystemResource(fileFullPath); 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + tsName + ".ts");
