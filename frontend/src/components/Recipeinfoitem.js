@@ -4,12 +4,11 @@ import React, {Fragment, useEffect, useState, useRef} from 'react';
 // import '../assets/css/style.css';
 import '../index.css';
 import axios from "axios";
-import vide from "../Recipe/고등어조림.mp4";
 import { Input } from 'antd';
 import { LikeOutlined, DislikeOutlined } from '@ant-design/icons';
 import withImportantStyle from 'react-with-important-style';
 import RecipeinfoComments from './RecipeinfoComments.js';
-
+import ReactHlsPlayer from 'react-hls-player'
 const { TextArea } = Input;
 const Recipeinfo = (props) => 
 {
@@ -23,6 +22,7 @@ const Recipeinfo = (props) =>
     const axio = axios.create({baseURL: 'http://localhost:8443'})
     const reqUrl = '/Info/detail'; // 한 레시피 정보 조회
     const reqUrl2 = '/Info/comments'; // 한 레시피의 댓글정보 조회
+    const reqdelRec = '/deleteDetail'; // 한 레시피 삭제
     const reqadd = '/Info/addcomment'; // 댓글 입력
     const reqlike = '/Info/addLikes'; // 좋아요 추가
     const requnlike = '/Info/deleteLikes'; // 좋아요 삭제
@@ -30,6 +30,8 @@ const Recipeinfo = (props) =>
     const reqcountlike = '/Info/getlikecount'; //좋아요 개수 확인
     const reqaddView = '/List/Views'; // 조회수 증가
     const Button = withImportantStyle('button');
+    const [videoName,setvideoName] = useState=('');
+    
 
     // 처음 렌더링시 한번 실행되는 함수
     useEffect(() => {
@@ -40,14 +42,18 @@ const Recipeinfo = (props) =>
 
     // 레시피에 대한 상세정보 요청
     const getInfoItem = async () => {
-        await axio
+        await axio // 레시피 정보 요청
             .get(reqUrl, {
                 params: {
                     videoNumber: Number(decodeURI(window.location.search.split('=')[1]))
                 }
             })
-            .then((res) => setRecipe(res.data));
-        await axio
+            .then((res) => {
+                setRecipe(res.data); //Recipe 객체에 값 할당.
+                let url = 'http://localhost:8443/Streaming/hls/' + res.data.videoName + '/' + res.data.videoName + '.m3u8';
+                setvideoName(url); //영상 정보 저장.
+            });
+        await axio// 조회수 요청
             .post(reqaddView,{},{
                 params: {
                     videoNumber: Number(decodeURI(window.location.search.split('=')[1]))
@@ -65,6 +71,18 @@ const Recipeinfo = (props) =>
                 }
             })
             .then((res) => setLikecount(res.data));
+    }
+
+    const DelRecipe = () => // 관리자 계정일 경우 레시피 삭제
+    {
+        var num = Number(decodeURI(window.location.search.split('=')[1]));
+        axio
+            .delete(`${reqdelRec}/${num}`)
+            .then((res) => 
+            {
+                console.log("Delete Recipe!");
+                this.props.history.goBack();
+            });
     }
 
 
@@ -152,7 +170,6 @@ const Recipeinfo = (props) =>
 
     // 상세페이지 관광지 정보 렌더링
     const tourSpotRender = () => {
-        console.log("comments info : ",sessionStorage['User_Id'],sessionStorage["User_Number"], {Like});
         return(
             <Fragment>
             <div class="mb-5" style={{fontFamily: "Roboto"}}>
@@ -160,10 +177,12 @@ const Recipeinfo = (props) =>
                 <p>난이도 : {Recipe.recipeLevel} / 조리시간 : {Recipe.recipeTime}분 / 업로드 일자 : {Recipe.crDa}</p>
             </div>
             <hr/>
-            <center>
-                <video width="700" height="700" preload="auto" controls>
-                    <source src={vide} type="video/mp4"/>
-                </video>
+            <center> {/*main 영상*/}
+                <ReactHlsPlayer
+                    src={videoName}
+                    autoPlay={false}
+                    controls={true}
+                />
             </center>
             <hr/>
                 {/* 레시피 정보 표시 */}
@@ -176,6 +195,12 @@ const Recipeinfo = (props) =>
                 ? 
                 (
                 <div>
+                {(sessionStorage['User_Kind'] == 1) //관리자 일 경우 레시피를 삭제할 수 있다.
+                ? 
+                <Button style={{backgroundColor: "#886A08 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}} onClick={DelRecipe}>레시피 삭제</Button>
+                :
+                <p/>
+                }
                 <p style={{textAlign:"right"}}>좋아요 : {Likecount}</p>
                 <Button style={{backgroundColor: "#886A08 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}} onClick={UnLikefunc}><DislikeOutlined/></Button>
                 <Button style={{backgroundColor: "#088A85 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}} onClick={Likefunc}><LikeOutlined /></Button>
@@ -183,7 +208,8 @@ const Recipeinfo = (props) =>
                 : 
                 (
                 <div><p style={{textAlign:"right"}}>좋아요 : {Likecount}</p><Button style={{backgroundColor: "#088A85 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}}><DislikeOutlined /></Button>
-                <Button style={{backgroundColor: "#886A08 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}}><LikeOutlined /></Button></div>)
+                <Button style={{backgroundColor: "#886A08 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}}><LikeOutlined /></Button></div>
+                )
                 }
                 <br/><br/>
                 {(sessionStorage["User_Id"] === undefined)

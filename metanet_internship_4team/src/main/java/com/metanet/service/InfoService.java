@@ -19,7 +19,7 @@ public interface InfoService
 	
 	//주웅 추가 
 	//게시글 번호로 게시글 삭제  
-	int deleteDetail(int videoNumber);
+	boolean deleteDetail(int videoNumber);
 	
 	//(newDetail = 새로운  게시글 정보)
 	void saveDetail(VideoDTO.addDetailRequest newDetail);
