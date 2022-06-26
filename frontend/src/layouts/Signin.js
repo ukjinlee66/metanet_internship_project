@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import {Form} from 'antd';
 
 const Signin = () => {
   const [inputId, setInputId] = useState('')
@@ -8,6 +9,15 @@ const Signin = () => {
 
   const handleInputId = (e) => {
     setInputId(e.target.value)
+  }
+
+  const EnterPress = (e) =>
+  {
+    console.log("Enter!");
+    if (e.key === 'Enter')
+    {
+      onClickLogin();
+    }
   }
 
   const handleInputPw = (e) => {
@@ -48,7 +58,7 @@ const Signin = () => {
   useEffect(() => { }, [inputPw])
 
   return (
-    <form>
+    <form onKeyPress={EnterPress}>
       <h3>Sign In</h3>
       <div className="mb-3">
         <label>Id</label>
@@ -82,17 +92,18 @@ const Signin = () => {
           </label>
         </div>
       </div>
-      <div className="d-grid">
-        <button type="button" className="btn btn-primary" onClick={onClickLogin}>
-          Login
-        </button>
-      </div>
-      <p className="forgot-password text-right">
-        Forgot <Link to="/zipcook/member/FindSignPa">password?</Link>
-      </p>
-      <p className="forgot-password text-right">
-        Forgot <Link to="/zipcook/member/FindSignId">Id?</Link>
-      </p>
+      
+        <div className="d-grid">
+          <button type="button" className="btn btn-primary" onClick={onClickLogin}>
+            Login
+          </button>
+        </div>
+        <p className="forgot-password text-right">
+          Forgot <Link to="/zipcook/member/FindSignPa">password?</Link>
+        </p>
+        <p className="forgot-password text-right">
+          Forgot <Link to="/zipcook/member/FindSignId">Id?</Link>
+        </p>
     </form>
   )
 }

@@ -47,10 +47,15 @@ public class InfoServiceImpl implements InfoService
 		String userRecKind = u.getUserRecKind(); // 게시글의 접속한 유저의 관심분야
 		List<Video> list = videoRepo.findAll(); // 전체비디오테이블
 		List<Video> ret_list = new ArrayList<>();
+		int cnt=0;
 		for(Video v : list)
 		{
+			if(cnt==3) break;
 			if(v.getRecipeKind().equals(userRecKind))
+			{
 				ret_list.add(v);
+				cnt++;
+			}
 		}
 		return(ret_list);
 	}
@@ -80,10 +85,15 @@ public class InfoServiceImpl implements InfoService
 		Video v = videoRepo.findByvideoNumber(videoNumber);
 		List<Video> list = videoRepo.findAll();
 		List<Video> ret_list = new ArrayList<>();
+		int cnt=0;
 		for(Video v2: list)
 		{
+			if (cnt==3) break;
 			if(v2.getRecipeKind().equals(v.getRecipeKind()))
+			{
 				ret_list.add(v2);
+				cnt++;
+			}
 		}
 		return ret_list;
 	}
@@ -109,10 +119,18 @@ public class InfoServiceImpl implements InfoService
 	// 주웅 상세정보 삭제 
 
 	@Transactional 
-	public int deleteDetail(int videoNumber) {	
-		Video findVideo  = videoRepo.findByvideoNumber(videoNumber);
-		videoRepo.delete(findVideo);		
-		return 1 ; 
+	public boolean deleteDetail(int videoNumber) 
+	{
+		try 
+		{
+			Video findVideo  = videoRepo.findByvideoNumber(videoNumber);
+			videoRepo.delete(findVideo);
+			return true;
+		}
+		catch(NullPointerException e)
+		{
+			return false;
+		}
 	};
 	
 	
