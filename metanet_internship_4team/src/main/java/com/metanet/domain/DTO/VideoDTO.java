@@ -119,7 +119,7 @@ public class VideoDTO {
 			recipeIngredient = video.getRecipeIngredient();
 			
 		
-			String fileFullPath = baseSavefilePath +  "\\" + video.getVideoName() +  "\\" + video.getVideoName()+".png";
+			String fileFullPath = baseSavefilePath +  "/" + video.getVideoName() +  "/" + video.getVideoName()+".png";
 			InputStream imageStream = new FileInputStream(fileFullPath);
 			byte[] imageByteArray = IOUtils.toByteArray(imageStream);
 			imageStream.close();

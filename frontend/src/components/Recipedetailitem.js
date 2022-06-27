@@ -1,9 +1,9 @@
 import React from 'react';
 import {useEffect, useState, useRef, Fragment} from 'react';
 import axios from "axios";
+import ReactHlsPlayer from 'react-hls-player'
 import VideoHover from './VideoHoverPlay.js';
 import vide from "../Recipe/고등어조림.mp4";
-import ReactHlsPlayer from 'react-hls-player'
 const axio = axios.create({baseURL: 'http://localhost:8443'})
 const reqUrl = '/Info/detail'; // 한 레시피 정보 조회
 const reqUrl2 = '/Info/comments'; // 한 레시피의 댓글정보 조회
@@ -18,82 +18,85 @@ const Recipedetaillist=()=>
 
   // useRef를 통해 css 변경
   const stickyChange = useRef(null);
-  const [subList, SetsubList] = useState=([ // subList 영상은 3개로 고정
-    {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-    {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-    {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}
-  ])
-  
-  const [videoName, setvideoName] = useState(['']); // subList의 영상 이름을 저장할 배열 State
+  // const [subList, SetsubList] = useState=([ // subList 영상은 3개로 고정
+  //   {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+  //   {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+  //   {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}
+  // ])
+  // const [videoName, setvideoName] = useState(['']); // subList의 영상 이름을 저장할 배열 State
+  // const subListRef = useRef(subList);
+  // const videoNameRef = useRef(videoName);
+  // const SetvideosubList = () =>
+  // {
+  //   const result = [];
+  //   for(let i=0;i<3;i++)
+  //   {
+  //     var url = 'http://localhost:8443/Streaming/hls/' + subListRef.current[i].videoName + '/' + subListRef.current[i].videoName + '.m3u8';
+  //     result.push(url);
+  //   }
+  //   videoNameRef.current = result;
+  //   setvideoName(result);
+  // }
 
-  const SetvideosubList = () =>
-  {
-    const result = [];
-    for(let i=0;i<3;i++)
-    {
-      var url = 'http://localhost:8443/Streaming/hls/' + subList[i].videoName + '/' + subList[i].videoName + '.m3u8';
-      result.push(url);
-    }
-    setvideoName(result);
-  }
-
-  const checkUserLogin = async () =>  // 회원의 로그인 여부 확인해서 서브 리스트 구성.
-  {
-    {sessionStorage.getItem("User_Number") != null
-    ?
-    ( await axio // 로그인했을 경우 해당 회원의 관심 분야 서브 리스트 호출
-      .get(reqSub,{
-          params:{
-              userNumber: sessionStorage["User_Number"],
-              videoNumber: Number(decodeURI(window.location.search.split('=')[1]))
-          }
-      })
-      .then((res)=>{
-        SetsubList(res.data)
-        SetvideosubList();
-      })
-    )
-    :
-    (await axio // 로그인 유저가 아닐 경우 게시글과 같은 분야의 서브 리스트 호출
-      .get(reqSub2,{
-          params:{
-              videoNumber: Number(decodeURI(window.location.search.split('=')[1]))
-          }
-      })
-      .then((res)=>{
-        SetsubList(res.data);
-        SetvideosubList();
-      })
-      )
-    }
-  }
+  // const checkUserLogin = async () =>  // 회원의 로그인 여부 확인해서 서브 리스트 구성.
+  // {
+  //   {sessionStorage.getItem("User_Number") != null
+  //   ?
+  //   ( await axio // 로그인했을 경우 해당 회원의 관심 분야 서브 리스트 호출
+  //     .get(reqSub,{
+  //         params:{
+  //             userNumber: sessionStorage["User_Number"],
+  //             videoNumber: Number(decodeURI(window.location.search.split('=')[1]))
+  //         }
+  //     })
+  //     .then((res)=>{
+  //       subListRef.current = res.data;
+  //       SetsubList(res.data)
+  //       SetvideosubList();
+  //     })
+  //   )
+  //   :
+  //   (await axio // 로그인 유저가 아닐 경우 게시글과 같은 분야의 서브 리스트 호출
+  //     .get(reqSub2,{
+  //         params:{
+  //             videoNumber: Number(decodeURI(window.location.search.split('=')[1]))
+  //         }
+  //     })
+  //     .then((res)=>{
+  //       subListRef.current = res.data;
+  //       SetsubList(res.data);
+  //       SetvideosubList();
+  //     })
+  //     )
+  //   }
+  // }
   
   useEffect(()=>
   {
     function scrollListener() { window.addEventListener("scroll", handleScroll); } //  window 에서 스크롤을 감시 시작
     scrollListener(); // window 에서 스크롤을 감시
     return () => { window.removeEventListener("scroll", handleScroll); }; //  window 에서 스크롤을 감시를 종료
-    checkUserLogin();
+    //checkUserLogin();
   },[]);
   
   const videoRender = async () =>
   {
     const result = [];
-    for (let i = 0; i < subList.length;i++)
-    {
-      result.push(
-        <Fragment>
-        <ReactHlsPlayer
-            src={videoName[i]}
-            autoPlay={false}
-            controls={true}
-        />
-        <p>제목 : {subList[i].videoTitle} || 조회수 : {subList[i].videoView} <br/> 업로드 날짜 : {subList[i].crDa}
-        || 난이도 : {subList[i].recipeLevel} || 분야 : {subList[i].recipeKind}</p>
-        </Fragment>
-      )
-    }
-    return result;
+    // for (let i = 0; i < subListRef.current.length;i++)
+    // {
+    //   result.push(
+    //     <Fragment>
+    //     <ReactHlsPlayer
+    //         src={videoNameRef.current[i]}
+    //         autoPlay={false}
+    //         controls={true}
+    //     />
+    //     <p>제목 : {subListRef.current[i].videoTitle} || 조회수 : {subListRef.current[i].videoView} <br/> 업로드 날짜 : {subListRef.current[i].crDa}
+    //     || 난이도 : {subListRef.current[i].recipeLevel} || 분야 : {subListRef.current[i].recipeKind}</p>
+    //     </Fragment>
+    //   )
+    // }
+    //return result;
   }
   // 스크롤의 Y축을 감시하여 특정 지점 이동 시 Navbar가 화면 일정 지점에 따라가도록 설정
   function handleScroll() {
@@ -106,15 +109,15 @@ const Recipedetaillist=()=>
 }
   return(
     <nav className="navbar bg-white navbar-light shadow sticky-top p-0" ref={stickyChange}>
-      {/* <VideoHover name = {vide}/>
+      <VideoHover name = {vide}/>
       <h3>Video1</h3>
       <VideoHover name = {vide}/>
       <h3>Video2</h3>
       <VideoHover name = {vide}/>
-      <h3>Video3</h3> */}
-      {videoRender()}
+      <h3>Video3</h3>
+      {/* {videoRender()} */}
     </nav>
   );
-};
+}
 
 export default Recipedetaillist;

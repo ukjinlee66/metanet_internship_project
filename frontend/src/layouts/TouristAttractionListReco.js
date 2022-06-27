@@ -7,7 +7,6 @@ import Scrolltop from '../components/Scrolltop';
 import Footer from '../components/Footer';
 import TourlistitemReco from '../components/TourlistitemReco';
 import Map from '../components/Map';
-import ChatButton from '../components/ChatButton';
 import Navbar from '../components/Navbar';
 
 function TouristAttractionListReco(props) {
@@ -24,7 +23,6 @@ function TouristAttractionListReco(props) {
                 </div>
             </div>
             <Scrolltop />
-            <ChatButton/>
             <Footer />
         </div>
     );

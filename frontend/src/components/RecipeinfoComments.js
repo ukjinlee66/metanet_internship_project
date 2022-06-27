@@ -6,18 +6,19 @@ import axios from "axios";
 import { Space } from 'antd';
 
 
-function RecipeinfoComments(props)
+const RecipeinfoComments= (props)=>
 {
     const axio = axios.create({baseURL: 'http://localhost:8443'})
     const reqdel = '/Info/deletecomment'; // 댓글 삭제
     const reqedit = '/Info/editcomment'; // 댓글 수정
+    const [Comments, setComments] = useState([{id:'',commentsNumber:'',userNumber:'', videoNumber:'', userId:'', commentsContexts:'', crDa:'', deDa:''}]);
+    const reqUrl = '/Info/comments'; // 한 레시피의 댓글정보 조회
     useEffect(()=>
     {
         GetRecipeComments();
     },[]);
     // 상세 페이지 출력 댓글 정보 
-    const [Comments, setComments] = useState([{id:'', commentsNumber:'',userNumber:'', videoNumber:'', userId:'', commentsContexts:'', crDa:'', deDa:''}])
-    const reqUrl = '/Info/comments'; // 한 레시피의 댓글정보 조회
+    
 
     const GetRecipeComments = async () =>
     {
