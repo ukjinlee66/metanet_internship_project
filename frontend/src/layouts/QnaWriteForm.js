@@ -53,27 +53,17 @@ const QnaWriteForm = () => {
         if (response.data == -1) alert("문의글 작성 실패")
         else{
           alert("문의글 작성 성공")
-          document.location.href = "/zipcook/PostMain?reportTitle=" //문의글 백 연결
+          // document.location.href = "/zipcook/PostMain?reportTitle=" //문의글 백 연결
+          History.go(-1);
         }
       })
       .catch(function (error) {
         console.log(error);
         alert("오류")
+        History.go(-1);
       })
   }
-  // const refundRender = () => {
-  //   if(refundMoney === '취소/환불 접수'){
-  //     alert("취소/환불");
-  //   return <div className="mb-3">
-  //           <label>환불 희망 금액</label>
-  //           <br />
-  //           <input type="text" name="refundMoney" placeholder="Enter refund Money" value={refundMoney} onChange={handleInputRefundMoney} />
-  //         </div>
-  //   }
-  //   else{
-  //     return ''
-  //   }
-  // }
+
     return (
         <Fragment>
         <Navbar></Navbar>
