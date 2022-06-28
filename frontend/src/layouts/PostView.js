@@ -11,13 +11,42 @@ import { Input } from 'antd';
 
 
 const { TextArea } = Input;
+
+
 const PostView = ({ history, location, match }) => {
   const [ data, setData ] = useState({});
   const { no } = useParams();
   const [ userData, setUserData] = useState({});
+  const [commentval, setcommentval] = useState("");
+
   const navigate = useNavigate();
   const PostListUrl = 'http://localhost:8443/Report/Posts/'+{no}.no;
+  
+  const reqadd = 'http://localhost:8443/Report/Reply'; // 댓글 입력
+  const reqUrl2 = '/Info/comments'; // 한 문의사항 댓글정보 조회
 
+
+  
+  const AppendComments = () => // 댓글 입력 axios
+    {
+        axios
+        .post(reqadd,{},{
+            params:{
+                reportReply: commentval,
+                userKind: Number(1),
+                reportTableNumber: Number(data.reportTableNumber)
+            }
+        })
+        .then((res)=>{
+            alert("댓글 작성 완료");
+            window.location.reload();
+    }
+        );
+    }
+    const AddComment = async(event) =>
+    {
+        await setcommentval(event.currentTarget.value);
+    }
   const getPostView = async (page) => {
     await axios
         .get(PostListUrl, {
@@ -99,11 +128,7 @@ useEffect(() => {
                 <label>| 작성일</label>
                 <label>{ data.crDa }</label>
               </div>
-              <hr></hr>
-              <div className="post-view-row">
-                <label>| 답변일</label>
-                <label>{ data.reDa }</label>
-              </div>
+              
               <hr></hr>
               <div className="post-view-row">
                 <label>| 분류</label>
@@ -111,7 +136,7 @@ useEffect(() => {
               </div>
               <hr></hr>
               
-              <div className="post-view-row">
+              <div className="post-view-row"  style={{marginBottom:"50px"}}>
                 <label>| 내용</label>
                 
                 
@@ -125,23 +150,42 @@ useEffect(() => {
                 </div>
                 
               </div>
+              
+              <hr></hr>
+              <div className="post-view-row">
+                <label>| 관리자 답변</label>
+                <label>{ data.reportReply }</label>
+              </div>
+              <hr></hr>
+              <div className="post-view-row">
+                <label>| 답변일</label>
+                <label>{ data.reDa }</label>
+              </div>
+              
               <hr></hr>
             </>
           ) : '해당 게시글을 찾을 수 없습니다.'
         }
-      <br/><br/>
-                <TextArea style={{width: "1000px" ,display: "flex", float:"left"}}rows={4} placeholder="댓글을 입력 하세요."/>
-                <Button style={{backgroundColor: "#F2F2F2 !important", color: "green !important", height: "100px !important", width: "100px !important"}}>등록</Button>
-                <br/><br/>
+      
                 <hr/>
-                <ReportComment number={Number(decodeURI(window.location.search.split('=')[1]))}/>
                 {isAdmin === '0' ? (
+                  <Fragment>
+                  
                     <button style={{marginLeft:"10px"}} className="post-view-go-list-btn" onClick={() => navigate(-1)}>목록으로 돌아가기</button>
-                ) : (data.reportKind === '취소/환불 접수' ? (<Fragment>
+                    </Fragment>) : (data.reportKind === '취소/환불 접수' ? (<Fragment>
+                  
+                  <br/><br/>
+                  <div><TextArea style={{width: "800px" ,display: "flex", float:"left"}}rows={4} placeholder="댓글을 입력 하세요." onChange={AddComment} value={commentval}/>
+                  <Button style={{backgroundColor: "#F2F2F2 !important", color: "white !important", height: "100px !important", width: "100px !important"}} onClick={AppendComments}>등록</Button></div>
+                  <br/><br/>
                   <button className="post-view-go-list-btn" onClick={moveRefundPage} >환불 이동</button>
                   <button style={{marginLeft:"10px"}}className="post-view-go-list-btn" onClick={() => navigate(-1)}>목록으로 돌아가기</button>
                   </Fragment>): 
                   <Fragment>
+                  <br/><br/>
+                  <div><TextArea style={{width: "800px" ,display: "flex", float:"left"}}rows={4} placeholder="댓글을 입력 하세요." onChange={AddComment} value={commentval}/>
+                  <Button style={{backgroundColor: "#F2F2F2 !important", color: "white !important", height: "100px !important", width: "100px !important"}} onClick={AppendComments}>등록</Button></div>
+                  <br/><br/>
                   <button style={{marginLeft:"10px"}}className="post-view-go-list-btn" onClick={() => navigate(-1)}>목록으로 돌아가기</button>
                   </Fragment>
                 )}

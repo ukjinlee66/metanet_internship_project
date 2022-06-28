@@ -20,7 +20,7 @@ function Navbar(props) {
             sessionStorage.setItem("pageSession", 1);
             window.location.href = "/zipcook/" + e.target.value;
         }else if(e.target.value === "PostMain"){
-            window.location.href = "/zipcook/" + e.target.value;
+            window.location.href = "/zipcook/" + e.target.value+"?reportTitle=";
         }else if(e.target.value === "RefundPage"){
             window.location.href = "/zipcook/" + e.target.value;
         }
