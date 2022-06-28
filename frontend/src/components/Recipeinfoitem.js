@@ -8,7 +8,8 @@ import { Input } from 'antd';
 import { LikeOutlined, DislikeOutlined } from '@ant-design/icons';
 import withImportantStyle from 'react-with-important-style';
 import RecipeinfoComments from './RecipeinfoComments.js';
-import ReactHlsPlayer from 'react-hls-player'
+import ReactHlsPlayer from 'react-hls-player';
+
 const { TextArea } = Input;
 const Recipeinfo = (props) => 
 {
@@ -30,7 +31,7 @@ const Recipeinfo = (props) =>
     const reqcountlike = '/Info/getlikecount'; //좋아요 개수 확인
     const reqaddView = '/List/Views'; // 조회수 증가
     const Button = withImportantStyle('button');
-    const [videoName,setvideoName] = useState=('');
+    const [videoName,setvideoName] = useState('');
     
 
     // 처음 렌더링시 한번 실행되는 함수
@@ -182,6 +183,8 @@ const Recipeinfo = (props) =>
                     src={videoName}
                     autoPlay={false}
                     controls={true}
+                    width={700}
+                    height={700}
                 />
             </center>
             <hr/>

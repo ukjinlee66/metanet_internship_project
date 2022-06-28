@@ -65,18 +65,17 @@ public class InfoServiceImpl implements InfoService
 		if(videoNumber == 0) {
 			return new ArrayList<Comments>();
 		}
-		List<Comments> nv = new ArrayList<Comments>();
 		try {
-		List<Comments> v = commentsRepo.findByvideoNumber(videoNumber);
-		if (v.isEmpty())
-			return new ArrayList<Comments>();
-		Collections.sort(v, new SortTime());
-		return v;
+			List<Comments> v = commentsRepo.findByvideoNumber(videoNumber);
+			if (v.isEmpty())
+				return new ArrayList<Comments>();
+			Collections.sort(v, new SortTime());
+			return v;
 		}
 		catch(NullPointerException e)
 		{
 			System.out.println("videoCommentList Error!");
-			return nv;
+			return new ArrayList<Comments>();
 		}
 	}
 	//비회원일경우 해당 게시글과 같은 분야의 비디오리스트 반환
