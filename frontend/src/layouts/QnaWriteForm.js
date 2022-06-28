@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import SelectInput from '@material-ui/core/Select/SelectInput';
 
 
 const getToday=()=>{
@@ -40,6 +41,13 @@ const QnaWriteForm = () => {
   // 문의글 등록
   const BASEURL = "http://localhost:8443/Report/Post"
 
+  const goBackPage = () => {
+    this.props.history.goback()
+  }
+
+  const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+  }
   const submitReport = () => {
     axios.post(BASEURL, null, {
       params: {
@@ -50,17 +58,31 @@ const QnaWriteForm = () => {
       }
     })
       .then(function (response) {
-        if (response.data == -1) alert("문의글 작성 실패")
+        if (response.data == -1) {
+          
+          
+          document.location.href = "/zipcook/PostMain?reportTitle=" //문의글 백 연결
+          sleep(2000) ;
+          // this.goBackPage()
+        }
         else{
+          
+          // sleep(3000) ;
+          document.location.href = "/zipcook/PostMain?reportTitle=" //문의글 백 연결
+          sleep(2000) ;
           alert("문의글 작성 성공")
-          // document.location.href = "/zipcook/PostMain?reportTitle=" //문의글 백 연결
-          History.go(-1);
+          // this.goBackPage()
         }
       })
       .catch(function (error) {
+
+        
+        // sleep(3000) ;
+        document.location.href = "/zipcook/PostMain?reportTitle=" //문의글 백 연결
+        sleep(2000) ;
         console.log(error);
         alert("오류")
-        History.go(-1);
+        // this.goBackPage()
       })
   }
 

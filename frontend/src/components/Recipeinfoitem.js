@@ -8,7 +8,8 @@ import { Input } from 'antd';
 import { LikeOutlined, DislikeOutlined } from '@ant-design/icons';
 import withImportantStyle from 'react-with-important-style';
 import RecipeinfoComments from './RecipeinfoComments.js';
-import ReactHlsPlayer from 'react-hls-player'
+import ReactHlsPlayer from 'react-hls-player';
+
 const { TextArea } = Input;
 const Recipeinfo = (props) => 
 {
