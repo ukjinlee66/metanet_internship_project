@@ -1,7 +1,7 @@
 //import { Space } from 'antd';
 import React from 'react';
 import Recipedetaillist from '../components/Recipedetailitem';
-export function Videoitem()
+export const Videoitem = ()=>
 {
     return (
       <div class="col-lg-3" style={{ paddingRight: 0}} >

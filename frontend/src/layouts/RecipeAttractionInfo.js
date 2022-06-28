@@ -5,12 +5,11 @@ import '../assets/css/style.css';
 import Scrolltop from '../components/Scrolltop';
 import Footer from '../components/Footer';
 import Recipeinfoitem from '../components/Recipeinfoitem';
-import RecipeinfoComments from '../components/RecipeinfoComments';
 import Videoitem from './Recipeitem';
-import ChatButton from '../components/ChatButton';
 import Navbar from '../components/Navbar';
 
-function RecipeAttractionInfo(props) {
+const RecipeAttractionInfo=(props)=> 
+{
     return (
         <div>
             <Navbar />
@@ -24,7 +23,6 @@ function RecipeAttractionInfo(props) {
                     </div>
                 </div>
             <Scrolltop />
-            <ChatButton/>
             <Footer />
         </div>
     );

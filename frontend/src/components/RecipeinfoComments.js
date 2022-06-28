@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState, useRef} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
@@ -6,18 +6,21 @@ import axios from "axios";
 import { Space } from 'antd';
 
 
-function RecipeinfoComments(props)
+const RecipeinfoComments = (props) =>
 {
     const axio = axios.create({baseURL: 'http://localhost:8443'})
     const reqdel = '/Info/deletecomment'; // 댓글 삭제
     const reqedit = '/Info/editcomment'; // 댓글 수정
+    const reqUrl = '/Info/comments'; // 한 레시피의 댓글정보 조회
+    const [Comments, setComments] = useState([{id:'',commentsNumber:'',userNumber:'', videoNumber:'', userId:'', commentsContexts:'', crDa:'', deDa:''}]);
+    const CommentsRef = useRef(Comments);
+
     useEffect(()=>
     {
         GetRecipeComments();
     },[]);
     // 상세 페이지 출력 댓글 정보 
-    const [Comments, setComments] = useState([{id:'', commentsNumber:'',userNumber:'', videoNumber:'', userId:'', commentsContexts:'', crDa:'', deDa:''}])
-    const reqUrl = '/Info/comments'; // 한 레시피의 댓글정보 조회
+    
 
     const GetRecipeComments = async () =>
     {
@@ -27,7 +30,11 @@ function RecipeinfoComments(props)
                 videoNumber: (props.number)
             }
         })
-        .then((res)=>{setComments(res.data)});
+        .then((res)=>
+            {    
+                CommentsRef.current = res.data;
+                setComments(res.data);
+            });
     }
 
     const EditComment = async () =>
@@ -61,15 +68,15 @@ function RecipeinfoComments(props)
     const RecRender = () => 
     {
         var result=[];
-        for (let i = 0; i < Comments.length;i++)
+        for (let i = 0; i < CommentsRef.current.length;i++)
         {
-            var temp = Comments[i].commentsNumber;
+            var temp = CommentsRef.current[i].commentsNumber;
             var check = false;
-            if(sessionStorage['User_Id'] === Comments[i].userId || sessionStorage['User_Kind'] == 1)
+            if(sessionStorage['User_Id'] === CommentsRef.current[i].userId || sessionStorage['User_Kind'] == 1)
                 check = true;
-            if (Comments[i].userNumber != 0 && Comments[i].deDa == null)
+            if (CommentsRef.current[i].userNumber != 0 && CommentsRef.current[i].deDa == null)
             {
-                var temp = Comments[i].commentsNumber;
+                var temp = CommentsRef.current[i].commentsNumber;
                 result.push(
                     <Space
                     direction="horizontal"
@@ -78,7 +85,7 @@ function RecipeinfoComments(props)
                         display: "flex",
                     }}
                     >
-                    {Comments[i].userId} : {Comments[i].commentsContexts} | {Comments[i].crDa}
+                    {CommentsRef.current[i].userId} : {CommentsRef.current[i].commentsContexts} | {CommentsRef.current[i].crDa}
                     {/* <button onClick={EditComment}>수정</button> */}
                     {check == true
                     ?

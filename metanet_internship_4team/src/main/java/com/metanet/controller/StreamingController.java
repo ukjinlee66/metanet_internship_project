@@ -59,7 +59,7 @@ public class StreamingController {
 		String onlyFileName = originalFileName.substring(0, originalFileName.lastIndexOf("."));
 		
 		String saveDirPath = baseSavefilePath+onlyFileName; //영상 저장 디렉토리 
-		String savefilePath = saveDirPath +"\\" +originalFileName; // 영상 파일 
+		String savefilePath = saveDirPath +"/" +originalFileName; // 영상 파일 
 				
 		File saveDir = new File(saveDirPath);		
 		if(!saveDir.exists()) 
@@ -78,7 +78,7 @@ public class StreamingController {
 				
 			FFmpegBuilder builder = new FFmpegBuilder()
 					.setInput(savefilePath)
-					.addOutput(saveDirPath+"\\" +onlyFileName+ ".m3u8") // 썸네일 경로 
+					.addOutput(saveDirPath+"/" +onlyFileName+ ".m3u8") // 썸네일 경로 
 					.addExtraArgs("-profile:v", "baseline") // 
 	    			.addExtraArgs("-level", "3.0") //
 	    			.addExtraArgs("-start_number", "0") //
@@ -94,7 +94,7 @@ public class StreamingController {
 	    			.overrideOutputFiles(true) // 오버라이드 여부
 	    			.setInput(savefilePath) // 동영상파일
 	    			.addExtraArgs("-ss", "00:00:03") // 썸네일 추출 싲가점
-	    			.addOutput( saveDirPath +"\\" + onlyFileName + ".png") // 썸네일 경로
+	    			.addOutput( saveDirPath +"/" + onlyFileName + ".png") // 썸네일 경로
 	    			.setFrames(1) // 프레임 수
 	    			.done();
 	        FFmpegExecutor executorThumbNail = new FFmpegExecutor(ffmpeg, ffprobe);
@@ -111,7 +111,7 @@ public class StreamingController {
 	public ResponseEntity<Resource> videoHlsM3U8(@PathVariable String fileName)
 	{
 		
-		String fileFullPath = baseSavefilePath + fileName + "\\" + fileName+ ".m3u8";
+		String fileFullPath = baseSavefilePath + fileName + "/" + fileName+ ".m3u8";
 		Resource resource = new FileSystemResource(fileFullPath); 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName + ".m3u8");
