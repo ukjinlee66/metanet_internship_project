@@ -65,6 +65,7 @@ function Navbar(props) {
     })
     const BASEURL = "http://localhost:8443/Account"
     const [point, setPoint] = useState(0)
+    const [enddate,setEndDate] =useState();
     useEffect(()=>
     {
         if (sessionStorage["User_Id"] != null)
@@ -75,9 +76,10 @@ function Navbar(props) {
           userId: sessionStorage.getItem("User_Id")
         }
       })
-      .then((res) => {
+      .then((res) => {console.log("구독날짜",res.data.userEndsubscribe)
         if (res.data != null)
             setPoint(res.data.userPoint);
+            setEndDate(res.data.userEndsubscribe);
       })
     }
     },[])
@@ -99,12 +101,11 @@ function Navbar(props) {
                 ) : ((sessionStorage.getItem("User_Kind") == 1 ?(
                     <div class="justify-content-md-end">
                     <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="PostMain">고객센터</button>
-                    <button class="btn btn-white border-0 w-15 m-3" onClick={btClick} value="RefundPage">환불 페이지</button>
                     <button class="btn btn-white border-0 w-20 m-3" onClick={logOut} value="Logout">로그아웃</button>
                     </div>
                 ) : (
                     <div class="justify-content-md-end">
-                    {/* <p style={{fontSize:'12px'}}>구독 마감 날짜 : {buy}</p> */}
+                    <p style={{fontSize:'12px'}}>구독 마감 날짜 : {enddate}</p>&nbsp;&nbsp;
                     <p style={{fontSize:'12px'}}>포인트 : {point}</p>
                     <button class="btn btn-white border-0 w-20 m-3" onClick={btClick} value="BuySubscribe">구독권 구입</button>
                     <button class="btn btn-white border-0 w-20 m-3" onClick={logOut} value="Logout">로그아웃</button>

@@ -42,6 +42,7 @@ public class AccountServiceImpl implements AccountService
 		long millis=System.currentTimeMillis();  
 	    java.sql.Date date=new java.sql.Date(millis);  
 	    users.setUserDate(date);
+		users.setUserEndsubscribe(date);
 	    	    
 	 
 	    

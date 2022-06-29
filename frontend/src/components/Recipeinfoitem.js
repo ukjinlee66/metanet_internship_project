@@ -23,6 +23,7 @@ const Recipeinfo = (props) =>
     const axio = axios.create({baseURL: 'http://localhost:8443'})
     const reqUrl = '/Info/detail'; // 한 레시피 정보 조회
     const reqUrl2 = '/Info/comments'; // 한 레시피의 댓글정보 조회
+    const reqUrl3 = '/MyPage/addViews'; //시청 영상 저장
     const reqdelRec = '/deleteDetail'; // 한 레시피 삭제
     const reqadd = '/Info/addcomment'; // 댓글 입력
     const reqlike = '/Info/addLikes'; // 좋아요 추가
@@ -55,6 +56,13 @@ const Recipeinfo = (props) =>
                 let url = 'http://localhost:8443/Streaming/hls/' + res.data.videoName + '/' + res.data.videoName + '.m3u8';
                 setvideoName(url); //영상 정보 저장.
             });
+        await axio//시청 영상 저장
+            .get(reqUrl3,{
+                params:{
+                    videoName: Recipe.videoName,
+                    userId: sessionStorage.getItem("User_Id")
+                }
+            })
         await axio// 조회수 요청
             .post(reqaddView,{},{
                 params: {
@@ -221,7 +229,7 @@ const Recipeinfo = (props) =>
                 <p style={{textAlign:"right"}}>좋아요 : {Likecount}</p>
                 <Button style={{backgroundColor: "#886A08 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}} onClick={UnLikefunc}><DislikeOutlined/></Button>
                 <Button style={{backgroundColor: "#088A85 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}} onClick={Likefunc}><LikeOutlined /></Button>
-                <Button style={{backgroundColor: "#96A5FF !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}} onClick={Likefunc}><SaveOutlined /></Button>
+                <Button style={{backgroundColor: "#96A5FF !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}} onClick={SaveVideo}><SaveOutlined /></Button>
                 </div>)
                 : 
                 (
