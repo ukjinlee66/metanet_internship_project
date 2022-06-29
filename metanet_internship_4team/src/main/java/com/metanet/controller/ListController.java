@@ -1,10 +1,16 @@
 package com.metanet.controller;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +22,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.metanet.domain.Video;
 import com.metanet.domain.DTO.VideoDTO;
-import com.metanet.domain.DTO.VideoDTO.detailResponse;
 import com.metanet.repository.VideoRepository;
 import com.metanet.service.ListService;
 
@@ -24,6 +29,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+
 
 @RestController
 @RequestMapping("/List")
@@ -33,6 +39,9 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 	private ListService service;
 	@Autowired
 	private VideoRepository videoRepo;
+	
+	@Value("${file.path}")
+	private String filepullpath;
 	
 	@Autowired
 	VideoDTO videoDTO;
@@ -288,4 +297,28 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 		ArrayList<Video> v = new ArrayList<Video>(Arrays.asList(li));
 		return(v.size());
 	}
+	
+	
+	@GetMapping("/getImg")
+	@CrossOrigin
+	@ApiResponses({
+        @ApiResponse(code = 200, message = "OK !!"),
+        @ApiResponse(code = 404, message = "404 에러 발생, Not Found !"),
+        @ApiResponse(code = 500, message = "500 에러 발생, Internal Server Error !")
+	})
+	@ApiOperation(value="단일 이미지 반환", notes="리스트를 순회하며 렌더링시 해당메소드를 활용해 이미지를 얻어온다.")
+	public java.lang.String getImg(
+			@ApiParam(value="레시피 넘버",required=true, example="레시피넘버를 가지고 이미지를 반환")
+			@RequestParam(value="videoNumber") int videoNumber) throws IOException
+	{
+		Video video = videoRepo.findByvideoNumber(videoNumber);
+		String fileFullPath = filepullpath +  "/" + video.getVideoName() +  "/" + video.getVideoName()+".png";
+	    InputStream imageStream = new FileInputStream(fileFullPath);
+	    byte[] imageByteArray = IOUtils.toByteArray(imageStream);
+	    imageStream.close();
+	       
+	    return (Base64.encodeBase64String(imageByteArray));
+	}
+	
+	
 }
