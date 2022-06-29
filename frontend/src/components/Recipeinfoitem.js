@@ -5,7 +5,7 @@ import React, {Fragment, useEffect, useState, useRef} from 'react';
 import '../index.css';
 import axios from "axios";
 import { Input } from 'antd';
-import { LikeOutlined, DislikeOutlined } from '@ant-design/icons';
+import { LikeOutlined, DislikeOutlined, SaveOutlined } from '@ant-design/icons';
 import withImportantStyle from 'react-with-important-style';
 import RecipeinfoComments from './RecipeinfoComments.js';
 import ReactHlsPlayer from 'react-hls-player';
@@ -30,6 +30,7 @@ const Recipeinfo = (props) =>
     const reqislike = '/Info/isLiked'; // 좋아요 확인
     const reqcountlike = '/Info/getlikecount'; //좋아요 개수 확인
     const reqaddView = '/List/Views'; // 조회수 증가
+    const reqsave = '/MyPage/addSave';// 나중에 볼 영상 저장
     const Button = withImportantStyle('button');
     const [videoName,setvideoName] = useState('');
     
@@ -139,7 +140,20 @@ const Recipeinfo = (props) =>
             .then((res)=>setLike(res.data)); // 좋아요면 true 아니면 false
         }
     }
-
+    const SaveVideo = () => // 나중에 볼 영상 저장 axios
+    {
+        axio
+        .get(reqsave,{
+            params:{
+                userId: sessionStorage.getItem('User_Id'),
+                videoName: Recipe.videoName
+            }
+        })
+        .then((res)=>
+            {
+                if(res.data==1) alert("영상 저장 완료")
+            });
+    }
     
 
     const AppendComments = () => // 댓글 입력 axios
@@ -207,6 +221,7 @@ const Recipeinfo = (props) =>
                 <p style={{textAlign:"right"}}>좋아요 : {Likecount}</p>
                 <Button style={{backgroundColor: "#886A08 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}} onClick={UnLikefunc}><DislikeOutlined/></Button>
                 <Button style={{backgroundColor: "#088A85 !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}} onClick={Likefunc}><LikeOutlined /></Button>
+                <Button style={{backgroundColor: "#96A5FF !important", color: "white !important",float: "right !important", height: "46px !important", width: "50px !important"}} onClick={Likefunc}><SaveOutlined /></Button>
                 </div>)
                 : 
                 (
