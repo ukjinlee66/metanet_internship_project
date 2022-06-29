@@ -1,10 +1,16 @@
 package com.metanet.controller;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +22,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.metanet.domain.Video;
 import com.metanet.domain.DTO.VideoDTO;
-import com.metanet.domain.DTO.VideoDTO.detailResponse;
 import com.metanet.repository.VideoRepository;
 import com.metanet.service.ListService;
 
@@ -24,6 +29,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+
 
 @RestController
 @RequestMapping("/List")
@@ -34,22 +40,12 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 	@Autowired
 	private VideoRepository videoRepo;
 	
+	@Value("${file.path}")
+	private String filepullpath;
+	
 	@Autowired
 	VideoDTO videoDTO;
 	
-	
-	public List<VideoDTO.detailResponse> changeResult(List<Video> v)throws  IOException{
-		
-		List<VideoDTO.detailResponse> vList = new ArrayList<>();
-
-		for(int i =0 ; i< v.size(); i++) {
-			
-			VideoDTO.detailResponse temp = videoDTO.new detailResponse();
-			temp.transferFrom(v.get(i));	
-			vList.add(temp);
-		}
-		return vList;		
-	}
 	
 	
 	@PostMapping("/Views")
@@ -70,7 +66,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 	})
 	@CrossOrigin
 	@ApiOperation(value="레시피 검색과 해당 특정 키워드가 있을 경우", notes="검색어를 통한 레시피조회")
-	public List<VideoDTO.detailResponse> Search (
+	public List<Video> Search (
 			@ApiParam(value="검색어",required=false, example="계란찜")
 			@RequestParam(required = false) String videoTitle,
 			@ApiParam(value="분야",required=false, example="한식,중식,양식,일식,초급,중급,상급") 
@@ -83,7 +79,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 		{
 			try 
 			{
-				return changeResult( service.Search(videoTitle));
+				return  service.Search(videoTitle);
 				
 			}
 			catch(NullPointerException e)
@@ -103,12 +99,12 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 					{
 						case "한식": List<Video> v=  service.SearchKind(Color2); 
 						
-						case "일식": return changeResult( service.SearchKind(Color2));
-						case "중식": return changeResult( service.SearchKind(Color2));
-						case "양식": return changeResult( service.SearchKind(Color2));
-						case "초급": return changeResult( service.SearchLevel(Color2));
-						case "중급": return changeResult( service.SearchLevel(Color2));
-						case "상급": return changeResult( service.SearchLevel(Color2));
+						case "일식": return  service.SearchKind(Color2);
+						case "중식": return service.SearchKind(Color2);
+						case "양식": return  service.SearchKind(Color2);
+						case "초급": return  service.SearchLevel(Color2);
+						case "중급": return  service.SearchLevel(Color2);
+						case "상급": return  service.SearchLevel(Color2);
 					}
 				}
 				catch(NullPointerException e)
@@ -124,13 +120,13 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 					System.out.println("Color2 null");
 					switch(Color)
 					{
-						case "한식": return changeResult( service.SearchKind(Color)); 
-						case "일식": return changeResult( service.SearchKind(Color));
-						case "중식": return changeResult( service.SearchKind(Color));
-						case "양식": return changeResult( service.SearchKind(Color));
-						case "초급": return changeResult( service.SearchLevel(Color));
-						case "중급": return changeResult( service.SearchLevel(Color));
-						case "상급": return changeResult( service.SearchLevel(Color));
+						case "한식": return  service.SearchKind(Color); 
+						case "일식": return  service.SearchKind(Color);
+						case "중식": return  service.SearchKind(Color);
+						case "양식": return  service.SearchKind(Color);
+						case "초급": return  service.SearchLevel(Color);
+						case "중급": return  service.SearchLevel(Color);
+						case "상급": return  service.SearchLevel(Color);
 					}
 				}
 				catch(NullPointerException e)
@@ -175,7 +171,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 								ret_list.add(v);
 						}
 					}
-					return changeResult( ret_list);
+					return  ret_list;
 				}
 				catch(NullPointerException e)
 				{
@@ -193,16 +189,16 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 				if (Color == null && Color2 != null)
 				{
 					if(Color2.equals("한식") || Color2.equals("중식") || Color2.equals("일식") || Color2.equals("양식"))
-						return changeResult( service.SearchKind(videoTitle, Color2) );
+						return  service.SearchKind(videoTitle, Color2) ;
 					else
-						return changeResult( service.SearchLevel(videoTitle, Color2) );
+						return  service.SearchLevel(videoTitle, Color2) ;
 				}
 				else if (Color2 == null && Color != null)
 				{
 					if(Color.equals("한식") || Color.equals("중식") || Color.equals("일식") || Color.equals("양식"))
-						return changeResult( service.SearchKind(videoTitle, Color) ) ;
+						return  service.SearchKind(videoTitle, Color)  ;
 					else
-						return changeResult( service.SearchLevel(videoTitle, Color) );
+						return  service.SearchLevel(videoTitle, Color) ;
 				}
 				else // Color, Color2 exist
 				{
@@ -225,7 +221,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 								retlist.add(v);
 						}
 					}
-					return changeResult( retlist);
+					return  retlist;
 				}
 				
 				
@@ -233,7 +229,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 			catch(NullPointerException e)
 			{
 				System.out.println("456List Service Search Function videoTitle Not null Color Not null region Error");
-				return changeResult( retlist) ;
+				return  retlist ;
 			}
 		}
 		System.out.println("List Service Search Function Outer region Error!");
@@ -249,7 +245,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
         @ApiResponse(code = 500, message = "500 에러 발생, Internal Server Error !")
 	})
 	@ApiOperation(value="정렬", notes="파라메터로 입력된 어레이를 정렬형태에 맞춰 정렬시켜 반환한다.")
-	public List<VideoDTO.detailResponse> ListSort(
+	public List<Video> ListSort(
 			@ApiParam(value="리스트",required=true, example="List<Video> 형태의 Array List") 
 			@RequestParam(value="list") String list,
 			@ApiParam(value="정렬 형태",required=true, example="정렬 형태 :  \"Time\",\"View\",\"Like\" 입력을 받는다.") 
@@ -263,9 +259,9 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 				
 		switch(Color)
 		{
-			case "Time":return changeResult( service.SearchCreateTitle(v) );
-			case "Like":return changeResult( service.SearchtoLikes(v) );
-			case "View":return changeResult( service.SearchViewTitle(v) );
+			case "Time":return  service.SearchCreateTitle(v) ;
+			case "Like":return  service.SearchtoLikes(v) ;
+			case "View":return  service.SearchViewTitle(v) ;
 		}
 		return new ArrayList<>();
 	}
@@ -288,4 +284,28 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 		ArrayList<Video> v = new ArrayList<Video>(Arrays.asList(li));
 		return(v.size());
 	}
+	
+	
+	@GetMapping("/getImg")
+	@CrossOrigin
+	@ApiResponses({
+        @ApiResponse(code = 200, message = "OK !!"),
+        @ApiResponse(code = 404, message = "404 에러 발생, Not Found !"),
+        @ApiResponse(code = 500, message = "500 에러 발생, Internal Server Error !")
+	})
+	@ApiOperation(value="단일 이미지 반환", notes="리스트를 순회하며 렌더링시 해당메소드를 활용해 이미지를 얻어온다.")
+	public java.lang.String getImg(
+			@ApiParam(value="레시피 넘버",required=true, example="레시피넘버를 가지고 이미지를 반환")
+			@RequestParam(value="videoNumber") int videoNumber) throws IOException
+	{
+		Video video = videoRepo.findByvideoNumber(videoNumber);
+		String fileFullPath = filepullpath +  "/" + video.getVideoName() +  "/" + video.getVideoName()+".png";
+	    InputStream imageStream = new FileInputStream(fileFullPath);
+	    byte[] imageByteArray = IOUtils.toByteArray(imageStream);
+	    imageStream.close();
+	       
+	    return (Base64.encodeBase64String(imageByteArray));
+	}
+	
+	
 }

@@ -24,7 +24,10 @@ function Recipelistitem(props) {
 
     const [listSize, setListSize] = useState(1);
     const [page, setPage] = useState(Number(sessionStorage.getItem("pageSession")));
-
+    const [recImg, setrecImg] = useState(['']);
+    const recII = [];
+    const recImgRef = useRef(recImg);
+    const recipeRef = useRef(recipe);
     const [priority, setPriority] = useState("SearchTotime");
     const [sortColor, setSortColor] = useState("Time");
 
@@ -82,6 +85,7 @@ function Recipelistitem(props) {
     const sortUrl = 'http://localhost:8443/List/Sort';
     
     const tourSizeUrl = 'http://localhost:8443/List/Search';
+    const getimurl = 'http://localhost:8443/List/getImg';
     const elaUrl = '/log/searchKeyword';
 
     
@@ -100,10 +104,24 @@ function Recipelistitem(props) {
                     }
                     })
                     .then((res) => {
+                        recipeRef.current.push(res.data);
                         setRecipe(res.data);
                         console.log("item",item)
+                        for(const rec of res.data)
+                        {
+                        axios
+                        .get(getimurl,{
+                            params:{
+                                videoNumber: Number(rec.videoNumber)
+                            }
+                        })
+                        .then((res2)=>{
+                            recImgRef.current.push(res2.data);
+                        })
+                        }
                     }
                     )
+                
             }
             else if(window.location.search.match(/&/g).length==1){
                 await axios
@@ -114,7 +132,20 @@ function Recipelistitem(props) {
                     }
                 })
                 .then((res) => {
+                    recipeRef.current.push(res.data);
                     setRecipe(res.data);
+                    for(const rec of res.data)
+                        {
+                        axios
+                        .get(getimurl,{
+                            params:{
+                                videoNumber: Number(rec.videoNumber)
+                            }
+                        })
+                        .then((res2)=>{
+                            recImgRef.current.push(res2.data);
+                        })
+                        }
                 }
                 )
             }
@@ -127,11 +158,22 @@ function Recipelistitem(props) {
                 }
             })
             .then((res) => {
+                recipeRef.current.push(res.data);
                 setRecipe(res.data);
-                console.log("item",item)
+                for (const rec of res.data)
+                        {
+                        axios
+                        .get(getimurl,{
+                            params:{
+                                videoNumber: Number(rec.videoNumber)
+                            }
+                        })
+                        .then((res2)=>{
+                            recImgRef.current.push(res2.data);
+                        })
+                        }
             }
             )
-            
         }
           
         }
@@ -155,15 +197,31 @@ function Recipelistitem(props) {
             .then((res) => setRecipe(res.data));  
     }
 
-
     
+    const getImagelist = async() => 
+    {
+        for(var i = Number(sessionStorage.getItem('pageSession'))*5-5; i < Number(sessionStorage.getItem('pageSession'))*5; i++) 
+        {
+            await axios
+            .get(getimurl,{
+                params:{
+                    videoNumber: Number(recipe[i].videoNumber)
+                }
+            })
+            .then((res)=>{
+                setrecImg(res.data);
+            })
+        }
+    }
 
 
 
     // 레시피 리스트 렌더링
     const recipelistRender = (page) => {
         const result = [];
-        for (let i = page*5-5; i < page*5; i++) {
+        for(let i = page*5-5; i < page*5; i++) 
+        {
+            console.log(recImgRef.current[i]);
             if(i > recipe.length-1) break;
             else{
                 console.log(recipe.length)
@@ -172,7 +230,7 @@ function Recipelistitem(props) {
                 <div class="list-item p-4 mb-4">
                     <div class="row g-4 list-section">
                         <div class="col-md-4 d-flex align-items-start">
-                            <img style={{position:"relative", width:"100%",height:"200px",padding: "0px 0px 13px 0px"}}class="img-list" src={"data:image/png;base64,"+recipe[i].recipeImg} onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + recipe[i].videoNumber} />
+                            <img style={{position:"relative", width:"100%",height:"200px",padding: "0px 0px 13px 0px"}}class="img-list" src={"data:image/png;base64,"+recImgRef.current[i]} onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + recipe[i].videoNumber} />
                         </div>
                         <div class="col-md-8 list-info">
                             <div className='row'>
@@ -206,6 +264,7 @@ function Recipelistitem(props) {
                         <button name='searchToTime' onClick={getsortItem} value="Time">시간순</button> &nbsp;&nbsp;
                         <button name='searchToView' onClick={getsortItem} value="View">조회순</button> &nbsp;&nbsp;
                         <button name='searchToLike' onClick={getsortItem} value="Like">인기순</button> &nbsp;&nbsp;
+                        
                         {recipelistRender(sessionStorage.getItem('pageSession'))}
                     </div>
                 </div>
