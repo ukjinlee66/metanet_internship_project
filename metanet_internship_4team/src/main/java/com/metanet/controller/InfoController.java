@@ -252,7 +252,7 @@ public class InfoController
 		return myPageService.isLike(videoNumber, userNumber);
 	}
 	
-	@GetMapping("/addLikes")
+	@PostMapping("/addLikes")
 	@CrossOrigin
 	@ApiOperation(value="회원 좋아요 영상 저장",notes="성공시 1 반환, 실패시 -1 반환 ")
 	public int  getLikes(@RequestParam("videoName") String videoName, @RequestParam String userId )
@@ -260,7 +260,7 @@ public class InfoController
 		return myPageService.addLikes(userId, videoName );
 	}
 	
-	@GetMapping("/deleteLikes")
+	@PostMapping("/deleteLikes")
 	@CrossOrigin
 	@ApiOperation(value="회원 레시피 좋아요 삭제",notes="회원 번호, , 성공시 1 반환")
 	public int deleteDetail(
