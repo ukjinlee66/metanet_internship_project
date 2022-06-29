@@ -17,11 +17,11 @@ const Subscribe = () => {
     const id = sessionStorage.getItem("User_Id")
     function cardClick(e) {
         var point = 0;
-        if (e == 7) {
+        if (e == 30) {
             point = 30000
-        } else if (e == 30) {
-            point = 100000
         } else if (e == 90) {
+            point = 100000
+        } else if (e == 365) {
             point = 250000
         }
         axios.post(BASEURL, null,
@@ -50,7 +50,7 @@ const Subscribe = () => {
         <div style={{ display: 'inline-flex' }}>
             <div>
                 <Card
-                    onClick={() => cardClick(7)}
+                    onClick={() => cardClick(30)}
                     hoverable
                     style={{
                         width: 300,
@@ -68,7 +68,7 @@ const Subscribe = () => {
             </div>
             <div style={{ paddingLeft: '200px' }}>
                 <Card
-                    onClick={() => cardClick(30)}
+                    onClick={() => cardClick(90)}
                     hoverable
                     style={{
                         width: 300,
@@ -91,7 +91,7 @@ const Subscribe = () => {
             </div>
             <div style={{ paddingLeft: '200px' }}>
                 <Card
-                    onClick={() => cardClick(90)}
+                    onClick={() => cardClick(365)}
                     hoverable
                     style={{
                         width: 300,

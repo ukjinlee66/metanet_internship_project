@@ -69,7 +69,7 @@ function MainRecipeList(props)
                 if(cnt==3)
                     break;
                 result.push(
-                    <a style={{cursor:'pointer'}}><img  style={{width:"300px", height:"340px"}} src={"data:image/png;base64,"+preferRef.current[i].recipeImg} alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + preferRef.current[i].videoNumber}/><p>{preferRef.current[i].videoTitle}</p></a>
+                    <a style={{cursor:'pointer'}}><img  style={{width:"1400px", height:"340px"}} src={"data:image/png;base64,"+preferRef.current[i].recipeImg} alt="1" onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + preferRef.current[i].videoNumber}/><p>{preferRef.current[i].videoTitle}</p></a>
                 );
                 cnt= cnt+1;
             }

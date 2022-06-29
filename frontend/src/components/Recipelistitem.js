@@ -15,11 +15,11 @@ function Recipelistitem(props) {
 
 
     const [recipe, setRecipe] = useState([
-        {id:'' ,recipeImg:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-        {id:'' ,recipeImg:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-        {id:'' ,recipeImg:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-        {id:'' ,recipeImg:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-        {id:'' ,recipeImg:'', videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}
+        {id:'' , videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+        {id:'' , videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+        {id:'' , videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+        {id:'' , videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+        {id:'' , videoNumber:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}
     ])
 
     const [listSize, setListSize] = useState(1);
@@ -36,7 +36,6 @@ function Recipelistitem(props) {
     // 특정 페이지 요청 시 작동하는 함수
     const handlePageChange = nowPage => {
         
-        alert('페이지 변경'+nowPage)
         setPage(nowPage);
         sessionStorage.setItem("pageSession", nowPage);
     };
@@ -106,7 +105,6 @@ function Recipelistitem(props) {
                     .then((res) => {
                         recipeRef.current.push(res.data);
                         setRecipe(res.data);
-                        console.log("item",item)
                         for(const rec of res.data)
                         {
                         axios
@@ -185,7 +183,6 @@ function Recipelistitem(props) {
     
     // 업로드 시간 순서에 따른 레시피 리스트 요청
     const getsortItem = async (e) => {
-        console.log("click sort", e.target.value)
         await axios
             .get(sortUrl, {
                 params: {
