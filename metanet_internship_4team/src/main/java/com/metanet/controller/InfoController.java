@@ -32,7 +32,7 @@ import com.metanet.service.MyPageService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
-
+// this is for test
 
 @RestController
 @RequestMapping("/Info")

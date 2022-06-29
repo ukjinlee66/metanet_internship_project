@@ -47,19 +47,6 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 	VideoDTO videoDTO;
 	
 	
-	public List<VideoDTO.detailResponse> changeResult(List<Video> v)throws  IOException{
-		
-		List<VideoDTO.detailResponse> vList = new ArrayList<>();
-
-		for(int i =0 ; i< v.size(); i++) {
-			
-			VideoDTO.detailResponse temp = videoDTO.new detailResponse();
-			temp.transferFrom(v.get(i));	
-			vList.add(temp);
-		}
-		return vList;		
-	}
-	
 	
 	@PostMapping("/Views")
 	@CrossOrigin
@@ -79,7 +66,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 	})
 	@CrossOrigin
 	@ApiOperation(value="레시피 검색과 해당 특정 키워드가 있을 경우", notes="검색어를 통한 레시피조회")
-	public List<VideoDTO.detailResponse> Search (
+	public List<Video> Search (
 			@ApiParam(value="검색어",required=false, example="계란찜")
 			@RequestParam(required = false) String videoTitle,
 			@ApiParam(value="분야",required=false, example="한식,중식,양식,일식,초급,중급,상급") 
@@ -92,7 +79,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 		{
 			try 
 			{
-				return changeResult( service.Search(videoTitle));
+				return  service.Search(videoTitle);
 				
 			}
 			catch(NullPointerException e)
@@ -112,12 +99,12 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 					{
 						case "한식": List<Video> v=  service.SearchKind(Color2); 
 						
-						case "일식": return changeResult( service.SearchKind(Color2));
-						case "중식": return changeResult( service.SearchKind(Color2));
-						case "양식": return changeResult( service.SearchKind(Color2));
-						case "초급": return changeResult( service.SearchLevel(Color2));
-						case "중급": return changeResult( service.SearchLevel(Color2));
-						case "상급": return changeResult( service.SearchLevel(Color2));
+						case "일식": return  service.SearchKind(Color2);
+						case "중식": return service.SearchKind(Color2);
+						case "양식": return  service.SearchKind(Color2);
+						case "초급": return  service.SearchLevel(Color2);
+						case "중급": return  service.SearchLevel(Color2);
+						case "상급": return  service.SearchLevel(Color2);
 					}
 				}
 				catch(NullPointerException e)
@@ -133,13 +120,13 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 					System.out.println("Color2 null");
 					switch(Color)
 					{
-						case "한식": return changeResult( service.SearchKind(Color)); 
-						case "일식": return changeResult( service.SearchKind(Color));
-						case "중식": return changeResult( service.SearchKind(Color));
-						case "양식": return changeResult( service.SearchKind(Color));
-						case "초급": return changeResult( service.SearchLevel(Color));
-						case "중급": return changeResult( service.SearchLevel(Color));
-						case "상급": return changeResult( service.SearchLevel(Color));
+						case "한식": return  service.SearchKind(Color); 
+						case "일식": return  service.SearchKind(Color);
+						case "중식": return  service.SearchKind(Color);
+						case "양식": return  service.SearchKind(Color);
+						case "초급": return  service.SearchLevel(Color);
+						case "중급": return  service.SearchLevel(Color);
+						case "상급": return  service.SearchLevel(Color);
 					}
 				}
 				catch(NullPointerException e)
@@ -184,7 +171,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 								ret_list.add(v);
 						}
 					}
-					return changeResult( ret_list);
+					return  ret_list;
 				}
 				catch(NullPointerException e)
 				{
@@ -202,16 +189,16 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 				if (Color == null && Color2 != null)
 				{
 					if(Color2.equals("한식") || Color2.equals("중식") || Color2.equals("일식") || Color2.equals("양식"))
-						return changeResult( service.SearchKind(videoTitle, Color2) );
+						return  service.SearchKind(videoTitle, Color2) ;
 					else
-						return changeResult( service.SearchLevel(videoTitle, Color2) );
+						return  service.SearchLevel(videoTitle, Color2) ;
 				}
 				else if (Color2 == null && Color != null)
 				{
 					if(Color.equals("한식") || Color.equals("중식") || Color.equals("일식") || Color.equals("양식"))
-						return changeResult( service.SearchKind(videoTitle, Color) ) ;
+						return  service.SearchKind(videoTitle, Color)  ;
 					else
-						return changeResult( service.SearchLevel(videoTitle, Color) );
+						return  service.SearchLevel(videoTitle, Color) ;
 				}
 				else // Color, Color2 exist
 				{
@@ -234,7 +221,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 								retlist.add(v);
 						}
 					}
-					return changeResult( retlist);
+					return  retlist;
 				}
 				
 				
@@ -242,7 +229,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 			catch(NullPointerException e)
 			{
 				System.out.println("456List Service Search Function videoTitle Not null Color Not null region Error");
-				return changeResult( retlist) ;
+				return  retlist ;
 			}
 		}
 		System.out.println("List Service Search Function Outer region Error!");
@@ -258,7 +245,7 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
         @ApiResponse(code = 500, message = "500 에러 발생, Internal Server Error !")
 	})
 	@ApiOperation(value="정렬", notes="파라메터로 입력된 어레이를 정렬형태에 맞춰 정렬시켜 반환한다.")
-	public List<VideoDTO.detailResponse> ListSort(
+	public List<Video> ListSort(
 			@ApiParam(value="리스트",required=true, example="List<Video> 형태의 Array List") 
 			@RequestParam(value="list") String list,
 			@ApiParam(value="정렬 형태",required=true, example="정렬 형태 :  \"Time\",\"View\",\"Like\" 입력을 받는다.") 
@@ -272,9 +259,9 @@ public class ListController //게시글 리스트를 출력하기위한 Controll
 				
 		switch(Color)
 		{
-			case "Time":return changeResult( service.SearchCreateTitle(v) );
-			case "Like":return changeResult( service.SearchtoLikes(v) );
-			case "View":return changeResult( service.SearchViewTitle(v) );
+			case "Time":return  service.SearchCreateTitle(v) ;
+			case "Like":return  service.SearchtoLikes(v) ;
+			case "View":return  service.SearchViewTitle(v) ;
 		}
 		return new ArrayList<>();
 	}
