@@ -174,7 +174,7 @@ const SignUp = () => {
           />
         </div>
         <div className="d-grid">
-          <button type="submit" className="btn btn-primary" onClick={onClickSignUp}>
+          <button type="button" className="btn btn-primary" onClick={onClickSignUp}>
             Sign Up
           </button>
         </div>

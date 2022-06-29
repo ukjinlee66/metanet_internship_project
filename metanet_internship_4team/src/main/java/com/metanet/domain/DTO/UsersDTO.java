@@ -23,6 +23,7 @@ public class UsersDTO
 			private String userEmail;
 			private String userAddr;
 			private String userReckind;
+
 			
 	
 			public Users transferTo( Users users ) {
@@ -67,6 +68,7 @@ public class UsersDTO
 			private String userAddr;
 			private String userReckind;
 			private java.sql.Date userDate;
+			private java.sql.Date userEndsubscribe;
 			
 			
 			public void transferFrom( Users users ) {
@@ -80,6 +82,7 @@ public class UsersDTO
 				userAddr= users.getUserAddr();
 				userReckind= users.getUserRecKind();
 				userDate = users.getUserDate();
+				userEndsubscribe = users.getUserEndsubscribe();
 				
 			}
 			

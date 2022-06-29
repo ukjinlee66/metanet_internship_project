@@ -27,7 +27,7 @@ function Recipelistitem({data}) {
        useEffect(() => {
         let timer = setTimeout(() => {
             setRecipe(data);
-        }, 500)
+        }, 1000)
         return ()=> clearTimeout(timer) 
     }, [data])
 
