@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "antd/dist/antd.css";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import profile from "../assets/img/carousel-1.jpg";
+import profile from "../assets/img/cook.jpeg";
 import SidebarItem from "./SidebarItem";
 
   
@@ -14,6 +14,8 @@ const Side = styled.div`
   align-items: center;
   justify-content: center;
   width: 20%;
+  display: table-cell !important;
+  verticalAlign: middle !important;
 `
 const Profile = styled.img`
   width: 150px;
@@ -41,7 +43,7 @@ const Sidebar = () => {
     ];
     return (
         
-        <Side>
+        <Side >
             <Profile src={profile}></Profile>
             <Menu1>
                 {menus.map((menu, index) => {

@@ -6,7 +6,7 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';  
 import 'owl.carousel/dist/assets/owl.theme.default.css'; 
 import mainImg1 from '../assets/img/main2jpg.jpg'
-import mainImg2 from '../assets/img/주웅.png'
+import mainImg2 from '../assets/img/motchamzi.png'
 import '../assets/css/owl.css';  
 
 // OwlCarousel(슬라이더) 옵션 설정
