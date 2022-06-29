@@ -15,9 +15,9 @@ function Recipedetaillist()
 
   // useRef를 통해 css 변경
   const [subList, SetsubList] = useState([ // subList 영상은 3개로 고정
-    {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-    {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
-    {id:'' ,img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}
+    {id:'' ,videoNumber:'', img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+    {id:'' ,videoNumber:'', img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}, 
+    {id:'' ,videoNumber:'', img:'', videoTitle:'', videoContexts:'', videoName:'', recipeLevel: '',recipeTime:'', recipeSize:'',recipeIngredient:'', recipeKind: '', videoLength:'', crDa:'' ,upDa:'', deDa:'', videoView: ''}
   ])
   const [videoName, setvideoName] = useState(['']); // subList의 영상 이름을 저장할 배열 State
   const subListRef = useRef(subList);
@@ -87,7 +87,7 @@ function Recipedetaillist()
             width={250}
             height={250}
         />
-        <p>제목 : {subListRef.current[i].videoTitle} / 조회수 : {subListRef.current[i].videoView} <br/> 업로드 날짜 : {subListRef.current[i].crDa} <br/>
+        <p>제목 : <a  onClick={(e) => window.location.href = "/zipcook/RecipeAttractionInfo?videoNumber=" + subListRef.current[i].videoNumber}>{subListRef.current[i].videoTitle}</a> / 조회수 : {subListRef.current[i].videoView} <br/> 업로드 날짜 : {subListRef.current[i].crDa} <br/>
         난이도 : {subListRef.current[i].recipeLevel} / 분야 : {subListRef.current[i].recipeKind}</p>
         </Fragment>
       )
