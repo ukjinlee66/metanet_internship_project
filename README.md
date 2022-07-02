@@ -14,10 +14,8 @@
 |   DatBase<br>Project Manager    |   Backend  | Frontend | Backend | Frontend |
 
 ## 🌈프로젝트 소개
-
-<p align="justify">
-프로젝트 개요/동기
-</p>
+- <h4>코로나로 인한 소비 하락과 배달료 인상으로 인한 Homemade Cook증가하는 추세이다.</h4>
+- <h4>그중에서도 영상을 통한 요리를 하는 사람들의 수가 점점 많아지고 있으며 각 분야 (한식,양식,중식,일식)와 난이도(초급,중급,상급)을 통해 자신이 좋아하는 분야의 난이도에맞는 검색 수단으로써 영상을 통해 쉽게 제공받을 수 있도록 기획하게 되었다.</h4>
 
 <p align="center">
 GIF Images
@@ -25,16 +23,8 @@ GIF Images
 
 <br>
 
-## 🧑🏼‍💻기술 스택
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/><br>
-<img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/><br>
-<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/><br>
-<img src="https://img.shields.io/badge/OracleDB-F80000?style=flat-square&logo=Oracle&logoColor=white"/><br>
-<img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat-square&logo=Spring Boot&logoColor=white"/><br>
-<img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white"/><br>
-<img src="https://img.shields.io/badge/Azure-0078D7?style=flat-square&logo=Azure DevOps&logoColor=white"/><br>
-<img src="https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=Kubernetes&logoColor=white"/><br>
-<img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white"/><br>
+## 🧑🏼‍💻기술 스택<br>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/><img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/><img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/><img src="https://img.shields.io/badge/OracleDB-F80000?style=flat-square&logo=Oracle&logoColor=white"/><img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat-square&logo=Spring Boot&logoColor=white"/><img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white"/><img src="https://img.shields.io/badge/Azure-0078D7?style=flat-square&logo=Azure DevOps&logoColor=white"/><img src="https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=Kubernetes&logoColor=white"/><img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white"/>
 <br>
 
 ## ℹ️구현 기능
@@ -47,11 +37,10 @@ GIF Images
 <br>
 
 ## 📖배운 점 & 아쉬운 점
-
-<p align="justify">
-
-</p>
-
+- 
+- 
+- 
+- 
 ## 📂설치 파일 및 버전
 Spring Tool Suite 4.13.1 Release<br>
 JDK 11<br>
@@ -62,8 +51,6 @@ Node 16.14.0<br>
 Npm 8.3.1<br>
 <br>
 
-## 🪪라이센스
-
 ## Reference
-
-MIT &copy; [NoHack](mailto:lbjp114@gmail.com)
+- 
+- 
